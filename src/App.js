@@ -25,7 +25,7 @@ const treeStructure = {
 }
 
 function App() {
-  const [useThreeColumns, setUseThreeColumns] = useState([false]);
+  const [useThreeColumns, setUseThreeColumns] = useState(false);
 
   return (
     <div className="column-container">
