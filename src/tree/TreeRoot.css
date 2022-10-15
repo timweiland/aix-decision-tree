@@ -1,0 +1,14 @@
+.arrow-container {
+    animation: fadeInAnimation 1s;
+}
+
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}

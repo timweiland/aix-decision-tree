@@ -5,4 +5,16 @@
     height: 75px;
     background-color: lightgray;
     margin: auto;
+    animation: fadeInAnimation 1s;
+}
+
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

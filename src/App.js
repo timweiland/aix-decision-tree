@@ -3,8 +3,9 @@ import { useState } from 'react';
 
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
+import { useXarrow } from 'react-xarrows';
 
-const treeStructure = {
+const treeStructureA = {
   name: 'root',
   children: [
     {
@@ -24,13 +25,32 @@ const treeStructure = {
         {
           name: 'left grandchild'
         },
+        {
+          name: 'right grandchild'
+        }
       ]
     }
   ]
 }
 
+const treeStructureB = {
+  name: 'root',
+  children: [
+    {
+      name: 'left child',
+    },
+    {
+      name: 'right child',
+    }
+  ]
+}
+
+const treeStructures = [treeStructureA, treeStructureB];
+
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
+  const [treeStructureIdx, setTreeStructureIdx] = useState(0);
+  const updateXarrow = useXarrow();
 
   return (
     <div className="column-container">
@@ -39,12 +59,16 @@ function App() {
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
+        setTimeout(updateXarrow, 10);
       }}>
-        <Tree structure={treeStructure} id={'userTree'} key={`userTree-${useThreeColumns}`}/>
+        <Tree structure={treeStructures[treeStructureIdx]} id={'userTree'} key={`userTree`}/>
       </div>
       {
         useThreeColumns &&
-        <div className="column" style={{ backgroundColor: 'green' }}>
+        <div className="column" style={{ backgroundColor: 'green' }} onClick={() => {
+          setTreeStructureIdx((treeStructureIdx + 1) % treeStructures.length);
+          setTimeout(updateXarrow, 10);
+        }}>
           Column C
         </div>
       }
