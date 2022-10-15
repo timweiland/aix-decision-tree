@@ -1,0 +1,8 @@
+.tree-node {
+    border: grey solid 2px;
+    border-radius: 75px;
+    width: 75px;
+    height: 75px;
+    background-color: lightgray;
+    margin: auto;
+}
