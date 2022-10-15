@@ -35,7 +35,7 @@ function App() {
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
       }}>
-        <Tree structure={treeStructure} />
+        <Tree structure={treeStructure} id={'userTree'} key={`userTree-${useThreeColumns}`}/>
       </div>
       {
         useThreeColumns &&

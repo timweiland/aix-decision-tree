@@ -1,5 +1,5 @@
 import TreeRoot from './TreeRoot';
 
-export default function Tree({structure}) {
-    return <TreeRoot structure={structure}/>
+export default function Tree({structure, id}) {
+    return <TreeRoot structure={structure} id={id} index={'root'}/>
 }
