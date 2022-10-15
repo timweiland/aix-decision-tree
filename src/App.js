@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
+import Map from './map/Map';
 import  Tree  from './tree/Tree';
 
 const treeStructure = {
@@ -19,7 +19,12 @@ const treeStructure = {
       ]
     },
     {
-      name: 'right child'
+      name: 'right child',
+      children: [
+        {
+          name: 'left grandchild'
+        },
+      ]
     }
   ]
 }
@@ -29,8 +34,8 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{ backgroundColor: 'blue' }}>
-        Column A
+      <div className="column" style={{ backgroundColor: 'white' }}>
+        <Map/>
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
