@@ -46,7 +46,7 @@ const treeStructureB = {
   ]
 }
 
-const relCoord = [30,10];
+const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
 
 const treeStructures = [treeStructureA, treeStructureB];
 
@@ -57,9 +57,9 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{ backgroundColor: 'white' }}>
-        {/* (<Map/>)*/}
-        <Point x={relCoord[0]} y={relCoord[1]} />
+      <div className="column" style={{position:"relative",backgroundColor: 'white' }}>
+        <Map/>
+        <Point coordinates={coordinates}/>
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);

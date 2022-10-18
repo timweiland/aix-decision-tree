@@ -1,5 +1,8 @@
 import "./Point.css";
 
-export default function Point({x,y}) {
-  return <div className="point" style = {{width: '5%', marginLeft:`${x}%`, marginTop:`${y}%`, display: 'flex' }}/>
+export default function Point({coordinates}) {
+  return coordinates.map((c) => {
+                        return <div className="point" 
+                                    style = {{position: "absolute", top:`${c[0]}%`, left:`${c[1]}%`}}/>
+                             });
 }
