@@ -57,9 +57,8 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{position:"relative",backgroundColor: 'white' }}>
-        <Map/>
-        <Point coordinates={coordinates}/>
+      <div className="column" style={{backgroundColor: 'white' }}>
+        <Map coordinates={coordinates}/>
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
