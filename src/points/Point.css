@@ -1,0 +1,7 @@
+.point {
+  border: grey solid 2px;
+  border-radius: 75px;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(47, 213, 77);
+}

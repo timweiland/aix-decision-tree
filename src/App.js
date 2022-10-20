@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
+import Point from './points/Point';
 import { useXarrow } from 'react-xarrows';
 
 const treeStructureA = {
@@ -45,6 +46,8 @@ const treeStructureB = {
   ]
 }
 
+const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
+
 const treeStructures = [treeStructureA, treeStructureB];
 
 function App() {
@@ -54,8 +57,8 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{ backgroundColor: 'white' }}>
-        <Map/>
+      <div className="column" style={{backgroundColor: 'white' }}>
+        <Map coordinates={coordinates}/>
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
