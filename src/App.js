@@ -3,8 +3,6 @@ import { useState } from 'react';
 
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
-import Point from './points/Point';
-import { useXarrow } from 'react-xarrows';
 
 const treeStructureA = {
   name: 'root',
@@ -53,7 +51,6 @@ const treeStructures = [treeStructureA, treeStructureB];
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
   const [treeStructureIdx, setTreeStructureIdx] = useState(0);
-  const updateXarrow = useXarrow();
 
   return (
     <div className="column-container">
@@ -62,7 +59,6 @@ function App() {
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
-        setTimeout(updateXarrow, 10);
       }}>
         <Tree structure={treeStructures[treeStructureIdx]} id={'userTree'} key={`userTree`}/>
       </div>
@@ -70,7 +66,6 @@ function App() {
         useThreeColumns &&
         <div className="column" style={{ backgroundColor: 'green' }} onClick={() => {
           setTreeStructureIdx((treeStructureIdx + 1) % treeStructures.length);
-          setTimeout(updateXarrow, 10);
         }}>
           Column C
         </div>
