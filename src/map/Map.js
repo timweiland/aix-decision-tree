@@ -17,9 +17,16 @@ export default function Map({coordinates}) {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        canvas.width = canvas.height * 0.75;
         const ctx = canvas.getContext("2d");
-        ctx.drawImage(MapImage, 0, 0);
+
+        const image = new Image();
+        image.src = require('../assets/map_sketch.jpg');
+        image.onload = (res) => {
+            canvas.width = image.width;
+            canvas.height= image.height;
+            ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+        }
+
         ctx.fillStyle="#000000";
     }, [])
 
