@@ -2,6 +2,7 @@ import './Map.css';
 import Point from '../points/Point.js';
 import MapImage from '../assets/map_sketch.jpg';
 import { useEffect, useRef } from 'react';
+import './button_q.css';
 
 /*
 export default function Map({coordinates}) {
@@ -33,6 +34,7 @@ export default function Map({ coordinates }) {
         image.src = require('../assets/map_sketch.jpg');
         image.onload = (res) => {
             drawBackgroundImage(canvas);
+            coordinates.map((c) => { ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, 10, 10) });
         }
 
         ctx.fillStyle = "#000000";
@@ -80,6 +82,7 @@ export default function Map({ coordinates }) {
             ctx.stroke();
             return null;
         })
+        coordinates.map((c) => { ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, 10, 10) });
     }
 
     function addLineEnd(x, y) {
@@ -97,9 +100,9 @@ export default function Map({ coordinates }) {
         addLineEnd(mousePos.x, mousePos.y);
     }
 
-    return <canvas ref={canvasRef} style={{ height: '100%', border: '1px solid black' }} 
-    onMouseDown={startDrawing}
-    onMouseUp={finishDrawing}
+    return <canvas ref={canvasRef} style={{ height: '100%', border: '1px solid black' }}
+        onMouseDown={startDrawing}
+        onMouseUp={finishDrawing}
 
     />
 }
