@@ -1,7 +1,7 @@
 import './Map.css';
 import Point from '../points/Point.js';
 import MapImage from '../assets/map_sketch.jpg';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './button_q.css';
 
 /*
@@ -15,7 +15,7 @@ export default function Map({coordinates}) {
 
 export default function Map({ coordinates }) {
     const canvasRef = useRef();
-    let lines = []
+    const [lines, setLines] = useState([]);
     let curLineStart = [0, 0];
 
     const image = new Image();
@@ -33,12 +33,11 @@ export default function Map({ coordinates }) {
 
         image.src = require('../assets/map_sketch.jpg');
         image.onload = (res) => {
-            drawBackgroundImage(canvas);
-            coordinates.map((c) => { ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, 10, 10) });
+            redrawAll();
         }
 
         ctx.fillStyle = "#000000";
-    }, []);
+    }, [lines]);
 
     function getMousePos(evt) {
         const canvas = canvasRef.current;
@@ -86,8 +85,7 @@ export default function Map({ coordinates }) {
     }
 
     function addLineEnd(x, y) {
-        lines.push([curLineStart, [x, y]]);
-        redrawAll();
+        setLines([...lines, [curLineStart, [x, y]]]);
     }
 
     function startDrawing(evt) {
