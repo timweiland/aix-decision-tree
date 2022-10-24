@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
+import './map/button_q.css';
 
 const treeStructureA = {
   name: 'root',
@@ -54,7 +55,15 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{backgroundColor: 'white' }}>
+      <div className="column" style={{position:"relative", display: "inline-block", backgroundColor: 'white' }}>
+        <div class="help" style = {{position: "absolute", top:`${5}%`, left:`${50}%`}}>
+          <div class="question">?</div>
+
+            <div class="popup">
+              <h3>But wait what exactely is AI and how will it kill my family?</h3>
+            </div>
+        </div>
+        
         <Map coordinates={coordinates}/>
       </div>
       <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {

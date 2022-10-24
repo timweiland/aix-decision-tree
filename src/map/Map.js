@@ -2,6 +2,7 @@ import './Map.css';
 import Point from '../points/Point.js';
 import MapImage from '../assets/map_sketch.jpg';
 import { useEffect, useRef } from 'react';
+import './button_q.css';
 
 /*
 export default function Map({coordinates}) {
@@ -25,6 +26,9 @@ export default function Map({coordinates}) {
             canvas.width = image.width;
             canvas.height= image.height;
             ctx.drawImage(image, 0, 0, image.width, image.height, 0, 0, canvas.width, canvas.height);
+            coordinates.map((c)=> {ctx.fillRect(c[0]*canvas.width/100,c[1]*canvas.height/100,10,10)});
+
+            
         }
 
         ctx.fillStyle="#000000";

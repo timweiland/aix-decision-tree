@@ -1,0 +1,41 @@
+body {
+  padding: 300px;
+  font-family: ubuntu;
+}
+
+.help {
+  width: 40px;
+  margin: 0 auto;
+}
+
+.help .question {
+  height: 40px;
+  width: 40px;
+  background: #ccc;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.help .popup {
+  width: 560px;
+  height: 0px;
+  text-align: left;
+  overflow: hidden;
+  position: relative;
+  background: #eee;
+  opacity: 0;
+  transition: 1s;
+}
+
+.help .popup {
+  left: -260px;
+  top: 10px;
+}
+
+.help:hover .popup {
+  opacity: 1;
+  height: 270px;
+}
