@@ -65,6 +65,21 @@ export default function Map({ coordinates, treeState, setTreeState }) {
         curLineStart = [x, y];
     }
 
+    function highlightTreeNode(x, y) {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext("2d");
+        const [x_rel, y_rel] = absoluteToRelativeCoords(canvas, x, y);
+
+        const curTreeNode = treeState.treeStructure.find(x_rel, y_rel);
+        let [treeX0, treeY0, treeX1, treeY1] = curTreeNode.rect;
+        [treeX0, treeY0] = relativeToAbsoluteCoords(canvas, treeX0, treeY0);
+        [treeX1, treeY1] = relativeToAbsoluteCoords(canvas, treeX1, treeY1);
+        ctx.globalAlpha = 0.6;
+        ctx.fillStyle = "#CBC3E3";
+        ctx.fillRect(treeX0,treeY0,treeX1 - treeX0,treeY1 - treeY0);
+        ctx.globalAlpha = 1.0;
+    }
+
     function clearCanvas(canvas) {
         const context = canvas.getContext('2d');
         // Store the current transformation matrix
@@ -124,6 +139,7 @@ export default function Map({ coordinates, treeState, setTreeState }) {
 
     function startDrawing(evt) {
         const mousePos = getMousePos(evt);
+        highlightTreeNode(mousePos.x, mousePos.y);
         addLineStart(mousePos.x, mousePos.y);
     }
 
