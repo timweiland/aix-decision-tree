@@ -1,57 +1,69 @@
 import './App.css';
 import { useState } from 'react';
 
+
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
 import './map/button_q.css';
 
-const treeStructureA = {
-  name: 'root',
-  children: [
-    {
-      name: 'left child',
-      children: [
-        {
-          name: 'left grandchild'
-        },
-        {
-          name: 'right grandchild'
-        }
-      ]
-    },
-    {
-      name: 'right child',
-      children: [
-        {
-          name: 'left grandchild'
-        },
-        {
-          name: 'right grandchild'
-        }
-      ]
-    }
-  ]
-}
+class TreeStructure {
+  constructor(rect) {
+    this.rect = rect;
+    this.children = []
+  }
 
-const treeStructureB = {
-  name: 'root',
-  children: [
-    {
-      name: 'left child',
-    },
-    {
-      name: 'right child',
+  split(axis, axis_pos) {
+    const [x0, y0, x1, y1] = this.rect;
+    let [rectA, rectB] = [undefined, undefined];
+    if(axis === 0) {
+      rectA = [x0, y0, axis_pos, y1];
+      rectB = [axis_pos, y0, x1, y1];
     }
-  ]
+    else {
+      rectA = [x0, y0, x1, axis_pos];
+      rectB = [x0, axis_pos, x1, y1];
+    }
+    const treeA = new TreeStructure(rectA);
+    const treeB = new TreeStructure(rectB);
+    this.children = [treeA, treeB];
+  }
+
+  contains(x, y) {
+    const [x0, y0, x1, y1] = this.rect;
+    return (x >= x0) && (x <= x1) && (y >= y0) && (y <= y1);
+  }
+
+  find(x, y) {
+    console.log(`Finding ${x}, ${y}`)
+    if(this.contains(x, y) && this.children.length === 0) {
+      return this;
+    }
+    for(let i = 0; i < this.children.length; i++) {
+      const child = this.children[i];
+      const findResult = child.find(x, y);
+      if(findResult) {
+        return findResult;
+      }
+    }
+    return null;
+  }
+
+  to_object() {
+    const child_objs = this.children.map((child) => {
+      return child.to_object();
+    });
+    return {
+      rect: this.rect,
+      children: child_objs
+    }
+  }
 }
 
 const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
 
-const treeStructures = [treeStructureA, treeStructureB];
-
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
-  const [treeStructureIdx, setTreeStructureIdx] = useState(0);
+  const [userTreeState, setUserTreeState] = useState({treeStructure: new TreeStructure([0, 0, 100, 100]), toggle: false});
 
   return (
     <div className="column-container">
@@ -64,18 +76,16 @@ function App() {
             </div>
         </div>
         
-        <Map coordinates={coordinates}/>
+        <Map coordinates={coordinates} treeState={userTreeState} setTreeState={setUserTreeState}/>
       </div>
-      <div className="column" style={{ backgroundColor: 'red' }} onClick={() => {
+      <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
       }}>
-        <Tree structure={treeStructures[treeStructureIdx]} id={'userTree'} key={`userTree`}/>
+        <Tree structure={userTreeState.treeStructure} id={'userTree'} key={`userTree`}/>
       </div>
       {
         useThreeColumns &&
-        <div className="column" style={{ backgroundColor: 'green' }} onClick={() => {
-          setTreeStructureIdx((treeStructureIdx + 1) % treeStructures.length);
-        }}>
+        <div className="column" style={{ backgroundColor: 'green' }}>
           Column C
         </div>
       }

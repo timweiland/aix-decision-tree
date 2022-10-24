@@ -13,7 +13,7 @@ export default function Map({coordinates}) {
 } 
 */
 
-export default function Map({ coordinates }) {
+export default function Map({ coordinates, treeState, setTreeState }) {
     const canvasRef = useRef();
     const [lines, setLines] = useState([]);
     let curLineStart = [0, 0];
@@ -96,20 +96,30 @@ export default function Map({ coordinates }) {
 
     function addLineEnd(x, y) {
         const canvas = canvasRef.current;
-        const rect = canvas.getBoundingClientRect();
         const dx = curLineStart[0] - x;
         const dy = curLineStart[1] - y;
         const [x0, y0] = absoluteToRelativeCoords(canvas, curLineStart[0], curLineStart[1]);
+        const curTreeNode = treeState.treeStructure.find(x0, y0);
+        const [treeX0, treeY0, treeX1, treeY1] = curTreeNode.rect;
         let line = null;
+        let splitAxis = null;
+        let splitPos = null;
         if (2 * dx ** 2 / (dx ** 2 + dy ** 2) <= 1) {
             // Horizontal line
-            line = [[x0, 0], [x0, 100]]
+            line = [[x0, treeY0], [x0, treeY1]]
+            splitAxis = 0;
+            splitPos = x0;
+            curTreeNode.split(splitAxis, splitPos);
           }
         else {
           // Vertical line
-          line = [[0, y0], [100, y0]];
+          line = [[treeX0, y0], [treeX1, y0]];
+          splitAxis = 1;
+          splitPos = y0;
+          curTreeNode.split(splitAxis, splitPos);
         }
         setLines([...lines, line]);
+        setTreeState({treeStructure: treeState.treeStructure, toggle: !treeState.toggle});
     }
 
     function startDrawing(evt) {
