@@ -39,6 +39,16 @@ export default function Map({ coordinates }) {
         ctx.fillStyle = "#000000";
     }, [lines]);
 
+    function relativeToAbsoluteCoords(canvas, x, y) {
+        const rect = canvas.getBoundingClientRect();
+        return [(x / 100.) * canvas.width, (y / 100.) * canvas.height]
+    }
+
+    function absoluteToRelativeCoords(canvas, x, y) {
+        const rect = canvas.getBoundingClientRect();
+        return [100. * x  / canvas.width, 100. * y  / canvas.height]
+    }
+
     function getMousePos(evt) {
         const canvas = canvasRef.current;
         const rect = canvas.getBoundingClientRect();
@@ -76,8 +86,8 @@ export default function Map({ coordinates }) {
         ctx.lineWidth = 7;
         lines.map((line) => {
             ctx.beginPath();
-            ctx.moveTo(line[0][0], line[0][1]);
-            ctx.lineTo(line[1][0], line[1][1]);
+            ctx.moveTo(...relativeToAbsoluteCoords(canvas, line[0][0], line[0][1]));
+            ctx.lineTo(...relativeToAbsoluteCoords(canvas, line[1][0], line[1][1]));
             ctx.stroke();
             return null;
         })
@@ -85,7 +95,21 @@ export default function Map({ coordinates }) {
     }
 
     function addLineEnd(x, y) {
-        setLines([...lines, [curLineStart, [x, y]]]);
+        const canvas = canvasRef.current;
+        const rect = canvas.getBoundingClientRect();
+        const dx = curLineStart[0] - x;
+        const dy = curLineStart[1] - y;
+        const [x0, y0] = absoluteToRelativeCoords(canvas, curLineStart[0], curLineStart[1]);
+        let line = null;
+        if (2 * dx ** 2 / (dx ** 2 + dy ** 2) <= 1) {
+            // Horizontal line
+            line = [[x0, 0], [x0, 100]]
+          }
+        else {
+          // Vertical line
+          line = [[0, y0], [100, y0]];
+        }
+        setLines([...lines, line]);
     }
 
     function startDrawing(evt) {
