@@ -34,7 +34,7 @@ export default function Map({ coordinates, treeState, setTreeState }) {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
 
-        image.src = require('../assets/map_sketch.jpg');
+        image.src = require('../assets/map_prototype.jpg');
         image.onload = (res) => {
             redrawAll();
         }
