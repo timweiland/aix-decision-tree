@@ -34,7 +34,6 @@ class TreeStructure {
   }
 
   find(x, y) {
-    console.log(`Finding ${x}, ${y}`)
     if(this.contains(x, y) && this.children.length === 0) {
       return this;
     }
