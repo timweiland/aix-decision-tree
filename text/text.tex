@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+
+% General document formatting
+\usepackage[margin=0.7in]{geometry}
+\usepackage[parfill]{parskip}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+    
+% Related to math
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+
+% Further packages
+\usepackage{xcolor}
+\usepackage{eurosym}
+
+% Document settings
+\addto\captionsngerman{
+  \renewcommand{\contentsname}
+    {Übersicht}
+}
+
+\begin{document}
+\textbf{Entscheidungsbaum für Mietpreise}\\
+\\
+\textbf{\Huge Erklärtexte}
+
+\tableofcontents
+
+\newpage
+
+\section{Vor der Interaktion}
+
+\subsection{Startbildschirm}
+(catchy)
+
+\subsection{Einführung in die Aufgabe}
+\begin{itemize}
+    \item Du wirst Mieten vorhersagen/einschätzen
+    \item Schau dir Tübingen an und versuche, Gegenden mit ähnlichem Mietniveau zu erkennen
+    \item Versuche, die Gegenden möglichst ... voneinander abzugrenzen
+    \item Die KI wird das Gleiche tun
+    \item Am Ende vergleichen wir, wie ihr performt
+\end{itemize}
+
+\subsection{Animation/Erklärvideo}
+\begin{itemize}
+    \item Du kannst horizontale und vertikale Linien zeichnen 
+    \item Wenn du die Karte geteilt hast, kannst du nur die Teilbereiche weiter unterteilen
+    \item Parallel entsteht auf der rechten Seite eine Struktur, die deine Unterteilungen repräsentiert 
+    \item Weil die aussieht wie ein umgedrehter Baum, sagen wir dazu auch Entscheidungsbaum
+    \item \texttt{[Kriterien für den Baum?]} Du kannst insgesamt x Bereiche unterteilen, das entspricht y Strichen
+    \item Alles verstanden?
+    \begin{itemize}
+        \item Ich will einmal üben
+        \item Nein, zurück zur Erklärung
+        \item Ja, direkt starten
+    \end{itemize}
+\end{itemize}
+
+\subsection{Los geht's!}
+
+\section{Während der Interaktion}
+\subsection{Besucher:in zeichnet}
+\begin{itemize}
+    \item \texttt{[Besucher:in wählt vorzeitig ``Fertig'']} Super, danke!
+    \item \texttt{[Sonst nach y Linien autoamtisch beenden]} Super, das sind genug Linien
+\end{itemize}
+
+\subsection{Berechnung der KI}
+Dann ist jetzt die KI an der Reihe \texttt{[Linien erscheinen nach und nach und der Baum entsteht]}
+
+\subsection{Vergleich KI und Besucher:in}
+Folgende Alternativen
+\begin{enumerate}
+    \item \texttt{[Anhand von 1-3 (Trainings-)Punkten, die durch den Baum ``rieseln'']} Hier liegt deine Einschätzung bei +/- x, die der KI bei +/- y und die tatsächliche Miete liegt bei z
+    \item Im Mittel unterscheiden sich deine Einschätzungen um +/- \euro{} von den echten Miete und die der KI um +/- \euro{}
+    \item Oder Kombi aus beidem
+\end{enumerate}
+
+\section{Nach der Interaktion}
+\subsection{Erklärung: Decision trees und Anwendungsbeispiel}
+Soweit so gut. Aber wie kommt die KI eigentlich zu ihren Unterteilungen?\\
+\\
+Während du deinen Entscheidungsbaum manuell erstellt hast, hat die KI ihre Unterteilungen berechnet. \texttt{[Wie genau berechnet sie es, insb bei 2dim features? Minimaler Fehler, maximaler Unterschied zwischen den Unterteilungen]}\\
+\\
+Das war ein sehr einfaches Beispiel. In der echten Welt werden Entscheidungsbäume vielfältig eingesetzt, auch für wesentlich komplizierte Aufgaben. (Gutes Beispiel aus der Medizin.) Sie sind beliebt, weil ihre Entscheidungsstruktur gut nachvollziehbar ist.
+
+\subsection{Ich will noch mehr über den Algorithmus wissen}
+
+\subsection{Ich will noch mehr Anwendungsbeispiele}
+
+\end{document}
