@@ -7,6 +7,7 @@ export default function TreeRoot({ structure, id, index }) {
         return null;
     }
     const rootID = `${id}-${index}`;
+    const avgRent = structure.avgRent;
     return <div style={{ width: '100%', height: '100%' }}>
         <ArcherElement id={`archer-${rootID}`}
             relations={
@@ -18,7 +19,7 @@ export default function TreeRoot({ structure, id, index }) {
                     }
                 }) : []
             }>
-            <div><TreeNode id={rootID} /></div>
+            <div><TreeNode id={rootID} avgRent={avgRent} /></div>
         </ArcherElement>
         <div style={{ width: '100%', marginTop: '5rem', display: 'flex' }}>
             {

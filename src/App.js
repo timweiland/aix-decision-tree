@@ -7,8 +7,9 @@ import  Tree  from './tree/Tree';
 import './map/button_q.css';
 
 class TreeStructure {
-  constructor(rect) {
+  constructor(rect, avgRent='25') {
     this.rect = rect;
+    this.avgRent = avgRent;
     this.children = []
   }
 
@@ -58,6 +59,23 @@ class TreeStructure {
   }
 }
 
+const aiPythonTree = {
+  avgRent: '40',
+  children: [
+    {
+      avgRent: '20',
+      children: [
+        {
+          avgRent: '15'
+        }
+      ]
+    },
+    {
+      avgRent: '50',
+    }
+  ]
+};
+
 const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
 
 function App() {
@@ -85,7 +103,7 @@ function App() {
       {
         useThreeColumns &&
         <div className="column" style={{ backgroundColor: 'green' }}>
-          Column C
+          <Tree structure={aiPythonTree} id={'aiTree'} key={`aiTree`}/>
         </div>
       }
     </div >
