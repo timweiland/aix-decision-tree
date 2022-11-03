@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
 import './map/button_q.css';
+import aiPythonTreeJSON from './python/aiPythonTree.json';
 
 
 class TreeStructure {
