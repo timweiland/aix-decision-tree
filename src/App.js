@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
 import './map/button_q.css';
-import aiPythonTreeJSON from './python/aiPythonTree.json';
+
 
 class TreeStructure {
   constructor(rect, avgRent='-1', threshold='-1') {
@@ -60,7 +60,7 @@ class TreeStructure {
     }
   }
 }
-const aiPythonTree = aiPythonTreeJSON;
+const aiPythonTree = require('./python/aiPythonTree.json');
 const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
 
 function App() {
