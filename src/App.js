@@ -7,9 +7,10 @@ import  Tree  from './tree/Tree';
 import './map/button_q.css';
 
 class TreeStructure {
-  constructor(rect, avgRent='25') {
+  constructor(rect, avgRent='-1', threshold='-1') {
     this.rect = rect;
     this.avgRent = avgRent;
+    this.threshold = threshold;
     this.children = []
   }
 
@@ -58,24 +59,7 @@ class TreeStructure {
     }
   }
 }
-
-const aiPythonTree = {
-  avgRent: '40',
-  children: [
-    {
-      avgRent: '20',
-      children: [
-        {
-          avgRent: '15'
-        }
-      ]
-    },
-    {
-      avgRent: '50',
-    }
-  ]
-};
-
+const aiPythonTree = {'avgRent': 24, 'feature': 0, 'threshold': 72, 'children': [{'avgRent': 20, 'feature': 1, 'threshold': 23, 'children': [{'avgRent': 17, 'feature': -1, 'threshold': -1}, {'avgRent': 24, 'feature': -1, 'threshold': -1}]}, {'avgRent': 35, 'feature': 0, 'threshold': 81, 'children': [{'avgRent': 35, 'feature': -1, 'threshold': -1}, {'avgRent': 34, 'feature': -1, 'threshold': -1}]}]};
 const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
 
 function App() {
