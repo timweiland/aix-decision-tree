@@ -5,7 +5,8 @@ import { useState } from 'react';
 import Map from './map/Map';
 import  Tree  from './tree/Tree';
 import './map/button_q.css';
-import aiPythonTreeJSON from './python/aiPythonTree.json';
+import aiPythonTree from './python/aiPythonTree.json';
+import mietdatenJSON from './python/mietdaten.json';
 
 
 class TreeStructure {
@@ -61,9 +62,8 @@ class TreeStructure {
     }
   }
 }
-{/*const aiPythonTree = require('./python/aiPythonTree.json');*/}
-const aiPythonTree = {'avgRent': 24, 'feature': 1, 'threshold': 40, 'children': [{'avgRent': 19, 'feature': 0, 'threshold': 52, 'children': [{'avgRent': 17, 'feature': -1, 'threshold': -1}, {'avgRent': 22, 'feature': -1, 'threshold': -1}]}, {'avgRent': 32, 'feature': 0, 'threshold': 48, 'children': [{'avgRent': 25, 'feature': -1, 'threshold': -1}, {'avgRent': 35, 'feature': -1, 'threshold': -1}]}]};
-const coordinates = [[10,15],[11,16],[95,95],[20,15],[11,45],[5,95]];
+
+const mietdaten = mietdatenJSON.data;
 
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
@@ -80,7 +80,7 @@ function App() {
             </div>
         </div>
         
-        <Map coordinates={coordinates} treeState={userTreeState} setTreeState={setUserTreeState}/>
+        <Map coordinates={mietdaten} treeState={userTreeState} setTreeState={setUserTreeState}/>
       </div>
       <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
