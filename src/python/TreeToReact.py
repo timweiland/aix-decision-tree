@@ -52,7 +52,7 @@ def export_for_react(model, map):
         else:
             dict = {}
             dict["avgRent"] = round(value[node_id][0][0])
-            dict["feature"] = feature[node_id]
+            dict["feature"] = int(feature[node_id])
             if dict["feature"] == 0:
                 dict["threshold"] = round(threshold[node_id]/map_width*100)
             else:
