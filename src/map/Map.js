@@ -13,9 +13,8 @@ export default function Map({coordinates}) {
 } 
 */
 
-export default function Map({ coordinates, treeState, setTreeState }) {
+export default function Map({ coordinates, lines, treeState, splitTree }) {
     const canvasRef = useRef();
-    const [lines, setLines] = useState([]);
     const [isDrawing, setIsDrawing] = useState(false);
     const [curLineStart, setCurLineStart] = useState([0, 0]);
     const [curLineEnd, setCurLineEnd] = useState([0, 0]);
@@ -150,17 +149,14 @@ export default function Map({ coordinates, treeState, setTreeState }) {
             line = [[x0, treeY0], [x0, treeY1]]
             splitAxis = 0;
             splitPos = x0;
-            curTreeNode.split(splitAxis, splitPos);
         }
         else {
             // Vertical line
             line = [[treeX0, y0], [treeX1, y0]];
             splitAxis = 1;
             splitPos = y0;
-            curTreeNode.split(splitAxis, splitPos);
         }
-        setLines([...lines, line]);
-        setTreeState({ treeStructure: treeState.treeStructure, toggle: !treeState.toggle });
+        splitTree(curTreeNode.idx, splitAxis, splitPos, line);
     }
 
     function startDrawing(evt) {
