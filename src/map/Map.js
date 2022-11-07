@@ -4,15 +4,6 @@ import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
 import './button_q.css';
 
-/*
-export default function Map({coordinates}) {
-    return  <div style={{position:"relative", display: "inline-block"}}>
-                <img src={MapImage} alt="Map" className="map" style={{opacity:0.6}} />
-                <div> <Point coordinates={coordinates}/> </div>
-            </div>
-} 
-*/
-
 export default function Map({ coordinates, lines, treeState, splitTree }) {
     const canvasRef = useRef();
     const [isDrawing, setIsDrawing] = useState(false);
@@ -67,16 +58,20 @@ export default function Map({ coordinates, lines, treeState, splitTree }) {
         setCurLineStart([x, y]);
     }
 
+    function treeNodeToCanvasRect(node, canvas) {
+        let [treeX0, treeY0, treeX1, treeY1] = node.rect;
+        [treeX0, treeY0] = relativeToAbsoluteCoords(canvas, treeX0, treeY0);
+        [treeX1, treeY1] = relativeToAbsoluteCoords(canvas, treeX1, treeY1);
+        return [treeX0, treeY0, treeX1 - treeX0, treeY1 - treeY0]
+    }
+
     function highlightTreeNode(x, y) {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
         const [x_rel, y_rel] = absoluteToRelativeCoords(canvas, x, y);
 
         const curTreeNode = treeState.treeStructure.find(x_rel, y_rel);
-        let [treeX0, treeY0, treeX1, treeY1] = curTreeNode.rect;
-        [treeX0, treeY0] = relativeToAbsoluteCoords(canvas, treeX0, treeY0);
-        [treeX1, treeY1] = relativeToAbsoluteCoords(canvas, treeX1, treeY1);
-        setHighlightedRect([treeX0, treeY0, treeX1 - treeX0, treeY1 - treeY0]);
+        setHighlightedRect(treeNodeToCanvasRect(curTreeNode, canvas));
     }
 
     function clearCanvas(canvas) {
@@ -125,6 +120,14 @@ export default function Map({ coordinates, lines, treeState, splitTree }) {
             ctx.stroke();
             ctx.setLineDash([]);
         }
+        // Paint each tree leaf in a different color
+        const treeLeaves = treeState.treeStructure.get_leaves();
+        treeLeaves.forEach((leaf) => {
+            ctx.globalAlpha = 0.6;
+            ctx.fillStyle = leaf.color.hex();
+            ctx.fillRect(...treeNodeToCanvasRect(leaf, canvas));
+            ctx.globalAlpha = 1.0;
+        })
         if(isDrawing && highlightedRect) {
             // Highlight the area of the tree that the user is currently drawing inside
             ctx.globalAlpha = 0.6;
