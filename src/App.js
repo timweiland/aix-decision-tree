@@ -171,7 +171,7 @@ function App() {
       {
         useThreeColumns &&
         <div className="column" style={{ backgroundColor: 'green' }}>
-          <Tree structure={aiPythonTree} id={'aiTree'} key={`aiTree`} />
+          <Tree structure={aiPythonTree} id={'aiTree'} key={`aiTree`} colors={{}} />
         </div>
       }
     </div >
