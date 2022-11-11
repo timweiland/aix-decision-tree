@@ -21,6 +21,7 @@ def export_for_react(model, map):
     feature = model.tree_.feature
     threshold = model.tree_.threshold
     value = model.tree_.value
+    impurity = model.tree_.impurity
     map_heigth = map.shape[0]
     map_width = map.shape[1]
 
@@ -47,11 +48,13 @@ def export_for_react(model, map):
         if is_leaves[node_id]:
             dict = {}
             dict["avgRent"] = round(value[node_id][0][0])
+            dict["impurity"] = round(impurity[node_id])
             dict["feature"] = -1
             dict["threshold"] = -1
         else:
             dict = {}
             dict["avgRent"] = round(value[node_id][0][0])
+            dict["impurity"] = round(impurity[node_id])
             dict["feature"] = int(feature[node_id])
             if dict["feature"] == 0:
                 dict["threshold"] = round(threshold[node_id]/map_width*100)

@@ -1,22 +1,21 @@
 import './App.css';
 import { useState } from 'react';
-
-import distinctColors from 'distinct-colors'
+import {Link} from "react-router-dom";
+import distinctColors from 'distinct-colors';
 
 
 import Map from './map/Map';
 import Tree from './tree/Tree';
-import './map/button_q.css';
+import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
 let colorPalette = distinctColors({ count: 15 });
 
 class TreeStructure {
-  constructor(rect, avgRent = '-1', threshold = '-1', idx = "root") {
+  constructor(rect, avgRent = '-1', idx = "root") {
     this.rect = rect;
     this.avgRent = avgRent;
-    this.threshold = threshold;
     this.idx = idx;
     this.children = [];
     this.colorPalette = colorPalette;
@@ -151,15 +150,22 @@ function App() {
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div class="help" style={{ position: "absolute", top: `${5}%`, left: `${50}%` }}>
+        
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
+          U
+        </div>
+        <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
           <div class="button">?</div>
           <div class="popup">
             <h3>But wait what exactely is AI and how will it kill my family?</h3>
           </div>
         </div>
-        <div class="button" style={{ position: "absolute", top: `${5}%`, left: `${90}%` }} onClick={undo}>
-          U
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
+        <Link to="/byebye">
+          F
+        </Link>
         </div>
+        
 
         <Map coordinates={mietdaten} lines={userLines} treeState={userTreeState} splitTree={splitTree} />
       </div>

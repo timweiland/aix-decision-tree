@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import App from './App';
 import StartPage from './pages/StartPage';
+import ByePage from  './pages/ByePage';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,8 +12,10 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
        <Routes>
-        <Route exact path="/" element={<StartPage/>} />
+        <Route path="/" element={<StartPage/>} />
         <Route path="/app" element={<App/>} />
+        <Route path="/byebye" element={<ByePage/>} />
+        
       </Routes>
       </BrowserRouter>,
   </React.StrictMode>

@@ -2,7 +2,7 @@ import './Map.css';
 import Point from '../points/Point.js';
 import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
-import './button_q.css';
+import './button.css';
 
 export default function Map({ coordinates, lines, treeState, splitTree }) {
     const canvasRef = useRef();
