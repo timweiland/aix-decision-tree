@@ -1,4 +1,4 @@
-import './ByePage.css';
+import './StartPage.css';
 import {Link } from "react-router-dom";
 import '../map/button.css'
 

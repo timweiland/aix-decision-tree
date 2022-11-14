@@ -163,24 +163,33 @@ function App() {
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-      <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
+        <div class="headers" style={{position: "absolute", left: `${20}%`}}> WG-Zimmer in Tübingen
+        </div>
+
+        <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
           <div class="button">?</div>
           <div class="popup">
             <h3>But wait what exactely is AI and how will it kill my family?</h3>
           </div>
         </div>
+
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
           ↺
         </div>
+
         <div class="button" style={{position: "absolute", top: `${1}%`, left: `${79}%`}} onClick={() => {
         setUseThreeColumns(!useThreeColumns);}}>
           <Link to="/byebye"style={{textDecoration: 'none'}} >
           ✓
           </Link>
         </div>
+
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }} onClick={undo}>
+        <Link to="/"style={{textDecoration: 'none'}} >
           X
+          </Link>
         </div>
+        
         <Map coordinates={mietdaten} lines={userLines} treeState={userTreeState} splitTree={splitTree} />
       </div>
 
