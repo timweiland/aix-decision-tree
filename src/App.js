@@ -163,33 +163,43 @@ function App() {
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
-          U
-        </div>
-        <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
+      <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
           <div class="button">?</div>
           <div class="popup">
             <h3>But wait what exactely is AI and how will it kill my family?</h3>
           </div>
         </div>
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
-          <Link to="/byebye">
-            F
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
+          ↺
+        </div>
+        <div class="button" style={{position: "absolute", top: `${1}%`, left: `${79}%`}} onClick={() => {
+        setUseThreeColumns(!useThreeColumns);}}>
+          <Link to="/byebye"style={{textDecoration: 'none'}} >
+          ✓
           </Link>
         </div>
-
-
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }} onClick={undo}>
+          X
+        </div>
         <Map coordinates={mietdaten} lines={userLines} treeState={userTreeState} splitTree={splitTree} />
       </div>
+
       <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
         setUseThreeColumns(!useThreeColumns);
       }}>
+        <div class="headers">
+            Dein Entscheidungsbaum<br/><br/>
+          </div>
         <Tree structure={userTreeState.treeStructure} colors={colors} />
       </div>
+
       {
         useThreeColumns &&
-        <div className="column" style={{ backgroundColor: 'green' }}>
+        <div className="column" style={{ backgroundColor: 'grey' }}>
+          <div class="headers">
+            KI Entscheidungsbaum<br/><br/>
+            
+          </div>
           <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={{}} />
         </div>
       }

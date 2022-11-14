@@ -6,15 +6,15 @@ function ByePage() {
 
     return (
       <div >
-        <h1> Vielen Dank fürs Mitmachen </h1>
+        <h1> Super!  </h1>
         <br />
-        <h3> Den selben Song nochmal?</h3>
+        <h1> Dann siehst du jetzt den Entscheidungsbaum der KI</h1>
         <br />
         <br />
         <Link to="/app">
           <div style={{ textAlign: 'center' }}>
             <button>
-            Den selben Song nochmal!
+            Bitte hier klicken
             </button>
           </div>
         </Link>
