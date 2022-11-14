@@ -1,0 +1,28 @@
+.container {
+  display: grid;
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: 400px auto;
+}
+
+
+.left,
+.right {
+  height: 100%;
+}
+
+.instr {
+  display: flex;
+  width: 80%;
+  height: 70%;
+  margin: auto;
+  align-items:center;
+  justify-content:center; 
+}
+
+.rowButtons {
+  display:flex; 
+  flex-direction:row;
+  align-items:center;
+  justify-content:center; 
+}
+
