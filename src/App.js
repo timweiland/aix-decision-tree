@@ -10,16 +10,30 @@ import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
-let colorPalette = distinctColors({ count: 15 });
+let colorPalette = distinctColors({ count: 20 });
 
 class TreeStructure {
-  constructor(rect, avgRent = '-1', idx = "root") {
+  constructor(rect, points, idx = "root") {
     this.rect = rect;
-    this.avgRent = avgRent;
+    this.points = points.filter((point) => this.contains(point[0], point[1]));
     this.idx = idx;
     this.children = [];
     this.colorPalette = colorPalette;
     this.color = colorPalette.pop();
+
+    this.calculate_avg_rent();
+  }
+
+  calculate_avg_rent() {
+    if(this.points.length === 0) {
+      this.avgRent = "?";
+      return;
+    }
+    this.avgRent = 0;
+    this.points.forEach((point) => {
+      this.avgRent += point[2];
+    });
+    this.avgRent /= this.points.length;
   }
 
   split(axis, axis_pos) {
@@ -33,8 +47,8 @@ class TreeStructure {
       rectA = [x0, y0, x1, axis_pos];
       rectB = [x0, axis_pos, x1, y1];
     }
-    const treeA = new TreeStructure(rectA, '-1', this.idx + "-L");
-    const treeB = new TreeStructure(rectB, '-1', this.idx + "-R");
+    const treeA = new TreeStructure(rectA, this.points, this.idx + "-L");
+    const treeB = new TreeStructure(rectB, this.points, this.idx + "-R");
     colorPalette.push(this.color);
     this.children = [treeA, treeB];
     this.color = undefined;
@@ -115,7 +129,6 @@ class TreeStructure {
 }
 
 function convertPythonTree(pythonTree, node) {
-  node.avgRent = pythonTree.avgRent;
   if (pythonTree.children !== undefined && pythonTree.children.length > 0) {
     node.split(pythonTree.feature, pythonTree.threshold);
     node.children.forEach((child, childidx) => {
@@ -125,11 +138,13 @@ function convertPythonTree(pythonTree, node) {
   return node;
 }
 
-const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], "", "ai-root"));
-
-const initialStructure = new TreeStructure([0, 0, 100, 100]);
-
 const mietdaten = mietdatenJSON.data;
+
+const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
+
+
+const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
+
 
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
@@ -138,6 +153,7 @@ function App() {
   const [userLines, setUserLines] = useState([]);
   const [colors, setColors] = useState({});
 
+  console.log(mietdaten);
   const splitTree = (idx, axis, pos, line) => {
     const node = userTreeState.treeStructure.find_idx(idx);
     node.split(axis, pos);
@@ -163,7 +179,7 @@ function App() {
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div class="headers" style={{position: "absolute", left: `${20}%`}}> WG-Zimmer in Tübingen
+        <div class="headers" style={{ position: "absolute", left: `${20}%` }}> WG-Zimmer in Tübingen
         </div>
 
         <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
@@ -177,19 +193,20 @@ function App() {
           ↺
         </div>
 
-        <div class="button" style={{position: "absolute", top: `${1}%`, left: `${79}%`}} onClick={() => {
-        setUseThreeColumns(!useThreeColumns);}}>
-          <Link to="/byebye"style={{textDecoration: 'none'}} >
-          ✓
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }} onClick={() => {
+          setUseThreeColumns(!useThreeColumns);
+        }}>
+          <Link to="/byebye" style={{ textDecoration: 'none' }} >
+            ✓
           </Link>
         </div>
 
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }} onClick={undo}>
-        <Link to="/"style={{textDecoration: 'none'}} >
-          X
+          <Link to="/" style={{ textDecoration: 'none' }} >
+            X
           </Link>
         </div>
-        
+
         <Map coordinates={mietdaten} lines={userLines} treeState={userTreeState} splitTree={splitTree} />
       </div>
 
@@ -197,8 +214,8 @@ function App() {
         setUseThreeColumns(!useThreeColumns);
       }}>
         <div class="headers">
-            Dein Entscheidungsbaum<br/><br/>
-          </div>
+          Dein Entscheidungsbaum<br /><br />
+        </div>
         <Tree structure={userTreeState.treeStructure} colors={colors} />
       </div>
 
@@ -206,8 +223,8 @@ function App() {
         useThreeColumns &&
         <div className="column" style={{ backgroundColor: 'grey' }}>
           <div class="headers">
-            KI Entscheidungsbaum<br/><br/>
-            
+            KI Entscheidungsbaum<br /><br />
+
           </div>
           <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={{}} />
         </div>
