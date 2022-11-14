@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import distinctColors from 'distinct-colors';
 
 
@@ -33,8 +33,8 @@ class TreeStructure {
       rectA = [x0, y0, x1, axis_pos];
       rectB = [x0, axis_pos, x1, y1];
     }
-    const treeA = new TreeStructure(rectA, '-1', '-1', this.idx + "-L");
-    const treeB = new TreeStructure(rectB, '-1', '-1', this.idx + "-R");
+    const treeA = new TreeStructure(rectA, '-1', this.idx + "-L");
+    const treeB = new TreeStructure(rectB, '-1', this.idx + "-R");
     colorPalette.push(this.color);
     this.children = [treeA, treeB];
     this.color = undefined;
@@ -42,7 +42,7 @@ class TreeStructure {
 
   delete_children() {
     this.children.forEach((child) => {
-      if(child.children.length === 0) {
+      if (child.children.length === 0) {
         colorPalette.push(child.color);
       }
     })
@@ -65,7 +65,7 @@ class TreeStructure {
     const leaves = this.get_leaves();
     let colors = {}
     leaves.forEach((leaf) => {
-        colors[leaf.idx] = leaf.color;
+      colors[leaf.idx] = leaf.color;
     })
     return colors;
   }
@@ -114,6 +114,19 @@ class TreeStructure {
   }
 }
 
+function convertPythonTree(pythonTree, node) {
+  node.avgRent = pythonTree.avgRent;
+  if (pythonTree.children !== undefined && pythonTree.children.length > 0) {
+    node.split(pythonTree.feature, pythonTree.threshold);
+    node.children.forEach((child, childidx) => {
+      convertPythonTree(pythonTree.children[childidx], child);
+    })
+  }
+  return node;
+}
+
+const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], "", "ai-root"));
+
 const initialStructure = new TreeStructure([0, 0, 100, 100]);
 
 const mietdaten = mietdatenJSON.data;
@@ -150,7 +163,7 @@ function App() {
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        
+
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
           U
         </div>
@@ -161,11 +174,11 @@ function App() {
           </div>
         </div>
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
-        <Link to="/byebye">
-          F
-        </Link>
+          <Link to="/byebye">
+            F
+          </Link>
         </div>
-        
+
 
         <Map coordinates={mietdaten} lines={userLines} treeState={userTreeState} splitTree={splitTree} />
       </div>
@@ -177,7 +190,7 @@ function App() {
       {
         useThreeColumns &&
         <div className="column" style={{ backgroundColor: 'green' }}>
-          <Tree structure={aiPythonTree} id={'aiTree'} key={`aiTree`} colors={{}} />
+          <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={{}} />
         </div>
       }
     </div >

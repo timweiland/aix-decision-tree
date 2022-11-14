@@ -24,7 +24,7 @@ export default function TreeRoot({ structure, colors }) {
             {
                 structure.children &&
                 structure.children.map((child, childidx) => {
-                    return <div style={{ flex: '1' }}>
+                    return <div style={{ flex: '1' }} key={child.idx}>
                         <TreeRoot structure={child} id={child.idx} key={child.idx} colors={colors} />
                     </div>
                 })
