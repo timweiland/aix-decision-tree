@@ -87,6 +87,26 @@ export default function Map({ coordinates, treeState, splitTree }) {
         context.restore();
     }
 
+    function drawCoordinates(coordinates, ctx, canvas) {
+        let minRent = 1000;
+        let maxRent = -1000;
+        coordinates.forEach((coord) => {
+            const rent = coord[2];
+            if(rent < minRent) {
+                minRent = rent;
+            }
+            if(rent > maxRent) {
+                maxRent = rent;
+            }
+        });
+        const [minSize, maxSize] = [5, 20];
+        coordinates.forEach((c) => {
+            const rent = c[2];
+            const size = Math.floor(minSize + (rent - minRent) * (maxSize - minSize) / (maxRent - minRent));
+            ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, size, size);
+        })
+    }
+
     function redrawAll() {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
@@ -105,7 +125,7 @@ export default function Map({ coordinates, treeState, splitTree }) {
             return null;
         })
         // Draw the rent points on the map
-        coordinates.map((c) => { ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, 10, 10) });
+        drawCoordinates(coordinates, ctx, canvas);
         if(isDrawing && curLineEnd) {
             // Dashed line that the user is currently in the process of drawing
             ctx.setLineDash([7, 7]);
