@@ -18,7 +18,7 @@ export default function TreeRoot({ structure, colors }) {
                     }
                 }) : []
             }>
-            <div><TreeNode id={structure.idx} avgRent={avgRent} color={colors[structure.idx]}/></div>
+            <div><TreeNode id={structure.idx} avgRent={avgRent} color={colors[structure.idx]} isSelected={structure.isSelected} /></div>
         </ArcherElement>
         <div style={{ width: '100%', marginTop: '5rem', display: 'flex' }}>
             {

@@ -4,7 +4,7 @@ import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
 import './button.css';
 
-export default function Map({ coordinates, treeState, splitTree }) {
+export default function Map({ coordinates, treeState, splitTree, highlightNode, unhighlightAll }) {
     const canvasRef = useRef();
     const [isDrawing, setIsDrawing] = useState(false);
     const [curLineStart, setCurLineStart] = useState([0, 0]);
@@ -71,6 +71,7 @@ export default function Map({ coordinates, treeState, splitTree }) {
         const [x_rel, y_rel] = absoluteToRelativeCoords(canvas, x, y);
 
         const curTreeNode = treeState.treeStructure.find(x_rel, y_rel);
+        highlightNode(curTreeNode);
         setHighlightedRect(treeNodeToCanvasRect(curTreeNode, canvas));
     }
 
@@ -198,6 +199,7 @@ export default function Map({ coordinates, treeState, splitTree }) {
         setCurLineStart([0, 0]);
         setCurLineEnd([0, 0]);
         setIsDrawing(false);
+        unhighlightAll();
     }
 
     function whileDrawing(evt) {
@@ -208,6 +210,7 @@ export default function Map({ coordinates, treeState, splitTree }) {
     }
     function leaveCanvas(evt) {
         setIsDrawing(false);
+        unhighlightAll();
         setCurLineStart([0, 0]);
         setCurLineEnd([0, 0]);
     }

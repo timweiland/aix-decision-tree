@@ -10,6 +10,7 @@ export class TreeStructure {
     this.children = [];
     this.colorPalette = colorPalette;
     this.color = colorPalette.pop();
+    this.isSelected = false;
 
     this.calculate_avg_rent();
 
@@ -136,6 +137,13 @@ export class TreeStructure {
     lineEnd[this.axis] = this.axis_pos;
 
     return [lineStart, lineEnd];
+  }
+
+  unhighlightAll() {
+    this.isSelected = false;
+    this.children.forEach((child) => {
+      child.unhighlightAll();
+    })
   }
 
   get_lines() {

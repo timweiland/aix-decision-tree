@@ -10,6 +10,9 @@ import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuestion, faCheck, faRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
+
 const mietdaten = mietdatenJSON.data;
 
 const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
@@ -28,6 +31,17 @@ function App() {
     setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
     setUserSplitStack([...userSplitStack, idx]);
     setColors(userTreeState.treeStructure.get_colors());
+  }
+
+  const highlightNode = (node) => {
+    const idx = node.idx;
+    userTreeState.treeStructure.find_idx(idx).isSelected = true;
+    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
+  }
+
+  const unhighlightAll = () => {
+    userTreeState.treeStructure.unhighlightAll();
+    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
   }
 
   const undo = () => {
@@ -49,31 +63,31 @@ function App() {
         </div>
 
         <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
-          <div class="button">?</div>
+          <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
           <div class="popup">
             <h3>But wait what exactely is AI and how will it kill my family?</h3>
           </div>
         </div>
 
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
-          ↺
+          <FontAwesomeIcon icon={faRotateLeft} />
         </div>
 
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }} onClick={() => {
           setUseThreeColumns(!useThreeColumns);
         }}>
           <Link to="/byebye" style={{ textDecoration: 'none' }} >
-            ✓
+            <FontAwesomeIcon icon={faCheck} />
           </Link>
         </div>
 
         <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }} onClick={undo}>
           <Link to="/" style={{ textDecoration: 'none' }} >
-            X
+            <FontAwesomeIcon icon={faXmark} />
           </Link>
         </div>
 
-        <Map coordinates={mietdaten} treeState={userTreeState} splitTree={splitTree} />
+        <Map coordinates={mietdaten} treeState={userTreeState} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} />
       </div>
 
       <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
