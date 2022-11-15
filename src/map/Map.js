@@ -4,7 +4,7 @@ import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
 import './button.css';
 
-export default function Map({ coordinates, lines, treeState, splitTree }) {
+export default function Map({ coordinates, treeState, splitTree }) {
     const canvasRef = useRef();
     const [isDrawing, setIsDrawing] = useState(false);
     const [curLineStart, setCurLineStart] = useState([0, 0]);
@@ -30,7 +30,7 @@ export default function Map({ coordinates, lines, treeState, splitTree }) {
         }
 
         ctx.fillStyle = "#000000";
-    }, [lines, isDrawing, curLineEnd]);
+    }, [image, isDrawing, curLineEnd, treeState]);
 
     function relativeToAbsoluteCoords(canvas, x, y) {
         const rect = canvas.getBoundingClientRect();
@@ -97,7 +97,7 @@ export default function Map({ coordinates, lines, treeState, splitTree }) {
         ctx.lineWidth = 7;
         ctx.fillStyle = "#000000";
         // Draw all of the lines the user has drawn so far
-        lines.map((line) => {
+        treeState.treeStructure.get_lines().map((line) => {
             ctx.beginPath();
             ctx.moveTo(...relativeToAbsoluteCoords(canvas, line[0][0], line[0][1]));
             ctx.lineTo(...relativeToAbsoluteCoords(canvas, line[1][0], line[1][1]));
