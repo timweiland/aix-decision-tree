@@ -16,6 +16,7 @@ export class TreeStructure {
 
     this.axis = undefined;
     this.axis_pos = undefined;
+    this.hasTestPoint = false;
   }
 
   calculate_avg_rent() {
@@ -155,6 +156,25 @@ export class TreeStructure {
       lines = [...lines, ...child.get_lines()]
     });
     return lines;
+  }
+
+  get_path(x, y) {
+    if(this.children.length === 0) {
+      return [this];
+    }
+    for(let i = 0; i < this.children.length; i++) {
+      if(this.children[i].contains(x, y)) {
+        return [this, ...this.children[i].get_path(x, y)];
+      }
+    }
+    return undefined;
+  }
+
+  removeTestPoints() {
+    this.hasTestPoint = false;
+    this.children.forEach((child) => {
+      child.removeTestPoints();
+    })
   }
 }
 

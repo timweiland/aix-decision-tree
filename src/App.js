@@ -22,6 +22,7 @@ const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100
 function App() {
   const [useThreeColumns, setUseThreeColumns] = useState(false);
   const [userTreeState, setUserTreeState] = useState({ treeStructure: initialStructure, toggle: false });
+  const [aiTreeState, setAITreeState] = useState({treeStructure: aiTree, toggle: false});
   const [userSplitStack, setUserSplitStack] = useState([]);
   const [colors, setColors] = useState({});
 
@@ -54,6 +55,19 @@ function App() {
     setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
     setUserSplitStack(userSplitStack.slice(0, -1));
     setColors(userTreeState.treeStructure.get_colors());
+  }
+
+  const propagateTestpoint = () => {
+    const [x, y] = [70, 40]
+    const path = aiTree.get_path(x, y);
+    const delay = 2000;
+    path.forEach((node, node_idx) => {
+      setTimeout(() => {
+        aiTreeState.treeStructure.removeTestPoints();
+        aiTreeState.treeStructure.find_idx(node.idx).hasTestPoint = true;
+        setAITreeState({treeStructure: aiTreeState.treeStructure, toggle: !aiTreeState.toggle});
+      }, delay * node_idx);
+    });
   }
 
   return (
@@ -101,7 +115,7 @@ function App() {
 
       {
         useThreeColumns &&
-        <div className="column" style={{ backgroundColor: 'grey' }}>
+        <div className="column" style={{ backgroundColor: 'grey' }} onClick={propagateTestpoint}>
           <div class="headers">
             KI Entscheidungsbaum<br /><br />
 
