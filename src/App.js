@@ -13,7 +13,7 @@ import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestion, faCheck, faRotateLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons'
 
 const mietdaten = mietdatenJSON.data;
 
@@ -107,6 +107,14 @@ function App() {
     toggleAITree(false);
   }
 
+  const overall_deviation = (tree) => {
+    const leaves = tree.get_leaves();
+    let deviation = 0;
+    leaves.forEach((leaf) => {
+      deviation += leaf.avgDeviation});
+    return deviation / leaves.length
+  }
+
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
@@ -145,6 +153,9 @@ function App() {
         <div>
           <div class="headers">
             Dein Entscheidungsbaum<br /><br />
+            {
+            overall_deviation(userTree.structure)
+            }
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
@@ -153,6 +164,7 @@ function App() {
           <div onClick={propagateTestpoint}>
             <div class="headers">
               KI Entscheidungsbaum<br /><br />
+              Aktueller Fehler: {overall_deviation(aiTree.structure)}
             </div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
           </div>
