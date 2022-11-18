@@ -34,12 +34,14 @@ const userSplitStore = create((set) => ({
 function App() {
   const [userTreeState, setUserTreeState] = useState({ treeStructure: initialStructure, toggle: false });
   const [aiTreeState, setAITreeState] = useState({treeStructure: aiTree, toggle: false});
+  const [compareTrees, setCompareTrees] = useState(false);
 
   const showAITree = showAITreeStore((state) => state.show);
   const toggleAITree = showAITreeStore((state) => state.toggle);
   const userSplitStack = userSplitStore((state) => state.stack);
   const pushUserSplit = userSplitStore((state) => state.push);
   const popUserSplit = userSplitStore((state) => state.pop);
+
 
   const splitTree = (idx, axis, pos, line) => {
     const node = userTreeState.treeStructure.find_idx(idx);
@@ -83,7 +85,7 @@ function App() {
     });
   }
 
-  const overall_deviation = (tree) => {
+  const overall_avg_deviation = (tree) => {
     const leaves = tree.get_leaves();
     let deviation = 0;
     leaves.forEach((leaf) => {
@@ -129,11 +131,11 @@ function App() {
         toggleAITree(!showAITree);
       }}>
         <div class="headers">
-          Dein Entscheidungsbaum<br /><br />
-          Aktueller Fehler: 
-          {
-            overall_deviation(userTreeState.treeStructure)
-          }
+          Dein Entscheidungsbaum<br /><br />          
+            {compareTrees &&
+              <div> 
+              Aktueller Fehler: {overall_avg_deviation(userTreeState.treeStructure)} 
+              </div>}
         </div>
         <Tree structure={userTreeState.treeStructure} colors={userTreeState.treeStructure.get_colors()} />
       </div>
@@ -143,13 +145,22 @@ function App() {
         <div className="column" style={{ backgroundColor: 'grey' }} onClick={propagateTestpoint}>
           <div class="headers">
             KI Entscheidungsbaum<br /><br />
-            Aktueller Fehler: {overall_deviation(aiTree)}
-
+            {compareTrees &&
+            <div> 
+            Aktueller Fehler: {overall_avg_deviation(aiTree)} 
+            </div>}
           </div>
+
           <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={aiTree.get_colors()} />
-        </div>
+
+          <div class="button" style={{ position: "absolute", top: `${50}%`, left: `${50}%` }} onClick={() => {
+            setCompareTrees(!compareTrees);}}>
+          Compare my tree to the AI tree
+          </div>
+        </div >
       }
-    </div >
+    </div>
+    
   );
 }
 
