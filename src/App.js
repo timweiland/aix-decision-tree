@@ -2,6 +2,8 @@ import './App.css';
 import { useState } from 'react';
 import { Link } from "react-router-dom";
 
+import create from 'zustand';
+
 
 import Map from './map/Map';
 import Tree from './tree/Tree';
@@ -18,20 +20,32 @@ const mietdaten = mietdatenJSON.data;
 const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
 const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
 
+const showAITreeStore = create((set) => ({
+  show: false,
+  toggle: (val) => set((state) => ({show: val}))
+}));
+
+const userSplitStore = create((set) => ({
+  stack: [],
+  push: (val) => set((state) => ({stack: [...state.stack, val]})),
+  pop: () => set((state) => ({stack: state.stack.slice(0, -1)}))
+}));
 
 function App() {
-  const [useThreeColumns, setUseThreeColumns] = useState(false);
   const [userTreeState, setUserTreeState] = useState({ treeStructure: initialStructure, toggle: false });
   const [aiTreeState, setAITreeState] = useState({treeStructure: aiTree, toggle: false});
-  const [userSplitStack, setUserSplitStack] = useState([]);
-  const [colors, setColors] = useState({});
+
+  const showAITree = showAITreeStore((state) => state.show);
+  const toggleAITree = showAITreeStore((state) => state.toggle);
+  const userSplitStack = userSplitStore((state) => state.stack);
+  const pushUserSplit = userSplitStore((state) => state.push);
+  const popUserSplit = userSplitStore((state) => state.pop);
 
   const splitTree = (idx, axis, pos, line) => {
     const node = userTreeState.treeStructure.find_idx(idx);
     node.split(axis, pos);
     setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
-    setUserSplitStack([...userSplitStack, idx]);
-    setColors(userTreeState.treeStructure.get_colors());
+    pushUserSplit(idx);
   }
 
   const highlightNode = (node) => {
@@ -53,8 +67,7 @@ function App() {
     const node = userTreeState.treeStructure.find_idx(last_split);
     node.delete_children();
     setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
-    setUserSplitStack(userSplitStack.slice(0, -1));
-    setColors(userTreeState.treeStructure.get_colors());
+    popUserSplit();
   }
 
   const propagateTestpoint = () => {
@@ -95,10 +108,10 @@ function App() {
           <FontAwesomeIcon icon={faRotateLeft} />
         </div>
 
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }} onClick={() => {
-          setUseThreeColumns(!useThreeColumns);
-        }}>
-          <Link to="/byebye" style={{ textDecoration: 'none' }} >
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
+          <Link to="/byebye" style={{ textDecoration: 'none' }} onClick={() => {
+            toggleAITree(true);
+          }}>
             <FontAwesomeIcon icon={faCheck} />
           </Link>
         </div>
@@ -113,7 +126,7 @@ function App() {
       </div>
 
       <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
-        setUseThreeColumns(!useThreeColumns);
+        toggleAITree(!showAITree);
       }}>
         <div class="headers">
           Dein Entscheidungsbaum<br /><br />
@@ -122,18 +135,18 @@ function App() {
             overall_deviation(userTreeState.treeStructure)
           }
         </div>
-        <Tree structure={userTreeState.treeStructure} colors={colors} />
+        <Tree structure={userTreeState.treeStructure} colors={userTreeState.treeStructure.get_colors()} />
       </div>
 
       {
-        useThreeColumns &&
+        showAITree &&
         <div className="column" style={{ backgroundColor: 'grey' }} onClick={propagateTestpoint}>
           <div class="headers">
             KI Entscheidungsbaum<br /><br />
             Aktueller Fehler: {overall_deviation(aiTree)}
 
           </div>
-          <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={{}} />
+          <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={aiTree.get_colors()} />
         </div>
       }
     </div >
