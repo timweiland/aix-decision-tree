@@ -18,45 +18,53 @@ import { faQuestion, faCheck, faRotateLeft, faXmark } from '@fortawesome/free-so
 const mietdaten = mietdatenJSON.data;
 
 const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
-const aiTree = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
+const aiTreeStructure = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
 
 const showAITreeStore = create((set) => ({
   show: false,
-  toggle: (val) => set((state) => ({show: val}))
+  toggle: (val) => set((state) => ({ show: val }))
 }));
 
 const userSplitStore = create((set) => ({
   stack: [],
-  push: (val) => set((state) => ({stack: [...state.stack, val]})),
-  pop: () => set((state) => ({stack: state.stack.slice(0, -1)}))
+  push: (val) => set((state) => ({ stack: [...state.stack, val] })),
+  pop: () => set((state) => ({ stack: state.stack.slice(0, -1) })),
+  clean: () => set((state) => ({stack: []}))
 }));
 
+
 function App() {
-  const [userTreeState, setUserTreeState] = useState({ treeStructure: initialStructure, toggle: false });
-  const [aiTreeState, setAITreeState] = useState({treeStructure: aiTree, toggle: false});
+  const [userTree, setUserTreeState] = useState({structure: initialStructure, toggle: false});
+
+  const setUserTree = (tree) => {
+    setUserTreeState({structure: tree, toggle: !userTree.toggle});
+  }
+
+  const [aiTree, setAITree] = useState({structure: aiTreeStructure, toggle: false});
 
   const showAITree = showAITreeStore((state) => state.show);
   const toggleAITree = showAITreeStore((state) => state.toggle);
   const userSplitStack = userSplitStore((state) => state.stack);
   const pushUserSplit = userSplitStore((state) => state.push);
   const popUserSplit = userSplitStore((state) => state.pop);
+  const cleanUserSplit = userSplitStore((state) => state.clean);
 
   const splitTree = (idx, axis, pos, line) => {
-    const node = userTreeState.treeStructure.find_idx(idx);
+    const node = userTree.structure.find_idx(idx);
     node.split(axis, pos);
-    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
+    setUserTree(userTree.structure);
     pushUserSplit(idx);
   }
 
   const highlightNode = (node) => {
     const idx = node.idx;
-    userTreeState.treeStructure.find_idx(idx).isSelected = true;
-    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
+    userTree.structure.find_idx(idx).isSelected = true;
+    setUserTree(userTree.structure);
   }
 
   const unhighlightAll = () => {
-    userTreeState.treeStructure.unhighlightAll();
-    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
+    userTree.structure.unhighlightAll();
+    setUserTree(userTree.structure);
   }
 
   const undo = () => {
@@ -64,23 +72,39 @@ function App() {
       return;
     }
     const last_split = userSplitStack[userSplitStack.length - 1]
-    const node = userTreeState.treeStructure.find_idx(last_split);
+    const node = userTree.structure.find_idx(last_split);
     node.delete_children();
-    setUserTreeState({ treeStructure: userTreeState.treeStructure, toggle: !userTreeState.toggle });
+    setUserTree(userTree.structure);
     popUserSplit();
   }
 
   const propagateTestpoint = () => {
     const [x, y] = [70, 40]
-    const path = aiTree.get_path(x, y);
+    const aiPath = aiTree.structure.get_path(x, y);
     const delay = 2000;
-    path.forEach((node, node_idx) => {
+    aiPath.forEach((node, node_idx) => {
       setTimeout(() => {
-        aiTreeState.treeStructure.removeTestPoints();
-        aiTreeState.treeStructure.find_idx(node.idx).hasTestPoint = true;
-        setAITreeState({treeStructure: aiTreeState.treeStructure, toggle: !aiTreeState.toggle});
+        aiTree.structure.removeTestPoints();
+        aiTree.structure.find_idx(node.idx).hasTestPoint = true;
+        setAITree({structure: aiTree.structure, toggle: !aiTree.toggle});
       }, delay * node_idx);
     });
+
+    const userPath = userTree.structure.get_path(x, y);
+    userPath.forEach((node, node_idx) => {
+      setTimeout(() => {
+        userTree.structure.removeTestPoints();
+        userTree.structure.find_idx(node.idx).hasTestPoint = true;
+        setUserTree(userTree.structure);
+      }, delay * node_idx);
+    })
+  }
+
+  const cleanUp = () => {
+    userTree.structure.reset()
+    setUserTree(userTree);
+    cleanUserSplit();
+    toggleAITree(false);
   }
 
   return (
@@ -108,32 +132,37 @@ function App() {
           </Link>
         </div>
 
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }} onClick={undo}>
-          <Link to="/" style={{ textDecoration: 'none' }} >
+        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
+          <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
             <FontAwesomeIcon icon={faXmark} />
           </Link>
         </div>
 
-        <Map coordinates={mietdaten} treeState={userTreeState} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} />
+        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={true} />
       </div>
 
-      <div className="column" style={{ backgroundColor: 'white' }} onClick={() => {
-        toggleAITree(!showAITree);
-      }}>
-        <div class="headers">
-          Dein Entscheidungsbaum<br /><br />
+      <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
+        <div>
+          <div class="headers">
+            Dein Entscheidungsbaum<br /><br />
+          </div>
+          <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
-        <Tree structure={userTreeState.treeStructure} colors={userTreeState.treeStructure.get_colors()} />
+        {
+          showAITree &&
+          <div onClick={propagateTestpoint}>
+            <div class="headers">
+              KI Entscheidungsbaum<br /><br />
+            </div>
+            <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
+          </div>
+        }
       </div>
 
       {
         showAITree &&
-        <div className="column" style={{ backgroundColor: 'grey' }} onClick={propagateTestpoint}>
-          <div class="headers">
-            KI Entscheidungsbaum<br /><br />
-
-          </div>
-          <Tree structure={aiTree} id={'aiTree'} key={`aiTree`} colors={aiTree.get_colors()} />
+        <div className="column">
+          <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} />
         </div>
       }
     </div >
