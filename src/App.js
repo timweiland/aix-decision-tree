@@ -29,18 +29,18 @@ const userSplitStore = create((set) => ({
   stack: [],
   push: (val) => set((state) => ({ stack: [...state.stack, val] })),
   pop: () => set((state) => ({ stack: state.stack.slice(0, -1) })),
-  clean: () => set((state) => ({stack: []}))
+  clean: () => set((state) => ({ stack: [] }))
 }));
 
 
 function App() {
-  const [userTree, setUserTreeState] = useState({structure: initialStructure, toggle: false});
+  const [userTree, setUserTreeState] = useState({ structure: initialStructure, toggle: false });
 
   const setUserTree = (tree) => {
-    setUserTreeState({structure: tree, toggle: !userTree.toggle});
+    setUserTreeState({ structure: tree, toggle: !userTree.toggle });
   }
 
-  const [aiTree, setAITree] = useState({structure: aiTreeStructure, toggle: false});
+  const [aiTree, setAITree] = useState({ structure: aiTreeStructure, toggle: false });
 
   const showAITree = showAITreeStore((state) => state.show);
   const toggleAITree = showAITreeStore((state) => state.toggle);
@@ -86,7 +86,7 @@ function App() {
       setTimeout(() => {
         aiTree.structure.removeTestPoints();
         aiTree.structure.find_idx(node.idx).hasTestPoint = true;
-        setAITree({structure: aiTree.structure, toggle: !aiTree.toggle});
+        setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
       }, delay * node_idx);
     });
 
@@ -110,9 +110,14 @@ function App() {
   const overall_deviation = (tree) => {
     const leaves = tree.get_leaves();
     let deviation = 0;
+    let numNonEmpty = 0;
     leaves.forEach((leaf) => {
-      deviation += leaf.avgDeviation});
-    return deviation / leaves.length
+      if (leaf.avgDeviation !== "?") {
+        deviation += leaf.avgDeviation
+        numNonEmpty += 1;
+      }
+    });
+    return deviation / numNonEmpty;
   }
 
   return (
@@ -146,7 +151,7 @@ function App() {
           </Link>
         </div>
 
-        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={true} />
+        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={!showAITree} />
       </div>
 
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
@@ -154,7 +159,7 @@ function App() {
           <div class="headers">
             Dein Entscheidungsbaum<br /><br />
             {
-            overall_deviation(userTree.structure)
+              overall_deviation(userTree.structure)
             }
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
