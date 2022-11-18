@@ -13,6 +13,7 @@ export class TreeStructure {
     this.isSelected = false;
 
     this.calculate_avg_rent();
+    this.calculate_avg_deviation();
 
     this.axis = undefined;
     this.axis_pos = undefined;
@@ -29,6 +30,20 @@ export class TreeStructure {
       this.avgRent += point[2];
     });
     this.avgRent /= this.points.length;
+  }
+
+  calculate_avg_deviation() {
+    if(this.points.length === 0) {
+      this.avgDeviation = "?";
+      return;
+    }
+    this.avgDeviation = 0
+    this.points.forEach((point) => {
+      this.avgDeviation += (point[2] - this.avgRent)**2;
+    });
+    
+    this.avgDeviation /= this.points.length;
+    this.avgDeviation = this.avgDeviation**0.5;
   }
 
   split(axis, axis_pos) {
