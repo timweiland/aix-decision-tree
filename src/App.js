@@ -42,7 +42,7 @@ function App() {
   }
 
   const [aiTree, setAITree] = useState({ structure: aiTreeStructure, toggle: false });
-
+  /*const compareTrees = compareAITreeStore((state) => state.show);*/
   const showAITree = showAITreeStore((state) => state.show);
   const toggleAITree = showAITreeStore((state) => state.toggle);
   const userSplitStack = userSplitStore((state) => state.stack);
