@@ -191,6 +191,42 @@ export class TreeStructure {
       child.removeTestPoints();
     })
   }
+
+  reset() {
+    this.children.forEach((child) => {
+      child.reset_children();
+    });
+    this.children = [];
+    this.axis = undefined;
+    this.axis_pos = undefined;
+    if(this.color === undefined) {
+      this.color = colorPalette.pop();
+    }
+  }
+
+  reset_children() {
+    this.children.forEach((child) => {
+      child.reset_children();
+    });
+    this.children = [];
+    if(this.color !== undefined) {
+      colorPalette.push(this.color);
+    }
+  }
+
+  getTestPointNode() {
+    if(this.hasTestPoint) {
+      return this;
+    }
+    for(let i = 0; i < this.children.length; i++) {
+      const child = this.children[i];
+      let childTestPointNode = child.getTestPointNode();
+      if(childTestPointNode !== undefined) {
+        return childTestPointNode
+      }
+    }
+    return undefined;
+  }
 }
 
 export function convertPythonTree(pythonTree, node) {

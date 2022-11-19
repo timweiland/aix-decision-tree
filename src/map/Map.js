@@ -4,7 +4,7 @@ import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
 import './button.css';
 
-export default function Map({ coordinates, treeState, splitTree, highlightNode, unhighlightAll }) {
+export default function Map({ coordinates, tree, splitTree, highlightNode, unhighlightAll, enableInteraction }) {
     const canvasRef = useRef();
     const [isDrawing, setIsDrawing] = useState(false);
     const [curLineStart, setCurLineStart] = useState([0, 0]);
@@ -30,7 +30,7 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
         }
 
         ctx.fillStyle = "#000000";
-    }, [image, isDrawing, curLineEnd, treeState]);
+    }, [image, isDrawing, curLineEnd, tree]);
 
     function relativeToAbsoluteCoords(canvas, x, y) {
         const rect = canvas.getBoundingClientRect();
@@ -70,7 +70,7 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
         const ctx = canvas.getContext("2d");
         const [x_rel, y_rel] = absoluteToRelativeCoords(canvas, x, y);
 
-        const curTreeNode = treeState.treeStructure.find(x_rel, y_rel);
+        const curTreeNode = tree.find(x_rel, y_rel);
         highlightNode(curTreeNode);
         setHighlightedRect(treeNodeToCanvasRect(curTreeNode, canvas));
     }
@@ -118,7 +118,7 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
         ctx.lineWidth = 7;
         ctx.fillStyle = "#000000";
         // Draw all of the lines the user has drawn so far
-        treeState.treeStructure.get_lines().map((line) => {
+        tree.get_lines().map((line) => {
             ctx.beginPath();
             ctx.moveTo(...relativeToAbsoluteCoords(canvas, line[0][0], line[0][1]));
             ctx.lineTo(...relativeToAbsoluteCoords(canvas, line[1][0], line[1][1]));
@@ -142,7 +142,7 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
             ctx.setLineDash([]);
         }
         // Paint each tree leaf in a different color
-        const treeLeaves = treeState.treeStructure.get_leaves();
+        const treeLeaves = tree.get_leaves();
         treeLeaves.forEach((leaf) => {
             ctx.globalAlpha = 0.6;
             ctx.fillStyle = leaf.color.hex();
@@ -156,6 +156,13 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
             ctx.fillRect(...highlightedRect);
             ctx.globalAlpha = 1.0;
         }
+        const testPointNode = tree.getTestPointNode();
+        if(testPointNode !== undefined) {
+            ctx.globalAlpha = 0.8;
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(...treeNodeToCanvasRect(testPointNode, canvas));
+            ctx.globalAlpha = 1.0;
+        }
     }
 
     function addLineEnd(x, y) {
@@ -163,7 +170,7 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
         const dx = curLineStart[0] - x;
         const dy = curLineStart[1] - y;
         const [x0, y0] = absoluteToRelativeCoords(canvas, curLineStart[0], curLineStart[1]);
-        const curTreeNode = treeState.treeStructure.find(x0, y0);
+        const curTreeNode = tree.find(x0, y0);
         const [treeX0, treeY0, treeX1, treeY1] = curTreeNode.rect;
         let line = null;
         let splitAxis = null;
@@ -184,6 +191,9 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
     }
 
     function startDrawing(evt) {
+        if(!enableInteraction) {
+            return;
+        }
         const mousePos = getMousePos(evt);
         highlightTreeNode(mousePos.x, mousePos.y);
         addLineStart(mousePos.x, mousePos.y);
@@ -192,6 +202,9 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
     }
 
     function finishDrawing(evt) {
+        if(!enableInteraction) {
+            return;
+        }
         if (isDrawing) {
             const mousePos = getMousePos(evt);
             addLineEnd(mousePos.x, mousePos.y);
@@ -203,12 +216,18 @@ export default function Map({ coordinates, treeState, splitTree, highlightNode, 
     }
 
     function whileDrawing(evt) {
+        if(!enableInteraction) {
+            return;
+        }
         if(isDrawing) {
             const mousePos = getMousePos(evt);
             setCurLineEnd([mousePos.x, mousePos.y]);
         }
     }
     function leaveCanvas(evt) {
+        if(!enableInteraction) {
+            return;
+        }
         setIsDrawing(false);
         unhighlightAll();
         setCurLineStart([0, 0]);
