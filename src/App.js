@@ -35,6 +35,7 @@ const userSplitStore = create((set) => ({
 
 function App() {
   const [userTree, setUserTreeState] = useState({ structure: initialStructure, toggle: false });
+  const [compareTrees, setCompareTrees] = useState(false);
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -118,7 +119,8 @@ function App() {
         numNonEmpty += 1;
       }
     });
-    return deviation / numNonEmpty;
+    
+    return Number((deviation / numNonEmpty).toFixed(1));
   }
 
   return (
@@ -158,18 +160,32 @@ function App() {
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
         <div>
           <div class="headers">
-            Dein Entscheidungsbaum<br /><br />
-            
+            Dein Entscheidungsbaum<br />
+            {compareTrees &&
+              <div> 
+              Durchschnittsabweichung +/-: {`${overall_avg_deviation(userTree.structure)}€`} 
+              </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
         {
           showAITree &&
+          <div>
           <div onClick={propagateTestpoint}>
+            
             <div class="headers">
-              
+            KI Entscheidungsbaum<br />
+            {compareTrees &&
+            <div> 
+            Durchschnittsabweichung +/-: {`${overall_avg_deviation(aiTree.structure)}€`} 
+            </div>}
             </div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
+          </div>
+          <button style={{color: "red", position: "absolute", top: `${50}%`, left: `${40}%` }} onClick={() => {
+            setCompareTrees(!compareTrees);}}>
+          Compare my tree to the AI tree
+          </button>
           </div>
         }
       </div>
