@@ -18,7 +18,7 @@ function StartPage() {
         </div>
       </Link>
 
-      <Link to="/instructions_01">
+      <Link to="/dialogue">
         <div style={{ textAlign: "center" }}>
           <button>INSTRUKTIONEN</button>
         </div>

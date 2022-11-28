@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
+import Dialogue from "./pages/Dialogue";
 import Instructions_01 from "./pages/Instructions_01";
 import Instructions_02 from "./pages/Instructions_02";
 import Instructions_03 from "./pages/Instructions_03";
@@ -17,6 +18,7 @@ root.render(
       <Routes>
         <Route exact path="/" element={<StartPage />} />
         <Route path="/app" element={<App />} />
+        <Route path="/dialogue" element={<Dialogue />} />
         <Route path="/instructions_01" element={<Instructions_01 />} />
         <Route path="/instructions_02" element={<Instructions_02 />} />
         <Route path="/instructions_03" element={<Instructions_03 />} />
