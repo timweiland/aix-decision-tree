@@ -13,7 +13,7 @@ import mietdatenJSON from './python/mietdaten.json';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons';
-import './map/taskbar.css';
+import './taskbar/taskbar.css';
 
 const mietdaten = mietdatenJSON.data;
 
