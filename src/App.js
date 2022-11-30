@@ -1,18 +1,16 @@
 import './App.css';
 import { useState } from 'react';
-import { Link } from "react-router-dom";
+
 
 import create from 'zustand';
 
-
+import Taskbar from './taskbar/Taskbar';
 import Map from './map/Map';
 import Tree from './tree/Tree';
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons';
 import './taskbar/taskbar.css';
 
 const mietdaten = mietdatenJSON.data;
@@ -129,62 +127,7 @@ function App() {
         <div class="headers" style={{ position: "absolute", left: `${20}%` }}> 
         WG-Zimmer in Tübingen
         </div>
-
-      <div style={{height: "5%", width: "100%", position: "absolute", top: `${95}%`, left: `${0}%` }}>
-
-        <div class="taskbar-container" style={{position: "absolute", top: `${0}%`, left: `${50}%` }}>
-          <div class="taskbar">
-              <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
-          </div>
-
-          <div class="taskbar">
-            <div class="button"  onClick={undo}>
-              <FontAwesomeIcon icon={faRotateLeft} />
-            </div>
-          </div>
-
-          <div class="taskbar">
-            <div class="button">
-              <Link to="/byebye" style={{ textDecoration: 'none' }} onClick={() => {
-                toggleAITree(true);
-              }}>
-                <FontAwesomeIcon icon={faCheck} />
-              </Link>
-            </div>
-          </div>
-          <div class="taskbar">
-            <div class="button">
-              <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
-                <FontAwesomeIcon icon={faXmark} />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <div class="taskbar-container" style={{top: `${0}%`, right: `${50}%` }}>
-
-          <div class="taskbar">
-            <div class="legend">10€: </div>
-            <div class="legend">
-              <div class="point" style={{width: "20px", height: "20px"}}/>
-            </div>
-          </div>
-
-          <div class="taskbar">
-            <div class="legend">20€: </div>
-            <div class="legend"> 
-              <div class="point" style={{width: "35px", height: "35px"}}/>
-            </div> 
-          </div>
-          <div clasS="taskbar">
-            <div class="legend"> 30€: </div>
-            <div class="legend">
-              <div class="point" style={{width: "50px", height: "50px"}}/>
-            </div>
-          </div>
-        </div>
-      </div>
-
+        <Taskbar cleanUp={cleanUp} toggleAITree={toggleAITree} undo={undo}/>
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={!showAITree} />
       </div>
 
