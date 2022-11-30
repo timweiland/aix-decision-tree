@@ -8,13 +8,12 @@ import create from 'zustand';
 import Map from './map/Map';
 import Tree from './tree/Tree';
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
-import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons';
-import './map/legend.css';
+import './map/taskbar.css';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -127,53 +126,64 @@ function App() {
   return (
     <div className="column-container">
       <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div class="headers" style={{ position: "absolute", left: `${20}%` }}> WG-Zimmer in Tübingen
+        <div class="headers" style={{ position: "absolute", left: `${20}%` }}> 
+        WG-Zimmer in Tübingen
         </div>
 
-        <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
-          <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
-          <div class="popup">
-            <h3>But wait what exactely is AI and how will it kill my family?</h3>
+      <div style={{height: "5%", width: "100%", position: "absolute", top: `${95}%`, left: `${0}%` }}>
+
+        <div class="taskbar-container" style={{position: "absolute", top: `${0}%`, left: `${50}%` }}>
+          <div class="taskbar">
+              <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
+          </div>
+
+          <div class="taskbar">
+            <div class="button"  onClick={undo}>
+              <FontAwesomeIcon icon={faRotateLeft} />
+            </div>
+          </div>
+
+          <div class="taskbar">
+            <div class="button">
+              <Link to="/byebye" style={{ textDecoration: 'none' }} onClick={() => {
+                toggleAITree(true);
+              }}>
+                <FontAwesomeIcon icon={faCheck} />
+              </Link>
+            </div>
+          </div>
+          <div class="taskbar">
+            <div class="button">
+              <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
+                <FontAwesomeIcon icon={faXmark} />
+              </Link>
+            </div>
           </div>
         </div>
 
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
-          <FontAwesomeIcon icon={faRotateLeft} />
-        </div>
+        <div class="taskbar-container" style={{top: `${0}%`, right: `${50}%` }}>
 
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
-          <Link to="/byebye" style={{ textDecoration: 'none' }} onClick={() => {
-            toggleAITree(true);
-          }}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Link>
-        </div>
-
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
-          <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
-            <FontAwesomeIcon icon={faXmark} />
-          </Link>
-        </div>
-
-        <div class="legend-container" style={{top: `${90}%`, left: `${50}%` }}>
-          <div class="legend"> 
-            Legende: 
+          <div class="taskbar">
+            <div class="legend">10€: </div>
+            <div class="legend">
+              <div class="point" style={{width: "20px", height: "20px"}}/>
+            </div>
           </div>
-          <div class="legend">
-            10€:
-            <div class="legend smallpoint" style={{display: "inline-block",width: "20px", height: "20px"}}/>
-          </div>
-          <div class="legend">
-            20€:
-            <div class="legend smallpoint" style={{display: "inline-block",width: "35px", height: "35px"}}/>
-          </div>
-          <div class="legend"> 30€: </div>
-            
-          <div class="legend smallpoint" style={{display: "inline-block",width: "50px", height: "50px"}}/>
-          
-          
 
+          <div class="taskbar">
+            <div class="legend">20€: </div>
+            <div class="legend"> 
+              <div class="point" style={{width: "35px", height: "35px"}}/>
+            </div> 
+          </div>
+          <div clasS="taskbar">
+            <div class="legend"> 30€: </div>
+            <div class="legend">
+              <div class="point" style={{width: "50px", height: "50px"}}/>
+            </div>
+          </div>
         </div>
+      </div>
 
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={!showAITree} />
       </div>

@@ -1,0 +1,40 @@
+.taskbar-container {
+  display: flex;
+  position: absolute;
+  height: 100%; 
+  width: 50%;
+  font-size: 200%;
+  background-color:#33475b;
+  opacity: 80%;
+  align-items:center;
+  padding-left: 8%;
+  padding-right: 8%;
+}
+.taskbar {
+  flex: 1;
+  display:flex;
+  align-items: center;
+}
+
+.legend {
+  flex:1
+}
+
+.button {
+  height: 40px;
+  width: 40px;
+  background: #ccc;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.point {
+  border-radius: 75px;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(5, 5, 5);
+}
+

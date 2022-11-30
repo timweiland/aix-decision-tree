@@ -1,8 +1,6 @@
 import './Map.css';
-import Point from '../points/Point.js';
 import MapImage from '../assets/map_sketch.jpg';
 import { useState, useEffect, useRef } from 'react';
-import './button.css';
 
 export default function Map({ coordinates, tree, splitTree, highlightNode, unhighlightAll, enableInteraction }) {
     const canvasRef = useRef();
