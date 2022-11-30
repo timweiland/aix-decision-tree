@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 
 export default function Taskbar({cleanUp, toggleAITree, undo}) {
   return <div style={{height: "5%", width: "100%", position: "absolute", top: `${95}%`, left: `${0}%` }}>
+          
           <div class="taskbar-container" style={{position: "absolute", top: `${0}%`, left: `${50}%` }}>
+            
             <div class="taskbar">
                 <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
             </div>
@@ -26,6 +28,7 @@ export default function Taskbar({cleanUp, toggleAITree, undo}) {
                 </Link>
               </div>
             </div>
+
             <div class="taskbar">
               <div class="button">
                 <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
@@ -33,8 +36,10 @@ export default function Taskbar({cleanUp, toggleAITree, undo}) {
                 </Link>
               </div>
             </div>
+
           </div>
-              
+
+
           <div class="taskbar-container" style={{top: `${0}%`, right: `${50}%` }}>
               
             <div class="taskbar">
@@ -50,12 +55,14 @@ export default function Taskbar({cleanUp, toggleAITree, undo}) {
                 <div class="point" style={{width: "35px", height: "35px"}}/>
               </div> 
             </div>
+
             <div clasS="taskbar">
               <div class="legend"> 30€: </div>
               <div class="legend">
                 <div class="point" style={{width: "50px", height: "50px"}}/>
               </div>
             </div>
-              </div>
+            
+          </div>
         </div>
 }
