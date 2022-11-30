@@ -88,6 +88,15 @@ export default function Map({ coordinates, tree, splitTree, highlightNode, unhig
         context.restore();
     }
 
+    function drawCircle(ctx, x, y, radius, fill) {
+        ctx.beginPath()
+        ctx.arc(x, y, radius, 0, 2 * Math.PI, false)
+        if (fill) {
+          ctx.fillStyle = fill
+          ctx.fill()
+        }
+      }
+
     function drawCoordinates(coordinates, ctx, canvas) {
         let minRent = 1000;
         let maxRent = -1000;
@@ -104,8 +113,12 @@ export default function Map({ coordinates, tree, splitTree, highlightNode, unhig
         coordinates.forEach((c) => {
             const rent = c[2];
             const size = Math.floor(minSize + (rent - minRent) * (maxSize - minSize) / (maxRent - minRent));
-            ctx.fillRect(c[0] * canvas.width / 100, c[1] * canvas.height / 100, size, size);
+            const x = c[0] * canvas.width / 100;
+            const y = c[1] * canvas.height / 100;
+            drawCircle(ctx,x,y,size,'black');
+
         })
+        
     }
 
     function redrawAll() {

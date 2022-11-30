@@ -12,8 +12,9 @@ import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import './map/legend.css';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -125,7 +126,7 @@ function App() {
 
   return (
     <div className="column-container">
-      <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
+      <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
         <div class="headers" style={{ position: "absolute", left: `${20}%` }}> WG-Zimmer in Tübingen
         </div>
 
@@ -154,6 +155,26 @@ function App() {
           </Link>
         </div>
 
+        <div class="legend-container" style={{top: `${90}%`, left: `${50}%` }}>
+          <div class="legend"> 
+            Legende: 
+          </div>
+          <div class="legend">
+            10€:
+            <div class="legend smallpoint" style={{display: "inline-block",width: "20px", height: "20px"}}/>
+          </div>
+          <div class="legend">
+            20€:
+            <div class="legend smallpoint" style={{display: "inline-block",width: "35px", height: "35px"}}/>
+          </div>
+          <div class="legend"> 30€: </div>
+            
+          <div class="legend smallpoint" style={{display: "inline-block",width: "50px", height: "50px"}}/>
+          
+          
+
+        </div>
+
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={!showAITree} />
       </div>
 
@@ -167,6 +188,7 @@ function App() {
               </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
+          
         </div>
         {
           showAITree &&
@@ -192,7 +214,7 @@ function App() {
 
       {
         showAITree &&
-        <div className="column">
+        <div className="column-static">
           <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} />
         </div>
       }
