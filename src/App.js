@@ -177,7 +177,7 @@ function App() {
             Dein Entscheidungsbaum<br />
             {compareTrees &&
               <div> 
-              Durchschnittsabweichung +/-: {`${overall_avg_difference(userTree.structure)}€`} 
+              Durchschnittsdifferenz +/-: {`${overall_avg_difference(userTree.structure)}€`} 
               </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
@@ -191,7 +191,7 @@ function App() {
             KI Entscheidungsbaum<br />
             {compareTrees &&
             <div> 
-            Durchschnittsabweichung +/-: {`${overall_avg_deviation(aiTree.structure)}€`} 
+            Durchschnittsdifferenz +/-: {`${overall_avg_difference(aiTree.structure)}€`} 
             </div>}
             </div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />

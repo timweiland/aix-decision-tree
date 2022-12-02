@@ -14,11 +14,14 @@ export class TreeStructure {
 
     this.calculate_avg_rent();
     this.calculate_avg_deviation();
+    this.calculate_avg_difference();
 
     this.axis = undefined;
     this.axis_pos = undefined;
     this.hasTestPoint = false;
   }
+
+  
 
   calculate_avg_rent() {
     if(this.points.length === 0) {
@@ -53,7 +56,7 @@ export class TreeStructure {
     }
     this.avgDiff = 0
     this.points.forEach((point) => {
-      this.avgDiff += (point[2] - this.avgRent);
+      this.avgDiff += Math.abs(point[2] - this.avgRent);
     });
 
     this.avgDiff /= this.points.length;
