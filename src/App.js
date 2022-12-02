@@ -123,6 +123,20 @@ function App() {
     return Number((deviation / numNonEmpty).toFixed(1));
   }
 
+  const overall_avg_difference = (tree) => {
+    const leaves = tree.get_leaves();
+    let difference = 0;
+    let numNonEmpty = 0;
+    leaves.forEach((leaf) => {
+      if (leaf.avgDiff !== "?") {
+        difference += leaf.points.length * leaf.avgDiff;
+        numNonEmpty += leaf.points.length;
+      }
+    });
+
+    return Number((difference / numNonEmpty).toFixed(1));
+  }
+
   return (
     <div className="column-container">
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
@@ -163,7 +177,7 @@ function App() {
             Dein Entscheidungsbaum<br />
             {compareTrees &&
               <div> 
-              Durchschnittsabweichung +/-: {`${overall_avg_deviation(userTree.structure)}€`} 
+              Durchschnittsabweichung +/-: {`${overall_avg_difference(userTree.structure)}€`} 
               </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />

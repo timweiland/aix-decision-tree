@@ -46,6 +46,19 @@ export class TreeStructure {
     this.avgDeviation = this.avgDeviation**0.5;
   }
 
+  calculate_avg_difference(){
+    if(this.points.length === 0) {
+      this.avgDiff = "?";
+      return;
+    }
+    this.avgDiff = 0
+    this.points.forEach((point) => {
+      this.avgDiff += (point[2] - this.avgRent);
+    });
+
+    this.avgDiff /= this.points.length;
+  }
+
   split(axis, axis_pos) {
     const [x0, y0, x1, y1] = this.rect;
     let [rectA, rectB] = [undefined, undefined];
