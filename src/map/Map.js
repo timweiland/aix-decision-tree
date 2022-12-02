@@ -100,7 +100,7 @@ export default function Map({ coordinates, tree, splitTree, highlightNode, unhig
                 maxRent = rent;
             }
         });
-        const [minSize, maxSize] = [5, 20];
+        const [minSize, maxSize] = [25, 100];
         coordinates.forEach((c) => {
             const rent = c[2];
             const size = Math.floor(minSize + (rent - minRent) * (maxSize - minSize) / (maxRent - minRent));
