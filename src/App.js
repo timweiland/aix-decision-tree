@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 
 import create from 'zustand';
-import Taskbar from './taskbar/Taskbar';
+import Taskbar from './taskbar/taskbar';
 import Map from './map/Map';
 import Tree from './tree/Tree';
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
