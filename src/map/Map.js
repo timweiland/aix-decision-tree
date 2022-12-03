@@ -1,10 +1,4 @@
-// add touch based on this tutorial
-// https://zipso.net/a-simple-touchscreen-sketchpad-using-javascript-and-html5/
-// still need to fix: prevent from returning to previous page
-
 import "./Map.css";
-import Point from "../points/Point.js";
-import MapImage from "../assets/map_sketch.jpg";
 import { useState, useEffect, useRef } from "react";
 import "./button.css";
 
@@ -88,30 +82,6 @@ export default function Map({
         };
       }
     }
-  }
-
-  function sketchpad_touchStart(evt) {
-    //getTouchPos();
-    startDrawing(evt);
-
-    evt.preventDefault();
-  }
-
-  function sketchpad_touchMove(evt) {
-    //getTouchPos(evt);
-
-    whileDrawing(evt);
-
-    evt.preventDefault();
-  }
-
-  function sketchpad_touchEnd(evt) {
-    //getTouchPos(evt);
-
-    // During a touchmove event, unlike a mousemove event, we don't need to check if the touch is engaged, since there will always be contact with the screen by definition.
-    finishDrawing(evt);
-
-    evt.preventDefault();
   }
 
   function addLineStart(x, y) {
@@ -272,30 +242,22 @@ export default function Map({
     splitTree(curTreeNode.idx, splitAxis, splitPos, line);
   }
 
-  function startDrawing(evt) {
+  function startDrawing(cursorX, cursorY) {
     if (!enableInteraction) {
       return;
     }
-    /* const mousePos = getMousePos(evt);
-        highlightTreeNode(mousePos.x, mousePos.y);
-        addLineStart(mousePos.x, mousePos.y);
-        setCurLineEnd([mousePos.x, mousePos.y]);
-        setIsDrawing(true); */
-    const touchPos = getTouchPos(evt);
-    highlightTreeNode(touchPos.x, touchPos.y);
-    addLineStart(touchPos.x, touchPos.y);
-    setCurLineEnd([touchPos.x, touchPos.y]);
+    highlightTreeNode(cursorX, cursorY);
+    addLineStart(cursorX, cursorY);
+    setCurLineEnd([cursorX, cursorY]);
     setIsDrawing(true);
   }
 
-  function finishDrawing(evt) {
+  function finishDrawing() {
     if (!enableInteraction) {
       return;
     }
     if (isDrawing) {
-      // const mousePos = getMousePos(evt);
-      const touchPos = getTouchPos(evt);
-      addLineEnd(touchPos.x, touchPos.y);
+      addLineEnd(curLineEnd[0], curLineEnd[1]);
     }
     setCurLineStart([0, 0]);
     setCurLineEnd([0, 0]);
@@ -303,16 +265,15 @@ export default function Map({
     unhighlightAll();
   }
 
-  function whileDrawing(evt) {
+  function whileDrawing(cursorX, cursorY) {
     if (!enableInteraction) {
       return;
     }
     if (isDrawing) {
-      // const mousePos = getMousePos(evt);
-      const touchPos = getTouchPos(evt);
-      setCurLineEnd([touchPos.x, touchPos.y]);
+      setCurLineEnd([cursorX, cursorY]);
     }
   }
+
   function leaveCanvas(evt) {
     if (!enableInteraction) {
       return;
@@ -323,19 +284,30 @@ export default function Map({
     setCurLineEnd([0, 0]);
   }
 
+  function passMousePos(evt, callback) {
+    const pos = getMousePos(evt);
+    callback(pos.x, pos.y);
+  }
+
+  function passTouchPos(evt, callback) {
+    const pos = getTouchPos(evt);
+    callback(pos.x, pos.y);
+    evt.preventDefault();
+  }
+
   return (
     <canvas
       ref={canvasRef}
       style={{ height: "100%", border: "1px solid black" }}
-      /*onMouseDown={startDrawing}
-        onMouseUp={finishDrawing}
-        onMouseMove={whileDrawing}
-        onMouseLeave={leaveCanvas}*/
+      onMouseDown={(evt) => passMousePos(evt, startDrawing)}
+      onMouseUp={(evt) => finishDrawing()}
+      onMouseMove={(evt) => passMousePos(evt, whileDrawing)}
+      onMouseLeave={leaveCanvas}
 
-      onTouchStart={sketchpad_touchStart}
-      onTouchEnd={sketchpad_touchEnd}
-      onTouchMove={sketchpad_touchMove}
-      onTouchCancel={leaveCanvas}
+      onTouchStart={(evt) => passTouchPos(evt, startDrawing)}
+      onTouchEnd={(evt) => {finishDrawing(); evt.preventDefault();}}
+      onTouchMove={(evt) => passTouchPos(evt, whileDrawing)}
+      onTouchCancel={(evt) => { leaveCanvas(evt); evt.preventDefault(); }}
     />
   );
 }
