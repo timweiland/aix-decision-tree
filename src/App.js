@@ -4,16 +4,20 @@ import { Link } from "react-router-dom";
 
 import create from 'zustand';
 
+import { sampleSize } from 'lodash';
+
 
 import Map from './map/Map';
 import Tree from './tree/Tree';
+import Popup from './popup/Popup';
+
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
 import './map/button.css';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faQuestion, faCheck, faRotateLeft, faXmark, faLeaf } from '@fortawesome/free-solid-svg-icons'
+import { faQuestion, faCheck, faRotateLeft, faXmark, faArrowRightLong } from '@fortawesome/free-solid-svg-icons'
 
 const mietdaten = mietdatenJSON.data;
 
@@ -35,7 +39,17 @@ const userSplitStore = create((set) => ({
 
 function App() {
   const [userTree, setUserTreeState] = useState({ structure: initialStructure, toggle: false });
-  const [compareTrees, setCompareTrees] = useState(false);
+  const [screenState, setScreenState] = useState("initialScreen");
+
+  const [showUserRentEstimate, setShowUserRentEstimate] = useState(false);
+  const [showAIRentEstimate, setShowAIRentEstimate] = useState(false);
+  const [userRentEstimate, setUserRentEstimate] = useState(undefined);
+  const [aiRentEstimate, setAIRentEstimate] = useState(undefined);
+
+  const [continueHandler, setContinueHandler] = useState(undefined);
+
+
+  const comparisonScreenStates = ["showAITree", "initiateAnimatedComparison", "animatedComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -43,7 +57,6 @@ function App() {
 
   const [aiTree, setAITree] = useState({ structure: aiTreeStructure, toggle: false });
   /*const compareTrees = compareAITreeStore((state) => state.show);*/
-  const showAITree = showAITreeStore((state) => state.show);
   const toggleAITree = showAITreeStore((state) => state.toggle);
   const userSplitStack = userSplitStore((state) => state.stack);
   const pushUserSplit = userSplitStore((state) => state.push);
@@ -80,8 +93,7 @@ function App() {
     popUserSplit();
   }
 
-  const propagateTestpoint = () => {
-    const [x, y] = [70, 40]
+  const propagateTestpoint = (x, y, doneCallback) => {
     const aiPath = aiTree.structure.get_path(x, y);
     const delay = 2000;
     aiPath.forEach((node, node_idx) => {
@@ -89,6 +101,12 @@ function App() {
         aiTree.structure.removeTestPoints();
         aiTree.structure.find_idx(node.idx).hasTestPoint = true;
         setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
+        if (node_idx === aiPath.length - 1) {
+          setTimeout(() => {
+            setAIRentEstimate(node.avgRent);
+            setShowAIRentEstimate(true);
+          }, 1000);
+        }
       }, delay * node_idx);
     });
 
@@ -98,8 +116,38 @@ function App() {
         userTree.structure.removeTestPoints();
         userTree.structure.find_idx(node.idx).hasTestPoint = true;
         setUserTree(userTree.structure);
+        if (node_idx === userPath.length - 1) {
+          setTimeout(() => {
+            setUserRentEstimate(node.avgRent);
+            setShowUserRentEstimate(true);
+          }, 1000);
+        }
       }, delay * node_idx);
     })
+
+    const maxDelay = (Math.max(aiPath.length, userPath.length) - 1) * delay;
+    setTimeout(() => {
+      setContinueHandler({
+        handler: () => {
+          userTree.structure.removeTestPoints();
+          aiTree.structure.removeTestPoints();
+          setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
+          setUserTree(userTree.structure);
+          setShowAIRentEstimate(false);
+          setShowUserRentEstimate(false);
+          doneCallback();
+        }
+      })
+    }, maxDelay + 1000);
+  }
+
+  const orchestrateComparison = () => {
+    const numPoints = 3;
+    const randomPoints = sampleSize(mietdaten, numPoints);
+    let thirdCallback = () => setScreenState("initiateQuantitativeComparison");
+    let secondCallback = () => propagateTestpoint(randomPoints[2][0], randomPoints[2][1], thirdCallback);
+    let firstCallback = () => propagateTestpoint(randomPoints[1][0], randomPoints[1][1], secondCallback);
+    propagateTestpoint(randomPoints[0][0], randomPoints[0][1], firstCallback);
   }
 
   const cleanUp = () => {
@@ -119,7 +167,7 @@ function App() {
         numNonEmpty += 1;
       }
     });
-    
+
     return Number((deviation / numNonEmpty).toFixed(1));
   }
 
@@ -139,79 +187,122 @@ function App() {
 
   return (
     <div className="column-container">
+      {
+        (screenState === "userTreeCompleted") &&
+        <Popup closeCallback={() => {
+          setScreenState("showAITree")
+          setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") });
+          //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
+        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
+          <p>Super! Dann siehst du jetzt den Entscheidungsbaum der KI.</p>
+        </Popup>
+      }
+      {
+        (screenState === "initiateAnimatedComparison") &&
+        <Popup closeCallback={() => {
+          setScreenState("animatedComparison");
+          orchestrateComparison();
+          //setTimeout(() => setScreenState("animatedComparison"), 10 * 1000);
+        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
+          <p>Jetzt hast du deinen Baum und den Baum der KI gesehen - und erste Ähnlichkeiten und Unterschiede bemerkt.</p>
+          <p>Wie gut schätzen sie die Mieten?</p>
+          <p>Schauen wir es uns einmal an - zuerst beispielhaft für einige Zimmer.</p>
+        </Popup>
+      }
+      {
+        (screenState === "initiateQuantitativeComparison") &&
+        <Popup closeCallback={() => {
+          setScreenState("quantitativeComparison");
+        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
+          <p>... und jetzt schauen wir uns an, wie sich die beiden Bäume insgesamt im Durchschnitt verhalten.</p>
+        </Popup>
+      }
       <div className="column" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
         <div class="headers" style={{ position: "absolute", left: `${20}%` }}> WG-Zimmer in Tübingen
         </div>
 
-        <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
-          <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
-          <div class="popup">
-            <h3>But wait what exactely is AI and how will it kill my family?</h3>
+        {screenState === "initialScreen" &&
+          <div>
+            <div class="help" style={{ position: "absolute", top: `${1}%`, left: `${71}%` }}>
+              <div class="button"><FontAwesomeIcon icon={faQuestion} /></div>
+              <div class="popup">
+                <h3>But wait what exactely is AI and how will it kill my family?</h3>
+              </div>
+            </div>
+
+            <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
+              <FontAwesomeIcon icon={faRotateLeft} />
+            </div>
+
+            <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
+              <FontAwesomeIcon icon={faCheck} onClick={() => {
+                setScreenState("userTreeCompleted");
+              }} />
+            </div>
+
+            <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
+              <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
+                <FontAwesomeIcon icon={faXmark} />
+              </Link>
+            </div>
           </div>
-        </div>
+        }
 
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${75}%` }} onClick={undo}>
-          <FontAwesomeIcon icon={faRotateLeft} />
-        </div>
-
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${79}%` }}>
-          <Link to="/byebye" style={{ textDecoration: 'none' }} onClick={() => {
-            toggleAITree(true);
-          }}>
-            <FontAwesomeIcon icon={faCheck} />
-          </Link>
-        </div>
-
-        <div class="button" style={{ position: "absolute", top: `${1}%`, left: `${83}%` }}>
-          <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
-            <FontAwesomeIcon icon={faXmark} />
-          </Link>
-        </div>
-
-        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={!showAITree} />
+        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} />
       </div>
 
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
         <div>
           <div class="headers">
             Dein Entscheidungsbaum<br />
-            {compareTrees &&
-              <div> 
-              Durchschnittsdifferenz +/-: {`${overall_avg_difference(userTree.structure)}€`} 
+            {(screenState === "quantitativeComparison") &&
+              <div>
+                Durchschnittsdifferenz +/-: {`${overall_avg_difference(userTree.structure)}€`}
               </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
+          {showUserRentEstimate &&
+            <p>Dein Baum schätzt: {userRentEstimate.toFixed(1)}€</p>
+          }
         </div>
         {
-          showAITree &&
+          (comparisonScreenStates.includes(screenState)) &&
           <div>
-          <div onClick={propagateTestpoint}>
-            
             <div class="headers">
-            KI Entscheidungsbaum<br />
-            {compareTrees &&
-            <div> 
-            Durchschnittsdifferenz +/-: {`${overall_avg_difference(aiTree.structure)}€`} 
-            </div>}
+              KI Entscheidungsbaum<br />
+              {(screenState === "quantitativeComparison") &&
+                <div>
+                  Durchschnittsdifferenz +/-: {`${overall_avg_difference(aiTree.structure)}€`}
+                </div>}
             </div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
-          </div>
-          <button style={{color: "red", position: "absolute", top: `${50}%`, left: `${40}%` }} onClick={() => {
-            setCompareTrees(!compareTrees);}}>
-          Compare my tree to the AI tree
-          </button>
+            {showAIRentEstimate &&
+              <p>Der KI-Baum schätzt: {aiRentEstimate.toFixed(1)}€</p>
+            }
           </div>
         }
       </div>
 
       {
-        showAITree &&
+        (comparisonScreenStates.includes(screenState)) &&
         <div className="column">
           <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} />
         </div>
       }
+
+      {
+        (continueHandler !== undefined) &&
+        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl top-3/4 left-3/4 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }} onClick={
+          () => {
+            continueHandler.handler();
+            setContinueHandler(undefined);
+          }
+        }>
+          <FontAwesomeIcon icon={faArrowRightLong} />
+        </div>
+      }
     </div>
-    
+
   );
 }
 
