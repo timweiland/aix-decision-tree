@@ -11,7 +11,7 @@ import { sampleSize } from 'lodash';
 import Taskbar from './taskbar/taskbar';
 import Map from './map/Map';
 import Tree from './tree/Tree';
-import Popup from './popup/Popup';
+import PopupCollection from './popup/PopupCollection';
 
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
 import aiPythonTree from './python/aiPythonTree.json';
@@ -157,20 +157,6 @@ function App() {
     toggleAITree(false);
   }
 
-  const overall_avg_deviation = (tree) => {
-    const leaves = tree.get_leaves();
-    let deviation = 0;
-    let numNonEmpty = 0;
-    leaves.forEach((leaf) => {
-      if (leaf.avgDeviation !== "?") {
-        deviation += leaf.avgDeviation
-        numNonEmpty += 1;
-      }
-    });
-
-    return Number((deviation / numNonEmpty).toFixed(1));
-  }
-
   const overall_avg_difference = (tree) => {
     const leaves = tree.get_leaves();
     let difference = 0;
@@ -187,36 +173,7 @@ function App() {
 
   return (
     <div className="column-container">
-      {
-        (screenState === "userTreeCompleted") &&
-        <Popup closeCallback={() => {
-          setScreenState("showAITree")
-          setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") });
-          //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
-        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-          <p>Super! Dann siehst du jetzt den Entscheidungsbaum der KI.</p>
-        </Popup>
-      }
-      {
-        (screenState === "initiateAnimatedComparison") &&
-        <Popup closeCallback={() => {
-          setScreenState("animatedComparison");
-          orchestrateComparison();
-          //setTimeout(() => setScreenState("animatedComparison"), 10 * 1000);
-        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-          <p>Jetzt hast du deinen Baum und den Baum der KI gesehen - und erste Ähnlichkeiten und Unterschiede bemerkt.</p>
-          <p>Wie gut schätzen sie die Mieten?</p>
-          <p>Schauen wir es uns einmal an - zuerst beispielhaft für einige Zimmer.</p>
-        </Popup>
-      }
-      {
-        (screenState === "initiateQuantitativeComparison") &&
-        <Popup closeCallback={() => {
-          setScreenState("quantitativeComparison");
-        }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-          <p>... und jetzt schauen wir uns an, wie sich die beiden Bäume insgesamt im Durchschnitt verhalten.</p>
-        </Popup>
-      }
+      <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
       <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
         <div class="headers" style={{ position: "absolute", left: `${20}%` }}>
           WG-Zimmer in Tübingen
