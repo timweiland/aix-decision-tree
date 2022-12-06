@@ -175,9 +175,7 @@ function App() {
     <div className="column-container">
       <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
       <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div class="headers" style={{ position: "absolute", left: `${20}%` }}>
-          WG-Zimmer in Tübingen
-        </div>
+        
         {screenState === "initialScreen" &&
           <Taskbar cleanUp={cleanUp}
             complete={() => {
@@ -191,10 +189,10 @@ function App() {
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
         <div>
           <div class="headers">
-            Dein Entscheidungsbaum<br />
+            Entscheidungsbaum<br />
             {(screenState === "quantitativeComparison") &&
               <div>
-                Durchschnittsdifferenz +/-: {`${overall_avg_difference(userTree.structure)}€`}
+                Mittlere Abweichung +/- {`${overall_avg_difference(userTree.structure)}€`}
               </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
