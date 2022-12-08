@@ -12,7 +12,8 @@ export default function PopupCollection({ screenState, setScreenState, setContin
                 setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") });
                 //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
             }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-                <p>Super! Dann siehst du jetzt den Entscheidungsbaum der KI.</p>
+                <p>Super!</p>
+                <p>Jetzt siehst du, wie die KI die Stadt in Bereiche mit unterschiedlich hohen Mieten unterteilt.</p>
             </Popup>
         }
         {
@@ -22,9 +23,10 @@ export default function PopupCollection({ screenState, setScreenState, setContin
                 orchestrateComparison();
                 //setTimeout(() => setScreenState("animatedComparison"), 10 * 1000);
             }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-                <p>Jetzt hast du deinen Baum und den Baum der KI gesehen - und erste Ähnlichkeiten und Unterschiede bemerkt.</p>
-                <p>Wie gut schätzen sie die Mieten?</p>
-                <p>Schauen wir es uns einmal an - zuerst beispielhaft für einige Zimmer.</p>
+                <p>Zuerst hast du die Stadt in Bereiche mit ähnlich hohen Mieten unterteilt und so deinen Entscheidungsbaum erstellt.</p>
+                <p>Dann hast du die Lösung der KI gesehen.</p>
+                <p>Jetzt möchten wir beide Lösungen vergleichen. Welcher Entscheidungsbaum schätzt die Mieten besser, deiner oder der der der KI?</p>
+                <p>Schauen wir uns die Schätzungen für drei verschiedene WG-Zimmer an.</p>
             </Popup>
         }
         {
@@ -32,7 +34,8 @@ export default function PopupCollection({ screenState, setScreenState, setContin
             <Popup closeCallback={() => {
                 setScreenState("quantitativeComparison");
             }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-                <p>... und jetzt schauen wir uns an, wie sich die beiden Bäume insgesamt im Durchschnitt verhalten.</p>
+                <p>Welcher Entscheidungsbaum hat dich bisher mehr überzeugt?</p>
+                <p>Jetzt schauen wir uns an, wie sehr die Schätzungen von deinem Entscheidungsbaum und dem der KI durchschnittlich von den echten Mieten abweichen.</p>
             </Popup>
         }
     </>
