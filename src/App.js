@@ -1,10 +1,10 @@
 import './App.css';
 import { useState } from 'react';
 
-
+import { Link } from "react-router-dom";
 import create from 'zustand';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
 
 import { sampleSize } from 'lodash';
 
@@ -171,6 +171,8 @@ function App() {
     return Number((difference / numNonEmpty).toFixed(1));
   }
 
+  const NoOfUserLines = userTree.structure.get_lines().length;
+
   return (
     <div className="column-container">
       <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
@@ -185,12 +187,14 @@ function App() {
             }}
             undo={undo} />
         }
+        {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} />
       </div>
 
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
         <div>
           <div class="headers">
+   
             Dein Entscheidungsbaum<br />
             {(screenState === "quantitativeComparison") &&
               <div>
@@ -229,13 +233,21 @@ function App() {
 
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl top-3/4 left-3/4 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }} onClick={
+        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }} onClick={
           () => {
             continueHandler.handler();
             setContinueHandler(undefined);
           }
         }>
           <FontAwesomeIcon icon={faArrowRightLong} />
+        </div>
+      }
+      {
+        (continueHandler !== undefined) &&
+        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }}>
+         <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
+          <FontAwesomeIcon icon={faXmark} />
+          </Link>
         </div>
       }
     </div>
