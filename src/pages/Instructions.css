@@ -1,0 +1,31 @@
+.column-container {
+  display: flex;
+  height: 100vh;
+}
+ 
+.column {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+}
+
+.instr {
+  width: 70%;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  position:relative;
+}
+
+.rowButtons {
+  /* display:flex; 
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;  */
+  position:absolute;
+  bottom: 0;
+  right: 30%;
+  margin-bottom: 2cm;
+  /* margin-top:100%; */
+}
+

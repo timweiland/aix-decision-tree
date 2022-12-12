@@ -1,24 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import './index.css';
-import App from './App';
-import StartPage from './pages/StartPage';
-import ByePage from  './pages/ByePage';
-import reportWebVitals from './reportWebVitals';
+import "./index.css";
+import App from "./App";
+import Dialogue from "./pages/Dialogue";
+import Instructions from "./pages/Instructions";
+import StartPage from "./pages/StartPage";
+import ByePage from "./pages/ByePage";
+import reportWebVitals from "./reportWebVitals";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-       <Routes>
-        <Route exact path="/" element={<StartPage/>} />
-        <Route path="/app" element={<App/>} />
-        <Route path="/byebye" element={<ByePage/>} />
-        
+      <Routes>
+        <Route exact path="/" element={<StartPage />} />
+        <Route path="/app" element={<App />} />
+        <Route path="/dialogue" element={<Dialogue />} />
+        <Route path="/instructions" element={<Instructions />} />
+        <Route path="/byebye" element={<ByePage />} />
       </Routes>
-      </BrowserRouter>,
+    </BrowserRouter>
   </React.StrictMode>
 );
 
