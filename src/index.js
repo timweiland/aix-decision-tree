@@ -6,6 +6,7 @@ import App from "./App";
 import Dialogue from "./pages/Dialogue";
 import Instructions from "./pages/Instructions";
 import StartPage from "./pages/StartPage";
+import ByePage from "./pages/ByePage";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,6 +18,7 @@ root.render(
         <Route path="/app" element={<App />} />
         <Route path="/dialogue" element={<Dialogue />} />
         <Route path="/instructions" element={<Instructions />} />
+        <Route path="/byebye" element={<ByePage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
