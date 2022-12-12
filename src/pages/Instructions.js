@@ -6,7 +6,7 @@ import bob from "../assets/bob.png";
 
 function Instructions() {
   const [Counter, setCounter] = useState(1);
-  const imgs = [map, bob, map];
+  const imgs = [map, map, map, map, map];
 
   return (
     <div className="column-container">
@@ -14,27 +14,34 @@ function Instructions() {
         <img src={imgs[Counter - 1]} alt="img" height="600vh" />
       </div>
 
-      <div
-        className="columns"
-        id="instr"
-        onClick={() => {
-          setCounter(Counter + 1);
-          addInstruction(Counter, "addInstruction");
-        }}
-      >
-        <div className="instr">
+      <div className="columns">
+        <div className="instr" id="instr0">
           Zeichne vertikale oder horizontale Linien, um die Karte einzuteilen.
           Du kannst deine gezeichneten Striche rückgängig machen, indem du auf
           das U klickst.
         </div>
         <div id="addInstruction"></div>
-        <Link to="/App">
-          <div className="rowButtons">
-            <div style={{ textAlign: "center", padding: 10 }}>
-              <button>LOS</button>
-            </div>
+
+        {Counter < 4 ? (
+          <div
+            className="rowButtons"
+            onClick={() => {
+              setCounter(Counter + 1);
+              addInstruction(Counter, "addInstruction");
+              changeColor(Counter);
+            }}
+          >
+            <button>WEITER</button>
           </div>
-        </Link>
+        ) : (
+          <Link to="/App">
+            <div className="rowButtons">
+              <div>
+                <button>WEITER</button>
+              </div>
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -49,17 +56,17 @@ function addInstruction(counter, div_id) {
         case 1:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='instr'> Wenn du die Karte geteilt hast, kannst du jeweils die Teilbereiche weiter unterteilen.</div>"
+            "<div class='instr' id='instr1'> Wenn du die Karte geteilt hast, kannst du jeweils die Teilbereiche weiter unterteilen.</div>"
           );
         case 2:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='instr'> Parallel entsteht auf der rechten Seite eine Struktur, die deine Unterteilungen zeigt. Sie sieht aus wie ein umgedrehter Baum und wird deshalb in der Fachsprache Entscheidungsbaum genannt.</div>"
+            "<div class='instr' id='instr2'> Parallel entsteht auf der rechten Seite eine Struktur, die deine Unterteilungen zeigt. Sie sieht aus wie ein umgedrehter Baum und wird deshalb in der Fachsprache Entscheidungsbaum genannt.</div>"
           );
         case 3:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='instr'> Du kannst insgesamt x Bereiche unterteilen, das entspricht y Strichen. Wenn du früher fertig sein solltest, kannst du auf Fertig klicken. Alles verstanden? </div>"
+            "<div class='instr' id='instr3'> Du kannst insgesamt x Bereiche unterteilen, das entspricht y Strichen. Wenn du früher fertig sein solltest, kannst du auf Fertig klicken. Alles verstanden? </div>"
           );
         default:
           return;
@@ -68,23 +75,21 @@ function addInstruction(counter, div_id) {
   }
 }
 
-function changeImage(counter) {
-  var img;
-
+function changeColor(counter) {
   {
     (() => {
       switch (counter) {
         case 1:
-          img = map;
+          return (document.getElementById("instr0").style.color = "grey");
         case 2:
-          img = map;
-
+          return (document.getElementById("instr1").style.color = "grey");
+        case 3:
+          return (document.getElementById("instr2").style.color = "grey");
         default:
-          img = bob;
+          return;
       }
     })();
   }
-  return img;
 }
 
 export default Instructions;

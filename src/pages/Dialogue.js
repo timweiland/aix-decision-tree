@@ -10,13 +10,7 @@ function Dialogue() {
   const [Counter, setCounter] = useState(1);
 
   return (
-    <div
-      className="column-container"
-      onClick={() => {
-        setCounter(Counter + 1);
-        addStatement(Counter, "addStatement");
-      }}
-    >
+    <div className="column-container">
       <div className="column">
         <img src={bob} alt="bob" />
       </div>
@@ -36,16 +30,28 @@ function Dialogue() {
         ) : (
           <img src={alice_map} alt="alice_map" />
         )}
-        <Link to="/">
+        {/* <Link to="/">
           <div style={{ textAlign: "center", padding: 10 }}>
             <button>ZURÜCK</button>
           </div>
-        </Link>
-        <Link to="/instructions">
-          <div style={{ textAlign: "center", padding: 10 }}>
+        </Link> */}
+        {Counter < 5 ? (
+          <div
+            style={{ textAlign: "end", padding: 10, margin: 10 }}
+            onClick={() => {
+              setCounter(Counter + 1);
+              addStatement(Counter, "addStatement");
+            }}
+          >
             <button>WEITER</button>
           </div>
-        </Link>
+        ) : (
+          <Link to="/instructions">
+            <div style={{ textAlign: "end", padding: 10, margin: 10 }}>
+              <button>WEITER</button>
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

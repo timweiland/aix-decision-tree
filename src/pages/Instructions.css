@@ -18,9 +18,14 @@
 }
 
 .rowButtons {
-  display:flex; 
+  /* display:flex; 
   flex-direction:row;
   align-items:center;
-  justify-content:center; 
+  justify-content:center;  */
+  position:absolute;
+  bottom: 0;
+  right: 30%;
+  margin-bottom: 2cm;
+  /* margin-top:100%; */
 }
 
