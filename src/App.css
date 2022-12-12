@@ -8,3 +8,15 @@
   height: 100%;
   text-align: center;
 }
+
+.column-static {
+  flex: 0;
+  height: 100%;
+  text-align: center;
+}
+
+.headers {
+  font-size: 50px;
+  font-family: Georgia, serif;
+  text-align: center;
+}
