@@ -41,6 +41,7 @@ function App() {
   const [userTree, setUserTreeState] = useState({ structure: initialStructure, toggle: false });
   const [screenState, setScreenState] = useState("initialScreen");
 
+  const [testPoint, setTestPoint] = useState(undefined);
   const [showUserRentEstimate, setShowUserRentEstimate] = useState(false);
   const [showAIRentEstimate, setShowAIRentEstimate] = useState(false);
   const [userRentEstimate, setUserRentEstimate] = useState(undefined);
@@ -93,7 +94,8 @@ function App() {
     popUserSplit();
   }
 
-  const propagateTestpoint = (x, y, doneCallback) => {
+  const propagateTestpoint = (x, y, rent, doneCallback) => {
+    setTestPoint([x, y, rent]);
     const aiPath = aiTree.structure.get_path(x, y);
     const delay = 2000;
     aiPath.forEach((node, node_idx) => {
@@ -135,19 +137,26 @@ function App() {
           setUserTree(userTree.structure);
           setShowAIRentEstimate(false);
           setShowUserRentEstimate(false);
+          setTestPoint(undefined);
           doneCallback();
         }
-      })
+      });
     }, maxDelay + 1000);
   }
 
   const orchestrateComparison = () => {
     const numPoints = 3;
-    const randomPoints = sampleSize(mietdaten, numPoints);
+    const randomLeaves = sampleSize(aiTree.structure.get_leaves(), numPoints);
+    //const randomPoints = sampleSize(mietdaten, numPoints);
+    const randomPoints = [];
+    randomLeaves.forEach((leaf) => {
+      const point = sampleSize(leaf.points, 1)[0];
+      randomPoints.push(point);
+    })
     let thirdCallback = () => setScreenState("initiateQuantitativeComparison");
-    let secondCallback = () => propagateTestpoint(randomPoints[2][0], randomPoints[2][1], thirdCallback);
-    let firstCallback = () => propagateTestpoint(randomPoints[1][0], randomPoints[1][1], secondCallback);
-    propagateTestpoint(randomPoints[0][0], randomPoints[0][1], firstCallback);
+    let secondCallback = () => propagateTestpoint(randomPoints[2][0], randomPoints[2][1], randomPoints[2][2], thirdCallback);
+    let firstCallback = () => propagateTestpoint(randomPoints[1][0], randomPoints[1][1], randomPoints[1][2], secondCallback);
+    propagateTestpoint(randomPoints[0][0], randomPoints[0][1], randomPoints[0][2], firstCallback);
   }
 
   const cleanUp = () => {
@@ -188,7 +197,7 @@ function App() {
             undo={undo} />
         }
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
-        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} />
+        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
       </div>
 
       <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
@@ -227,13 +236,13 @@ function App() {
       {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static">
-          <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} />
+          <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />
         </div>
       }
 
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }} onClick={
+        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white"  style={{ fontSize: "100px" }} onClick={
           () => {
             continueHandler.handler();
             setContinueHandler(undefined);
@@ -244,7 +253,7 @@ function App() {
       }
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white" style={{ fontSize: "100px" }}>
+        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white" style={{ fontSize: "100px" }}>
          <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
           <FontAwesomeIcon icon={faXmark} />
           </Link>

@@ -8,6 +8,7 @@ export default function Map({
   highlightNode,
   unhighlightAll,
   enableInteraction,
+  testPoint
 }) {
   const canvasRef = useRef();
   const [isDrawing, setIsDrawing] = useState(false);
@@ -135,7 +136,7 @@ export default function Map({
       return null;
     });
     // Draw the rent points on the map
-    drawCoordinates(coordinates, ctx, canvas);
+    drawCoordinates(coordinates, testPoint, ctx, canvas);
     if (isDrawing && curLineEnd) {
       // Dashed line that the user is currently in the process of drawing
       ctx.setLineDash([7, 7]);
@@ -173,10 +174,36 @@ export default function Map({
     }
     const testPointNode = tree.getTestPointNode();
     if (testPointNode !== undefined) {
-      ctx.globalAlpha = 0.8;
-      ctx.fillStyle = "#FF0000";
+      ctx.lineWidth = 30;
+      ctx.strokeStyle = "#FF0000";
+      ctx.fillStyle = "#ff886f";
+      ctx.globalAlpha = 1.0;
+      ctx.beginPath();
+      ctx.rect(...treeNodeToCanvasRect(testPointNode, canvas));
+      ctx.stroke();
+      ctx.globalAlpha = 0.7;
       ctx.fillRect(...treeNodeToCanvasRect(testPointNode, canvas));
       ctx.globalAlpha = 1.0;
+    }
+
+    let minRent = 1000;
+    let maxRent = -1000;
+    coordinates.forEach((coord) => {
+      const rent = coord[2];
+      if (rent < minRent) {
+        minRent = rent;
+      }
+      if (rent > maxRent) {
+        maxRent = rent;
+      }
+    });
+    const [minSize, maxSize] = [25, 100];
+    if(testPoint !== undefined) {
+      const rent = testPoint[2];
+      const size = Math.floor(minSize + (rent - minRent) * (maxSize - minSize) / (maxRent - minRent));
+      const x = testPoint[0] * canvas.width / 100;
+      const y = testPoint[1] * canvas.height / 100;
+      drawCircle(ctx, x, y, size, 'yellow');
     }
   }
 
@@ -223,7 +250,7 @@ export default function Map({
     }
   }
 
-  function drawCoordinates(coordinates, ctx, canvas) {
+  function drawCoordinates(coordinates, testPoint, ctx, canvas) {
     let minRent = 1000;
     let maxRent = -1000;
     coordinates.forEach((coord) => {
