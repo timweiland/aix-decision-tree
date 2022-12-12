@@ -1,22 +1,20 @@
-.container {
-  display: grid;
-  /* grid-template-columns: repeat(2, 1fr); */
-  grid-template-columns: 400px auto;
+.column-container {
+  display: flex;
+  height: 100vh;
 }
-
-
-.left,
-.right {
+ 
+.column {
+  flex: 1;
   height: 100%;
+  text-align: center;
 }
 
 .instr {
-  display: flex;
-  width: 80%;
-  height: 70%;
+  width: 70%;
   margin: auto;
-  align-items:center;
-  justify-content:center; 
+  padding: 20px;
+  text-align: center;
+  position:relative;
 }
 
 .rowButtons {

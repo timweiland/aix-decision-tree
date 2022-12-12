@@ -23,9 +23,9 @@ function StartPage() {
         <div class="box sbbob">
           {" "}
           Ich bin neu in Tübingen und will wissen wie hoch die Miete für ein
-          Studentenzimmer ist! xyz
+          Studentenzimmer ist!
         </div>
-        <div class="box sbalice"> Hast du Lust mitzumachen? </div>
+        <div class="box sbalice"> Hast Du Lust mitzumachen? </div>
         <div className="rowButtons">
           <Link to="/dialogue">
             <div style={{ textAlign: "center", padding: 10 }}>
