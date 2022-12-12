@@ -11,9 +11,9 @@ function Instructions_01() {
 
       <div className="right">
         <div className="instr">
-          Zeichne vertikale oder horizontale Linien in die Karte, um die Karte
-          einzuteilen. Du kannst deine gezeichneten Striche rückgängig machen,
-          indem du auf das U klickst.
+          Zeichne vertikale oder horizontale Linien, um die Karte einzuteilen.
+          Du kannst deine gezeichneten Striche rückgängig machen, indem du auf
+          das U klickst.
         </div>
         <div className="rowButtons">
           <Link to="/">

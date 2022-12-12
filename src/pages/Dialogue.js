@@ -20,12 +20,16 @@ function Dialogue() {
       </div>
 
       <div className="column">
+        <div class="box sbalice">
+          {" "}
+          Hier ist eine Karte von Tübingen, auf denen die Mietpreise pro
+          Quadratmeter eingezeichnet sind.{" "}
+        </div>
         <div class="box sbbob">
           {" "}
-          Ich bin neu in Tübingen und will wissen wie hoch die Miete für ein
-          Studentenzimmer ist!
+          Wenn ich den Durchschnitt berechne, weiß ich ungefähr wie hoch die
+          Miete ist...
         </div>
-        <div class="box sbalice"> Hast du Lust mitzumachen? </div>
         <div id="addStatement"> </div>
       </div>
 
@@ -58,78 +62,58 @@ function addStatement(counter, div_id) {
         case 1:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbbob'> Wenn ich hier Mittelwerte blabla </div>"
+            "<div class='box sbalice'>Das ist aber nicht sehr genau, es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
           );
         case 2:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbalice'> Das ist aber nicht sehr genau junger Mann </div>"
+            "<div class='box sbbob'> Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann jeweils den Durchschnittspreis berechnen! </div>"
           );
         case 3:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbbob'>  Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann den Durchschnittspreis berechnen! </div>"
+            "<div class='box sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.  </div>"
           );
         case 4:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbalice'> Gute Idee! Und ich kann eine KI programmieren, die das Gleichemacht, dann können wir am Ende beide Ergebnisse vergleichen. </div>"
+            "<div class='box sbbob'> Hey, hast Du Lust mir zu helfen? Ich erkläre Dir wie es geht.  </div>"
           );
         default:
           return;
       }
     })();
   }
+}
 
-  const statement1 = {
-    person: "box sbbob",
-    text: "Wenn ich hier Mittelwerte blabla",
-  };
-  const statement2 = {
-    person: "box sbalice",
-    text: "Das ist aber nicht sehr genau junger Mann",
-  };
-  const statement3 = {
-    person: "box sbbob",
-    text: "Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann den Durchschnittspreis berechnen!",
-  };
-  const statement4 = {
-    person: "box sbalice",
-    text: "Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.",
-  };
+function changeImages(counter) {
+  {
+    (() => {
+      switch (counter) {
+        case 1:
+          return theDiv.insertAdjacentHTML(
+            "beforeend",
+            "<div class='box sbalice'>Das ist aber nicht sehr genau, es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
+          );
+        case 2:
+          return theDiv.insertAdjacentHTML(
+            "beforeend",
+            "<div class='box sbbob'> Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann jeweils den Durchschnittspreis berechnen! </div>"
+          );
+        case 3:
+          return theDiv.insertAdjacentHTML(
+            "beforeend",
+            "<div class='box sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.  </div>"
+          );
+        case 4:
+          return theDiv.insertAdjacentHTML(
+            "beforeend",
+            "<div class='box sbbob'> Hey, hast Du Lust mir zu helfen? Ich erkläre Dir wie es geht.  </div>"
+          );
+        default:
+          return;
+      }
+    })();
+  }
 }
 export default Dialogue;
-
-/* 
-{(() => {
-    switch (Counter) {
-      case 1:
-        return (
-          <div class="box sbbob"> Wenn ich hier Mittelwerte blabla </div>
-        );
-      case 2:
-        return (
-          <div class="box sbalice">
-            {" "}
-            Das ist aber nicht sehr genau junger Mann{" "}
-          </div>
-        );
-      case 3:
-        return (
-          <div class="box sbbob">
-            {" "}
-            Gute Idee! Und ich kann eine KI programmieren, die das Gleiche
-            macht, dann können wir am Ende beide Ergebnisse vergleichen.{" "}
-          </div>
-        );
-      case 4:
-        return (
-          <div class="box sbalice">
-            {" "}
-            Das ist aber nicht sehr genau junger Mann{" "}
-          </div>
-        );
-      default:
-        return;
-    }
-  })()} */
