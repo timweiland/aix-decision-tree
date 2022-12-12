@@ -1,43 +1,55 @@
 import "./Instructions.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import map from "../assets/instruction_vertical_lines.jpg";
-import bob from "../assets/bob.png";
+import instr_lines from "../assets/instructions_lines.jpeg";
+import instr_divisions from "../assets/instructions_divisions.jpeg";
+import instr_decisiontree from "../assets/instructions_decisiontree.jpeg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faQuestion,
+  faCheck,
+  faRotateLeft,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Instructions() {
   const [Counter, setCounter] = useState(1);
-  const imgs = [map, map, map, map, map];
+  const imgs = [
+    instr_lines,
+    instr_divisions,
+    instr_decisiontree,
+    instr_decisiontree,
+  ];
 
   return (
     <div className="column-container">
-      <div className="columns">
-        <img src={imgs[Counter - 1]} alt="img" height="600vh" />
+      <div className="left">
+        <img src={imgs[Counter - 1]} alt="img" />
       </div>
 
-      <div className="columns">
+      <div className="right">
         <div className="instr" id="instr0">
           Zeichne vertikale oder horizontale Linien, um die Karte einzuteilen.
-          Du kannst deine gezeichneten Striche rückgängig machen, indem du auf
-          das U klickst.
+          Mit <FontAwesomeIcon icon={faRotateLeft} /> kannst du deinen Strich
+          rückgängig machen.
         </div>
         <div id="addInstruction"></div>
 
         {Counter < 4 ? (
           <div
-            className="rowButtons"
             onClick={() => {
               setCounter(Counter + 1);
               addInstruction(Counter, "addInstruction");
               changeColor(Counter);
             }}
           >
-            <button>WEITER</button>
+            <button className="weiterbutton">WEITER</button>
           </div>
         ) : (
           <Link to="/App">
-            <div className="rowButtons">
+            <div>
               <div>
-                <button>WEITER</button>
+                <button className="weiterbutton">WEITER</button>
               </div>
             </div>
           </Link>
@@ -66,7 +78,7 @@ function addInstruction(counter, div_id) {
         case 3:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='instr' id='instr3'> Du kannst insgesamt x Bereiche unterteilen, das entspricht y Strichen. Wenn du früher fertig sein solltest, kannst du auf Fertig klicken. Alles verstanden? </div>"
+            "<div class='instr' id='instr3'> Du kannst maximal 5 Linien ziehen. Mit <FontAwesomeIcon icon={faRotateLeft} /> kannst du früher abbrechen. Los gehts! </div>"
           );
         default:
           return;

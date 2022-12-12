@@ -37,18 +37,17 @@ function Dialogue() {
         </Link> */}
         {Counter < 5 ? (
           <div
-            style={{ textAlign: "end", padding: 10, margin: 10 }}
             onClick={() => {
               setCounter(Counter + 1);
               addStatement(Counter, "addStatement");
             }}
           >
-            <button>WEITER</button>
+            <button className="weiterbutton">WEITER</button>
           </div>
         ) : (
           <Link to="/instructions">
-            <div style={{ textAlign: "end", padding: 10, margin: 10 }}>
-              <button>WEITER</button>
+            <div>
+              <button className="weiterbutton">WEITER</button>
             </div>
           </Link>
         )}
