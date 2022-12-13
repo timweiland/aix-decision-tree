@@ -2,15 +2,19 @@
   display: flex;
   height: 100vh;
 }
- 
-.column {
+
+.right {
   flex: 1;
   height: 100%;
   text-align: center;
 }
 
+img {
+  margin-top: 10%;
+}
+
 .instr {
-  width: 70%;
+  width: 60%;
   margin: auto;
   padding: 20px;
   text-align: center;
@@ -18,14 +22,21 @@
 }
 
 .rowButtons {
-  /* display:flex; 
-  flex-direction:row;
-  align-items:center;
-  justify-content:center;  */
   position:absolute;
   bottom: 0;
   right: 30%;
   margin-bottom: 2cm;
-  /* margin-top:100%; */
+}
+
+.weiterbutton {
+  padding: 1%;
+  background-color: lightgrey;
+  position:absolute;
+  font-size: 150%;
+  bottom: 0;
+  right: 9%;
+  margin-bottom: 1cm;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(57, 56, 56, 0.2), 0 4px 8px 0 rgba(92, 91, 91, 0.19);
 }
 

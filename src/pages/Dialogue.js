@@ -5,6 +5,8 @@ import bob from "../assets/bob.png";
 import alice from "../assets/alice.png";
 import alice_map from "../assets/alice_map.png";
 import alice_laptop from "../assets/alice_laptop.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function Dialogue() {
   const [Counter, setCounter] = useState(1);
@@ -30,14 +32,11 @@ function Dialogue() {
         ) : (
           <img src={alice_map} alt="alice_map" />
         )}
-        {/* <Link to="/">
-          <div style={{ textAlign: "center", padding: 10 }}>
-            <button>ZURÜCK</button>
-          </div>
-        </Link> */}
+
         {Counter < 5 ? (
           <div
-            style={{ textAlign: "end", padding: 10, margin: 10 }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-10 right-10 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+            style={{ fontSize: "100px" }}
             onClick={() => {
               setCounter(Counter + 1);
               addStatement(Counter, "addStatement");
