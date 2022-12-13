@@ -20,7 +20,7 @@ export default function TreeRoot({ structure, colors}) {
             }>
             <div><TreeNode id={structure.idx} avgRent={avgRent} color={colors[structure.idx]} isSelected={structure.isSelected} hasTestPoint={structure.hasTestPoint} /></div>
         </ArcherElement>
-        <div style={{ width: '100%', marginTop: '5rem', display: 'flex' }}>
+        <div style={{ width: '100%', marginTop: '3rem', display: 'flex' }}>
             {
                 structure.children &&
                 structure.children.map((child, childidx) => {
