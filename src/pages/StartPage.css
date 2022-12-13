@@ -1,24 +1,11 @@
-h1 {
-    color: black;
-    text-align: center;
-    font-family: Georgia, serif;
-    font-size: 50px;
-    
+img {
+    padding-top: 10%; 
+    padding-left: 10%;
+    height: 80%;
 }
 
-h3 {
-    color: black;
-    text-align: center;
-    font-family: Georgia, serif;
-    font-size: 50px;
-
-
-}
-
-button {
-    color: black;
-    background-color: white;
-    text-align: center;
-    font-family: Georgia, serif;
-    font-size: 50px;
+.imgalice {
+    padding-top: 10%; 
+    padding-left: 31%;
+    height: 80%;
 }

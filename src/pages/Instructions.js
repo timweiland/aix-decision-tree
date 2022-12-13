@@ -6,10 +6,8 @@ import instr_divisions from "../assets/instructions_divisions.jpeg";
 import instr_decisiontree from "../assets/instructions_decisiontree.jpeg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faQuestion,
-  faCheck,
+  faArrowRightLong,
   faRotateLeft,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Instructions() {
@@ -37,20 +35,25 @@ function Instructions() {
 
         {Counter < 4 ? (
           <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+            style={{ fontSize: "50pt" }}
             onClick={() => {
               setCounter(Counter + 1);
               addInstruction(Counter, "addInstruction");
               changeColor(Counter);
             }}
           >
-            <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
+            {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+            <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
           <Link to="/App">
-            <div>
-              <div>
-                <button className="btn btn-lg text-4xl text-white btn-primary">WEITER</button>
-              </div>
+            <div
+              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+              style={{ fontSize: "50pt" }}
+            >
+              {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+              <FontAwesomeIcon icon={faArrowRightLong} />
             </div>
           </Link>
         )}
