@@ -95,11 +95,11 @@ function changeColor(counter) {
     (() => {
       switch (counter) {
         case 1:
-          return (document.getElementById("instr0").style.color = "grey");
+          return (document.getElementById("instr0").style.color = "lightgrey");
         case 2:
-          return (document.getElementById("instr1").style.color = "grey");
+          return (document.getElementById("instr1").style.color = "lightgrey");
         case 3:
-          return (document.getElementById("instr2").style.color = "grey");
+          return (document.getElementById("instr2").style.color = "lightgrey");
         default:
           return;
       }

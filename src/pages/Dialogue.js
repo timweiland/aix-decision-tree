@@ -18,7 +18,7 @@ function Dialogue() {
       </div>
 
       <div className="column">
-        <div class="box sbalice">
+        <div class="box_dialogue sbalice">
           {" "}
           Hier ist eine Karte von Tübingen, auf denen die Mietpreise pro
           Quadratmeter eingezeichnet sind.{" "}
@@ -70,27 +70,27 @@ function addStatement(counter, div_id) {
         case 1:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbbob'> Wenn ich den Durchschnitt berechne, weiß ich ungefähr wie hoch die Miete ist...</div>"
+            "<div class='box_dialogue sbbob'> Wenn ich den Durchschnitt berechne, weiß ich ungefähr wie hoch die Miete ist...</div>"
           );
         case 2:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbalice'>Das ist aber nicht sehr genau, es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
+            "<div class='box_dialogue sbalice'>Das ist aber nicht sehr genau, es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
           );
         case 3:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbbob'> Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann jeweils den Durchschnittspreis berechnen! </div>"
+            "<div class='box_dialogue sbbob'> Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann jeweils den Durchschnittspreis berechnen! </div>"
           );
         case 4:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.  </div>"
+            "<div class='box_dialogue sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.  </div>"
           );
         case 5:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box sbbob'> Hey, hast Du Lust mir zu helfen? Ich erkläre Dir wie es geht.  </div>"
+            "<div class='box_dialogue sbbob'> Hey, hast Du Lust mir zu helfen? Ich erkläre Dir wie es geht.  </div>"
           );
         default:
           return;

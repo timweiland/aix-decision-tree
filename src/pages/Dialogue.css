@@ -16,22 +16,23 @@ img {
     height: 80%;
 }
 
-.box {
+.box_dialogue {
     width: 95%;
     margin: 5% auto;
     padding: 3%;
     text-align: center;
     font-weight: 500;
-    color: #fff;
+    font-size: 100%;
+    color: rgb(0, 0, 0);
     position:relative;
   }
 
-.box.sbbob {
-    background: #6647c4;
+.box_dialogue.sbbob {
+    background: #edccc6;
 }
 
-.box.sbalice {
-    background: #00bfb6;
+.box_dialogue.sbalice {
+    background: #badfde;
 }
 .sbbob:before {
     content: "";
@@ -39,8 +40,8 @@ img {
     height: 0px;
     position: absolute;
     border-left: 10px solid transparent;
-    border-right: 10px solid #6647c4;
-    border-top: 10px solid #6647c4;
+    border-right: 10px solid #edccc6;
+    border-top: 10px solid #edccc6;
     border-bottom: 10px solid transparent;
     left: -19px;
     top: 20px;
@@ -51,9 +52,9 @@ img {
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 10px solid #00bfb6;
+    border-left: 10px solid #badfde;
     border-right: 10px solid transparent;
-    border-top: 10px solid #00bfb6;
+    border-top: 10px solid #badfde;
     border-bottom: 10px solid transparent;
     right: -20px;
     top: 20px;
