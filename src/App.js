@@ -235,6 +235,9 @@ function App() {
     }
   }
 
+  console.log("Screen state:");
+  console.log(screenState);
+
   return (
     <div className="column-container relative" data-theme="light" >
       <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
