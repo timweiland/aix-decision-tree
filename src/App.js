@@ -242,9 +242,6 @@ function App() {
     <div className="column-container relative" data-theme="light" >
       <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
       <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div className="headers text-white" style={{ position: "absolute", left: `${20}%` }}>
-          WG-Zimmer in Tübingen
-        </div>
         {screenState === "initialScreen" &&
           <Taskbar cleanUp={cleanUp}
             complete={() => {
@@ -256,7 +253,7 @@ function App() {
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
         {
           comparisonScreenStates.includes(screenState) &&
-          <div className="text-primary text-6xl absolute top-1/2 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-16 h-16" /></div>
+          <div className="text-primary text-6xl absolute top-10 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-16 h-16" /></div>
         }
         {
           bobMessage &&
@@ -266,7 +263,10 @@ function App() {
 
       <div className="column flex flex-col relative justify-between">
         <div className="mt-4">
-          <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-12 h-12" /></div>
+          {
+            (comparisonScreenStates.includes(screenState)) &&
+            <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-12 h-12" /></div>
+          }
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
         {
@@ -317,7 +317,7 @@ function App() {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
           <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />
-          <div className="text-primary text-6xl absolute top-1/2 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
+          <div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
           {
             aliceMessage &&
             <Alice message={aliceMessage} excited={aliceExcited} />
