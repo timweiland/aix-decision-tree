@@ -252,12 +252,12 @@ function App() {
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
         {
-          bobMessage &&
-          <Bob message={bobMessage} excited={bobExcited} />
-        }
-        {
           comparisonScreenStates.includes(screenState) &&
           <div className="text-primary text-6xl absolute top-1/2 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-16 h-16" /></div>
+        }
+        {
+          bobMessage &&
+          <Bob message={bobMessage} excited={bobExcited} />
         }
       </div>
 
@@ -319,11 +319,11 @@ function App() {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
           <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />
+          <div className="text-primary text-6xl absolute top-1/2 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
           {
             aliceMessage &&
             <Alice message={aliceMessage} excited={aliceExcited} />
           }
-          <div className="text-primary text-6xl absolute top-1/2 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
         </div>
       }
 
