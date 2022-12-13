@@ -29,7 +29,7 @@ function StartPage() {
         <div className="rowButtons">
           <Link to="/dialogue">
             <div style={{ textAlign: "center", padding: 10 }}>
-              <button>START</button>
+              <button className="btn btn-lg btn-success text-4xl text-white">START</button>
             </div>
           </Link>
         </div>

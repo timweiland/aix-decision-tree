@@ -43,12 +43,12 @@ function Dialogue() {
               addStatement(Counter, "addStatement");
             }}
           >
-            <button>WEITER</button>
+            <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
           </div>
         ) : (
           <Link to="/instructions">
             <div style={{ textAlign: "end", padding: 10, margin: 10 }}>
-              <button>WEITER</button>
+              <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
             </div>
           </Link>
         )}

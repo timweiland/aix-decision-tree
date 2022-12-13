@@ -31,13 +31,13 @@ function Instructions() {
               changeColor(Counter);
             }}
           >
-            <button>WEITER</button>
+            <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
           </div>
         ) : (
           <Link to="/App">
             <div className="rowButtons">
               <div>
-                <button>WEITER</button>
+                <button className="btn btn-lg text-4xl text-white btn-primary">WEITER</button>
               </div>
             </div>
           </Link>

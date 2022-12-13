@@ -26,7 +26,7 @@ export default function Taskbar({ cleanUp, complete, undo }) {
       </div>
 
       <div class="taskbar">
-        <div class="button">
+        <div className="button">
           <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
           <FontAwesomeIcon icon={faXmark} />
           </Link>

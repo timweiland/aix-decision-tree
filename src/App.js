@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import create from 'zustand';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowRightLong } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faArrowRightLong, faPerson, faRobot, faHouse } from '@fortawesome/free-solid-svg-icons';
 
 import { sampleSize } from 'lodash';
 
@@ -13,11 +13,15 @@ import Map from './map/Map';
 import Tree from './tree/Tree';
 import PopupCollection from './popup/PopupCollection';
 
+import Bob from './mascots/Bob';
+import Alice from './mascots/Alice';
+
 import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
 import './taskbar/taskbar.css';
+import classNames from 'classnames';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -50,7 +54,7 @@ function App() {
   const [continueHandler, setContinueHandler] = useState(undefined);
 
 
-  const comparisonScreenStates = ["showAITree", "initiateAnimatedComparison", "animatedComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
+  const comparisonScreenStates = ["showAITree", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -145,6 +149,7 @@ function App() {
   }
 
   const orchestrateComparison = () => {
+    setScreenState("qualitativeComparison");
     const numPoints = 3;
     const randomLeaves = sampleSize(aiTree.structure.get_leaves(), numPoints);
     //const randomPoints = sampleSize(mietdaten, numPoints);
@@ -182,11 +187,59 @@ function App() {
 
   const NoOfUserLines = userTree.structure.get_lines().length;
 
+  let bobMessage = undefined;
+  let aliceMessage = undefined;
+  let bobExcited = false;
+  let aliceExcited = false;
+
+  let avgDiffUser = 0;
+  let avgDiffAI = 0;
+  let isUserBetter = false;
+  let isAIBetter = false;
+  if (screenState === "quantitativeComparison") {
+    avgDiffUser = overall_avg_difference(userTree.structure);
+    avgDiffAI = overall_avg_difference(aiTree.structure);
+    if (avgDiffUser < avgDiffAI) {
+      bobMessage = "Juhu! Wir haben die KI geschlagen! Toll gemacht!";
+      bobExcited = true;
+      aliceMessage = "Wow, du bist echt gut!";
+      isUserBetter = true;
+    }
+    else if (avgDiffUser > avgDiffAI) {
+      bobMessage = "Guter Versuch! Wollen wir es nochmal probieren?";
+      aliceMessage = "Nicht schlecht! Aber meine KI ist ein bisschen genauer.";
+      isAIBetter = true;
+    }
+    else {
+      bobMessage = "Hey, die beiden Bäume sind gleich gut!";
+      aliceMessage = "Was ein Zufall!";
+    }
+  }
+  else if (showUserRentEstimate && showAIRentEstimate) {
+    const trueRent = testPoint[2];
+    const userError = (userRentEstimate - trueRent) ** 2;
+    const aiError = (aiRentEstimate - trueRent) ** 2;
+    if (userError < aiError) {
+      bobMessage = "Super! Diese Miete haben wir genauer vorhergesagt!";
+      bobExcited = true;
+      aliceMessage = "Oh, da hast du meine KI wohl geschlagen!";
+    }
+    else if (userError > aiError) {
+      bobMessage = "Da sind wir ein bisschen ungenauer. Aber das muss nichts heißen!";
+      aliceMessage = "Bei dieser Miete liegt meine KI ein bisschen näher dran.";
+      aliceExcited = true;
+    }
+    else {
+      bobMessage = "Erstaunlich!";
+      aliceMessage = "Hier treffen beide Bäume die gleiche Vorhersage!";
+    }
+  }
+
   return (
-    <div className="column-container">
+    <div className="column-container relative" data-theme="light" >
       <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} />
       <div className="column-static" style={{ position: "relative", display: "inline-block", backgroundColor: 'white' }}>
-        <div class="headers" style={{ position: "absolute", left: `${20}%` }}>
+        <div className="headers text-white" style={{ position: "absolute", left: `${20}%` }}>
           WG-Zimmer in Tübingen
         </div>
         {screenState === "initialScreen" &&
@@ -198,51 +251,85 @@ function App() {
         }
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
+        {
+          bobMessage &&
+          <Bob message={bobMessage} excited={bobExcited} />
+        }
+        {
+          comparisonScreenStates.includes(screenState) &&
+          <div className="text-primary text-6xl absolute top-1/2 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-16 h-16" /></div>
+        }
       </div>
 
-      <div className="column flex flex-col justify-between" style={{ backgroundColor: 'white' }}>
+      <div className="column flex flex-col justify-between relative">
         <div>
-          <div class="headers">
-   
+          <div className="headers text-primary mb-4">
+
             Dein Entscheidungsbaum<br />
-            {(screenState === "quantitativeComparison") &&
-              <div>
-                Durchschnittsdifferenz +/-: {`${overall_avg_difference(userTree.structure)}€`}
-              </div>}
           </div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
-          {showUserRentEstimate &&
-            <p>Dein Baum schätzt: {userRentEstimate.toFixed(1)}€</p>
-          }
         </div>
+        {
+          (screenState === "qualitativeComparison") &&
+          <div className="stats shadow-md bg-gray-50">
+            <div className="stat">
+              <div className="stat-figure text-primary text-4xl"><FontAwesomeIcon icon={faPerson} /></div>
+              <div className="stat-title">Deine Vorhersage</div>
+              <div class="stat-value">{showUserRentEstimate ? Number(userRentEstimate).toFixed(1) + "€" : "..."}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-figure text-primary text-4xl"><FontAwesomeIcon icon={faHouse} /></div>
+              <div className="stat-title">Echter Mietpreis</div>
+              <div class="stat-value">{testPoint ? Number(testPoint[2]).toFixed(1) + "€" : "?"}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-figure text-primary text-4xl"><FontAwesomeIcon icon={faRobot} /></div>
+              <div className="stat-title">KI-Vorhersage</div>
+              <div class="stat-value">{showAIRentEstimate ? Number(aiRentEstimate).toFixed(1) + "€" : "..."}</div>
+            </div>
+          </div>
+        }
+        {
+          (screenState === "quantitativeComparison") &&
+          <div className="stats shadow-md bg-gray-50">
+            <div className="stat">
+              <div className="stat-figure text-primary text-4xl"><FontAwesomeIcon icon={faPerson} /></div>
+              <div className="stat-title">Deine Genauigkeit</div>
+              <div className={classNames("stat-value", { "text-green-700": isUserBetter, "text-orange-700": isAIBetter })}>{"+/- " + overall_avg_difference(userTree.structure) + "€"}</div>
+            </div>
+            <div className="stat">
+              <div className="stat-figure text-primary text-4xl"><FontAwesomeIcon icon={faRobot} /></div>
+              <div className="stat-title">KI-Genauigkeit</div>
+              <div className={classNames("stat-value", { "text-green-700": isAIBetter, "text-orange-700": isUserBetter })}>{"+/- " + overall_avg_difference(aiTree.structure) + "€"}</div>
+            </div>
+          </div>
+        }
         {
           (comparisonScreenStates.includes(screenState)) &&
           <div>
-            <div class="headers">
+            <div className="headers text-primary mb-4">
               KI Entscheidungsbaum<br />
-              {(screenState === "quantitativeComparison") &&
-                <div>
-                  Durchschnittsdifferenz +/-: {`${overall_avg_difference(aiTree.structure)}€`}
-                </div>}
             </div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
-            {showAIRentEstimate &&
-              <p>Der KI-Baum schätzt: {aiRentEstimate.toFixed(1)}€</p>
-            }
           </div>
         }
       </div>
 
       {
         (comparisonScreenStates.includes(screenState)) &&
-        <div className="column-static">
+        <div className="column-static relative">
           <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />
+          {
+            aliceMessage &&
+            <Alice message={aliceMessage} excited={aliceExcited} />
+          }
+          <div className="text-primary text-6xl absolute top-1/2 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
         </div>
       }
 
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white"  style={{ fontSize: "100px" }} onClick={
+        <div className="absolute hover:cursor-pointer bg-green-700 bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-32" style={{ fontSize: "100px" }} onClick={
           () => {
             continueHandler.handler();
             setContinueHandler(undefined);
@@ -252,10 +339,10 @@ function App() {
         </div>
       }
       {
-        (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white" style={{ fontSize: "100px" }}>
-         <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
-          <FontAwesomeIcon icon={faXmark} />
+        (continueHandler !== undefined || screenState === "quantitativeComparison") &&
+        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-40" style={{ fontSize: "100px" }}>
+          <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
+            <FontAwesomeIcon icon={faXmark} />
           </Link>
         </div>
       }
