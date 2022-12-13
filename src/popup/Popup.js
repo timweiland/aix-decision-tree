@@ -4,7 +4,7 @@ export default function Popup({ icon, closeCallback, children }) {
             <div className="bg-gray-400 opacity-80 z-50 w-full h-full absolute" />
             <div id="popup-modal" tabindex="-1" className="overflow-y-auto overflow-x-hidden m-auto z-50 p-4 md:inset-0 w-1/2 w-1/2">
                 <div className="relative w-full h-full">
-                    <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <div className="relative rounded-lg shadow bg-gray-700">
                         <div className="pt-40 pb-40 pl-24 pr-24 text-center">
                             <div className="mx-auto mb-8 w-14 h-14 ">
                                 {icon}
