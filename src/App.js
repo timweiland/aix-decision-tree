@@ -264,12 +264,9 @@ function App() {
         }
       </div>
 
-      <div className="column flex flex-col justify-between relative">
-        <div>
-          <div className="headers text-primary mb-4">
-
-            Dein Entscheidungsbaum<br />
-          </div>
+      <div className="column flex flex-col relative justify-between">
+        <div className="mt-4">
+          <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-12 h-12" /></div>
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
         {
@@ -309,10 +306,8 @@ function App() {
         }
         {
           (comparisonScreenStates.includes(screenState)) &&
-          <div>
-            <div className="headers text-primary mb-4">
-              KI Entscheidungsbaum<br />
-            </div>
+          <div className="mt-2">
+            <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-12 h-12" /></div>
             <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
           </div>
         }
