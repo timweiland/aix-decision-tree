@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import bob from "../assets/bob.png";
 import alice from "../assets/alice.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function StartPage() {
   const [Counter, setCounter] = useState(1);
@@ -26,44 +28,22 @@ function StartPage() {
           Studentenzimmer ist!
         </div>
         <div class="box sbalice"> Hast Du Lust mitzumachen? </div>
-        <div className="rowButtons">
+        <div>
           <Link to="/dialogue">
-            <div style={{ textAlign: "center", padding: 10 }}>
-              <button className="btn btn-lg btn-success text-4xl text-white">START</button>
+            <div
+              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+              style={{ fontSize: "50pt" }}
+            >
+              {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+              <FontAwesomeIcon icon={faArrowRightLong} />
             </div>
           </Link>
         </div>
       </div>
 
       <div className="column">
-        <img src={alice} alt="alice" />
+        <img src={alice} alt="alice" className="imgalice" />
       </div>
-    </div>
-  );
-}
-
-function StartPage_old() {
-  return (
-    <div>
-      <h1> WG-Zimmer gesucht? </h1>
-      <br />
-      <h3>
-        {" "}
-        Hier kannst du Mietpreise vorhersagen und dich mit einer KI vergleichen.
-      </h3>
-      <br />
-      <br />
-      <Link to="/app">
-        <div style={{ textAlign: "center" }}>
-          <button>LOS</button>
-        </div>
-      </Link>
-
-      <Link to="/dialogue">
-        <div style={{ textAlign: "center" }}>
-          <button>INSTRUKTIONEN</button>
-        </div>
-      </Link>
     </div>
   );
 }

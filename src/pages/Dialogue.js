@@ -35,19 +35,24 @@ function Dialogue() {
 
         {Counter < 5 ? (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-10 right-10 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-            style={{ fontSize: "100px" }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+            style={{ fontSize: "50pt" }}
             onClick={() => {
               setCounter(Counter + 1);
               addStatement(Counter, "addStatement");
             }}
           >
-            <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
+            {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+            <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
           <Link to="/instructions">
-            <div style={{ textAlign: "end", padding: 10, margin: 10 }}>
-              <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button>
+            <div
+              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+              style={{ fontSize: "50pt" }}
+            >
+              {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+              <FontAwesomeIcon icon={faArrowRightLong} />
             </div>
           </Link>
         )}
