@@ -256,14 +256,14 @@ export function convertPythonTree(pythonTree, node) {
 }
 
 
-export function clipPythonTree(pythonTree,node, stateNumber) {
-  if (stateNumber === 1) {
-    
+export function clipPythonTree(pythonTree,node, stepsToShow) {
+  if (stepsToShow === 1) {
+
     pythonTree.children[0].children = []
     pythonTree.children[1].children = []
   }
 
-  if (stateNumber === 2) {
+  if (stepsToShow === 2) {
     pythonTree.children[0].children[1].children= []
     pythonTree.children[1].children = []
   }
