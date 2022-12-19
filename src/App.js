@@ -57,7 +57,7 @@ function App() {
   const [continueHandler, setContinueHandler] = useState(undefined);
 
 
-  const comparisonScreenStates = ["showAITree","showAITree1","showAITree2","showAITree3","showAITree4", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
+  const comparisonScreenStates = ["showAITree","showAITree1","showAITree2", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -201,15 +201,15 @@ function App() {
   let isAIBetter = false;
 
   if (screenState === "showAITree1") {
-    aliceMessage = "Hier guck mal was die KI macht"
+    aliceMessage = "Zunächst unterteilt die KI das Stadtgebiet mit einer vertikalen Linie"
   }
 
-  if (screenState === "showAITree3") {
-    aliceMessage = "Als Zweites macht die KI diesdasAnanas"
+  if (screenState === "showAITree2") {
+    aliceMessage = "Als nächstes zieht Sie eine horizontale Linie."
   }
 
   if (screenState === "showAITree") {
-    aliceMessage = "Jetzt ist die KI fertig"
+    aliceMessage = "Dies macht die KI auch für die restlichen drei Linien. Auf diesem Screen siehst du die fertige Einteilung der KI"
   }
 
   if (screenState === "quantitativeComparison") {
@@ -325,10 +325,12 @@ function App() {
           <div className="mt-2">
             <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-12 h-12" /></div>
             
-            {((screenState === "showAITree1") || (screenState === "showAITree2")) && <Tree structure={aiTreeClipped1} colors={aiTreeClipped1.get_colors()} />}
-            {((screenState === "showAITree3") || (screenState === "showAITree4")) && <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
-            {(screenState !== "showAITree1") && (screenState !== "showAITree2") && (screenState !== "showAITree3") && (screenState !== "showAITree4") &&
+            {(screenState === "showAITree1") && <Tree structure={aiTreeClipped1} colors={aiTreeClipped1.get_colors()} />}
+            {(screenState === "showAITree2")&& <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
+            {(continueHandler === undefined) && screenState === "showAITree2" && setContinueHandler({ handler: () => setScreenState("showAITree") })}
+            {(screenState !== "showAITree1") && (screenState !== "showAITree2") &&
               <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />}
+            {(continueHandler === undefined) && screenState === "showAITree" && setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") })}
           </div>
         }
       </div>
@@ -336,9 +338,9 @@ function App() {
       {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
-          {((screenState === "showAITree1") || (screenState === "showAITree2")) &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
-          {((screenState === "showAITree3") || (screenState === "showAITree4")) &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
-          {(screenState !== "showAITree1") && (screenState !== "showAITree2") && (screenState !== "showAITree3") && (screenState !== "showAITree4") &&
+          {(screenState === "showAITree1") &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState === "showAITree2") &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState !== "showAITree1") && (screenState !== "showAITree2") &&
             <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />}
           <div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
           {
