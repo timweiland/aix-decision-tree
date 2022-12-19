@@ -16,7 +16,7 @@ import PopupCollection from './popup/PopupCollection';
 import Bob from './mascots/Bob';
 import Alice from './mascots/Alice';
 
-import { TreeStructure, convertPythonTree } from './tree/TreeStructure';
+import { TreeStructure, convertPythonTree,clipPythonTree } from './tree/TreeStructure';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
@@ -27,6 +27,9 @@ const mietdaten = mietdatenJSON.data;
 
 const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
 const aiTreeStructure = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
+const aiTreeClipped2 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 2);
+const aiTreeClipped1 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 1);
+
 
 const showAITreeStore = create((set) => ({
   show: false,
@@ -54,7 +57,7 @@ function App() {
   const [continueHandler, setContinueHandler] = useState(undefined);
 
 
-  const comparisonScreenStates = ["showAITree", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
+  const comparisonScreenStates = ["showAITree","showAITree1","showAITree2","showAITree3","showAITree4", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -196,6 +199,19 @@ function App() {
   let avgDiffAI = 0;
   let isUserBetter = false;
   let isAIBetter = false;
+
+  if (screenState === "showAITree1") {
+    aliceMessage = "Hier guck mal was die KI macht"
+  }
+
+  if (screenState === "showAITree3") {
+    aliceMessage = "Als Zweites macht die KI diesdasAnanas"
+  }
+
+  if (screenState === "showAITree") {
+    aliceMessage = "Jetzt ist die KI fertig"
+  }
+
   if (screenState === "quantitativeComparison") {
     avgDiffUser = overall_avg_difference(userTree.structure);
     avgDiffAI = overall_avg_difference(aiTree.structure);
@@ -308,7 +324,11 @@ function App() {
           (comparisonScreenStates.includes(screenState)) &&
           <div className="mt-2">
             <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-12 h-12" /></div>
-            <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />
+            
+            {((screenState === "showAITree1") || (screenState === "showAITree2")) && <Tree structure={aiTreeClipped1} colors={aiTreeClipped1.get_colors()} />}
+            {((screenState === "showAITree3") || (screenState === "showAITree4")) && <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
+            {(screenState !== "showAITree1") && (screenState !== "showAITree2") && (screenState !== "showAITree3") && (screenState !== "showAITree4") &&
+              <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />}
           </div>
         }
       </div>
@@ -316,7 +336,10 @@ function App() {
       {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
-          <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />
+          {((screenState === "showAITree1") || (screenState === "showAITree2")) &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
+          {((screenState === "showAITree3") || (screenState === "showAITree4")) &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState !== "showAITree1") && (screenState !== "showAITree2") && (screenState !== "showAITree3") && (screenState !== "showAITree4") &&
+            <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />}
           <div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
           {
             aliceMessage &&

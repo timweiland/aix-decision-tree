@@ -8,12 +8,34 @@ export default function PopupCollection({ screenState, setScreenState, setContin
         {
             (screenState === "userTreeCompleted") &&
             <Popup closeCallback={() => {
+                setScreenState("showAITree1")
+                setContinueHandler({ handler: () => setScreenState("showAITree2") });
+                //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
+            }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
+                <p>1.Super!</p>
+                <p>Jetzt wird auf der rechten Seite erscheinen, wie die KI die Stadt in Bereiche mit unterschiedlich hohen Mieten unterteilt.</p>
+                <p>Aber keine Sorge, Alice wird dich Schritt für Schritt begleiten!</p>
+            </Popup>
+        }
+
+        {
+            (screenState === "showAITree2") &&
+            <Popup closeCallback={() => {
+                setScreenState("showAITree3")
+                setContinueHandler({ handler: () => setScreenState("showAITree4") });
+                //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
+            }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
+                <p>Nach der vertikalen Linie wird die KI eine horizontale Unterteilung vornehmen</p>
+            </Popup>
+        }
+        {
+            (screenState === "showAITree4") &&
+            <Popup closeCallback={() => {
                 setScreenState("showAITree")
                 setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") });
                 //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
             }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
-                <p>Super!</p>
-                <p>Jetzt siehst du, wie die KI die Stadt in Bereiche mit unterschiedlich hohen Mieten unterteilt.</p>
+                <p>Dasselbe passiert für drei weitere Linien. Jetzt wirst du den fertigen KI sehen.</p>
             </Popup>
         }
         {

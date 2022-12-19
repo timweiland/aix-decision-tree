@@ -254,3 +254,19 @@ export function convertPythonTree(pythonTree, node) {
   }
   return node;
 }
+
+
+export function clipPythonTree(pythonTree,node, stateNumber) {
+  if (stateNumber === 1) {
+    
+    pythonTree.children[0].children = []
+    pythonTree.children[1].children = []
+  }
+
+  if (stateNumber === 2) {
+    pythonTree.children[0].children[1].children= []
+    pythonTree.children[1].children = []
+  }
+  
+  return convertPythonTree(pythonTree, node)
+} 
