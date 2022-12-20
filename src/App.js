@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import create from 'zustand';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faArrowRightLong, faPerson, faRobot, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faArrowRightLong, faPerson, faRobot, faHouse, faArrowsLeftRight } from '@fortawesome/free-solid-svg-icons';
 
 import { sampleSize } from 'lodash';
 
@@ -29,6 +29,7 @@ const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
 const aiTreeStructure = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
 const aiTreeClipped2 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 2);
 const aiTreeClipped1 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 1);
+const aiTreeClipped0 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 0);
 
 
 const showAITreeStore = create((set) => ({
@@ -57,7 +58,7 @@ function App() {
   const [continueHandler, setContinueHandler] = useState(undefined);
 
 
-  const comparisonScreenStates = ["showAITree","showAITree1","showAITree2", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
+  const comparisonScreenStates = ["showAITree0","showAITree1","showAITree2","showAITree3", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -200,16 +201,20 @@ function App() {
   let isUserBetter = false;
   let isAIBetter = false;
 
+  if (screenState === "showAITree0") {
+    aliceMessage = "Die KI hat dieselbe Ausgangssituation wie du gerade eben. Sie wird nun auch Schritt für Schritt Linien in die Karte einzeichnen. Den Ort der Linie wählt Sie aufgrund eines Kriteriums, welches wir später genauer betrachten werden"
+  }
+
   if (screenState === "showAITree1") {
-    aliceMessage = "Zunächst unterteilt die KI das Stadtgebiet mit einer vertikalen Linie"
+    aliceMessage = "Zunächst unterteilt die KI das Stadtgebiet mit einer vertikalen Linie. "
   }
 
   if (screenState === "showAITree2") {
     aliceMessage = "Als nächstes zieht Sie eine horizontale Linie."
   }
 
-  if (screenState === "showAITree") {
-    aliceMessage = "Dies macht die KI auch für die restlichen drei Linien. Auf diesem Screen siehst du die fertige Einteilung der KI"
+  if (screenState === "showAITree3") {
+    aliceMessage = "Dies macht die KI auch für die restlichen drei Linien. Auf diesem Screen siehst du die fertige Einteilung der KI."
   }
 
   if (screenState === "quantitativeComparison") {
@@ -267,10 +272,10 @@ function App() {
         }
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
         <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
-        {
+        {/*
           comparisonScreenStates.includes(screenState) &&
-          <div className="text-primary text-6xl absolute top-10 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-16 h-16" /></div>
-        }
+          <div className="text-primary text-6xl absolute top-10 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-16 h-16" /></div>
+      */}
         {
           bobMessage &&
           <Bob message={bobMessage} excited={bobExcited} />
@@ -281,7 +286,7 @@ function App() {
         <div className="mt-4">
           {
             (comparisonScreenStates.includes(screenState)) &&
-            <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faPerson} className="align-middle w-12 h-12" /></div>
+            <div className="text-black text-lg absolute left-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
           }
           <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
         </div>
@@ -323,14 +328,16 @@ function App() {
         {
           (comparisonScreenStates.includes(screenState)) &&
           <div className="mt-2">
-            <div className="text-primary text-lg absolute right-5 bg-gray-50 rounded-full p-2 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-12 h-12" /></div>
+            <div className="text-black text-lg absolute right-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
             
+            {(screenState === "showAITree0") && <Tree structure={aiTreeClipped0} colors={aiTreeClipped0.get_colors()} />}
             {(screenState === "showAITree1") && <Tree structure={aiTreeClipped1} colors={aiTreeClipped1.get_colors()} />}
+            {(continueHandler === undefined) && screenState === "showAITree1" && setContinueHandler({ handler: () => setScreenState("showAITree2") })}
             {(screenState === "showAITree2")&& <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
-            {(continueHandler === undefined) && screenState === "showAITree2" && setContinueHandler({ handler: () => setScreenState("showAITree") })}
-            {(screenState !== "showAITree1") && (screenState !== "showAITree2") &&
+            {(continueHandler === undefined) && screenState === "showAITree2" && setContinueHandler({ handler: () => setScreenState("showAITree3") })}
+            {(screenState !== "showAITree0") && (screenState !== "showAITree1") && (screenState !== "showAITree2") &&
               <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />}
-            {(continueHandler === undefined) && screenState === "showAITree" && setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") })}
+            {(continueHandler === undefined) && screenState === "showAITree3" && setContinueHandler({ handler: () => setScreenState("initiateAnimatedComparison") })}
           </div>
         }
       </div>
@@ -338,11 +345,12 @@ function App() {
       {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
+          {(screenState === "showAITree0") &&  <Map coordinates={mietdaten} tree={aiTreeClipped0} enableInteraction={false} testPoint={testPoint} />}
           {(screenState === "showAITree1") &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
           {(screenState === "showAITree2") &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
           {(screenState !== "showAITree1") && (screenState !== "showAITree2") &&
             <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />}
-          <div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>
+          {/*<div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>*/}
           {
             aliceMessage &&
             <Alice message={aliceMessage} excited={aliceExcited} />

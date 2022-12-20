@@ -8,8 +8,8 @@ export default function PopupCollection({ screenState, setScreenState, setContin
         {
             (screenState === "userTreeCompleted") &&
             <Popup closeCallback={() => {
-                setScreenState("showAITree1")
-                setContinueHandler({ handler: () => setScreenState("showAITree2") });
+                setScreenState("showAITree0")
+                setContinueHandler({ handler: () => setScreenState("showAITree1") });
                 //setTimeout(() => setScreenState("initiateAnimatedComparison"), 10 * 1000);
             }} icon={<FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}>
                 <p>1.Super!</p>

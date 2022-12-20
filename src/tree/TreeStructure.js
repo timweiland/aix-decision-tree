@@ -257,6 +257,9 @@ export function convertPythonTree(pythonTree, node) {
 
 
 export function clipPythonTree(pythonTree,node, stepsToShow) {
+  if (stepsToShow === 0) {
+    pythonTree.children = []
+  }
   if (stepsToShow === 1) {
 
     pythonTree.children[0].children = []
@@ -264,8 +267,9 @@ export function clipPythonTree(pythonTree,node, stepsToShow) {
   }
 
   if (stepsToShow === 2) {
-    pythonTree.children[0].children[1].children= []
-    pythonTree.children[1].children = []
+    pythonTree.children[0].children = []
+    pythonTree.children[1].children[0].children = []
+    pythonTree.children[1].children[1].children = []
   }
   
   return convertPythonTree(pythonTree, node)
