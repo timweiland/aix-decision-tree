@@ -7,7 +7,7 @@ export default function Bob({ message, excited }) {
             <img src={bobImg} alt="Bob" className={classNames({"animate-bounce": excited}, "w-48 p-0")}/>
             { message &&
                 <div className="chat chat-start">
-                    <div className="chat-bubble chat-bubble-primary">
+                    <div className="chat-bubble chat-bubble-primary text-2xl">
                         {message}
                     </div>
                 </div>

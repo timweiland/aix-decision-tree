@@ -59,7 +59,7 @@ function App() {
 
 
   const comparisonScreenStates = ["showAITree0","showAITree1","showAITree2","showAITree3", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
-
+  const showAITreeStates = ["showAITree0","showAITree1","showAITree2","showAITree3"]
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
   }
@@ -202,7 +202,7 @@ function App() {
   let isAIBetter = false;
 
   if (screenState === "showAITree0") {
-    aliceMessage = "Die KI hat dieselbe Ausgangssituation wie du gerade eben. Sie wird nun auch Schritt für Schritt Linien in die Karte einzeichnen. Den Ort der Linie wählt Sie aufgrund eines Kriteriums, welches wir später genauer betrachten werden"
+    aliceMessage = "Die KI hat dieselbe Ausgangssituation wie du gerade eben. Sie wird nun auch Schritt für Schritt Linien in die Karte einzeichnen. Den Ort der Linie wählt Sie aufgrund eines mathematischen Kriteriums, welches wir später genauer betrachten werden"
   }
 
   if (screenState === "showAITree1") {
@@ -210,11 +210,11 @@ function App() {
   }
 
   if (screenState === "showAITree2") {
-    aliceMessage = "Als nächstes zieht Sie eine horizontale Linie."
+    aliceMessage = "Als nächstes zieht Sie eine horizontale Linie. Auf dieselbe Art wird die KI auch für die verbleibenden drei Linien wählen. Das Endergebnis wirst du nach dem nächsten Click sehen."
   }
 
   if (screenState === "showAITree3") {
-    aliceMessage = "Dies macht die KI auch für die restlichen drei Linien. Auf diesem Screen siehst du die fertige Einteilung der KI."
+    aliceMessage = "Meine KI ist fertig! Bob, jetzt wollen wir mal sehen, welcher Entscheidungsbaum die besseren Vorhersagen liefert #teamKI"
   }
 
   if (screenState === "quantitativeComparison") {
@@ -271,7 +271,15 @@ function App() {
             undo={undo} />
         }
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
-        <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
+
+        { !showAITreeStates.includes(screenState) &&
+          <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
+        }
+        {showAITreeStates.includes(screenState) &&
+        <div className="column-static opacity-10">
+          <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
+        </div>
+        }
         {/*
           comparisonScreenStates.includes(screenState) &&
           <div className="text-primary text-6xl absolute top-10 right-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-16 h-16" /></div>
@@ -285,10 +293,21 @@ function App() {
       <div className="column flex flex-col relative justify-between">
         <div className="mt-4">
           {
-            (comparisonScreenStates.includes(screenState)) &&
+            (comparisonScreenStates.includes(screenState)) && !showAITreeStates.includes(screenState) &&
             <div className="text-black text-lg absolute left-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
           }
-          <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
+          {
+            !showAITreeStates.includes(screenState) &&
+              <Tree structure={userTree.structure} colors={userTree.structure.get_colors()}/>
+          }
+          {
+            showAITreeStates.includes(screenState) &&
+              <div className="opacity-10"> 
+              <div className="text-black text-lg absolute left-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
+                <Tree structure={userTree.structure} colors={userTree.structure.get_colors()}/>
+              </div>
+          }
+          
         </div>
         {
           (screenState === "qualitativeComparison") &&
@@ -348,7 +367,7 @@ function App() {
           {(screenState === "showAITree0") &&  <Map coordinates={mietdaten} tree={aiTreeClipped0} enableInteraction={false} testPoint={testPoint} />}
           {(screenState === "showAITree1") &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
           {(screenState === "showAITree2") &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
-          {(screenState !== "showAITree1") && (screenState !== "showAITree2") &&
+          {(screenState !== "showAITree1") && (screenState !== "showAITree1") && (screenState !== "showAITree2") && 
             <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />}
           {/*<div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>*/}
           {
