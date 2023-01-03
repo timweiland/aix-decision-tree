@@ -6,7 +6,7 @@ export default function Alice({ message, excited }) {
         <div className="absolute bottom-10 right-48 flex flex-row">
             { message &&
                 <div className="chat chat-end" style={{placeItems: "start"}}>
-                    <div className="chat-bubble chat-bubble-secondary">
+                    <div className="chat-bubble chat-bubble-secondary text-2xl">
                         {message}
                     </div>
                 </div>
