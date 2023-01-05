@@ -16,7 +16,7 @@ import PopupCollection from './popup/PopupCollection';
 import Bob from './mascots/Bob';
 import Alice from './mascots/Alice';
 
-import { TreeStructure, convertPythonTree,clipPythonTree } from './tree/TreeStructure';
+import { TreeStructure, convertPythonTree, clipPythonTree } from './tree/TreeStructure';
 import aiPythonTree from './python/aiPythonTree.json';
 import mietdatenJSON from './python/mietdaten.json';
 
@@ -58,8 +58,8 @@ function App() {
   const [continueHandler, setContinueHandler] = useState(undefined);
 
 
-  const comparisonScreenStates = ["showAITree0","showAITree1","showAITree2","showAITree3", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
-  const showAITreeStates = ["showAITree0","showAITree1","showAITree2","showAITree3"]
+  const comparisonScreenStates = ["showAITree0", "showAITree1", "showAITree2", "showAITree3", "qualitativeComparison", "initiateQuantitativeComparison", "quantitativeComparison"];
+  const showAITreeStates = ["showAITree0", "showAITree1", "showAITree2", "showAITree3"]
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
   }
@@ -272,13 +272,13 @@ function App() {
         }
         {(screenState === "initialScreen") && (NoOfUserLines === 5) && setScreenState("userTreeCompleted")}
 
-        { !showAITreeStates.includes(screenState) &&
+        {!showAITreeStates.includes(screenState) &&
           <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
         }
         {showAITreeStates.includes(screenState) &&
-        <div className="column-static opacity-10">
-          <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
-        </div>
+          <div className="column-static opacity-10">
+            <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={((screenState === "initialScreen"))} testPoint={testPoint} />
+          </div>
         }
         {/*
           comparisonScreenStates.includes(screenState) &&
@@ -298,16 +298,16 @@ function App() {
           }
           {
             !showAITreeStates.includes(screenState) &&
-              <Tree structure={userTree.structure} colors={userTree.structure.get_colors()}/>
+            <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
           }
           {
             showAITreeStates.includes(screenState) &&
-              <div className="opacity-10"> 
+            <div className="opacity-10">
               <div className="text-black text-lg absolute left-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
-                <Tree structure={userTree.structure} colors={userTree.structure.get_colors()}/>
-              </div>
+              <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} />
+            </div>
           }
-          
+
         </div>
         {
           (screenState === "qualitativeComparison") &&
@@ -348,11 +348,11 @@ function App() {
           (comparisonScreenStates.includes(screenState)) &&
           <div className="mt-2">
             <div className="text-black text-lg absolute right-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
-            
+
             {(screenState === "showAITree0") && <Tree structure={aiTreeClipped0} colors={aiTreeClipped0.get_colors()} />}
             {(screenState === "showAITree1") && <Tree structure={aiTreeClipped1} colors={aiTreeClipped1.get_colors()} />}
             {(continueHandler === undefined) && screenState === "showAITree1" && setContinueHandler({ handler: () => setScreenState("showAITree2") })}
-            {(screenState === "showAITree2")&& <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
+            {(screenState === "showAITree2") && <Tree structure={aiTreeClipped2} colors={aiTreeClipped2.get_colors()} />}
             {(continueHandler === undefined) && screenState === "showAITree2" && setContinueHandler({ handler: () => setScreenState("showAITree3") })}
             {(screenState !== "showAITree0") && (screenState !== "showAITree1") && (screenState !== "showAITree2") &&
               <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} />}
@@ -364,10 +364,10 @@ function App() {
       {
         (comparisonScreenStates.includes(screenState)) &&
         <div className="column-static relative">
-          {(screenState === "showAITree0") &&  <Map coordinates={mietdaten} tree={aiTreeClipped0} enableInteraction={false} testPoint={testPoint} />}
-          {(screenState === "showAITree1") &&  <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
-          {(screenState === "showAITree2") &&  <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
-          {(screenState !== "showAITree1") && (screenState !== "showAITree1") && (screenState !== "showAITree2") && 
+          {(screenState === "showAITree0") && <Map coordinates={mietdaten} tree={aiTreeClipped0} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState === "showAITree1") && <Map coordinates={mietdaten} tree={aiTreeClipped1} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState === "showAITree2") && <Map coordinates={mietdaten} tree={aiTreeClipped2} enableInteraction={false} testPoint={testPoint} />}
+          {(screenState !== "showAITree1") && (screenState !== "showAITree1") && (screenState !== "showAITree2") &&
             <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} />}
           {/*<div className="text-primary text-6xl absolute top-10 left-10 bg-gray-50 rounded-full p-4 text-center opacity-90 shadow-lg"><FontAwesomeIcon icon={faRobot} className="align-middle w-16 h-16" /></div>*/}
           {
