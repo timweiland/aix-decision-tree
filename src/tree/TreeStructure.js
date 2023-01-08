@@ -168,7 +168,7 @@ export class TreeStructure {
     lineStart[this.axis] = this.axis_pos;
     lineEnd[this.axis] = this.axis_pos;
 
-    return [lineStart, lineEnd];
+    return [lineStart, lineEnd, this.hasTestPoint];
   }
 
   unhighlightAll() {
