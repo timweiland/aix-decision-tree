@@ -29,7 +29,7 @@ function StartPage() {
         </div>
         <div class="box sbalice"> Hast Du Lust mitzumachen? </div>
         <div>
-          <Link to="/dialogue">
+          <Link to="/explanation">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}

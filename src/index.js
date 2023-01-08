@@ -7,7 +7,11 @@ import Dialogue from "./pages/Dialogue";
 import Instructions from "./pages/Instructions";
 import StartPage from "./pages/StartPage";
 import ByePage from "./pages/ByePage";
+import Explanation from "./pages/Explanation";
 import reportWebVitals from "./reportWebVitals";
+import Choose from "./pages/Advanced/Choose";
+import Rents1 from "./pages/Basic/Rents1";
+import Rents2 from "./pages/Basic/Rents2";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +23,10 @@ root.render(
         <Route path="/dialogue" element={<Dialogue />} />
         <Route path="/instructions" element={<Instructions />} />
         <Route path="/byebye" element={<ByePage />} />
+        <Route path="/explanation" element={<Explanation />} />
+        <Route path="/choose" element={<Choose />} />
+        <Route path="/rents1" element={<Rents1 />} />
+        <Route path="/rents2" element={<Rents2 />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
