@@ -14,7 +14,7 @@ import './taskbar/taskbar.css';
 import InitialScreen from './screens/InitialScreen';
 import { ShowAITree } from './screens/ShowAITree';
 import QualitativeComparison from './screens/qualitativeComparison/QualitativeComparison';
-import { QuantitativeComparison } from './screens/QuantitativeComparison';
+import { QuantitativeComparison } from './screens/quantitativeComparison/QuantitativeComparison';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -108,10 +108,10 @@ function App() {
       { screenState === "qualitativeComparison" &&
       <QualitativeComparison mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("quantitativeComparison")} />}
       { screenState === "quantitativeComparison" &&
-      <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} />}
+      <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler}/>}
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-green-700 bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-32" style={{ fontSize: "100px" }} onClick={
+        <div className="absolute hover:cursor-pointer bg-green-700 bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-32 z-50" style={{ fontSize: "100px" }} onClick={
           () => {
             continueHandler.handler();
             setContinueHandler(undefined);
@@ -122,7 +122,7 @@ function App() {
       }
       {
         (continueHandler !== undefined || screenState === "quantitativeComparison") &&
-        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-40" style={{ fontSize: "100px" }}>
+        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-40 z-50" style={{ fontSize: "100px" }}>
           <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
             <FontAwesomeIcon icon={faXmark} />
           </Link>
