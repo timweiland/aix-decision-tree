@@ -1,10 +1,25 @@
+.hand {
+    position: fixed;
+    z-index: 100;
+}
+
 .imgbob {
     /*padding-bottom: 20%;
     padding-right: 20%; */
     position:absolute;
     bottom: 0; 
-    left: 8cm ;
-    width: 35%;
+    right: 15% ;
+    width: 30%;
+    transform: scaleX(-1);
+}
+
+.imgbobsmall {
+    /*padding-bottom: 20%;
+    padding-right: 20%; */
+    position:absolute;
+    bottom: 0; 
+    right: 40% ;
+    width: 18%;
     transform: scaleX(-1);
 }
 
@@ -29,3 +44,39 @@
     font-size: 40px;
     text-align: center;
 }
+
+.box_dialogue_middle {
+    width: 90%;
+    margin: 5% auto;
+    padding: 3%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 150%;
+    color: rgb(0, 0, 0);
+    position:absolute;
+    right: 50%;
+  }
+
+.box_dialogue_small {
+    width: 80%;
+    margin: 5% auto;
+    padding: 3%;
+    text-align: center;
+    font-weight: 500;
+    font-size: 150%;
+    color: rgb(0, 0, 0);
+    position:absolute;
+    right: 60%;
+    bottom: 10%;
+  }
+
+
+.box_dialogue_middle.sbbob {
+    background: #edccc6;
+}
+
+.box_dialogue_small.sbbob {
+    background: #edccc6;
+}
+
+

@@ -20,7 +20,7 @@ function Dialogue() {
       <div className="column">
         <div class="box_dialogue sbalice">
           {" "}
-          Hier ist eine Karte von Tübingen, auf denen die Mietpreise pro
+          Hier ist eine Karte von Tübingen, auf der die Mietpreise pro
           Quadratmeter eingezeichnet sind.{" "}
         </div>
         <div id="addStatement"> </div>
@@ -33,7 +33,7 @@ function Dialogue() {
           <img src={alice_map} alt="alice_map" />
         )}
 
-        {Counter < 5 ? (
+        {Counter < 6 ? (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
             style={{ fontSize: "50pt" }}
@@ -46,7 +46,7 @@ function Dialogue() {
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
-          <Link to="/instructions">
+          <Link to="/tutorial">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}
@@ -70,12 +70,12 @@ function addStatement(counter, div_id) {
         case 1:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box_dialogue sbbob'> Wenn ich den Durchschnitt berechne, weiß ich ungefähr wie hoch die Miete ist...</div>"
+            "<div class='box_dialogue sbbob'> Wenn ich den Durchschnitt berechne, weiß ich ungefähr, wie hoch die Miete ist...</div>"
           );
         case 2:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box_dialogue sbalice'>Das ist aber nicht sehr genau, es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
+            "<div class='box_dialogue sbalice'>Das ist aber nicht sehr genau. Es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
           );
         case 3:
           return theDiv.insertAdjacentHTML(
@@ -85,7 +85,7 @@ function addStatement(counter, div_id) {
         case 4:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='box_dialogue sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht, dann können wir am Ende beide Ergebnisse vergleichen.  </div>"
+            "<div class='box_dialogue sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht. Dann können wir am Ende beide Ergebnisse vergleichen!  </div>"
           );
         case 5:
           return theDiv.insertAdjacentHTML(

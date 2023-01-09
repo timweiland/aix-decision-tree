@@ -24,8 +24,8 @@ function StartPage() {
       <div className="column">
         <div class="box sbbob">
           {" "}
-          Ich bin neu in Tübingen und will wissen wie hoch die Miete für ein
-          Studentenzimmer ist!
+          Ich bin neu in Tübingen und will wissen, wie hoch die Miete für ein
+          Studierendenzimmer ist!
         </div>
         <div class="box sbalice"> Hast Du Lust mitzumachen? </div>
         <div>

@@ -47,7 +47,7 @@ function Instructions() {
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
-          <Link to="/App">
+          <Link to="/Tutorial">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}
