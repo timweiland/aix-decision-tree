@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Lottie from 'lottie-react';
 
 import PredictionComparison from './PredictionComparison';
 
@@ -11,6 +12,8 @@ import Tree from '../../tree/Tree';
 
 import Alice from '../../mascots/Alice';
 import Bob from '../../mascots/Bob';
+
+import confettiAnimation from '../../assets/confetti_anim.json';
 
 function displayedRent(rent) {
     return Number(rent).toFixed(1).replace(".", ",");
@@ -28,7 +31,9 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
     const [userRentEstimate, setUserRentEstimate] = useState(undefined);
     const [aiRentEstimate, setAiRentEstimate] = useState(undefined);
     const [bobMessage, setBobMessage] = useState(undefined);
+    const [bobExcited, setBobExcited] = useState(false);
     const [aliceMessage, setAliceMessage] = useState(undefined);
+    const [confetti, setConfetti] = useState(false);
 
     const userPath = userTree.structure.get_path(x, y);
     const curNode = userPath[curPathIdx];
@@ -102,8 +107,9 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             const userError = Math.abs(userRentEstimate - trueRent);
             const aiError = Math.abs(aiRentEstimate - trueRent);
             if (userError < aiError) {
+                setConfetti(true);
                 setBobMessage("Spitze! Wir haben die Miete genauer vorhergesagt!")
-                //bobExcited = true;
+                setBobExcited(true);
                 //aliceMessage = "Oh, da hast du meine KI wohl geschlagen!";
                 setAliceMessage("Besser als die KI - gut gemacht!");
             }
@@ -123,6 +129,8 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             setContinueHandler({ handler: () => setScreenState("final") });
         }
         else if (screenState === "final") {
+            setConfetti(false);
+            setBobExcited(false);
             setBobMessage("Das ganze machen wir jetzt im Schnelldurchlauf noch für zwei weitere Wohnungen.")
             setAliceMessage("Mal sehen, wer die Mieten besser schätzt!")
             userTree.structure.removeTestPoints();
@@ -135,11 +143,12 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
 
     return (
         <ColumnContainer>
+            { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={true} />}
             <MapColumn>
                 <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} testPoint={testPoint} hide={hideUserScreens.includes(screenState)} />
                 {
                     bobMessage &&
-                    <Bob message={bobMessage} excited={false} />
+                    <Bob message={bobMessage} excited={bobExcited} />
                 }
             </MapColumn>
 

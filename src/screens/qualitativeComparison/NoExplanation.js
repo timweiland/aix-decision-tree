@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPerson, faRobot, faHouse, faArrowsLeftRight } from '@fortawesome/free-solid-svg-icons';
+import Lottie from 'lottie-react';
 
 import PredictionComparison from './PredictionComparison';
 import ColumnContainer from '../../columns/ColumnContainer';
@@ -14,6 +12,7 @@ import Tree from '../../tree/Tree';
 import Alice from '../../mascots/Alice';
 import Bob from '../../mascots/Bob';
 
+import confettiAnimation from '../../assets/confetti_anim.json';
 
 function displayedRent(rent) {
   return Number(rent).toFixed(1).replace(".", ",");
@@ -33,6 +32,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
   const [bobExcited, setBobExcited] = useState(false);
   const [aliceMessage, setAliceMessage] = useState(undefined);
   const [aliceExcited, setAliceExcited] = useState(false);
+  const [confetti, setConfetti] = useState(false);
 
   const aiPath = aiTree.structure.get_path(x, y);
   const userPath = userTree.structure.get_path(x, y);
@@ -89,6 +89,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
       const userError = (userRentEstimate - trueRent) ** 2;
       const aiError = (aiRentEstimate - trueRent) ** 2;
       if (userError < aiError) {
+        setConfetti(true);
         setBobMessage("Super! Diese Miete haben wir genauer vorhergesagt!");
         setBobExcited(true);
         setAliceMessage("Oh, da hast du meine KI wohl geschlagen!");
@@ -112,6 +113,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
 
   return (
     <ColumnContainer>
+      { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={true} />}
       <MapColumn>
         <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} testPoint={testPoint} hide={screenState === "followAlicePath"} />
         {
@@ -122,8 +124,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
 
       <TreeColumn>
         <div className="mt-4">
-          <div className="text-black text-lg absolute left-5 rounded-full p-2 text-center"><FontAwesomeIcon icon={faArrowsLeftRight} className="align-middle w-20 h-20" /></div>
-          <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} hide={screenState === "followAlicePath"} />
+          <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} hide={screenState === "followAlicePath"} arrow="left" />
         </div>
         <PredictionComparison showUserRentEstimate={showUserRentEstimate} userRentEstimate={userRentEstimate} testPoint={testPoint}
           showTrueRent={showTrueRent} showAIRentEstimate={showAIRentEstimate} aiRentEstimate={aiRentEstimate}
