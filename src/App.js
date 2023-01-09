@@ -99,8 +99,6 @@ function App() {
 
   return (
     <div className="h-screen flex">
-      {/* <PopupCollection screenState={screenState} setScreenState={setScreenState} setContinueHandler={setContinueHandler} orchestrateComparison={orchestrateComparison} /> */}
-
       { screenState === "initialScreen" &&
       <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} />}
       { screenState === "showAITree" &&

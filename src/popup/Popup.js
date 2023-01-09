@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 export default function Popup({ icon, closeCallback, children }) {
     return (
         <div className="flex absolute h-screen justify-center items-center w-screen">
@@ -7,7 +10,7 @@ export default function Popup({ icon, closeCallback, children }) {
                     <div className="relative rounded-lg shadow bg-gray-700">
                         <div className="pt-40 pb-40 pl-24 pr-24 text-center">
                             <div className="mx-auto mb-8 w-14 h-14 ">
-                                {icon}
+                                {icon === "check" && <FontAwesomeIcon icon={faCheck} className="w-full h-full ring-2 ring-black rounded-full p-2 bg-gray-300 text-green-400" />}
                             </div>
                             <div className="mb-5 text-lg font-normal text-white">
                                 {children}

@@ -6,6 +6,7 @@ import TreeColumn from '../columns/TreeColumn';
 
 import Map from '../map/Map';
 import Tree from '../tree/Tree';
+import Popup from '../popup/Popup';
 
 import Alice from '../mascots/Alice';
 
@@ -13,6 +14,7 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
     const [screenState, setScreenState] = useState("showAITree0");
     const [aliceMessage, setAliceMessage] = useState("undefined");
     const [curTree, setTree] = useState(aiTreeClipped0);
+    const [isDone, setIsDone] = useState(false);
 
     useEffect(() => {
         if (screenState === "showAITree0") {
@@ -31,7 +33,7 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
         }
         else if (screenState === "showAITree3") {
             setAliceMessage("Meine KI ist fertig! Bob, jetzt wollen wir mal sehen, welcher Entscheidungsbaum die besseren Vorhersagen liefert #teamKI");
-            setContinueHandler({ handler: onComplete })
+            setContinueHandler({ handler: () => setIsDone(true) })
             setTree(aiTree.structure);
         }
     }, [screenState, setContinueHandler, onComplete, aiTree, aiTreeClipped1, aiTreeClipped2])
@@ -58,6 +60,16 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
                     <Alice message={aliceMessage} excited={false} />
                 }
             </MapColumn>
+
+            {
+            (isDone) &&
+            <Popup closeCallback={onComplete} icon="check">
+                <p>Zuerst hast du die Stadt in Bereiche mit ähnlich hohen Mieten unterteilt und so deinen Entscheidungsbaum erstellt.</p>
+                <p>Dann hast du die Lösung der KI gesehen.</p>
+                <p>Jetzt möchten wir beide Lösungen vergleichen. Welcher Entscheidungsbaum schätzt die Mieten besser?</p>
+                <p>Schauen wir uns die Schätzungen für drei verschiedene WG-Zimmer an.</p>
+            </Popup>
+            }
         </ColumnContainer>
 
     );
