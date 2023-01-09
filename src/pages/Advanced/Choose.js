@@ -4,10 +4,17 @@ import Button from '@mui/material/Button';
 
 function Choose() {
     return(
-        <Stack spacing={2} direction="column">
-            <Button variant='outlined'>Komplexe Daten</Button>
-            <Button variant='outlined'>Nachvollziehbarkeit</Button>
-        </Stack>       
+        <Stack spacing={4} direction="column" style={{ alignItems: "center", justifyContent: "center", marginTop: "40vh"}}>
+                <Button 
+                variant='outlined' 
+                style={{ fontSize: '63px', width: '35vw'}}>
+                    Komplexe Daten
+                </Button>
+                <Button variant='outlined'
+                style={{ fontSize: '63px', width: '35vw' }}>
+                    Nachvollziehbarkeit
+                </Button>
+        </Stack>    
     );
 }
 

@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import Choose from "./pages/Advanced/Choose";
 import Rents1 from "./pages/Basic/Rents1";
 import Rents2 from "./pages/Basic/Rents2";
+import Test from "./pages/Test";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -27,6 +28,7 @@ root.render(
         <Route path="/choose" element={<Choose />} />
         <Route path="/rents1" element={<Rents1 />} />
         <Route path="/rents2" element={<Rents2 />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
