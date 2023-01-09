@@ -17,7 +17,10 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
     const [isDone, setIsDone] = useState(false);
 
     useEffect(() => {
-        if (screenState === "showAITree0") {
+        if(isDone) {
+            setContinueHandler(undefined);
+        }
+        else if (screenState === "showAITree0") {
             setAliceMessage("Die KI hat dieselbe Ausgangssituation wie du gerade eben. Sie wird nun auch Schritt für Schritt Linien in die Karte einzeichnen. Den Ort der Linie wählt Sie aufgrund eines mathematischen Kriteriums, welches wir später genauer betrachten werden");
             setContinueHandler({ handler: () => setScreenState("showAITree1") })
         }
@@ -33,10 +36,14 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
         }
         else if (screenState === "showAITree3") {
             setAliceMessage("Meine KI ist fertig! Bob, jetzt wollen wir mal sehen, welcher Entscheidungsbaum die besseren Vorhersagen liefert #teamKI");
-            setContinueHandler({ handler: () => setIsDone(true) })
+            setContinueHandler({
+                handler: () => {
+                    setIsDone(true);
+                }
+            })
             setTree(aiTree.structure);
         }
-    }, [screenState, setContinueHandler, onComplete, aiTree, aiTreeClipped1, aiTreeClipped2])
+    }, [screenState, setContinueHandler, onComplete, aiTree, aiTreeClipped1, aiTreeClipped2, isDone])
 
     return (
         <ColumnContainer>
@@ -62,13 +69,13 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
             </MapColumn>
 
             {
-            (isDone) &&
-            <Popup closeCallback={onComplete} icon="check">
-                <p>Zuerst hast du die Stadt in Bereiche mit ähnlich hohen Mieten unterteilt und so deinen Entscheidungsbaum erstellt.</p>
-                <p>Dann hast du die Lösung der KI gesehen.</p>
-                <p>Jetzt möchten wir beide Lösungen vergleichen. Welcher Entscheidungsbaum schätzt die Mieten besser?</p>
-                <p>Schauen wir uns die Schätzungen für drei verschiedene WG-Zimmer an.</p>
-            </Popup>
+                (isDone) &&
+                <Popup closeCallback={onComplete} icon="check">
+                    <p>Zuerst hast du die Stadt in Bereiche mit ähnlich hohen Mieten unterteilt und so deinen Entscheidungsbaum erstellt.</p>
+                    <p>Dann hast du die Lösung der KI gesehen.</p>
+                    <p>Jetzt möchten wir beide Lösungen vergleichen. Welcher Entscheidungsbaum schätzt die Mieten besser?</p>
+                    <p>Schauen wir uns die Schätzungen für drei verschiedene WG-Zimmer an.</p>
+                </Popup>
             }
         </ColumnContainer>
 
