@@ -1,5 +1,5 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Link } from "react-router-dom";
 import create from 'zustand';
@@ -43,6 +43,7 @@ function App() {
   const [screenState, setScreenState] = useState("initialScreen");
 
   const [continueHandler, setContinueHandler] = useState(undefined);
+  const [inactivityTime, setInactivityTime] = useState(0);
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -93,20 +94,40 @@ function App() {
     toggleAITree(false);
   }
 
+  const resetTime = 150 // seconds
+  useEffect(() => {
+      const inactivityInterval = setInterval(() => {
+        setInactivityTime(inactivityTime => inactivityTime + 1);
+      }, 1000);
 
-  console.log("Screen state:");
-  console.log(screenState);
+      const resetTimer = () => {
+        setInactivityTime(0);
+      };
+  
+      document.addEventListener('click', resetTimer);
+
+      return () => {
+        clearInterval(inactivityInterval);
+        document.removeEventListener('click', resetTimer);
+      };
+  }, []);
+
+  useEffect(() => {
+    if (inactivityTime > resetTime) {
+      window.location.replace('/');
+    }
+  }, [inactivityTime]);
 
   return (
     <div className="h-screen flex">
-      { screenState === "initialScreen" &&
-      <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} />}
-      { screenState === "showAITree" &&
-      <ShowAITree mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} continueHandler={continueHandler} setContinueHandler={setContinueHandler} aiTreeClipped0={aiTreeClipped0} aiTreeClipped1={aiTreeClipped1} aiTreeClipped2={aiTreeClipped2} onComplete={() => setScreenState("qualitativeComparison")}/>}
-      { screenState === "qualitativeComparison" &&
-      <QualitativeComparison mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("quantitativeComparison")} />}
-      { screenState === "quantitativeComparison" &&
-      <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler}/>}
+      {screenState === "initialScreen" &&
+        <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} />}
+      {screenState === "showAITree" &&
+        <ShowAITree mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} continueHandler={continueHandler} setContinueHandler={setContinueHandler} aiTreeClipped0={aiTreeClipped0} aiTreeClipped1={aiTreeClipped1} aiTreeClipped2={aiTreeClipped2} onComplete={() => setScreenState("qualitativeComparison")} />}
+      {screenState === "qualitativeComparison" &&
+        <QualitativeComparison mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("quantitativeComparison")} />}
+      {screenState === "quantitativeComparison" &&
+        <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} />}
       {
         (continueHandler !== undefined) &&
         <div className="absolute hover:cursor-pointer bg-green-700 bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-32 z-50" style={{ fontSize: "100px" }} onClick={

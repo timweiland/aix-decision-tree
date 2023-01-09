@@ -1,5 +1,5 @@
 import "./Dialogue.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import bob from "../assets/bob.png";
 import alice from "../assets/alice.png";
@@ -10,6 +10,32 @@ import { faXmark, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function Dialogue() {
   const [Counter, setCounter] = useState(1);
+
+  const [inactivityTime, setInactivityTime] = useState(0);
+
+  const resetTime = 150 // seconds
+  useEffect(() => {
+      const inactivityInterval = setInterval(() => {
+        setInactivityTime(inactivityTime => inactivityTime + 1);
+      }, 1000);
+
+      const resetTimer = () => {
+        setInactivityTime(0);
+      };
+  
+      document.addEventListener('click', resetTimer);
+
+      return () => {
+        clearInterval(inactivityInterval);
+        document.removeEventListener('click', resetTimer);
+      };
+  }, []);
+
+  useEffect(() => {
+    if (inactivityTime > resetTime) {
+      window.location.replace('/');
+    }
+  }, [inactivityTime]);
 
   return (
     <div className="column-container">
