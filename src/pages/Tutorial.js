@@ -261,15 +261,15 @@ function Tutorial() {
 
         {Counter === 3 && (
           <div class="box_dialogue_small sbbob">
-            Parallel entsteht ein sogenannter „Entscheidungsbaum“, der deine
+            Parallel entsteht ein sogenannter Entscheidungsbaum, der deine
             Unterteilungen in der Karte darstellt. Jeder Kreis steht für einen
             Bereich in der Karte.
           </div>
         )}
         {Counter === 4 && (
           <div class="box_dialogue_small sbbob">
-            Die Zahl gibt den Durchschnittspreis der Mieten in diesem Bereich
-            an.
+            Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in diesem
+            Bereich an.
           </div>
         )}
 
@@ -282,7 +282,7 @@ function Tutorial() {
         )}
 
         {Counter === 6 && (
-          <div class="box_dialogue_small sbbob">Bereit? Los geht's!!!</div>
+          <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
         )}
 
         {Counter <= 5 && (
