@@ -282,7 +282,7 @@ function Tutorial() {
         )}
 
         {Counter === 6 && (
-          <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
+          <div class="box_dialogue_small sbbob">Bereit? Los geht's!!!</div>
         )}
 
         {Counter <= 5 && (
