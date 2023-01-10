@@ -12,7 +12,9 @@ import reportWebVitals from "./reportWebVitals";
 import Choose from "./pages/Advanced/Choose";
 import Rents1 from "./pages/Basic/Rents1";
 import Rents2 from "./pages/Basic/Rents2";
-import Test from "./pages/Test";
+import Rents3 from "./pages/Basic/Rents3";
+import Rents4 from "./pages/Basic/Rents4";
+import Rents5 from "./pages/Basic/Rents5";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -28,7 +30,9 @@ root.render(
         <Route path="/choose" element={<Choose />} />
         <Route path="/rents1" element={<Rents1 />} />
         <Route path="/rents2" element={<Rents2 />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/rents3" element={<Rents3 />} />
+        <Route path="/rents4" element={<Rents4 />} />
+        <Route path="/rents5" element={<Rents5 />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
