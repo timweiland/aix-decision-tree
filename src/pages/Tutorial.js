@@ -17,7 +17,7 @@ import Tree from "../tree/Tree";
 import PopupCollection from "../popup/PopupCollection";
 
 import bob from "../assets/bob.png";
-import hand from "../assets/hand_emoji.png";
+// import hand from "../assets/hand_emoji.png";
 import Xarrow from "react-xarrows";
 
 import {
