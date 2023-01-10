@@ -15,6 +15,7 @@ export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, spli
 
     if (NoOfUserLines === 5) {
         onComplete();
+        
     }
 
     return (

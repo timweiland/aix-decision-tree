@@ -140,7 +140,7 @@ function App() {
         </div>
       }
       {
-        (continueHandler !== undefined || screenState === "quantitativeComparison") &&
+        (continueHandler !== undefined || screenState === "quantitativeComparison" || screenState === "initialScreen") &&
         <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10" style={{ fontSize: "60px" }}>
           <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
             <FontAwesomeIcon icon={faXmark} />
