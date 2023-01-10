@@ -21,7 +21,7 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
             setContinueHandler(undefined);
         }
         else if (screenState === "showAITree0") {
-            setAliceMessage("Die KI hat dieselbe Ausgangssituation wie du gerade eben. Sie wird nun auch Schritt für Schritt Linien in die Karte einzeichnen. Den Ort der Linie wählt Sie aufgrund eines mathematischen Kriteriums, welches wir später genauer betrachten werden");
+            setAliceMessage("Die KI wird nun wie du gerade Schritt für Schritt Linien in die Karte einzeichnen. Wie sie auf die Linien kommt, erfährst du zu einem späteren Zeitpunkt.");
             setContinueHandler({ handler: () => setScreenState("showAITree1") })
         }
         else if (screenState === "showAITree1") {
@@ -30,7 +30,7 @@ export function ShowAITree({ mietdaten, userTree, aiTree, setContinueHandler, ai
             setTree(aiTreeClipped1);
         }
         else if (screenState === "showAITree2") {
-            setAliceMessage("Als nächstes zieht Sie eine horizontale Linie. Auf dieselbe Art wird die KI auch für die verbleibenden drei Linien wählen. Das Endergebnis wirst du nach dem nächsten Click sehen.");
+            setAliceMessage("Als nächstes zieht Sie eine horizontale Linie. Auf dieselbe Art wird die KI auch die verbleibenden 3 Linien wählen. Das Endergebnis wirst du nach dem nächsten Click sehen.");
             setContinueHandler({ handler: () => setScreenState("showAITree3") })
             setTree(aiTreeClipped2);
         }

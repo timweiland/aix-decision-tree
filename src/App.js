@@ -130,7 +130,7 @@ function App() {
         <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} />}
       {
         (continueHandler !== undefined) &&
-        <div className="absolute hover:cursor-pointer bg-green-700 bottom-20 right-20 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-32 z-50" style={{ fontSize: "100px" }} onClick={
+        <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50" style={{ fontSize: "60px" }} onClick={
           () => {
             continueHandler.handler();
             setContinueHandler(undefined);
@@ -141,7 +141,7 @@ function App() {
       }
       {
         (continueHandler !== undefined || screenState === "quantitativeComparison") &&
-        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-20 right-20 pl-16 pr-16 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-40 z-50" style={{ fontSize: "100px" }}>
+        <div className="absolute hover:cursor-pointer bg-red-700 rounded-3xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10" style={{ fontSize: "60px" }}>
           <Link to="/" style={{ textDecoration: 'none' }} onClick={cleanUp}>
             <FontAwesomeIcon icon={faXmark} />
           </Link>
