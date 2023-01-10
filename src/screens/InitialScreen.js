@@ -14,7 +14,11 @@ export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, spli
     const NoOfUserLines = userTree.structure.get_lines().length;
 
     if (NoOfUserLines === 5) {
-        onComplete();
+        if (isDone === false) {
+            setIsDone(true);
+        }
+        {/*onComplete()*/}
+        
         
     }
 
