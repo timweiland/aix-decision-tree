@@ -273,7 +273,19 @@ function Tutorial() {
           </div>
         )}
 
-        {Counter <= 4 && (
+        {Counter === 5 && (
+          <div class="box_dialogue_small sbbob">
+            Versuche die Striche so zu ziehen, dass die beiden Bereiche
+            möglichst unterschiedliche Durchschnittspreise haben. Für deinen
+            Baum kannst du 5 Striche ziehen.
+          </div>
+        )}
+
+        {Counter === 6 && (
+          <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
+        )}
+
+        {Counter <= 5 && (
           <div>
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
@@ -295,7 +307,7 @@ function Tutorial() {
             </div>
           </div>
         )}
-        {Counter > 4 && (
+        {Counter > 5 && (
           <Link to="/App">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
