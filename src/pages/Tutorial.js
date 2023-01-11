@@ -41,52 +41,6 @@ const userSplitStore = create((set) => ({
   clean: () => set(() => ({ stack: [] })),
 }));
 
-function drawArrow(fromx, fromy, tox, toy, arrowWidth, color) {
-  var canvas = document.getElementById("arrowcanvas");
-  var ctx = canvas.getContext("2d");
-  //variables to be used when creating the arrow
-  var headlen = 10;
-  var angle = Math.atan2(toy - fromy, tox - fromx);
-
-  ctx.save();
-  ctx.strokeStyle = color;
-
-  //starting path of the arrow from the start square to the end square
-  //and drawing the stroke
-  ctx.beginPath();
-  ctx.moveTo(fromx, fromy);
-  ctx.lineTo(tox, toy);
-  ctx.lineWidth = arrowWidth;
-  ctx.stroke();
-
-  //starting a new path from the head of the arrow to one of the sides of
-  //the point
-  ctx.beginPath();
-  ctx.moveTo(tox, toy);
-  ctx.lineTo(
-    tox - headlen * Math.cos(angle - Math.PI / 7),
-    toy - headlen * Math.sin(angle - Math.PI / 7)
-  );
-
-  //path from the side point of the arrow, to the other side point
-  ctx.lineTo(
-    tox - headlen * Math.cos(angle + Math.PI / 7),
-    toy - headlen * Math.sin(angle + Math.PI / 7)
-  );
-
-  //path from the side point back to the tip of the arrow, and then
-  //again to the opposite side point
-  ctx.lineTo(tox, toy);
-  ctx.lineTo(
-    tox - headlen * Math.cos(angle - Math.PI / 7),
-    toy - headlen * Math.sin(angle - Math.PI / 7)
-  );
-
-  //draws the paths created above
-  ctx.stroke();
-  ctx.restore();
-}
-
 function Tutorial() {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   const [userTree, setUserTreeState] = useState({
@@ -143,6 +97,10 @@ function Tutorial() {
 
   const [Counter, setCounter] = useState(0);
 
+  const NoOfUserLines = userTree.structure.get_lines().length;
+
+  const [ShowArrow, setShowArrow] = useState(true);
+
   console.log("Screen state:");
   console.log(screenState);
 
@@ -198,43 +156,41 @@ function Tutorial() {
         id="rightcolumn"
         className="column flex flex-col relative justify-between"
       >
-        {Counter < 3 && (
-          <div className="imgbob">
+        <div>
+          <div className="imgbobsmall">
             <img id="bob" src={bob} alt="bob" />
           </div>
-        )}
-        {Counter >= 3 && (
-          <div>
-            <div className="imgbobsmall">
-              <img id="bob" src={bob} alt="bob" />
-            </div>
+
+          {Counter >= 3 && (
             <Tree
               structure={userTree.structure}
               colors={userTree.structure.get_colors()}
             />
-          </div>
-        )}
-
-        {Counter === 0 && (
-          <div>
-            <div id="box" class="box_dialogue_middle sbbob">
-              Hier ist eine Karte von Tübingen. Ein Punkt steht jeweils für ein
-              Zimmer. Je größer der Punkt desto höher die Miete.
+          )}
+        </div>
+        {Counter === 0 &&
+          setTimeout(() => {
+            setShowArrow(false);
+          }, 5000) && (
+            <div>
+              <div id="box" class="box_dialogue_middle sbbob">
+                Hier ist eine Karte von Tübingen. Ein Punkt steht jeweils für
+                ein Zimmer. Je größer der Punkt desto höher die Miete.
+              </div>
+              {ShowArrow && (
+                <Xarrow
+                  start="box" //can be react ref
+                  end="taskbar20" //or an id
+                  color="white"
+                  startAnchor="bottom"
+                  endAnchor="top"
+                  path="smooth"
+                  strokeWidth={10}
+                  animateDrawing={2}
+                />
+              )}
             </div>
-            {/* {
-              <Xarrow
-                start="bob" //can be react ref
-                end="taskbar20" //or an id
-                color="black"
-                endAnchor="top"
-                path="straight"
-                strokeWidth={10}
-                animateDrawing
-              />
-            } */}
-          </div>
-        )}
-
+          )}
         {Counter === 1 && (
           <div class="box_dialogue_middle sbbob">
             Du kannst horizontale oder vertikale Striche zeichnen, um die Karte
@@ -243,22 +199,21 @@ function Tutorial() {
         )}
         {Counter === 2 && (
           <div>
-            <div id="box" className="box_dialogue_middle sbbob">
-              Hier kannst du einen Strich rückgängig machen.
+            <div id="box" className="box_dialogue_small sbbob">
+              Hier kannst du einen Strich rückgängig machen...
             </div>
             <Xarrow
-              start="bob" //can be react ref
+              start="box" //can be react ref
               end="rotateleft" //or an id
               color="black"
               endAnchor="top"
               path="smooth"
-              curveness={0}
+              curveness={1}
               animateDrawing
               strokeWidth={10}
             />
           </div>
         )}
-
         {Counter === 3 && (
           <div class="box_dialogue_small sbbob">
             Parallel entsteht ein sogenannter Entscheidungsbaum, der deine
@@ -272,7 +227,6 @@ function Tutorial() {
             Bereich an.
           </div>
         )}
-
         {Counter === 5 && (
           <div class="box_dialogue_small sbbob">
             Versuche die Striche so zu ziehen, dass die beiden Bereiche
@@ -280,33 +234,67 @@ function Tutorial() {
             Baum kannst du 5 Striche ziehen.
           </div>
         )}
-
         {Counter === 6 && (
           <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
         )}
-
-        {Counter <= 5 && (
-          <div>
+        {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
+        {Counter !== 0 && (
+          <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
+            style={{ fontSize: "50pt" }}
+            onClick={() => {
+              setCounter(Counter - 1);
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowLeftLong} />
+          </div>
+        )}
+        {Counter === 0 && (
+          <Link to="/Dialogue">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
               style={{ fontSize: "50pt" }}
-              onClick={() => {
-                setCounter(Counter - 1);
-              }}
             >
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </div>
-            <div
-              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-              style={{ fontSize: "50pt" }}
-              onClick={() => {
-                setCounter(Counter + 1);
-              }}
-            >
-              <FontAwesomeIcon icon={faArrowRightLong} />
-            </div>
+          </Link>
+        )}
+        {/* ++++++++++++++++ RIGHT ARROW ++++++++++++++++ */}
+        {Counter <= 5 && Counter !== 1 && (
+          <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+            style={{ fontSize: "50pt" }}
+            onClick={() => {
+              setCounter(Counter + 1);
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         )}
+        {Counter === 1 && NoOfUserLines < 1 && (
+          <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
+            style={{ fontSize: "50pt" }}
+            onClick={() => {
+              setCounter(Counter - 1);
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowLeftLong} />
+          </div>
+        )}
+        {Counter === 1 && NoOfUserLines >= 1 && NoOfUserLines <= 4 && (
+          <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+            style={{ fontSize: "50pt" }}
+            onClick={() => {
+              setCounter(Counter + 1);
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowRightLong} />
+          </div>
+        )}
+        {Counter === 1 && NoOfUserLines === 4 && setCounter(Counter + 1)}
+        {Counter === 2 && NoOfUserLines >= 5 && setCounter(Counter + 1)}
         {Counter > 5 && (
           <Link to="/App">
             <div
