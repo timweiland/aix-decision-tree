@@ -11,21 +11,21 @@ function Rents1() {
         <div
         className="column-container"
         >
-            <Stack spacing={1} direction="column" style={{ marginTop: "5vh", marginLeft: "5vw" }}>
+            <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
             <div 
-            className="text-2xl pl-16 pt-16 text-black font-semibold"
+            class="text-6xl mb-10 text-black font-semibold"
             >
-                Mieten in Tübingen
+                Wie schätzt die KI die Mieten in Tübingen?
             </div>
             <div
-            className="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
-               Um die Mieten in den verschiedenen Stadtteilen gut zu schätzen, muss die KI herausfinden, wo auf der Karte die Mieten möglichst ähnlich sind.
+               Um die Mieten in den verschiedenen Stadtteilen gut zu schätzen, muss die KI herausfinden, wo auf der Karte die Mieten möglichst <i>ähnlich</i> sind.
             </div>
             <div
-            className="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
-               Diese Bereiche muss sie von Bereichen mit anderen Mietpreisen unterscheiden. 
+               Diese Bereiche muss sie von Bereichen mit anderen Mietpreisen <i>unterscheiden</i>. 
             </div>
             </Stack>
 

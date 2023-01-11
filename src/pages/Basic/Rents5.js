@@ -10,31 +10,31 @@ export default function Rents5() {
         <div
         className="column-container"
         >
-            <Stack spacing={1} direction="column" style={{ marginTop: "5vh", marginLeft: "5vw" }}>
+            <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
             <div 
-            class="text-2xl pl-16 pt-16 text-black font-semibold"
+            class="text-6xl mb-10 text-black font-semibold"
             >
-                Mieten in Tübingen
+                Wie schätzt die KI die Mieten in Tübingen?
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                Das Beispiel der Mietpreise ist so gewählt, dass Menschen es nachvollziehen und ihren eigenen Entscheidungsbaum erstellen können.
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                 Eine KI kann nach dem hier beschriebenen Prinzip Entscheidungsbäume auch für viel komplexere Daten berechnen. 
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                 Gleichzeitig bleiben die Ergebnisse/Vorhersagen von Entscheidungsbäumen auch bei komplexen Daten interpretierbar. Das macht sie zu einem sehr beliebten Algorithmus.
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
-                Unter <i>Fortgeschrittenes</i> kannst du mehr darüber erfahren.
+                Unter <i>Fortgeschritten</i> kannst du mehr darüber erfahren.
             </div>
             </Stack>
 

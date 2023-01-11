@@ -11,14 +11,14 @@ export default function Rents2() {
   
     return (
       <div className="column-container">
-        <Stack spacing={1} direction="column" style={{ marginTop: "5vh", marginLeft: "5vw" }}>
+        <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
             <div 
-            class="text-2xl pl-16 pt-16 text-black font-semibold"
+            class="text-6xl mb-10 text-black font-semibold"
             >
-                Mieten in Tübingen
+                Wie schätzt die KI die Mieten in Tübingen?
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                Herausfinden bedeutet für die KI berechnen. Dabei führt sie folgenden Algorithmus aus: 
             </div>
@@ -72,27 +72,27 @@ export default function Rents2() {
           case 1:
             return theDiv.insertAdjacentHTML(
               "beforeend",
-              "<div class='text-base pl-16 pt-30 text-black font-normal'> 1. Teste eine Unterteilung, fange ganz links am Rand an. </div>"
+              "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 1. Teste eine Unterteilung, fange ganz links am Rand an. </div>"
             );
             case 2:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='text-base pl-16 pt-30 text-black font-normal'> 2. Berechne die durchschnittliche Miete in beiden Bereichen. </div>"
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 2. Berechne die durchschnittliche Miete in beiden Bereichen. </div>"
           );
         case 3:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='text-base pl-16 pt-30 text-black font-normal'> 3. Berechne den Unterschied zwischen den echten Mietpreisen und der durchschnittlichen Miete für beide Bereiche. </div>"
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 3. Berechne den Unterschied zwischen den echten Mietpreisen und der durchschnittlichen Miete für beide Bereiche. </div>"
           );
         case 4:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='text-base pl-16 pt-30 text-black font-normal'> 4. Speichere die Unterschiede. </div>"
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 4. Speichere die Unterschiede. </div>"
           );
         case 5:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='text-base pl-16 pt-30 text-black font-normal'> 5. Teste eine weitere Unterteilung, diesmal ein bisschen weiter rechts. </div>"
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 5. Teste eine weitere Unterteilung, diesmal ein bisschen weiter rechts. </div>"
           );
           default:
             return;

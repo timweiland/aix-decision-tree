@@ -10,19 +10,19 @@ export default function Rents4() {
         <div
         className="column-container"
         >
-            <Stack spacing={1} direction="column" style={{ marginTop: "5vh", marginLeft: "5vw" }}>
+            <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
             <div 
-            class="text-2xl pl-16 pt-16 text-black font-semibold"
+            class="text-6xl mb-10 text-black font-semibold"
             >
-                Mieten in Tübingen
+                Wie schätzt die KI die Mieten in Tübingen?
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                Die Bereiche können nach dem obigen Verfahren in weitere Unterbereiche unterteilt werden. Auf diese Weise entsteht Schritt für Schritt eine genauere Unterteilung der Karte.
             </div>
             <div
-            class="text-base pl-16 pt-30 text-black font-normal"
+            class="text-3xl text-black font-normal leading-relaxed"
             >
                 Der zugehörige Entscheidungsbaum ist zunehmend verzweigt. Mit jeder neuen Unterteilung wird der Unterschied zwischen den echten Mieten und der durchschnittlichen Miete in dem jeweiligen Bereich kleiner, sodass die Schätzungen der KI am Ende sehr genau werden.
             </div>
