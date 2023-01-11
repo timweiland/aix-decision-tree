@@ -9,12 +9,13 @@ import StartPage from "./pages/StartPage";
 import ByePage from "./pages/ByePage";
 import Explanation from "./pages/Explanation";
 import reportWebVitals from "./reportWebVitals";
-import Choose from "./pages/Advanced/Choose";
-import Rents1 from "./pages/Basic/Rents1";
-import Rents2 from "./pages/Basic/Rents2";
-import Rents3 from "./pages/Basic/Rents3";
-import Rents4 from "./pages/Basic/Rents4";
-import Rents5 from "./pages/Basic/Rents5";
+import Choose from "./pages/advanced/Choose";
+import Rents1 from "./pages/basic/Rents1";
+import Rents2 from "./pages/basic/Rents2";
+import Rents3 from "./pages/basic/Rents3";
+import Rents4 from "./pages/basic/Rents4";
+import Rents5 from "./pages/basic/Rents5";
+import Complex1 from "./pages/advanced/complexData/Complex1"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -33,6 +34,7 @@ root.render(
         <Route path="/rents3" element={<Rents3 />} />
         <Route path="/rents4" element={<Rents4 />} />
         <Route path="/rents5" element={<Rents5 />} />
+        <Route path="/complex1" element={<Complex1 />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
