@@ -25,7 +25,7 @@ export default Choose;
 
 export default function Choose() {
     return(
-        <Stack spacing={20} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
+        <Stack spacing={22} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
             {/*<Link to='/rents1'>
                 <Button 
                 variant='outlined' 
