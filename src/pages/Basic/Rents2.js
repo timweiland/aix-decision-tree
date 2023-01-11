@@ -35,8 +35,7 @@ export default function Rents2() {
                 </div>
             </Link>
         </div>
-
-            {Counter < 6 ? (
+            {Counter < 7 ? (
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}
@@ -93,6 +92,12 @@ export default function Rents2() {
           return theDiv.insertAdjacentHTML(
             "beforeend",
             "<div class='text-3xl text-black font-normal leading-relaxed mb-2'> 5. Teste eine weitere Unterteilung, diesmal ein bisschen weiter rechts. </div>"
+          );
+          
+        case 6:
+          return theDiv.insertAdjacentHTML(
+            "beforeend",
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2 mt-8'> Dieser Algorithmus wird so lange wiederholt, bis <i>alle möglichen</i> Unterteilungen getestet wurden.</div>"
           );
           default:
             return;
