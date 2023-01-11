@@ -104,6 +104,11 @@ function Tutorial() {
 
   console.log("Screen state:");
   console.log(screenState);
+  console.log(!userTree.structure.get_leaves()[0].children.length);
+  console.log(userTree.setTestPoint);
+  console.log(userTree.structure.get_leaves()[0].isSelected);
+  console.log(setIsSelected(userTree.structure.get_leaves()[0]));
+  console.log(userTree.structure.get_leaves()[0].isSelected);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -223,9 +228,13 @@ function Tutorial() {
           </div>
         )}
         {Counter === 4 && (
-          <div class="box_dialogue_small sbbob">
-            Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in diesem
-            Bereich an.
+          <div>
+            <div class="box_dialogue_small sbbob">
+              Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in diesem
+              Bereich an.
+            </div>
+            {/* {!userTree.structure.get_leaves()[0].children.length &&
+              userTree.structure.hasTestPoint} */}
           </div>
         )}
         {Counter === 5 && (
