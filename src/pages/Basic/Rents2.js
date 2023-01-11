@@ -97,7 +97,7 @@ export default function Rents2() {
         case 6:
           return theDiv.insertAdjacentHTML(
             "beforeend",
-            "<div class='text-3xl text-black font-normal leading-relaxed mb-2 mt-8'> Dieser Algorithmus wird so lange wiederholt, bis <i>alle möglichen</i> Unterteilungen getestet wurden.</div>"
+            "<div class='text-3xl text-black font-normal leading-relaxed mb-2 mt-8'> Dieser Algorithmus wird so lange wiederholt, bis alle möglichen Unterteilungen von <i>links nach rechts</i> und von <i>oben nach unten</i> getestet wurden.</div>"
           );
           default:
             return;
