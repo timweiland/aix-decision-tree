@@ -15,7 +15,9 @@ import Rents2 from "./pages/basic/Rents2";
 import Rents3 from "./pages/basic/Rents3";
 import Rents4 from "./pages/basic/Rents4";
 import Rents5 from "./pages/basic/Rents5";
-import Complex1 from "./pages/advanced/complexData/Complex1"
+import Complex1 from "./pages/advanced/complexData/Complex1";
+import Complex2 from "./pages/advanced/complexData/Complex2";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -35,6 +37,7 @@ root.render(
         <Route path="/rents4" element={<Rents4 />} />
         <Route path="/rents5" element={<Rents5 />} />
         <Route path="/complex1" element={<Complex1 />} />
+        <Route path="/complex2" element={<Complex2 />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -5,7 +5,7 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import Stack from "@mui/material/Stack"
 import * as React from 'react';
 
-export default function Rents3() {  
+export default function Complex1() {  
     return (
         <div
         className="column-container"
@@ -26,20 +26,10 @@ export default function Rents3() {
             >
                In vielen Fällen haben Daten deutlich mehr als zwei Merkmale. Fische können zum Beispiel mit den Merkmalen Länge, Gewicht, Anzahl der Flossen und Länge der Schwanzflosse beschrieben werden.
             </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-               Außerdem enthält das Beispiel der Mieten in Tübingen nur knapp 160 Datenpunkte. Das ist sehr wenig.
-            </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-               Datensätze, welche mehrere Hundert bis Tausend Datenpunkten enthalten, sind in realen Anwendungen keine Seltenheit. 
-            </div>
             </Stack>
 
             <div>
-                <Link to="/rents2">
+                <Link to="/choose">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
@@ -49,7 +39,7 @@ export default function Rents3() {
                 </Link>
             </div>
             <div>
-                <Link to="/rents4">
+                <Link to="/complex2">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
