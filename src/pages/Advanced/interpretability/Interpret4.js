@@ -5,7 +5,7 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import Stack from "@mui/material/Stack"
 import * as React from 'react';
 
-export default function Complex2() {  
+export default function Interpret4() {  
     return (
         <div
         className="column-container"
@@ -14,22 +14,27 @@ export default function Complex2() {
             <div
             class="text-6xl mb-10 text-black font-semibold"
             >
-                Entscheidungsbäume für große, komplexe Daten
+                Entscheidungsbäume nachvollziehen
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Außerdem enthält das Beispiel der Mieten in Tübingen nur knapp 160 Datenpunkte. Das ist sehr wenig.
+               Bei Datenpunkten mit mehreren Merkmalen lässt sich die Unterteilung nicht mehr auf einer Karte visualisieren. 
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-                Datensätze, welche mehrere Hundert bis Tausend Datenpunkten enthalten, sind in realen Anwendungen keine Seltenheit. 
+               Trotzdem kann es sehr wichtig sein, nachzuvollziehen, wieso eine bestimmte Unterteilung gemacht wurde. 
+            </div>
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+                Hier hilft der Entscheidungsbaum weiter.
             </div>
             </Stack>
 
             <div>
-                <Link to="/complex1">
+                <Link to="/Interpret3">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
@@ -39,7 +44,7 @@ export default function Complex2() {
                 </Link>
             </div>
             <div>
-                <Link to="/complex3">
+                <Link to="/Interpret5">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}

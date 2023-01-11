@@ -17,6 +17,13 @@ import Rents4 from "./pages/basic/Rents4";
 import Rents5 from "./pages/basic/Rents5";
 import Complex1 from "./pages/advanced/complexData/Complex1";
 import Complex2 from "./pages/advanced/complexData/Complex2";
+import Complex3 from "./pages/advanced/complexData/Complex3";
+import Interpret1 from "./pages/advanced/interpretability/Interpret1";
+import Interpret2 from "./pages/advanced/interpretability/Interpret2";
+import Interpret3 from "./pages/advanced/interpretability/Interpret3";
+import Interpret4 from "./pages/advanced/interpretability/Interpret4";
+import Interpret5 from "./pages/advanced/interpretability/Interpret5";
+import Interpret6 from "./pages/advanced/interpretability/Interpret6";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -38,6 +45,13 @@ root.render(
         <Route path="/rents5" element={<Rents5 />} />
         <Route path="/complex1" element={<Complex1 />} />
         <Route path="/complex2" element={<Complex2 />} />
+        <Route path="/complex3" element={<Complex3 />} />
+        <Route path="/interpret1" element={<Interpret1 />} />
+        <Route path="/interpret2" element={<Interpret2 />} />        
+        <Route path="/interpret3" element={<Interpret3 />} />
+        <Route path="/interpret4" element={<Interpret4 />} />
+        <Route path="/interpret5" element={<Interpret5 />} />
+        <Route path="/interpret6" element={<Interpret6 />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

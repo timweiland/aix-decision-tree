@@ -5,7 +5,7 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import Stack from "@mui/material/Stack"
 import * as React from 'react';
 
-export default function Complex2() {  
+export default function Interpret5() {  
     return (
         <div
         className="column-container"
@@ -14,22 +14,27 @@ export default function Complex2() {
             <div
             class="text-6xl mb-10 text-black font-semibold"
             >
-                Entscheidungsbäume für große, komplexe Daten
+                Entscheidungsbäume nachvollziehen
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Außerdem enthält das Beispiel der Mieten in Tübingen nur knapp 160 Datenpunkte. Das ist sehr wenig.
+               Jede Verzweigung im Baum enthält das Merkmal und seinen Wert, anhand dessen in zwei Gruppen unterteilt wurde.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-                Datensätze, welche mehrere Hundert bis Tausend Datenpunkten enthalten, sind in realen Anwendungen keine Seltenheit. 
+                Wenn man den Entscheidungsbaum vom Beginn bis zu den Enden liest, kann man für jede Gruppe nachvollziehen, hinsichtlich welcher Merkmale die Datenpunkte in dieser Gruppe ähnliche Werte haben. 
+            </div>
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+               Aus dieser <i>Ähnlichkeit</i> schließt der Algorithmus, dass es sich bei dieser Gruppe um Datenpunkte mit einem bestimmten Mietpreis oder der gleichen Fischart handelt.
             </div>
             </Stack>
 
             <div>
-                <Link to="/complex1">
+                <Link to="/interpret4">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
@@ -39,7 +44,7 @@ export default function Complex2() {
                 </Link>
             </div>
             <div>
-                <Link to="/complex3">
+                <Link to="/interpret6">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
