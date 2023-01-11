@@ -55,6 +55,7 @@ function Tutorial() {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
   };
 
+  const [testPoint, setTestPoint] = useState(undefined);
   const userSplitStack = userSplitStore((state) => state.stack);
   const popUserSplit = userSplitStore((state) => state.pop);
   const cleanUserSplit = userSplitStore((state) => state.clean);
