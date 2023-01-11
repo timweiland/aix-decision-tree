@@ -107,7 +107,6 @@ function Tutorial() {
   console.log(!userTree.structure.get_leaves()[0].children.length);
   console.log(userTree.setTestPoint);
   console.log(userTree.structure.get_leaves()[0].isSelected);
-  console.log(setIsSelected(userTree.structure.get_leaves()[0]));
   console.log(userTree.structure.get_leaves()[0].isSelected);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
