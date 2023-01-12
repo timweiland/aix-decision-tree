@@ -8,7 +8,6 @@ import {
   faArrowLeftLong,
 } from "@fortawesome/free-solid-svg-icons";
 
-
 import ColumnContainer from "../columns/ColumnContainer";
 import MapColumn from "../columns/MapColumn";
 import TreeColumn from "../columns/TreeColumn";
@@ -19,8 +18,18 @@ import Tree from "../tree/Tree";
 import bob from "../assets/bob.png";
 // import hand from "../assets/hand_emoji.png";
 import Xarrow from "react-xarrows";
+import { get } from "lodash";
 
-function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode, unhighlightAll, onComplete }) {
+function Tutorial({
+  cleanUp,
+  userTree,
+  mietdaten,
+  undo,
+  splitTree,
+  highlightNode,
+  unhighlightAll,
+  onComplete,
+}) {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [Counter, setCounter] = useState(0);
@@ -29,17 +38,33 @@ function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode
 
   const [ShowArrow, setShowArrow] = useState(true);
 
-  console.log(!userTree.structure.get_leaves()[0].children.length);
-  console.log(userTree.setTestPoint);
-  console.log(userTree.structure.get_leaves()[0].isSelected);
-  console.log(userTree.structure.get_leaves()[0].isSelected);
+  const DoAverageHighlight = (node) => {
+    node.hasTestPoint = true;
+  };
+
+  const ShowAvgRent = (node) => {
+    let avgrent = node.avgRent;
+    let coord = node.rect;
+    return (
+      <div
+        style={{
+          position: "absolute",
+          fontSize: "300%",
+          color: "yellow",
+          left: coord[4],
+          top: "50%",
+        }}
+      >
+        {Math.round(avgrent)}€
+      </div>
+    );
+  };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <ColumnContainer
-    >
-      <MapColumn
-      >
+    <ColumnContainer>
+      <MapColumn>
+        {Counter === 4 && ShowAvgRent(userTree.structure.get_leaves()[0])}
         <Map
           coordinates={mietdaten}
           tree={userTree.structure}
@@ -48,13 +73,11 @@ function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode
           unhighlightAll={unhighlightAll}
           enableInteraction={Counter === 1 || Counter === 2}
         />
-        <Taskbar
-          undo={undo}
-        />
+
+        <Taskbar undo={undo} />
       </MapColumn>
 
-      <TreeColumn
-      >
+      <TreeColumn>
         <div>
           <div className="imgbobsmall">
             <img id="bob" src={bob} alt="bob" />
@@ -78,14 +101,14 @@ function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode
               </div>
               {ShowArrow && (
                 <Xarrow
-                  start="box" //can be react ref
-                  end="taskbar20" //or an id
-                  color="white"
+                  start="box"
+                  end="taskbar20"
+                  color="black"
                   startAnchor="bottom"
                   endAnchor="top"
                   path="smooth"
                   strokeWidth={10}
-                  animateDrawing={2}
+                  animateDrawing
                 />
               )}
             </div>
@@ -126,8 +149,7 @@ function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode
               Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in diesem
               Bereich an.
             </div>
-            {/* {!userTree.structure.get_leaves()[0].children.length &&
-              userTree.structure.hasTestPoint} */}
+            {DoAverageHighlight(userTree.structure.get_leaves()[0])}
           </div>
         )}
         {Counter === 5 && (
@@ -205,8 +227,7 @@ function Tutorial({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode
             onClick={() => {
               cleanUp();
               onComplete();
-            }
-            }
+            }}
           >
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
