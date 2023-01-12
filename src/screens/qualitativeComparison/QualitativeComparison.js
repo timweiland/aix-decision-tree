@@ -8,7 +8,7 @@ export default function QualitativeComparison({ mietdaten, userTree, setUserTree
     const [screenState, setScreenState] = useState("bobExplains");
     const [isDone, setIsDone] = useState(false);
 
-    const testPoints = [mietdaten[0], mietdaten[1], mietdaten[2]];
+    const testPoints = [mietdaten[30], mietdaten[59], mietdaten[86]];
 
     return (
         <>
