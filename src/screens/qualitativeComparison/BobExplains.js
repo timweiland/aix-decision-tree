@@ -143,7 +143,7 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
 
     return (
         <ColumnContainer>
-            { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={true} />}
+            { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={false} />}
             <MapColumn>
                 <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} testPoint={testPoint} hide={hideUserScreens.includes(screenState)} />
                 {
