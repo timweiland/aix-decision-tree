@@ -1,6 +1,6 @@
 import "./Instructions.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import instr_lines from "../assets/instructions_lines.jpeg";
 import instr_divisions from "../assets/instructions_divisions.jpeg";
 import instr_decisiontree from "../assets/instructions_decisiontree.jpeg";
@@ -18,6 +18,32 @@ function Instructions() {
     instr_decisiontree,
     instr_decisiontree,
   ];
+
+  const [inactivityTime, setInactivityTime] = useState(0);
+
+  const resetTime = 150 // seconds
+  useEffect(() => {
+      const inactivityInterval = setInterval(() => {
+        setInactivityTime(inactivityTime => inactivityTime + 1);
+      }, 1000);
+
+      const resetTimer = () => {
+        setInactivityTime(0);
+      };
+  
+      document.addEventListener('click', resetTimer);
+
+      return () => {
+        clearInterval(inactivityInterval);
+        document.removeEventListener('click', resetTimer);
+      };
+  }, []);
+
+  useEffect(() => {
+    if (inactivityTime > resetTime) {
+      window.location.replace('/');
+    }
+  }, [inactivityTime]);
 
   return (
     <div className="column-container">
@@ -47,7 +73,7 @@ function Instructions() {
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
-          <Link to="/Tutorial">
+          <Link to="/App">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}

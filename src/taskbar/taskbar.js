@@ -2,13 +2,10 @@ import "./taskbar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faQuestion,
-  faCheck,
   faRotateLeft,
-  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
-export default function Taskbar({ cleanUp, complete, undo }) {
+export default function Taskbar({ undo }) {
   return (
     <div
       style={{
@@ -19,10 +16,7 @@ export default function Taskbar({ cleanUp, complete, undo }) {
         left: `${0}%`,
       }}
     >
-      <div
-        class="taskbar-container"
-        style={{ position: "absolute", top: `${0}%`, left: `${50}%` }}
-      >
+      <div class="taskbar-container" style={{ position: "absolute", top: `${0}%`, left: `${80}%`, width: "20%" }}>
         <div class="taskbar">
           <div class="button">
             <FontAwesomeIcon icon={faQuestion} />
@@ -34,46 +28,38 @@ export default function Taskbar({ cleanUp, complete, undo }) {
             <FontAwesomeIcon icon={faRotateLeft} />
           </div>
         </div>
-
-        <div class="taskbar">
-          <div class="button" onClick={complete}>
-            <FontAwesomeIcon icon={faCheck} />
-          </div>
-        </div>
-
-        <div class="taskbar">
-          <div className="button">
-            <Link to="/" style={{ textDecoration: "none" }} onClick={cleanUp}>
-              <FontAwesomeIcon icon={faXmark} />
-            </Link>
-          </div>
-        </div>
       </div>
 
-      <div class="taskbar-container" style={{ top: `${0}%`, right: `${50}%` }}>
+      <div class="taskbar-container" style={{ position: "absolute", top: `${0}%`, left: `${70}%`, width: "10%" }}></div>
+
+
+      <div class="taskbar-container" style={{ top: `${0}%`, right: `${30}%`, width: "70%" }}>
+        <div className="text-white">
+          Preise pro Quadratmeter:
+        </div>
+        <div className="w-1"></div>
         <div class="taskbar">
           <div class="legend">10€: </div>
           <div class="legend">
-            <div class="point" style={{ width: "20px", height: "20px" }} />
+            <div class="point" style={{ width: "15px", height: "15px" }} />
           </div>
         </div>
 
         <div class="taskbar">
-          <div id="taskbar20" class="legend">
-            20€:{" "}
-          </div>
+          <div id="taskbar20" class="legend">20€: </div>
           <div class="legend">
-            <div class="point" style={{ width: "35px", height: "35px" }} />
+            <div class="point" style={{ width: "27px", height: "27px" }} />
           </div>
         </div>
 
         <div clasS="taskbar">
           <div class="legend"> 30€: </div>
           <div class="legend">
-            <div class="point" style={{ width: "50px", height: "50px" }} />
+            <div class="point" style={{ width: "40px", height: "40px" }} />
           </div>
         </div>
+
       </div>
     </div>
-  );
+  )
 }

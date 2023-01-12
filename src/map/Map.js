@@ -1,5 +1,6 @@
 import "./Map.css";
 import { useState, useEffect, useRef } from "react";
+import classNames from "classnames";
 
 export default function Map({
   coordinates,
@@ -8,7 +9,8 @@ export default function Map({
   highlightNode,
   unhighlightAll,
   enableInteraction,
-  testPoint
+  testPoint,
+  hide
 }) {
   const canvasRef = useRef();
   const [isDrawing, setIsDrawing] = useState(false);
@@ -125,10 +127,14 @@ export default function Map({
     clearCanvas(canvas);
     drawBackgroundImage(canvas);
 
+    let testPointLine = undefined;
     ctx.lineWidth = 7;
     ctx.fillStyle = "#000000";
     // Draw all of the lines the user has drawn so far
     tree.get_lines().map((line) => {
+      if(line[2]) {
+        testPointLine = line;
+      }
       ctx.beginPath();
       ctx.moveTo(...relativeToAbsoluteCoords(canvas, line[0][0], line[0][1]));
       ctx.lineTo(...relativeToAbsoluteCoords(canvas, line[1][0], line[1][1]));
@@ -197,8 +203,16 @@ export default function Map({
         maxRent = rent;
       }
     });
+    if(testPointLine) {
+      ctx.strokeStyle = "#FFFF00";
+      ctx.lineWidth = 15;
+      ctx.beginPath();
+      ctx.moveTo(...relativeToAbsoluteCoords(canvas, testPointLine[0][0], testPointLine[0][1]));
+      ctx.lineTo(...relativeToAbsoluteCoords(canvas, testPointLine[1][0], testPointLine[1][1]));
+      ctx.stroke();
+    }
     const [minSize, maxSize] = [25, 100];
-    if(testPoint !== undefined) {
+    if (testPoint !== undefined) {
       const rent = testPoint[2];
       const size = Math.floor(minSize + (rent - minRent) * (maxSize - minSize) / (maxRent - minRent));
       const x = testPoint[0] * canvas.width / 100;
@@ -338,6 +352,7 @@ export default function Map({
       onTouchEnd={(evt) => { finishDrawing(); evt.preventDefault(); }}
       onTouchMove={(evt) => passTouchPos(evt, whileDrawing)}
       onTouchCancel={(evt) => { leaveCanvas(evt); evt.preventDefault(); }}
+      className={classNames({ "opacity-10": hide })}
     />
   );
 }
