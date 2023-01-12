@@ -29,7 +29,7 @@ export default function Interpret1() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               In jedem Schritt teilt sie die Datenpunkte anhand eines ihrer beiden Merkmale auf, entweder Breitengrad (waagerechte Linie) oder Längengrad (senkrechte Linie).
+               In jedem Schritt teilt sie die Datenpunkte anhand eines der beiden Merkmale auf, entweder Breitengrad (waagerechte Linie) oder Längengrad (senkrechte Linie).
             </div>
             </Stack>
 

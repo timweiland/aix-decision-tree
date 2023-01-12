@@ -30,7 +30,7 @@ export default function Interpret6() {
             class="text-3xl text-black font-normal leading-relaxed"
             >
                 <div
-                class="text-3xl text-black font-normal leading-loose"
+                class="text-3xl text-black font-normal leading-relaxed"
                 >
                 <p>&#9679; Größe des Zellklumpens</p>
                 <p>&#9679; Gleichmäßigkeit der Größe der Zellen</p>

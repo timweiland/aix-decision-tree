@@ -19,7 +19,7 @@ export default function Interpret2() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Jede Unterteilung geschieht anhand eines <i>bestimmten</i> Werts dieses Merkmals: Der eine Teil der Daten hat bei diesem Merkmal <i>kleinere</i> Werte, der andere Teil hat <i>größere</i> Werte. 
+               Jede Unterteilung geschieht anhand eines bestimmten <i>Werts</i> dieses Merkmals: Der eine Teil der Daten hat bei diesem Merkmal <i>kleinere</i> Werte, der andere Teil hat <i>größere</i> Werte. 
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
