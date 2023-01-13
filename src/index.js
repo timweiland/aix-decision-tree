@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import Dialogue from "./pages/Dialogue";
-import Instructions from "./pages/Instructions";
 import StartPage from "./pages/StartPage";
 import ByePage from "./pages/ByePage";
 import Explanation from "./pages/Explanation";
@@ -24,7 +23,6 @@ import Interpret3 from "./pages/Advanced/interpretability/Interpret3";
 import Interpret4 from "./pages/Advanced/interpretability/Interpret4";
 import Interpret5 from "./pages/Advanced/interpretability/Interpret5";
 import Interpret6 from "./pages/Advanced/interpretability/Interpret6";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -47,7 +45,7 @@ root.render(
         <Route path="/complex2" element={<Complex2 />} />
         <Route path="/complex3" element={<Complex3 />} />
         <Route path="/interpret1" element={<Interpret1 />} />
-        <Route path="/interpret2" element={<Interpret2 />} />        
+        <Route path="/interpret2" element={<Interpret2 />} />
         <Route path="/interpret3" element={<Interpret3 />} />
         <Route path="/interpret4" element={<Interpret4 />} />
         <Route path="/interpret5" element={<Interpret5 />} />
