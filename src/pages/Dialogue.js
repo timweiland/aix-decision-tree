@@ -37,9 +37,9 @@ function Dialogue() {
     }
   }, [inactivityTime]);
 
-  const bubblebob = "chat-bubble chat-bubble-primary text-3xl mx-2 my-3";
-  const bubblealice = "chat-bubble chat-bubble-secondary text-3xl mx-2 my-3";
-  const textmargin = "m-3";
+  const bubblebob = "chat-bubble chat-bubble-primary text-3xl mx-2 my-2";
+  const bubblealice = "chat-bubble chat-bubble-secondary text-3xl mx-2 my-2";
+  const textmargin = "m-2";
 
   return (
     <div className="column-container">
@@ -106,19 +106,14 @@ function Dialogue() {
             </div>
           </div>
         )}
-        {/* <div class="box_dialogue sbalice">
-          {" "}
-          Hier ist eine Karte von Tübingen, auf der die Mietpreise pro
-          Quadratmeter eingezeichnet sind.{" "}
-        </div> */}
         <div id="addStatement"> </div>
       </div>
 
       <div className="column">
         {Counter > 3 ? (
-          <img src={alice_laptop} alt="alice_laptop" />
+          <img src={alice_laptop} alt="alice_laptop" className="alice_laptop" />
         ) : (
-          <img src={alice_map} alt="alice_map" />
+          <img src={alice_map} alt="alice_map" className="alice_map" />
         )}
 
         {Counter < 5 ? (
