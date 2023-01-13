@@ -21,7 +21,7 @@ export default function TreeNode({ id, avgRent, color, isSelected, hasTestPoint,
         'ring-8': isSelected,
         'ring-red-500': isSelected
     })} id={id} style={{ backgroundColor: backgroundColor, height: isSmall ? "45px" : "60px", width: isSmall ? "45px" : "60px"}}>
-        <div style={{ position: "relative"}} className={classNames("text-white", "mx-auto", "z-10", {"text-lg" : isSmall, "text-3xl": !isSmall})}>{`${nodeCaption}`}</div>
+        <div style={{ position: "relative"}} className={classNames("text-white", "mx-auto", "z-10", {"text-2xl" : isSmall, "text-3xl": !isSmall})}>{`${nodeCaption}`}</div>
         {hasTestPoint &&
             <motion.div className="absolute top-0 left-0  rounded-full bg-yellow-300" style={{height: isSmall ? "45px" : "60px", width: isSmall ? "45px" : "60px"}} layoutId="test-anim" transition={transition}></motion.div>
         }
