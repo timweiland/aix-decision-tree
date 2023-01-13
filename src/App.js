@@ -16,6 +16,7 @@ import InitialScreen from './screens/InitialScreen';
 import { ShowAITree } from './screens/ShowAITree';
 import QualitativeComparison from './screens/qualitativeComparison/QualitativeComparison';
 import { QuantitativeComparison } from './screens/quantitativeComparison/QuantitativeComparison';
+import FinalScreen from './screens/FinalScreen';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -100,6 +101,15 @@ function App() {
     setScreenState("tutorial");
   }
 
+  const restartWithoutTutorial = () => {
+    cleanUp();
+    setScreenState("initialScreen");
+  }
+
+  const exitApp = () => {
+    window.location.replace('/');
+  }
+
   const resetTime = 150 // seconds
   useEffect(() => {
     const inactivityInterval = setInterval(() => {
@@ -120,7 +130,7 @@ function App() {
 
   useEffect(() => {
     if (inactivityTime > resetTime) {
-      window.location.replace('/');
+      exitApp();
     }
   }, [inactivityTime]);
 
@@ -135,7 +145,9 @@ function App() {
       {screenState === "qualitativeComparison" &&
         <QualitativeComparison mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("quantitativeComparison")} />}
       {screenState === "quantitativeComparison" &&
-        <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} />}
+        <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("finalScreen")} />}
+      {screenState === "finalScreen" &&
+        <FinalScreen restartWithoutTutorial={restartWithoutTutorial} exitApp={exitApp} /> }
       {
         (continueHandler !== undefined) &&
         <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50" style={{ fontSize: "60px" }} onClick={

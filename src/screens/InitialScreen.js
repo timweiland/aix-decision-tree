@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Taskbar from '../taskbar/taskbar';
 
 import ColumnContainer from '../columns/ColumnContainer';
@@ -15,10 +15,11 @@ export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, spli
 
     const NoOfUserLines = userTree.structure.get_lines().length;
 
-    if (NoOfUserLines === 5) {
-        setIsDone(true);
-    }
-
+    useEffect(() => {
+        if (NoOfUserLines === 5) {
+            setIsDone(true);
+        }
+    }, [NoOfUserLines])
 
     return (
         <ColumnContainer>

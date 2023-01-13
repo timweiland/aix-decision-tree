@@ -68,6 +68,7 @@ export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinu
                 setBobMessage("Hey, die beiden Bäume sind gleich gut!");
                 setAliceMessage("Was ein Zufall!");
             }
+            setContinueHandler({handler: onComplete});
         }
     }, [screenState]);
 
