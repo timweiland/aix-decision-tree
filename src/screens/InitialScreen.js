@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Taskbar from '../taskbar/taskbar';
 
 import ColumnContainer from '../columns/ColumnContainer';
@@ -9,28 +9,26 @@ import Map from '../map/Map';
 import Tree from '../tree/Tree';
 import Popup from '../popup/Popup';
 
-export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode, unhighlightAll, onComplete }) {
+export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, splitTree, highlightNode, unhighlightAll, onComplete, openTutorial }) {
     const [isDone, setIsDone] = useState(false);
     console.log(userTree);
 
     const NoOfUserLines = userTree.structure.get_lines().length;
 
-    if (NoOfUserLines === 5) {
-        if (isDone === false) {
+    useEffect(() => {
+        if (NoOfUserLines === 5) {
             setIsDone(true);
         }
-        {/*onComplete()*/}
-        
-        
-    }
-
+    }, [NoOfUserLines])
 
     return (
         <ColumnContainer>
             <MapColumn>
                 <Taskbar cleanUp={cleanUp}
                     complete={() => setIsDone(true)}
-                    undo={undo} />
+                    undo={undo}
+                    openTutorial={openTutorial}
+                />
                 <Map coordinates={mietdaten} tree={userTree.structure} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} enableInteraction={true} />
             </MapColumn>
 
@@ -41,11 +39,11 @@ export default function InitialScreen({ cleanUp, userTree, mietdaten, undo, spli
             </TreeColumn>
 
             {
-            (isDone) &&
-            <Popup closeCallback={onComplete} icon="check">
-                <p>Super! Du hast deinen Entscheidungsbaum fertig gestellt.</p>
-                <p>Jetzt wird auf der rechten Seite erscheinen, wie die KI die Stadt in Bereiche mit unterschiedlich hohen Mieten unterteilt.</p>
-            </Popup>
+                (isDone) &&
+                <Popup closeCallback={onComplete} icon="check">
+                    <p>Super! Du hast deinen Entscheidungsbaum fertig gestellt.</p>
+                    <p>Jetzt wird auf der rechten Seite erscheinen, wie die KI die Stadt in Bereiche mit unterschiedlich hohen Mieten unterteilt.</p>
+                </Popup>
             }
         </ColumnContainer>
 

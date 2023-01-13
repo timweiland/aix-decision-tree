@@ -11,7 +11,7 @@ export default function Alice({ message, excited }) {
                     </div>
                 </div>
             }
-            <img src={aliceImg} alt="Alice" className={classNames({animateBounce: excited}, "w-28", "p-0")}/>
+            <img src={aliceImg} alt="Alice" className={classNames({"animate-excite": excited}, "w-28", "p-0")}/>
         </div>
     );
 }

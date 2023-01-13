@@ -5,7 +5,7 @@ import {
   faRotateLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Taskbar({ undo }) {
+export default function Taskbar({ undo, openTutorial }) {
   return (
     <div
       style={{
@@ -18,7 +18,7 @@ export default function Taskbar({ undo }) {
     >
       <div class="taskbar-container" style={{ position: "absolute", top: `${0}%`, left: `${80}%`, width: "20%" }}>
         <div class="taskbar">
-          <div class="button">
+          <div class="button" onClick={openTutorial}>
             <FontAwesomeIcon icon={faQuestion} />
           </div>
         </div>

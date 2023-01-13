@@ -16,6 +16,7 @@ import InitialScreen from './screens/InitialScreen';
 import { ShowAITree } from './screens/ShowAITree';
 import QualitativeComparison from './screens/qualitativeComparison/QualitativeComparison';
 import { QuantitativeComparison } from './screens/quantitativeComparison/QuantitativeComparison';
+import FinalScreen from './screens/FinalScreen';
 
 const mietdaten = mietdatenJSON.data;
 
@@ -95,42 +96,58 @@ function App() {
     toggleAITree(false);
   }
 
+  const openTutorial = () => {
+    cleanUp();
+    setScreenState("tutorial");
+  }
+
+  const restartWithoutTutorial = () => {
+    cleanUp();
+    setScreenState("initialScreen");
+  }
+
+  const exitApp = () => {
+    window.location.replace('/');
+  }
+
   const resetTime = 150 // seconds
   useEffect(() => {
-      const inactivityInterval = setInterval(() => {
-        setInactivityTime(inactivityTime => inactivityTime + 1);
-      }, 1000);
+    const inactivityInterval = setInterval(() => {
+      setInactivityTime(inactivityTime => inactivityTime + 1);
+    }, 1000);
 
-      const resetTimer = () => {
-        setInactivityTime(0);
-      };
-  
-      document.addEventListener('click', resetTimer);
+    const resetTimer = () => {
+      setInactivityTime(0);
+    };
 
-      return () => {
-        clearInterval(inactivityInterval);
-        document.removeEventListener('click', resetTimer);
-      };
+    document.addEventListener('click', resetTimer);
+
+    return () => {
+      clearInterval(inactivityInterval);
+      document.removeEventListener('click', resetTimer);
+    };
   }, []);
 
   useEffect(() => {
     if (inactivityTime > resetTime) {
-      window.location.replace('/');
+      exitApp();
     }
   }, [inactivityTime]);
 
   return (
     <div className="h-screen flex">
       {screenState === "tutorial" &&
-        <Tutorial cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("initialScreen")} />}
+        <Tutorial cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("initialScreen")}/>}
       {screenState === "initialScreen" &&
-        <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} />}
+        <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} openTutorial={openTutorial} />}
       {screenState === "showAITree" &&
         <ShowAITree mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} continueHandler={continueHandler} setContinueHandler={setContinueHandler} aiTreeClipped0={aiTreeClipped0} aiTreeClipped1={aiTreeClipped1} aiTreeClipped2={aiTreeClipped2} onComplete={() => setScreenState("qualitativeComparison")} />}
       {screenState === "qualitativeComparison" &&
         <QualitativeComparison mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("quantitativeComparison")} />}
       {screenState === "quantitativeComparison" &&
-        <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} />}
+        <QuantitativeComparison mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("finalScreen")} />}
+      {screenState === "finalScreen" &&
+        <FinalScreen restartWithoutTutorial={restartWithoutTutorial} exitApp={exitApp} /> }
       {
         (continueHandler !== undefined) &&
         <div className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50" style={{ fontSize: "60px" }} onClick={
