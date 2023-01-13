@@ -45,14 +45,17 @@ function Tutorial({
   const ShowAvgRent = (node) => {
     let avgrent = node.avgRent;
     let coord = node.rect;
+    console.log(coord);
+    let scaling = coord[2] * coord[3] * 0.1;
+    console.log(scaling * 0.01);
     return (
       <div
         style={{
           position: "absolute",
-          fontSize: "300%",
+          fontSize: `${scaling}%`,
           color: "yellow",
-          left: coord[4],
-          top: "50%",
+          left: `${(coord[2] - coord[0]) / 2 - Math.round(scaling * 0.02)}%`,
+          top: `${(coord[3] - coord[1]) / 2 - Math.round(scaling * 0.015)}%`,
         }}
       >
         {Math.round(avgrent)}€
@@ -74,7 +77,7 @@ function Tutorial({
           enableInteraction={Counter === 1 || Counter === 2}
         />
 
-        <Taskbar undo={undo} openTutorial={() => { }} />
+        <Taskbar undo={undo} openTutorial={() => {}} />
       </MapColumn>
 
       <TreeColumn>

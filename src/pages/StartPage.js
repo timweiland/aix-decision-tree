@@ -22,12 +22,25 @@ function StartPage() {
       </div>
 
       <div className="column">
-        <div class="box sbbob">
+        <div className="chat chat-start">
+          <div className="chat-bubble chat-bubble-primary text-6xl top-8 mx-3 my-10">
+            <div className="m-3">
+              Ich bin neu in Tübingen und will wissen, wie hoch die Miete für
+              ein Studierendenzimmer ist!
+            </div>
+          </div>
+        </div>
+        <div className="chat chat-end">
+          <div className="chat-bubble chat-bubble-secondary text-6xl mx-3 my-10">
+            <div className="m-5">Hast Du Lust mitzumachen?</div>
+          </div>
+        </div>
+        {/* <div class="box sbbob">
           {" "}
           Ich bin neu in Tübingen und will wissen, wie hoch die Miete für ein
           Studierendenzimmer ist!
         </div>
-        <div class="box sbalice"> Hast Du Lust mitzumachen? </div>
+        <div class="box sbalice"> Hast Du Lust mitzumachen? </div> */}
         <div>
           <Link to="/dialogue">
             <div
