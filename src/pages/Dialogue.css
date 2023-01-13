@@ -9,66 +9,8 @@
     text-align: center;
 }
 
-
 img {
     padding-top: 10%; 
     padding-left: 10%;
     height: 80%;
 }
-
-.box_dialogue {
-    width: 95%;
-    margin: 5% auto;
-    padding: 3%;
-    text-align: center;
-    font-weight: 500;
-    font-size: 150%;
-    color: rgb(0, 0, 0);
-    position:relative;
-  }
-
-.box_dialogue.sbbob {
-    background: #edccc6;
-}
-
-.box_dialogue.sbalice {
-    background: #badfde;
-}
-.sbbob:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid #edccc6;
-    border-top: 10px solid #edccc6;
-    border-bottom: 10px solid transparent;
-    left: -19px;
-    top: 20px;
-}
-
-.sbalice:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid #badfde;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #badfde;
-    border-bottom: 10px solid transparent;
-    right: -20px;
-    top: 20px;
-  }
-
-.weiterbutton {
-    padding: 1%;
-    background-color: lightgrey;
-    position:absolute;
-    font-size: 150%;
-    bottom: 0;
-    right: 9%;
-    margin-bottom: 1cm;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px 0 rgba(57, 56, 56, 0.2), 0 4px 8px 0 rgba(92, 91, 91, 0.19);
-}
-

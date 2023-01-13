@@ -7,16 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function StartPage() {
-  const [Counter, setCounter] = useState(1);
-
   return (
-    <div
-      className="column-container"
-      onClick={() => {
-        setCounter(Counter + 1);
-        // addStatement(Counter, "addStatement");
-      }}
-    >
+    <div className="column-container">
       <div className="column">
         <img src={bob} alt="bob" />
       </div>
@@ -35,19 +27,12 @@ function StartPage() {
             <div className="m-5">Hast Du Lust mitzumachen?</div>
           </div>
         </div>
-        {/* <div class="box sbbob">
-          {" "}
-          Ich bin neu in Tübingen und will wissen, wie hoch die Miete für ein
-          Studierendenzimmer ist!
-        </div>
-        <div class="box sbalice"> Hast Du Lust mitzumachen? </div> */}
         <div>
           <Link to="/dialogue">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
               style={{ fontSize: "50pt" }}
             >
-              {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
               <FontAwesomeIcon icon={faArrowRightLong} />
             </div>
           </Link>

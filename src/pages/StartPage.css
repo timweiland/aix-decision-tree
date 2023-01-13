@@ -7,6 +7,7 @@ img {
 .imgalice {
     padding-top: 10%; 
     padding-left: 31%;
+    right: 0;
     height: 80%;
 }
 
@@ -20,38 +21,4 @@ img {
     font-size: 150%;
     color: rgb(0, 0, 0);
     position:relative;
-  }
-
-.box.sbbob {
-    background: #edccc6;
-}
-
-.box.sbalice {
-    background: #badfde;
-}
-
-.sbbob:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid transparent;
-    border-right: 10px solid #edccc6;
-    border-top: 10px solid #edccc6;
-    border-bottom: 10px solid transparent;
-    left: -19px;
-    top: 20px;
-}
-
-.sbalice:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    border-left: 10px solid #badfde;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #badfde;
-    border-bottom: 10px solid transparent;
-    right: -20px;
-    top: 20px;
   }
