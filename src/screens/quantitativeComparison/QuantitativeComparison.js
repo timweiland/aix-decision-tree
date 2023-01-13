@@ -31,6 +31,7 @@ const overall_avg_difference = (tree) => {
 
 export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinueHandler, onComplete }) {
     const [screenState, setScreenState] = useState("drumroll");
+    const [cancelDrumroll, setCancelDrumroll] = useState(false);
     const [bobMessage, setBobMessage] = useState(undefined);
     const [bobExcited, setBobExcited] = useState(false);
     const [aliceMessage, setAliceMessage] = useState(undefined);
@@ -49,6 +50,7 @@ export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinu
 
     useEffect(() => {
         if (screenState === "drumroll") {
+            setTimeout(() => setCancelDrumroll(true), 1000 * 3);
             lottieRef.current.setSpeed(3);
             setBobMessage("Das waren aber nur drei Beispiele. Welcher Baum ist insgesamt genauer?");
             setAliceMessage("Jetzt schauen wir, welcher Baum im Durchschnitt für ganz Tübingen genauer ist!");
@@ -87,7 +89,7 @@ export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinu
                 <div className="mt-4">
                     <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} arrow="left" />
                 </div>
-                { screenState === "drumroll" && <Lottie className="absolute z-50 h-80 w-80 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" animationData={drumrollAnimation} loop={true} lottieRef={lottieRef} />}
+                { screenState === "drumroll" && !cancelDrumroll && <Lottie className="absolute z-50 h-80 w-80 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" animationData={drumrollAnimation} loop={true} lottieRef={lottieRef} />}
                 { screenState === "revealComparison" && <AccuracyComparison avgDiffUser={avgDiffUser} avgDiffAI={avgDiffAI}/> }
                 <div className="mt-2">
                     <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} arrow="right" />
