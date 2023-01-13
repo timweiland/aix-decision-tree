@@ -167,7 +167,7 @@ export default function Map({
     const treeLeaves = tree.get_leaves();
     treeLeaves.forEach((leaf) => {
       ctx.globalAlpha = 0.6;
-      ctx.fillStyle = leaf.color.hex();
+      ctx.fillStyle = leaf.color;
       ctx.fillRect(...treeNodeToCanvasRect(leaf, canvas));
       ctx.globalAlpha = 1.0;
     });
