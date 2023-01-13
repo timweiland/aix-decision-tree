@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as React from 'react';
+import { useEffect, useState } from "react";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -10,7 +11,39 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 
 
 function Explanation() {
-    return(
+    const [inactivityTime, setInactivityTime] = useState(0);
+
+    const exitApp = () => {
+        window.location.replace('/');
+    }
+
+    const resetTime = 150 // seconds
+    useEffect(() => {
+        const inactivityInterval = setInterval(() => {
+            setInactivityTime(inactivityTime => inactivityTime + 1);
+        }, 1000);
+
+        const resetTimer = () => {
+            setInactivityTime(0);
+        };
+
+        document.addEventListener('click', resetTimer);
+
+        return () => {
+            clearInterval(inactivityInterval);
+            document.removeEventListener('click', resetTimer);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (inactivityTime > resetTime) {
+            exitApp();
+        }
+    }, [inactivityTime]);
+
+    console.log(inactivityTime);
+
+    return (
         <Stack spacing={22} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
             {/*<Link to='/rents1'>
                 <Button 
@@ -20,30 +53,30 @@ function Explanation() {
                 </Button>
     </Link>*/}
 
-        <Link to="/rents1">
-            <div
-            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-            style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
-            >
-                Grundlagen
-            </div>
-        </Link>
-        <Link to="/choose">
-            <div
-            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-            style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
-            >
-                Fortgeschritten
-            </div>
-        </Link>
-            
-        {/*<Link to='/choose'>
+            <Link to="/rents1">
+                <div
+                    className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+                    style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center" }}
+                >
+                    Grundlagen
+                </div>
+            </Link>
+            <Link to="/choose">
+                <div
+                    className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+                    style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center" }}
+                >
+                    Fortgeschritten
+                </div>
+            </Link>
+
+            {/*<Link to='/choose'>
             <Button variant='outlined'
             style={{ fontSize: '63px', width: '50vw' }}>
                 Fortgeschritten
             </Button>
-</Link>*/}            
-        </Stack>   
+</Link>*/}
+        </Stack>
     );
 }
 
