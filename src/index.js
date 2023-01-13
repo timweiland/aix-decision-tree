@@ -32,7 +32,6 @@ root.render(
         <Route exact path="/" element={<StartPage />} />
         <Route path="/app" element={<App />} />
         <Route path="/dialogue" element={<Dialogue />} />
-        <Route path="/instructions" element={<Instructions />} />
         <Route path="/byebye" element={<ByePage />} />
         <Route path="/explanation" element={<Explanation />} />
         <Route path="/choose" element={<Choose />} />
