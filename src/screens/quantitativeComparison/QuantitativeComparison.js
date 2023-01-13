@@ -74,6 +74,7 @@ export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinu
 
     return (
         <ColumnContainer>
+            { screenState === "drumroll" && <div className="absolute h-screen w-screen bg-gray-400 opacity-60 z-20"/> }
             <MapColumn>
                 <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} />
                 {
@@ -86,7 +87,7 @@ export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinu
                 <div className="mt-4">
                     <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} arrow="left" />
                 </div>
-                { screenState === "drumroll" && <Lottie className="h-96 w-96 mx-auto" animationData={drumrollAnimation} loop={true} lottieRef={lottieRef} />}
+                { screenState === "drumroll" && <Lottie className="absolute z-50 h-80 w-80 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" animationData={drumrollAnimation} loop={true} lottieRef={lottieRef} />}
                 { screenState === "revealComparison" && <AccuracyComparison avgDiffUser={avgDiffUser} avgDiffAI={avgDiffAI}/> }
                 <div className="mt-2">
                     <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} arrow="right" />
