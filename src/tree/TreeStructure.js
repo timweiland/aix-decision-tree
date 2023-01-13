@@ -1,15 +1,37 @@
-import distinctColors from 'distinct-colors';
-
-let colorPalette = distinctColors({ count: 20 });
-
 export class TreeStructure {
-  constructor(rect, points, idx = "root") {
+  constructor(rect, points, type, idx = "root", rootRef = undefined) {
     this.rect = rect;
     this.points = points.filter((point) => this.contains(point[0], point[1]));
     this.idx = idx;
     this.children = [];
-    this.colorPalette = colorPalette;
-    this.color = colorPalette.pop();
+    this.type = type;
+    if (rootRef === undefined) {
+      this.rootRef = this;
+    }
+    else {
+      this.rootRef = rootRef;
+    }
+    if (this.type === "user") {
+      this.colorPalette = [
+        "#00ffff", // aqua
+        "#00ff00", // lime
+        "#ff00ff", // fuchsia
+        "#ffdab9", // peachpuff
+        "#ff8c00", // darkorange
+        "#7f0000", // maroon 2
+      ].reverse()
+    }
+    else {
+      this.colorPalette = [
+        "#228b22", // forestgreen
+        "#000080", // navy
+        "#D27D2D", // cinnamon
+        "#ff69b4", // hotpink
+        "#1e90ff", // dodgerblue
+        "#2f4f4f", // darkslategray
+      ].reverse()
+    }
+    this.color = undefined;
     this.isSelected = false;
 
     this.calculate_avg_rent();
@@ -21,10 +43,10 @@ export class TreeStructure {
     this.hasTestPoint = false;
   }
 
-  
+
 
   calculate_avg_rent() {
-    if(this.points.length === 0) {
+    if (this.points.length === 0) {
       this.avgRent = "?";
       return;
     }
@@ -37,22 +59,22 @@ export class TreeStructure {
   }
 
   calculate_avg_deviation() {
-    if(this.points.length === 0) {
+    if (this.points.length === 0) {
       this.avgDeviation = "?";
       return;
     }
     this.avgDeviation = 0
     this.points.forEach((point) => {
-      this.avgDeviation += (point[2] - this.avgRent)**2;
+      this.avgDeviation += (point[2] - this.avgRent) ** 2;
     });
-    
+
     this.avgDeviation /= this.points.length;
-    this.avgDeviation = this.avgDeviation**0.5;
+    this.avgDeviation = this.avgDeviation ** 0.5;
     this.avgDeviation = Number(this.avgDeviation.toFixed(1))
   }
 
-  calculate_avg_difference(){
-    if(this.points.length === 0) {
+  calculate_avg_difference() {
+    if (this.points.length === 0) {
       this.avgDiff = "?";
       return;
     }
@@ -76,26 +98,30 @@ export class TreeStructure {
       rectA = [x0, y0, x1, axis_pos];
       rectB = [x0, axis_pos, x1, y1];
     }
-    const treeA = new TreeStructure(rectA, this.points, this.idx + "-L");
-    const treeB = new TreeStructure(rectB, this.points, this.idx + "-R");
-    colorPalette.push(this.color);
+    const treeA = new TreeStructure(rectA, this.points, this.type, this.idx + "-L", this.rootRef);
+    const treeB = new TreeStructure(rectB, this.points, this.type, this.idx + "-R", this.rootRef);
     this.children = [treeA, treeB];
+    if (this.color !== undefined) {
+      this.rootRef.colorPalette.push(this.color);
+    }
     this.color = undefined;
-
+    treeA.color = this.rootRef.colorPalette.pop();
+    treeB.color = this.rootRef.colorPalette.pop();
     this.axis = axis;
     this.axis_pos = axis_pos;
   }
 
   delete_children() {
     this.children.forEach((child) => {
-      if (child.children.length === 0) {
-        colorPalette.push(child.color);
+      if (child.children.length === 0 && child.color !== undefined) {
+        this.rootRef.colorPalette.push(child.color);
       }
     })
-    this.color = colorPalette.pop();
     this.children = [];
     this.axis = undefined;
     this.axis_pos = undefined;
+    this.color = this.rootRef.colorPalette.pop();
+    //this.rootRef.recalculateColors();
   }
 
   get_leaves() {
@@ -162,7 +188,7 @@ export class TreeStructure {
   }
 
   get_line() {
-    if(this.axis === undefined) {
+    if (this.axis === undefined) {
       return undefined;
     }
     let lineStart = [this.rect[0], this.rect[1]];
@@ -183,7 +209,7 @@ export class TreeStructure {
 
   get_lines() {
     let lines = [];
-    if(this.axis !== undefined) {
+    if (this.axis !== undefined) {
       lines = [this.get_line()];
     }
     this.children.forEach((child) => {
@@ -193,11 +219,11 @@ export class TreeStructure {
   }
 
   get_path(x, y) {
-    if(this.children.length === 0) {
+    if (this.children.length === 0) {
       return [this];
     }
-    for(let i = 0; i < this.children.length; i++) {
-      if(this.children[i].contains(x, y)) {
+    for (let i = 0; i < this.children.length; i++) {
+      if (this.children[i].contains(x, y)) {
         return [this, ...this.children[i].get_path(x, y)];
       }
     }
@@ -219,9 +245,7 @@ export class TreeStructure {
     this.children = [];
     this.axis = undefined;
     this.axis_pos = undefined;
-    if(this.color === undefined) {
-      this.color = colorPalette.pop();
-    }
+    this.color = undefined;
   }
 
   reset_children() {
@@ -229,52 +253,46 @@ export class TreeStructure {
       child.reset_children();
     });
     this.children = [];
-    if(this.color !== undefined) {
-      colorPalette.push(this.color);
+    if (this.color !== undefined) {
+      this.rootRef.colorPalette.push(this.color);
     }
   }
 
   getTestPointNode() {
-    if(this.hasTestPoint) {
+    if (this.hasTestPoint) {
       return this;
     }
-    for(let i = 0; i < this.children.length; i++) {
+    for (let i = 0; i < this.children.length; i++) {
       const child = this.children[i];
       let childTestPointNode = child.getTestPointNode();
-      if(childTestPointNode !== undefined) {
+      if (childTestPointNode !== undefined) {
         return childTestPointNode
       }
     }
     return undefined;
   }
+
+  calculate_depth() {
+    let depth = 0;
+    this.children.forEach((child) => {
+      let curDepth = 1 + child.calculate_depth();
+      if(curDepth > depth) {
+        depth = curDepth;
+      }
+    });
+    return depth;
+  }
 }
 
-export function convertPythonTree(pythonTree, node) {
+export function convertPythonTree(pythonTree, node, numSteps=undefined) {
   if (pythonTree.children !== undefined && pythonTree.children.length > 0) {
+    if(numSteps !== undefined && pythonTree.step >= numSteps) {
+      return node;
+    }
     node.split(pythonTree.feature, pythonTree.threshold);
     node.children.forEach((child, childidx) => {
-      convertPythonTree(pythonTree.children[childidx], child);
+      convertPythonTree(pythonTree.children[childidx], child, numSteps);
     })
   }
   return node;
 }
-
-
-export function clipPythonTree(pythonTree,node, stepsToShow) {
-  if (stepsToShow === 0) {
-    pythonTree.children = []
-  }
-  if (stepsToShow === 1) {
-
-    pythonTree.children[0].children = []
-    pythonTree.children[1].children = []
-  }
-
-  if (stepsToShow === 2) {
-    pythonTree.children[0].children = []
-    pythonTree.children[1].children[0].children = []
-    pythonTree.children[1].children[1].children = []
-  }
-  
-  return convertPythonTree(pythonTree, node)
-} 

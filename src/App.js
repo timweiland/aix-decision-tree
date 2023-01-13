@@ -20,11 +20,11 @@ import FinalScreen from './screens/FinalScreen';
 
 const mietdaten = mietdatenJSON.data;
 
-const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten);
-const aiTreeStructure = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"));
-const aiTreeClipped2 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 2);
-const aiTreeClipped1 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 1);
-const aiTreeClipped0 = clipPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai-root"), 0);
+const initialStructure = new TreeStructure([0, 0, 100, 100], mietdaten, "user");
+const aiTreeStructure = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai", "ai-root"));
+const aiTreeClipped2 = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai", "ai-root"), 2);
+const aiTreeClipped1 = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai", "ai-root"), 1);
+const aiTreeClipped0 = convertPythonTree(aiPythonTree, new TreeStructure([0, 0, 100, 100], mietdaten, "ai", "ai-root"), 0);
 
 
 const showAITreeStore = create((set) => ({

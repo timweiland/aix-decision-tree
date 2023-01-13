@@ -15,7 +15,7 @@ import Taskbar from "../taskbar/taskbar";
 import Map from "../map/Map";
 import Tree from "../tree/Tree";
 
-import bob from "../assets/bob.png";
+import bob_mirrored from "../assets/bob_mirrored.png";
 // import hand from "../assets/hand_emoji.png";
 import Xarrow from "react-xarrows";
 import { get } from "lodash";
@@ -83,7 +83,7 @@ function Tutorial({
       <TreeColumn>
         <div>
           <div className="imgbobsmall">
-            <img id="bob" src={bob} alt="bob" />
+            <img id="bob" src={bob_mirrored} alt="bob_mirrored" />
           </div>
 
           {Counter >= 3 && (

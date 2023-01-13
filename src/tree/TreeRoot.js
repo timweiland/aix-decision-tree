@@ -2,7 +2,7 @@ import TreeNode from './TreeNode';
 import { ArcherElement } from 'react-archer';
 import React from 'react';
 
-export default function TreeRoot({ structure, colors}) {
+export default function TreeRoot({ structure, colors, isSmall}) {
     if (structure === {} || structure === null) {
         return null;
     }
@@ -18,14 +18,14 @@ export default function TreeRoot({ structure, colors}) {
                     }
                 }) : []
             }>
-            <div><TreeNode id={structure.idx} avgRent={avgRent} color={colors[structure.idx]} isSelected={structure.isSelected} hasTestPoint={structure.hasTestPoint} /></div>
+            <div><TreeNode id={structure.idx} avgRent={avgRent} color={colors[structure.idx]} isSelected={structure.isSelected} hasTestPoint={structure.hasTestPoint} isSmall={isSmall} /></div>
         </ArcherElement>
-        <div style={{ width: '100%', marginTop: '3rem', display: 'flex' }}>
+        <div style={{ width: '100%', marginTop: isSmall? '2rem' : '3rem', display: 'flex' }}>
             {
                 structure.children &&
                 structure.children.map((child, childidx) => {
                     return <div style={{ flex: '1' }} key={child.idx}>
-                        <TreeRoot structure={child} id={child.idx} key={child.idx} colors={colors} />
+                        <TreeRoot structure={child} id={child.idx} key={child.idx} colors={colors} isSmall={isSmall}/>
                     </div>
                 })
             }
