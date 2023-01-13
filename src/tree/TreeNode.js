@@ -11,7 +11,7 @@ const transition = {
 export default function TreeNode({ id, avgRent, color, isSelected, hasTestPoint }) {
     let backgroundColor = 'lightgray';
     if (color) {
-        backgroundColor = color.hex();
+        backgroundColor = color;
     }
     let nodeCaption = "???";
     if (avgRent !== "?") {

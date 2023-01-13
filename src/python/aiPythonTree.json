@@ -1,1 +1,87 @@
-{"avgRent": 24, "impurity": 66, "feature": 0, "threshold": 42, "children": [{"avgRent": 19, "impurity": 41, "feature": 1, "threshold": 48, "children": [{"avgRent": 16, "impurity": 13, "feature": -1, "threshold": -1}, {"avgRent": 21, "impurity": 60, "feature": 1, "threshold": 59, "children": [{"avgRent": 30, "impurity": 49, "feature": -1, "threshold": -1}, {"avgRent": 18, "impurity": 26, "feature": -1, "threshold": -1}]}]}, {"avgRent": 29, "impurity": 36, "feature": 1, "threshold": 30, "children": [{"avgRent": 24, "impurity": 6, "feature": -1, "threshold": -1}, {"avgRent": 31, "impurity": 35, "feature": 1, "threshold": 75, "children": [{"avgRent": 33, "impurity": 43, "feature": -1, "threshold": -1}, {"avgRent": 28, "impurity": 6, "feature": -1, "threshold": -1}]}]}]}
+{
+    "avgRent": 24,
+    "impurity": 66,
+    "feature": 0,
+    "threshold": 42,
+    "step": 0,
+    "children": [
+        {
+            "avgRent": 19,
+            "impurity": 41,
+            "feature": 1,
+            "threshold": 48,
+            "step": 2,
+            "children": [
+                {
+                    "avgRent": 16,
+                    "impurity": 13,
+                    "feature": -1,
+                    "threshold": -1,
+                    "step": 4
+                },
+                {
+                    "avgRent": 21,
+                    "impurity": 60,
+                    "feature": 1,
+                    "threshold": 59,
+                    "step": 4,
+                    "children": [
+                        {
+                            "avgRent": 30,
+                            "impurity": 49,
+                            "feature": -1,
+                            "threshold": -1,
+                            "step": 4
+                        },
+                        {
+                            "avgRent": 18,
+                            "impurity": 26,
+                            "feature": -1,
+                            "threshold": -1,
+                            "step": 4
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "avgRent": 29,
+            "impurity": 36,
+            "feature": 1,
+            "threshold": 30,
+            "step": 1,
+            "children": [
+                {
+                    "avgRent": 24,
+                    "impurity": 6,
+                    "feature": -1,
+                    "threshold": -1,
+                    "step": 4
+                },
+                {
+                    "avgRent": 31,
+                    "impurity": 35,
+                    "feature": 1,
+                    "threshold": 75,
+                    "step": 4,
+                    "children": [
+                        {
+                            "avgRent": 33,
+                            "impurity": 43,
+                            "feature": -1,
+                            "threshold": -1,
+                            "step": 4
+                        },
+                        {
+                            "avgRent": 28,
+                            "impurity": 6,
+                            "feature": -1,
+                            "threshold": -1,
+                            "step": 4
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
