@@ -14,3 +14,19 @@ img {
     padding-left: 10%;
     height: 80%;
 }
+
+.alice_laptop {
+    padding-top: 10%; 
+    position: absolute;
+    right: 0.5%;
+    bottom: 19.5%;
+    height: 93%;
+}
+
+.alice_map {
+    padding-top: 10%; 
+    position: absolute;
+    right: 0.5%;
+    bottom: 19.5%;
+    height: 93%;
+}

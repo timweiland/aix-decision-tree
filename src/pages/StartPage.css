@@ -6,9 +6,10 @@ img {
 
 .imgalice {
     padding-top: 10%; 
-    padding-left: 31%;
-    right: 0;
-    height: 80%;
+    position: absolute;
+    right: 0.5%;
+    bottom: 19.5%;
+    height: 93.5%;
 }
 
 

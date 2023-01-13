@@ -13,9 +13,9 @@ function StartPage() {
         <img src={bob} alt="bob" />
       </div>
 
-      <div className="column">
+      <div className="column" style={{ width: "500%" }}>
         <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-primary text-6xl top-8 mx-3 my-10">
+          <div className="chat-bubble chat-bubble-primary text-6xl top-8 my-10 w-full">
             <div className="m-3">
               Ich bin neu in Tübingen und will wissen, wie hoch die Miete für
               ein Studierendenzimmer ist!
@@ -23,7 +23,7 @@ function StartPage() {
           </div>
         </div>
         <div className="chat chat-end">
-          <div className="chat-bubble chat-bubble-secondary text-6xl mx-3 my-10">
+          <div className="chat-bubble chat-bubble-secondary text-6xl my-10">
             <div className="m-5">Hast Du Lust mitzumachen?</div>
           </div>
         </div>
