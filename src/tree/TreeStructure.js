@@ -271,6 +271,17 @@ export class TreeStructure {
     }
     return undefined;
   }
+
+  calculate_depth() {
+    let depth = 0;
+    this.children.forEach((child) => {
+      let curDepth = 1 + child.calculate_depth();
+      if(curDepth > depth) {
+        depth = curDepth;
+      }
+    });
+    return depth;
+  }
 }
 
 export function convertPythonTree(pythonTree, node, numSteps=undefined) {
