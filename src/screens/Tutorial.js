@@ -74,7 +74,7 @@ function Tutorial({
           enableInteraction={Counter === 1 || Counter === 2}
         />
 
-        <Taskbar undo={undo} />
+        <Taskbar undo={undo} openTutorial={() => { }} />
       </MapColumn>
 
       <TreeColumn>

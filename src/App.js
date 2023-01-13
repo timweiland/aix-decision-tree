@@ -95,22 +95,27 @@ function App() {
     toggleAITree(false);
   }
 
+  const openTutorial = () => {
+    cleanUp();
+    setScreenState("tutorial");
+  }
+
   const resetTime = 150 // seconds
   useEffect(() => {
-      const inactivityInterval = setInterval(() => {
-        setInactivityTime(inactivityTime => inactivityTime + 1);
-      }, 1000);
+    const inactivityInterval = setInterval(() => {
+      setInactivityTime(inactivityTime => inactivityTime + 1);
+    }, 1000);
 
-      const resetTimer = () => {
-        setInactivityTime(0);
-      };
-  
-      document.addEventListener('click', resetTimer);
+    const resetTimer = () => {
+      setInactivityTime(0);
+    };
 
-      return () => {
-        clearInterval(inactivityInterval);
-        document.removeEventListener('click', resetTimer);
-      };
+    document.addEventListener('click', resetTimer);
+
+    return () => {
+      clearInterval(inactivityInterval);
+      document.removeEventListener('click', resetTimer);
+    };
   }, []);
 
   useEffect(() => {
@@ -122,9 +127,9 @@ function App() {
   return (
     <div className="h-screen flex">
       {screenState === "tutorial" &&
-        <Tutorial cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("initialScreen")} />}
+        <Tutorial cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("initialScreen")}/>}
       {screenState === "initialScreen" &&
-        <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} />}
+        <InitialScreen cleanUp={cleanUp} userTree={userTree} mietdaten={mietdaten} undo={undo} splitTree={splitTree} highlightNode={highlightNode} unhighlightAll={unhighlightAll} onComplete={() => setScreenState("showAITree")} openTutorial={openTutorial} />}
       {screenState === "showAITree" &&
         <ShowAITree mietdaten={mietdaten} userTree={userTree} aiTree={aiTree} continueHandler={continueHandler} setContinueHandler={setContinueHandler} aiTreeClipped0={aiTreeClipped0} aiTreeClipped1={aiTreeClipped1} aiTreeClipped2={aiTreeClipped2} onComplete={() => setScreenState("qualitativeComparison")} />}
       {screenState === "qualitativeComparison" &&
