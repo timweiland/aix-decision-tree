@@ -1,0 +1,104 @@
+import { useEffect, useState, useRef } from 'react';
+import Lottie from "lottie-react";
+
+import ColumnContainer from '../../columns/ColumnContainer';
+import MapColumn from '../../columns/MapColumn';
+import TreeColumn from '../../columns/TreeColumn';
+
+import Map from '../../map/Map';
+import Tree from '../../tree/Tree';
+
+import Bob from '../../mascots/Bob';
+import Alice from '../../mascots/Alice';
+
+import AccuracyComparison from './AccuracyComparison';
+
+import drumrollAnimation from '../../assets/drumroll_anim.json';
+
+const overall_avg_difference = (tree) => {
+    const leaves = tree.get_leaves();
+    let difference = 0;
+    let numNonEmpty = 0;
+    leaves.forEach((leaf) => {
+        if (leaf.avgDiff !== "?") {
+            difference += leaf.points.length * leaf.avgDiff;
+            numNonEmpty += leaf.points.length;
+        }
+    });
+
+    return Number((difference / numNonEmpty).toFixed(1));
+}
+
+export function QuantitativeComparison({ mietdaten, userTree, aiTree, setContinueHandler, onComplete }) {
+    const [screenState, setScreenState] = useState("drumroll");
+    const [bobMessage, setBobMessage] = useState(undefined);
+    const [bobExcited, setBobExcited] = useState(false);
+    const [aliceMessage, setAliceMessage] = useState(undefined);
+    const [aliceExcited, setAliceExcited] = useState(false);
+
+    const lottieRef = useRef();
+
+    let avgDiffUser = 0;
+    let avgDiffAI = 0;
+
+    avgDiffUser = overall_avg_difference(userTree.structure);
+    avgDiffAI = overall_avg_difference(aiTree.structure);
+
+    let isUserBetter = avgDiffUser < avgDiffAI;
+    let isAIBetter = avgDiffUser > avgDiffAI;
+
+    useEffect(() => {
+        if (screenState === "drumroll") {
+            lottieRef.current.setSpeed(3);
+            setBobMessage("Das waren aber nur drei Beispiele. Welcher Baum ist insgesamt genauer?");
+            setAliceMessage("Jetzt schauen wir, welcher Baum im Durchschnitt für ganz Tübingen genauer ist!");
+            setContinueHandler({ handler: () => setScreenState("revealComparison") });
+        }
+        else if (screenState === "revealComparison") {
+            if (isUserBetter) {
+                setBobMessage("Juhu! Wir haben die KI geschlagen! Toll gemacht!");
+                setBobExcited(true);
+                setAliceMessage("Wow, du bist echt gut!");
+            }
+            else if (isAIBetter) {
+                setBobMessage("Guter Versuch! Wollen wir es nochmal probieren?");
+                setAliceMessage("Nicht schlecht! Aber meine KI ist ein bisschen genauer.");
+            }
+            else {
+                setBobMessage("Hey, die beiden Bäume sind gleich gut!");
+                setAliceMessage("Was ein Zufall!");
+            }
+            setContinueHandler({handler: onComplete});
+        }
+    }, [screenState]);
+
+    return (
+        <ColumnContainer>
+            <MapColumn>
+                <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} />
+                {
+                    bobMessage &&
+                    <Bob message={bobMessage} excited={bobExcited} />
+                }
+            </MapColumn>
+
+            <TreeColumn>
+                <div className="mt-4">
+                    <Tree structure={userTree.structure} colors={userTree.structure.get_colors()} arrow="left" />
+                </div>
+                { screenState === "drumroll" && <Lottie className="h-96 w-96 mx-auto" animationData={drumrollAnimation} loop={true} lottieRef={lottieRef} />}
+                { screenState === "revealComparison" && <AccuracyComparison avgDiffUser={avgDiffUser} avgDiffAI={avgDiffAI}/> }
+                <div className="mt-2">
+                    <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} arrow="right" />
+                </div>
+            </TreeColumn>
+            <MapColumn>
+                <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} />
+                {
+                    aliceMessage &&
+                    <Alice message={aliceMessage} excited={aliceExcited} />
+                }
+            </MapColumn>
+        </ColumnContainer>
+    )
+}

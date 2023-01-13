@@ -33,6 +33,7 @@ export class TreeStructure {
       this.avgRent += point[2];
     });
     this.avgRent /= this.points.length;
+    this.avgRent = Number(this.avgRent.toFixed(1))
   }
 
   calculate_avg_deviation() {
@@ -47,6 +48,7 @@ export class TreeStructure {
     
     this.avgDeviation /= this.points.length;
     this.avgDeviation = this.avgDeviation**0.5;
+    this.avgDeviation = Number(this.avgDeviation.toFixed(1))
   }
 
   calculate_avg_difference(){
@@ -60,6 +62,7 @@ export class TreeStructure {
     });
 
     this.avgDiff /= this.points.length;
+    this.avgDiff = Number(this.avgDiff.toFixed(1))
   }
 
   split(axis, axis_pos) {
@@ -168,7 +171,7 @@ export class TreeStructure {
     lineStart[this.axis] = this.axis_pos;
     lineEnd[this.axis] = this.axis_pos;
 
-    return [lineStart, lineEnd];
+    return [lineStart, lineEnd, this.hasTestPoint];
   }
 
   unhighlightAll() {
@@ -209,6 +212,7 @@ export class TreeStructure {
   }
 
   reset() {
+    this.removeTestPoints();
     this.children.forEach((child) => {
       child.reset_children();
     });
