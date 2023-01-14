@@ -39,7 +39,7 @@ export default function Choose() {
             className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
             style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
             >
-                Komplexe Daten
+                Große Datenmengen
             </div>
         </Link>
         <Link to="/interpret1">

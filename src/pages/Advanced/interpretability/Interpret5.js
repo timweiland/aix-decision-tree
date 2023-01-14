@@ -24,13 +24,13 @@ export default function Interpret5() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-                Wenn man den Entscheidungsbaum vom Beginn bis zu den Enden liest, kann man für jede Gruppe nachvollziehen, hinsichtlich welcher Merkmale die Datenpunkte in dieser Gruppe ähnliche Werte haben. 
+                Wenn man den Entscheidungsbaum vom Beginn bis zu den Enden liest, kann man für jede Gruppe nachvollziehen, hinsichtlich welcher Merkmale die Datenpunkte in dieser Gruppe <i>ähnlich</i> sind.
             </div>
-            <div
+            {/*<div
             class="text-3xl text-black font-normal leading-relaxed"
             >
                Aus dieser <i>Ähnlichkeit</i> schließt der Algorithmus, dass es sich bei dieser Gruppe um Datenpunkte mit einem bestimmten Mietpreis oder der gleichen Fischart handelt.
-            </div>
+    </div>*/}
             </Stack>
 
             <div>

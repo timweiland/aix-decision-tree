@@ -25,6 +25,11 @@ export default function Rents4() {
             class="text-3xl text-black font-normal leading-relaxed"
             >
                 Der zugehörige Entscheidungsbaum ist zunehmend verzweigt. Mit jeder neuen Unterteilung wird der Unterschied zwischen den echten Mieten und der durchschnittlichen Miete in dem jeweiligen Bereich kleiner, sodass die Schätzungen der KI am Ende sehr genau werden.
+            </div>            
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+                Die Schätzungen der KI entsprechen den durchschnittlichen Mieten in den jeweiligen Bereichen.
             </div>
             </Stack>
 

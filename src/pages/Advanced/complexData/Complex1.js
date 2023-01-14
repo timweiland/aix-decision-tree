@@ -14,7 +14,7 @@ export default function Complex1() {
             <div
             class="text-6xl mb-10 text-black font-semibold"
             >
-                Entscheidungsbäume für große, komplexe Daten
+                Entscheidungsbäume für große Datenmengen
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
