@@ -204,6 +204,7 @@ function Tutorial({
           )}
         </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
+        {/* move within tutorial */}
         {Counter !== 0 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
@@ -215,6 +216,7 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </div>
         )}
+        {/* move back to dialogue when counter is 0 */}
         {Counter === 0 && (
           <Link to="/Dialogue">
             <div
@@ -226,6 +228,7 @@ function Tutorial({
           </Link>
         )}
         {/* ++++++++++++++++ RIGHT ARROW ++++++++++++++++ */}
+        {/* move forward within tutorial */}
         {Counter <= 5 && Counter !== 1 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
@@ -237,6 +240,7 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         )}
+        {/* set constraint: only move forward when drawing at least one line */}
         {Counter === 1 && NoOfUserLines < 1 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
@@ -248,6 +252,7 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </div>
         )}
+        {/* move forward if at least one line */}
         {Counter === 1 && NoOfUserLines >= 1 && NoOfUserLines <= 3 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
@@ -259,7 +264,9 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         )}
+        {/* move automatically forward when 3 lines are drawn */}
         {Counter === 1 && NoOfUserLines === 3 && setCounter(Counter + 1)}
+        {/* move automatically forward when 3 lines are drawn */}
         {Counter === 2 && NoOfUserLines >= 4 && setCounter(Counter + 1)}
         {Counter > 5 && (
           <div
