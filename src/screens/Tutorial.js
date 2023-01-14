@@ -17,9 +17,6 @@ import Map from "../map/Map";
 import Tree from "../tree/Tree";
 
 import bob_mirrored from "../assets/bob_mirrored.png";
-// import hand from "../assets/hand_emoji.png";
-import Xarrow from "react-xarrows";
-import { get } from "lodash";
 
 function Tutorial({
   cleanUp,
@@ -62,7 +59,7 @@ function Tutorial({
     );
   };
 
-  const bubblebob = "chat-bubble chat-bubble-primary text-3xl";
+  const bubblebob = "chat-bubble chat-bubble-primary text-3xl bottom-0";
   const textmargin = "m-2";
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +93,7 @@ function Tutorial({
             style={{
               fontSize: "400%",
               top: `${85}%`,
-              left: "79%",
+              left: "88%",
             }}
           >
             <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
@@ -112,74 +109,98 @@ function Tutorial({
           </div>
 
           {Counter >= 3 && (
-            <Tree
-              structure={userTree.structure}
-              colors={userTree.structure.get_colors()}
-            />
+            <div className="mt-4">
+              <Tree
+                structure={userTree.structure}
+                colors={userTree.structure.get_colors()}
+              />
+            </div>
           )}
 
           {Counter === 0 && (
-            <div>
-              <div id="start" className="speechbubble">
-                <div className="chat chat-end">
-                  <div className={bubblebob}>
-                    <div className={textmargin}>
-                      Hier ist eine Karte von Tübingen, auf der die Mietpreise
-                      pro Quadratmeter eingezeichnet sind.
-                    </div>
+            <div className="speechbubble">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className={textmargin}>
+                    Hier ist eine Karte von Tübingen, auf der die Mietpreise pro
+                    Quadratmeter eingezeichnet sind.
                   </div>
                 </div>
               </div>
             </div>
           )}
           {Counter === 1 && (
-            <div class="box_dialogue_middle sbbob">
-              Du kannst horizontale oder vertikale Striche zeichnen, um die
-              Karte zu unterteilen. Probiere es gerne aus!
+            <div className="speechbubble">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className={textmargin}>
+                    Du kannst horizontale oder vertikale Striche zeichnen, um
+                    die Karte zu unterteilen. Probiere es gerne aus!
+                  </div>
+                </div>
+              </div>
             </div>
           )}
           {Counter === 2 && (
-            <div>
-              <div id="box" className="box_dialogue_small sbbob">
-                Hier kannst du einen Strich rückgängig machen...
+            <div className="speechbubble">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className={textmargin}>
+                    Hier kannst du einen Strich rückgängig machen...
+                  </div>
+                </div>
               </div>
-              <Xarrow
-                start="box" //can be react ref
-                end="rotateleft" //or an id
-                color="black"
-                endAnchor="top"
-                path="smooth"
-                curveness={1}
-                animateDrawing
-                strokeWidth={10}
-              />
             </div>
           )}
           {Counter === 3 && (
-            <div class="box_dialogue_small sbbob">
-              Parallel entsteht ein sogenannter Entscheidungsbaum, der deine
-              Unterteilungen in der Karte darstellt. Jeder Kreis steht für einen
-              Bereich in der Karte.
+            <div className="speechbubble_low">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className={textmargin}>
+                    Parallel entsteht ein sogenannter Entscheidungsbaum, der
+                    deine Unterteilungen in der Karte darstellt. Jeder Kreis
+                    steht für einen Bereich in der Karte.
+                  </div>
+                </div>
+              </div>
             </div>
           )}
           {Counter === 4 && (
             <div>
-              <div class="box_dialogue_small sbbob">
-                Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in
-                diesem Bereich an.
+              <div className="speechbubble_low">
+                <div className="chat chat-end">
+                  <div className={bubblebob}>
+                    <div className={textmargin}>
+                      Die Zahl im Kreis gibt den Durchschnittspreis der Mieten
+                      in diesem Bereich an.
+                    </div>
+                  </div>
+                </div>
               </div>
               {DoAverageHighlight(userTree.structure.get_leaves()[0])}
             </div>
           )}
           {Counter === 5 && (
-            <div class="box_dialogue_small sbbob">
-              Versuche die Striche so zu ziehen, dass die beiden Bereiche
-              möglichst unterschiedliche Durchschnittspreise haben. Für deinen
-              Baum kannst du 5 Striche ziehen.
+            <div className="speechbubble_low">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className={textmargin}>
+                    Versuche die Striche so zu ziehen, dass Bereiche mit
+                    ähnlichen Mietpreisen voneinander abgegrenzt werden. Für
+                    deinen Baum kannst du 5 Striche ziehen.
+                  </div>
+                </div>
+              </div>
             </div>
           )}
           {Counter === 6 && (
-            <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
+            <div className="speechbubble_low">
+              <div className="chat chat-end">
+                <div className={bubblebob}>
+                  <div className="m-2 text-5xl">Bereit? Los geht's!</div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
@@ -227,7 +248,7 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </div>
         )}
-        {Counter === 1 && NoOfUserLines >= 1 && NoOfUserLines <= 4 && (
+        {Counter === 1 && NoOfUserLines >= 1 && NoOfUserLines <= 3 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
             style={{ fontSize: "50pt" }}
@@ -238,8 +259,8 @@ function Tutorial({
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         )}
-        {Counter === 1 && NoOfUserLines === 4 && setCounter(Counter + 1)}
-        {Counter === 2 && NoOfUserLines >= 5 && setCounter(Counter + 1)}
+        {Counter === 1 && NoOfUserLines === 3 && setCounter(Counter + 1)}
+        {Counter === 2 && NoOfUserLines >= 4 && setCounter(Counter + 1)}
         {Counter > 5 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
