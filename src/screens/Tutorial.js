@@ -31,8 +31,14 @@ function Tutorial({
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const [Counter, setCounter] = useState(0);
+  const [histCounter, setHistCounter] = useState(-1);
+  const [FlagHighlight, setFlagHighlight] = useState(0);
 
   const NoOfUserLines = userTree.structure.get_lines().length;
+
+  console.log("HistCount", histCounter);
+  console.log("Counter", Counter);
+  console.log("Flag", FlagHighlight);
 
   const DoAverageHighlight = (node) => {
     node.hasTestPoint = true;
@@ -41,11 +47,10 @@ function Tutorial({
   const ShowAvgRent = (node) => {
     let avgrent = node.avgRent;
     let coord = node.rect;
-    console.log(coord);
     let scaling = coord[2] * coord[3] * 0.1;
-    console.log(scaling * 0.01);
     return (
       <div
+        id="showavgrent"
         style={{
           position: "absolute",
           fontSize: `${scaling}%`,
@@ -57,6 +62,10 @@ function Tutorial({
         {Math.round(avgrent)}€
       </div>
     );
+  };
+
+  const RemoveAvgHighlight = (node) => {
+    node.hasTestPoint = false;
   };
 
   const bubblebob = "chat-bubble chat-bubble-primary text-3xl bottom-0";
@@ -108,7 +117,7 @@ function Tutorial({
             <img id="bob" src={bob_mirrored} alt="bob_mirrored" />
           </div>
 
-          {Counter >= 3 && (
+          {Counter != 6 && Counter >= 3 && (
             <div className="mt-4">
               <Tree
                 structure={userTree.structure}
@@ -127,6 +136,7 @@ function Tutorial({
                   </div>
                 </div>
               </div>
+              {userTree.structure.reset()}
             </div>
           )}
           {Counter === 1 && (
@@ -153,16 +163,19 @@ function Tutorial({
             </div>
           )}
           {Counter === 3 && (
-            <div className="speechbubble_low">
-              <div className="chat chat-end">
-                <div className={bubblebob}>
-                  <div className={textmargin}>
-                    Parallel entsteht ein sogenannter Entscheidungsbaum, der
-                    deine Unterteilungen in der Karte darstellt. Jeder Kreis
-                    steht für einen Bereich in der Karte.
+            <div>
+              <div className="speechbubble_low">
+                <div className="chat chat-end">
+                  <div className={bubblebob}>
+                    <div className={textmargin}>
+                      Parallel entsteht ein sogenannter Entscheidungsbaum, der
+                      deine Unterteilungen in der Karte darstellt. Jeder Kreis
+                      steht für einen Bereich in der Karte.
+                    </div>
                   </div>
                 </div>
               </div>
+              {RemoveAvgHighlight(userTree.structure.get_leaves()[0])}
             </div>
           )}
           {Counter === 4 && (
@@ -181,16 +194,19 @@ function Tutorial({
             </div>
           )}
           {Counter === 5 && (
-            <div className="speechbubble_low">
-              <div className="chat chat-end">
-                <div className={bubblebob}>
-                  <div className={textmargin}>
-                    Versuche die Striche so zu ziehen, dass Bereiche mit
-                    ähnlichen Mietpreisen voneinander abgegrenzt werden. Für
-                    deinen Baum kannst du 5 Striche ziehen.
+            <div>
+              <div className="speechbubble_low">
+                <div className="chat chat-end">
+                  <div className={bubblebob}>
+                    <div className={textmargin}>
+                      Versuche die Striche so zu ziehen, dass Bereiche mit
+                      ähnlichen Mietpreisen voneinander abgegrenzt werden. Für
+                      deinen Baum kannst du 5 Striche ziehen.
+                    </div>
                   </div>
                 </div>
               </div>
+              {RemoveAvgHighlight(userTree.structure.get_leaves()[0])}
             </div>
           )}
           {Counter === 6 && (
@@ -200,16 +216,18 @@ function Tutorial({
                   <div className="m-2 text-5xl">Bereit? Los geht's!</div>
                 </div>
               </div>
+              {/* {userTree.structure.reset()} */}
             </div>
           )}
         </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
-        {/* move within tutorial */}
+        {/* move within tutorial normally */}
         {Counter !== 0 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
             style={{ fontSize: "50pt" }}
             onClick={() => {
+              setHistCounter(Counter);
               setCounter(Counter - 1);
             }}
           >
@@ -227,6 +245,7 @@ function Tutorial({
             </div>
           </Link>
         )}
+
         {/* ++++++++++++++++ RIGHT ARROW ++++++++++++++++ */}
         {/* move forward within tutorial */}
         {Counter <= 5 && Counter !== 1 && (
@@ -234,30 +253,20 @@ function Tutorial({
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
             style={{ fontSize: "50pt" }}
             onClick={() => {
+              setHistCounter(Counter);
               setCounter(Counter + 1);
             }}
           >
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         )}
-        {/* set constraint: only move forward when drawing at least one line */}
-        {Counter === 1 && NoOfUserLines < 1 && (
-          <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
-            style={{ fontSize: "50pt" }}
-            onClick={() => {
-              setCounter(Counter - 1);
-            }}
-          >
-            <FontAwesomeIcon icon={faArrowLeftLong} />
-          </div>
-        )}
-        {/* move forward if at least one line */}
-        {Counter === 1 && NoOfUserLines >= 1 && NoOfUserLines <= 3 && (
+        {/* show forward button if at least two lines and max three lines are drawn */}
+        {Counter === 1 && NoOfUserLines >= 2 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
             style={{ fontSize: "50pt" }}
             onClick={() => {
+              setHistCounter(Counter);
               setCounter(Counter + 1);
             }}
           >
@@ -265,9 +274,19 @@ function Tutorial({
           </div>
         )}
         {/* move automatically forward when 3 lines are drawn */}
-        {Counter === 1 && NoOfUserLines === 3 && setCounter(Counter + 1)}
-        {/* move automatically forward when 3 lines are drawn */}
-        {Counter === 2 && NoOfUserLines >= 4 && setCounter(Counter + 1)}
+        {Counter === 1 &&
+          histCounter != 2 &&
+          NoOfUserLines === 3 &&
+          //setHistCounter(Counter) &&
+          setCounter(Counter + 1)}
+
+        {/* return: move forward after pressing return 1x, and maximally one additional line is drawn */}
+        {Counter === 2 &&
+          histCounter != 3 &&
+          NoOfUserLines === 1 &&
+          setHistCounter(Counter) &&
+          setCounter(Counter + 1)}
+
         {Counter > 5 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
