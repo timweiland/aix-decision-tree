@@ -26,6 +26,13 @@
     height: 100%;
     text-align: center;
 }
+
+.speechbubble {
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    bottom: 0;
+}
   
 .headers {
     font-size: 40px;

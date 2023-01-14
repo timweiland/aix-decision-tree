@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightLong,
   faArrowLeftLong,
+  faArrowDownLong,
 } from "@fortawesome/free-solid-svg-icons";
 
 import ColumnContainer from "../columns/ColumnContainer";
@@ -36,8 +37,6 @@ function Tutorial({
 
   const NoOfUserLines = userTree.structure.get_lines().length;
 
-  const [ShowArrow, setShowArrow] = useState(true);
-
   const DoAverageHighlight = (node) => {
     node.hasTestPoint = true;
   };
@@ -63,6 +62,9 @@ function Tutorial({
     );
   };
 
+  const bubblebob = "chat-bubble chat-bubble-primary text-3xl";
+  const textmargin = "m-2";
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <ColumnContainer>
@@ -76,7 +78,30 @@ function Tutorial({
           unhighlightAll={unhighlightAll}
           enableInteraction={Counter === 1 || Counter === 2}
         />
-
+        {Counter === 0 && (
+          <div
+            className="absolute hover:cursor-pointer bg-white opacity-60 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3"
+            style={{
+              fontSize: "400%",
+              top: `${85}%`,
+              left: "30%",
+            }}
+          >
+            <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
+          </div>
+        )}
+        {Counter === 2 && (
+          <div
+            className="absolute hover:cursor-pointer bg-white opacity-60 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3"
+            style={{
+              fontSize: "400%",
+              top: `${85}%`,
+              left: "79%",
+            }}
+          >
+            <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
+          </div>
+        )}
         <Taskbar undo={undo} openTutorial={() => {}} />
       </MapColumn>
 
@@ -92,79 +117,71 @@ function Tutorial({
               colors={userTree.structure.get_colors()}
             />
           )}
-        </div>
-        {Counter === 0 &&
-          setTimeout(() => {
-            setShowArrow(false);
-          }, 5000) && (
+
+          {Counter === 0 && (
             <div>
-              <div id="box" class="box_dialogue_middle sbbob">
-                Hier ist eine Karte von Tübingen. Ein Punkt steht jeweils für
-                ein Zimmer. Je größer der Punkt desto höher die Miete.
+              <div id="start" className="speechbubble">
+                <div className="chat chat-end">
+                  <div className={bubblebob}>
+                    <div className={textmargin}>
+                      Hier ist eine Karte von Tübingen, auf der die Mietpreise
+                      pro Quadratmeter eingezeichnet sind.
+                    </div>
+                  </div>
+                </div>
               </div>
-              {ShowArrow && (
-                <Xarrow
-                  start="box"
-                  end="taskbar20"
-                  color="black"
-                  startAnchor="bottom"
-                  endAnchor="top"
-                  path="smooth"
-                  strokeWidth={10}
-                  animateDrawing
-                />
-              )}
             </div>
           )}
-        {Counter === 1 && (
-          <div class="box_dialogue_middle sbbob">
-            Du kannst horizontale oder vertikale Striche zeichnen, um die Karte
-            zu unterteilen. Probiere es gerne aus!
-          </div>
-        )}
-        {Counter === 2 && (
-          <div>
-            <div id="box" className="box_dialogue_small sbbob">
-              Hier kannst du einen Strich rückgängig machen...
+          {Counter === 1 && (
+            <div class="box_dialogue_middle sbbob">
+              Du kannst horizontale oder vertikale Striche zeichnen, um die
+              Karte zu unterteilen. Probiere es gerne aus!
             </div>
-            <Xarrow
-              start="box" //can be react ref
-              end="rotateleft" //or an id
-              color="black"
-              endAnchor="top"
-              path="smooth"
-              curveness={1}
-              animateDrawing
-              strokeWidth={10}
-            />
-          </div>
-        )}
-        {Counter === 3 && (
-          <div class="box_dialogue_small sbbob">
-            Parallel entsteht ein sogenannter Entscheidungsbaum, der deine
-            Unterteilungen in der Karte darstellt. Jeder Kreis steht für einen
-            Bereich in der Karte.
-          </div>
-        )}
-        {Counter === 4 && (
-          <div>
+          )}
+          {Counter === 2 && (
+            <div>
+              <div id="box" className="box_dialogue_small sbbob">
+                Hier kannst du einen Strich rückgängig machen...
+              </div>
+              <Xarrow
+                start="box" //can be react ref
+                end="rotateleft" //or an id
+                color="black"
+                endAnchor="top"
+                path="smooth"
+                curveness={1}
+                animateDrawing
+                strokeWidth={10}
+              />
+            </div>
+          )}
+          {Counter === 3 && (
             <div class="box_dialogue_small sbbob">
-              Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in diesem
-              Bereich an.
+              Parallel entsteht ein sogenannter Entscheidungsbaum, der deine
+              Unterteilungen in der Karte darstellt. Jeder Kreis steht für einen
+              Bereich in der Karte.
             </div>
-            {DoAverageHighlight(userTree.structure.get_leaves()[0])}
-          </div>
-        )}
-        {Counter === 5 && (
-          <div class="box_dialogue_small sbbob">
-            Versuche die Striche so zu ziehen, dass die beiden Bereiche
-            möglichst unterschiedliche Durchschnittspreise haben. Für deinen
-            Baum kannst du 5 Striche ziehen.
-          </div>
-        )}
-        {Counter === 6 && (
-          <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
-        )}
+          )}
+          {Counter === 4 && (
+            <div>
+              <div class="box_dialogue_small sbbob">
+                Die Zahl im Kreis gibt den Durchschnittspreis der Mieten in
+                diesem Bereich an.
+              </div>
+              {DoAverageHighlight(userTree.structure.get_leaves()[0])}
+            </div>
+          )}
+          {Counter === 5 && (
+            <div class="box_dialogue_small sbbob">
+              Versuche die Striche so zu ziehen, dass die beiden Bereiche
+              möglichst unterschiedliche Durchschnittspreise haben. Für deinen
+              Baum kannst du 5 Striche ziehen.
+            </div>
+          )}
+          {Counter === 6 && (
+            <div class="box_dialogue_small sbbob">Bereit? Los geht's!</div>
+          )}
+        </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
         {Counter !== 0 && (
           <div
