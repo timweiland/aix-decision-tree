@@ -29,7 +29,7 @@ export default function Rents5() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-                Gleichzeitig bleiben die Ergebnisse/Vorhersagen von Entscheidungsbäumen auch bei komplexen Daten interpretierbar. Das macht sie zu einem sehr beliebten Algorithmus.
+                Gleichzeitig bleiben die Ergebnisse von Entscheidungsbäumen auch bei komplexen Daten interpretierbar. Das macht sie zu einem sehr beliebten Algorithmus.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"

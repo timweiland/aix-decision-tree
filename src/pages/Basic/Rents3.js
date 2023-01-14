@@ -24,17 +24,12 @@ export default function Rents3() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Am besten ist die Unterteilung, bei der die Unterschiede zwischen den echten Mietpreisen und der durchschnittlichen Miete, gemittelt über beide Bereiche, am <i>kleinsten</i> sind. Es spielen also die Unterschiede für beide Bereiche zusammen eine Rolle.
+               Am besten ist die Unterteilung, bei der die Unterschiede zwischen den echten Mietpreisen und der durchschnittlichen Miete in den Bereichen am kleinsten ist.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
                 Die entsprechende Unterteilung resultiert in einer Linie auf der Karte und einer Verzweigung im Entscheidungsbaum.
-            </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-                Die Schätzungen der KI entsprechen den durchschnittlichen Mieten in den jeweiligen Bereichen.
             </div>
             </Stack>
 

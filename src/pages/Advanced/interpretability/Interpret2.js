@@ -24,7 +24,7 @@ export default function Interpret2() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Auf der Karte Tübingens wurden die Datenpunkte in jedem Schritt unterteilt in <i>links oder rechts</i>, bzw. <i>oberhalb oder unterhalb</i> der Trennungslinie. 
+               Auf der Karte Tübingens wurden die Datenpunkte in jedem Schritt unterteilt in weiter <i>links oder rechts</i>, bzw. weiter <i>oberhalb oder unterhalb</i> der Trennungslinie. 
             </div>
             </Stack>
 

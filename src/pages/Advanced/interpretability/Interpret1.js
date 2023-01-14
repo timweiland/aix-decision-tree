@@ -24,12 +24,7 @@ export default function Interpret1() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Die KI zeichnet Schritt für Schritt entweder eine waagerechte oder eine senkrechte Linie in die Karte ein.
-            </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-               In jedem Schritt teilt sie die Datenpunkte anhand eines der beiden Merkmale auf, entweder Breitengrad (waagerechte Linie) oder Längengrad (senkrechte Linie).
+               Jedes Mal, wenn die KI eine Linie in die Karte zeichnet, teilt die Datenpunkte anhand eines der beiden Merkmale auf: Entweder Längengrad (waagerechte Linie) oder Breitengrad (senkrechte Linie).
             </div>
             </Stack>
 
