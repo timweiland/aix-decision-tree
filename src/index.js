@@ -24,7 +24,7 @@ import Interpret4 from "./pages/Advanced/interpretability/Interpret4";
 import Interpret5 from "./pages/Advanced/interpretability/Interpret5";
 import Appl1 from "./pages/Advanced/Applications/Appl1";
 import Appl2 from "./pages/Advanced/Applications/Appl2";
-import FinalScreen from "./screens/FinalScreen";
+import FinalScreen from "./screens/FinalScreen2";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

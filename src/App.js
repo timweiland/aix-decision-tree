@@ -16,7 +16,7 @@ import InitialScreen from './screens/InitialScreen';
 import { ShowAITree } from './screens/ShowAITree';
 import QualitativeComparison from './screens/qualitativeComparison/QualitativeComparison';
 import { QuantitativeComparison } from './screens/quantitativeComparison/QuantitativeComparison';
-import FinalScreen from './screens/FinalScreen';
+import FinalScreen from './screens/FinalScreen2';
 
 const mietdaten = mietdatenJSON.data;
 

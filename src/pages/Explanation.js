@@ -57,7 +57,7 @@ function Explanation() {
                     className="absolute hover:cursor-pointer rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white pt-10"
                     style={{ fontSize: "50pt", width: "50vw", height: "9vh", textAlign: "center"}}
                 >
-                    Grundlagen
+                    Algorithmus
                 </div>
             </Link>
             <Link to="/choose">
