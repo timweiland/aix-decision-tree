@@ -131,8 +131,9 @@ function Tutorial({
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div className={textmargin}>
-                    Hier ist eine Karte von Tübingen, auf der die Mietpreise pro
-                    Quadratmeter eingezeichnet sind.
+                    Hier ist eine Karte von Tübingen – jeder Punkt steht für ein
+                    Studierendenzimmer. Je größer der Punkt desto höher der
+                    Mietpreis.
                   </div>
                 </div>
               </div>
@@ -144,8 +145,9 @@ function Tutorial({
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div className={textmargin}>
-                    Du kannst horizontale oder vertikale Striche zeichnen, um
-                    die Karte zu unterteilen. Probiere es gerne aus!
+                    Wir machen erstmal einen Probedurchlauf. Du kannst
+                    horizontale oder vertikale Striche zeichnen, um die Karte zu
+                    unterteilen. Probiere es gerne aus!
                   </div>
                 </div>
               </div>
@@ -169,8 +171,9 @@ function Tutorial({
                   <div className={bubblebob}>
                     <div className={textmargin}>
                       Parallel entsteht ein sogenannter Entscheidungsbaum, der
-                      deine Unterteilungen in der Karte darstellt. Jeder Kreis
-                      steht für einen Bereich in der Karte.
+                      deine Unterteilungen in der Karte darstellt. Die Farben
+                      der Kreise geben an, für welchen Bereich in der Karte sie
+                      stehen.
                     </div>
                   </div>
                 </div>
@@ -199,9 +202,10 @@ function Tutorial({
                 <div className="chat chat-end">
                   <div className={bubblebob}>
                     <div className={textmargin}>
-                      Versuche die Striche so zu ziehen, dass Bereiche mit
-                      ähnlichen Mietpreisen voneinander abgegrenzt werden. Für
-                      deinen Baum kannst du 5 Striche ziehen.
+                      Gleich geht die eigentliche Aufgabe los: Versuche die
+                      Striche so zu ziehen, dass Bereiche mit ähnlichen
+                      Mietpreisen voneinander abgegrenzt werden. Du kannst
+                      insgesamt 5 Striche ziehen.
                     </div>
                   </div>
                 </div>
@@ -283,8 +287,8 @@ function Tutorial({
         {/* return: move forward after pressing return 1x, and maximally one additional line is drawn */}
         {Counter === 2 &&
           histCounter != 3 &&
-          NoOfUserLines === 1 &&
-          setHistCounter(Counter) &&
+          (NoOfUserLines === 1 || NoOfUserLines >= 4) &&
+          //setHistCounter(Counter) &&
           setCounter(Counter + 1)}
 
         {Counter > 5 && (
