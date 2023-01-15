@@ -19,17 +19,15 @@ export default function Interpret4() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Bei Datenpunkten mit mehreren Merkmalen lässt sich die Unterteilung nicht mehr auf einer Karte visualisieren. 
+               Bei Datenpunkten mit mehreren Merkmalen lässt sich die Unterteilung nicht mehr auf einer Karte visualisieren. Hier hilft der Entscheidungsbaum weiter.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Trotzdem kann es sehr wichtig sein, nachzuvollziehen, wieso eine bestimmte Unterteilung gemacht wurde. 
+                Jede Verzweigung im Baum enthält das Merkmal und seinen Wert, anhand dessen in zwei Gruppen unterteilt wurde.
             </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-                Hier hilft der Entscheidungsbaum weiter.
+            <div>
+                Wenn man den Entscheidungsbaum vom Beginn bis zu den Enden liest, kann man für jede Gruppe nachvollziehen, hinsichtlich welcher Merkmale die Datenpunkte in den Gruppen <i>ähnlich</i> sind.
             </div>
             </Stack>
 

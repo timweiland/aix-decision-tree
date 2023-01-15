@@ -45,7 +45,7 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
 
     useEffect(() => {
         if (screenState === "intro0") {
-            setBobMessage("Ich habe eine coole Wohnung gefunden! Sie ist in der Karte gelb markiert. Schauen wir mal, was unser Baum über die Miete sagt.")
+            setBobMessage("Ich habe eine coole Wohnung gefunden! Sie ist in der Karte mit einem gelben Punkt markiert. Schauen wir mal, was unser Baum über die Miete sagt.")
             setContinueHandler({ handler: () => setScreenState("intro1") });
         }
         else if (screenState === "intro1") {

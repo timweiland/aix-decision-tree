@@ -5,27 +5,40 @@ import { faArrowLeftLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Stack from "@mui/material/Stack"
 import * as React from 'react';
 
-export default function Complex1() {  
+export default function Appl2() {  
     return (
         <div
         className="column-container"
         >
             <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
-            <div
-            class="text-6xl mb-10 text-black font-semibold"
-            >
-                Entscheidungsbäume für große Datenmengen
-            </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-               Im Beispiel der Mieten in Tübingen hat jeder Datenpunkt zwei Merkmale: Längengrad und Breitengrad, zusammen ergeben sie eine bestimmte Position auf der Karte. 
-            </div>
-            <div
-            class="text-3xl text-black font-normal leading-relaxed"
-            >
-               In vielen Fällen haben Daten deutlich mehr als zwei Merkmale. Fische können zum Beispiel mit den Merkmalen Länge, Gewicht, Anzahl der Flossen und Länge der Schwanzflosse beschrieben werden.
-            </div>
+                <div
+                class="text-6xl mb-10 text-black font-semibold"
+                >
+                    Entscheidungsbäume bei Krediten
+                </div>
+                <div
+                class="text-3xl text-black font-normal leading-relaxed"
+                >
+                    Banken können Entscheidungsbäume nutzen, um einzuschätzen, ob eine Person einen Kredit zurückzahlen wird oder nicht. Entsprechend können sie den Kredit bewilligen oder verweigern. 
+                </div>
+                <div
+                class="text-3xl text-black font-normal leading-relaxed"
+                >
+                    Relevante Merkmale sind unter anderem:
+                </div>
+                <div
+                class="text-3xl text-black font-normal leading-relaxed"
+                >
+                <p>&#9679; Höhe des Kredits</p>
+                <p>&#9679; Ersparnisse</p>
+                <p>&#9679; Gehalt</p>
+                <p>&#9679; Dauer der aktuellen Anstellung</p>
+                </div>
+                <div
+                class="text-3xl text-black font-normal leading-relaxed"
+                >
+                    Sollte die KI zu dem Ergebnis kommen, dass der Kredit vermutlich nicht zurückgezahlt werden wird, ist es für die Bank und den_die Antragsteller_in wichtig zu wissen, wieso.
+                </div>
             </Stack>
 
             <Link to="/final">
@@ -36,7 +49,7 @@ export default function Complex1() {
                     Menü
                 </div>
             </Link>
-            <Link to="/choose">
+            <Link to="/appl1">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                 style={{ fontSize: "50pt" }}
@@ -44,7 +57,7 @@ export default function Complex1() {
                     <FontAwesomeIcon icon={faArrowLeftLong} />
                 </div>
             </Link>
-            <Link to="/complex2">
+            <Link to="/choose">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                 style={{ fontSize: "50pt" }}
