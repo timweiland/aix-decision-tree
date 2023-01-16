@@ -139,8 +139,7 @@ function Tutorial({
                 <div className={bubblebob}>
                   <div className={textmargin}>
                     Hier ist eine Karte von Tübingen – jeder Punkt steht für ein
-                    Studierendenzimmer. Je größer der Punkt desto höher der
-                    Mietpreis.
+                    WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.
                   </div>
                 </div>
               </div>
