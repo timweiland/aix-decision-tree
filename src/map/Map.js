@@ -132,7 +132,7 @@ export default function Map({
     ctx.fillStyle = "#000000";
     // Draw all of the lines the user has drawn so far
     tree.get_lines().map((line) => {
-      if(line[2]) {
+      if (line[2]) {
         testPointLine = line;
       }
       ctx.beginPath();
@@ -166,10 +166,12 @@ export default function Map({
     // Paint each tree leaf in a different color
     const treeLeaves = tree.get_leaves();
     treeLeaves.forEach((leaf) => {
-      ctx.globalAlpha = 0.6;
-      ctx.fillStyle = leaf.color;
-      ctx.fillRect(...treeNodeToCanvasRect(leaf, canvas));
-      ctx.globalAlpha = 1.0;
+      if (leaf.color !== undefined) {
+        ctx.globalAlpha = 0.6;
+        ctx.fillStyle = leaf.color;
+        ctx.fillRect(...treeNodeToCanvasRect(leaf, canvas));
+        ctx.globalAlpha = 1.0;
+      }
     });
     if (isDrawing && highlightedRect) {
       // Highlight the area of the tree that the user is currently drawing inside
@@ -203,7 +205,7 @@ export default function Map({
         maxRent = rent;
       }
     });
-    if(testPointLine) {
+    if (testPointLine) {
       ctx.strokeStyle = "#FFFF00";
       ctx.lineWidth = 15;
       ctx.beginPath();
