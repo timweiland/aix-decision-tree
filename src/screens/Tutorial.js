@@ -93,15 +93,15 @@ function Tutorial({
               left: "30%",
             }}
           >
-            <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
+            {/* <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} /> */}
           </div>
         )}
         {Counter === 2 && (
           <div
-            className="absolute hover:cursor-pointer bg-white opacity-60 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3"
+            className="absolute bg-white opacity-90 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3 px-2 py-2"
             style={{
-              fontSize: "400%",
-              top: `${85}%`,
+              fontSize: "40px",
+              top: `${83}%`,
               left: "88%",
             }}
           >
@@ -113,6 +113,16 @@ function Tutorial({
 
       <TreeColumn>
         <div>
+          <div
+            className="absolute text-black text-opacity-30 text-shadow top-8 left-8"
+            style={{
+              fontSize: "40px",
+              textShadow:
+                "0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08)",
+            }}
+          >
+            TUTORIAL
+          </div>
           <div className="imgbobsmall">
             <img id="bob" src={bob_mirrored} alt="bob_mirrored" />
           </div>
@@ -228,8 +238,8 @@ function Tutorial({
         {/* move within tutorial normally */}
         {Counter !== 0 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
-            style={{ fontSize: "50pt" }}
+            className="absolute hover:cursor-pointer bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
               setCounter(Counter - 1);
@@ -242,8 +252,8 @@ function Tutorial({
         {Counter === 0 && (
           <Link to="/Dialogue">
             <div
-              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-50 text-white"
-              style={{ fontSize: "50pt" }}
+              className="absolute hover:cursor-pointer bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+              style={{ fontSize: "60px" }}
             >
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </div>
@@ -254,8 +264,8 @@ function Tutorial({
         {/* move forward within tutorial */}
         {Counter <= 5 && Counter !== 1 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-            style={{ fontSize: "50pt" }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
               setCounter(Counter + 1);
@@ -267,8 +277,8 @@ function Tutorial({
         {/* show forward button if at least two lines and max three lines are drawn */}
         {Counter === 1 && NoOfUserLines >= 2 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-            style={{ fontSize: "50pt" }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
               setCounter(Counter + 1);
@@ -293,8 +303,8 @@ function Tutorial({
 
         {Counter > 5 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-            style={{ fontSize: "50pt" }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
             onClick={() => {
               cleanUp();
               onComplete();

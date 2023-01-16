@@ -118,8 +118,8 @@ function Dialogue() {
 
         {Counter < 5 ? (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-            style={{ fontSize: "50pt" }}
+            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
             onClick={() => {
               setCounter(Counter + 1);
               // addStatement(Counter, "addStatement");
@@ -130,8 +130,8 @@ function Dialogue() {
         ) : (
           <Link to="/App">
             <div
-              className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-              style={{ fontSize: "50pt" }}
+              className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+              style={{ fontSize: "60px" }}
             >
               {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
               <FontAwesomeIcon icon={faArrowRightLong} />
@@ -141,45 +141,6 @@ function Dialogue() {
       </div>
     </div>
   );
-}
-
-function addStatement(counter, div_id) {
-  var theDiv = document.getElementById(div_id);
-
-  {
-    (() => {
-      switch (counter) {
-        case 1:
-          return theDiv.insertAdjacentHTML(
-            "beforeend",
-            //"<div class='box_dialogue sbbob'> Wenn ich den Durchschnitt berechne, weiß ich ungefähr, wie hoch die Miete ist...</div>"
-            "<div className='chat chat-start'><div className='chat-bubble chat-bubble-secondary text-3xl mx-3 my-10'><div className='m-5'>Hier ist eine Karte von Tübingen, auf der die Mietpreise proQuadratmeter eingezeichnet sind.</div></div></div>"
-          );
-        case 2:
-          return theDiv.insertAdjacentHTML(
-            "beforeend",
-            "<div class='box_dialogue sbalice'>Das ist aber nicht sehr genau. Es gibt viele Zimmer, die deutlich teurer oder billiger sind.</div>"
-          );
-        case 3:
-          return theDiv.insertAdjacentHTML(
-            "beforeend",
-            "<div class='box_dialogue sbbob'> Ich habe eine bessere Idee: Ich kann die Stadt in teure und billige Viertel einteilen, und dann jeweils den Durchschnittspreis berechnen! </div>"
-          );
-        case 4:
-          return theDiv.insertAdjacentHTML(
-            "beforeend",
-            "<div class='box_dialogue sbalice'>  Gute Idee! Und ich kann eine KI programmieren, die das Gleiche macht. Dann können wir am Ende beide Ergebnisse vergleichen!  </div>"
-          );
-        case 5:
-          return theDiv.insertAdjacentHTML(
-            "beforeend",
-            "<div class='box_dialogue sbbob'> Hey, hast Du Lust mir zu helfen? Ich erkläre Dir wie es geht.  </div>"
-          );
-        default:
-          return;
-      }
-    })();
-  }
 }
 
 export default Dialogue;
