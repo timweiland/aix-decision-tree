@@ -43,12 +43,15 @@ export default function InitialScreen({
   return (
     <ColumnContainer>
       <MapColumn>
+      {(!isDone) &&
         <Taskbar
           cleanUp={cleanUp}
           complete={() => setIsDone(true)}
           undo={undo}
           openTutorial={openTutorial}
         />
+      }
+        {(!isDone) &&
         <Map
           coordinates={mietdaten}
           tree={userTree.structure}
@@ -57,6 +60,14 @@ export default function InitialScreen({
           unhighlightAll={unhighlightAll}
           enableInteraction={true}
         />
+        }
+        {(isDone) &&
+        <Map
+          coordinates={mietdaten}
+          tree={userTree.structure}
+          enableInteraction={false}
+        />
+        }
       </MapColumn>
 
       <TreeColumn>
@@ -90,8 +101,9 @@ export default function InitialScreen({
                   style={{ fontSize: "50pt" }}
                   onClick={() => {
                     onComplete();
+                    
                   }}>
-                    <FontAwesomeIcon icon={faArrowRightLong} />
+                    Weiter zur Lösung der KI <FontAwesomeIcon icon={faArrowRightLong} />
                     
                 </div>
             }
