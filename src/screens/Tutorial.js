@@ -79,7 +79,9 @@ function Tutorial({
           splitTree={splitTree}
           highlightNode={highlightNode}
           unhighlightAll={unhighlightAll}
-          enableInteraction={Counter === 1 || Counter === 2}
+          enableInteraction={
+            Counter === 1 || (Counter === 2 && NoOfUserLines != 4)
+          }
         />
         {Counter === 0 && (
           <div
