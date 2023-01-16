@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong, faArrowLeftLong, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faArrowLeftLong, faXmark, faLightbulb, faArrowUpRightDots, faUniversalAccess } from "@fortawesome/free-solid-svg-icons";
 
 /*
 function Choose() {
@@ -27,7 +27,7 @@ export default Choose;
 
 export default function Choose() {
     return(
-        <Stack spacing={22} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
+        <Stack spacing={22} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "25vh", marginLeft: "25vw", marginRight: "25vw" }}>
             {/*<Link to='/rents1'>
                 <Button 
                 variant='outlined' 
@@ -41,6 +41,7 @@ export default function Choose() {
             className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
             style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
             >
+                <FontAwesomeIcon icon={faArrowUpRightDots} style={{ marginRight: "50px"}} />
                 Große Datenmengen
             </div>
         </Link>
@@ -49,6 +50,7 @@ export default function Choose() {
             className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
             style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
             >
+                <FontAwesomeIcon icon={faLightbulb} style={{ marginRight: "50px"}} />
                 Nachvollziehbarkeit
             </div>
         </Link>
@@ -57,12 +59,13 @@ export default function Choose() {
             className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
             style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
             >
+                <FontAwesomeIcon icon={faUniversalAccess} style={{ marginRight: "50px"}} />
                 Anwendungen
             </div>
         </Link>
         <Link to="/final">
                 <div
-                className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-40 pt-2 pb-3 left-8 pl-7 pr-7 shadow-2xl shadow-green-700 opacity-80 text-white"
+                className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-40 pt-2 pb-3 left-8 pl-8 pr-7 shadow-2xl shadow-green-700 opacity-80 text-white"
                 style={{ fontSize: "40pt" }}
                 >
                     Menü

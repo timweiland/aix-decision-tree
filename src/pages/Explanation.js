@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightLong, faArrowLeftLong, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong, faArrowLeftLong, faXmark, faLaptopCode, faAward } from "@fortawesome/free-solid-svg-icons";
 
 
 function Explanation() {
@@ -43,7 +43,7 @@ function Explanation() {
     console.log(inactivityTime);
 
     return (
-        <Stack spacing={33} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
+        <Stack spacing={22} direction="column" style={{ /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh", marginLeft: "25vw", marginRight: "25vw" }}>
             {/*<Link to='/rents1'>
                 <Button 
                 variant='outlined' 
@@ -54,17 +54,19 @@ function Explanation() {
 
             <Link to="/rents1">
                 <div
-                    className="absolute hover:cursor-pointer rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white pt-10"
-                    style={{ fontSize: "50pt", width: "50vw", height: "9vh", textAlign: "center"}}
+                className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+                style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
                 >
+                    <FontAwesomeIcon icon={faLaptopCode} style={{ marginRight: "50px"}}/>
                     Algorithmus
                 </div>
             </Link>
             <Link to="/choose">
-            <div
-                    className="absolute hover:cursor-pointer rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white pt-10"
-                    style={{ fontSize: "50pt", width: "50vw", height: "9vh",textAlign: "center" }}
+                <div
+                className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+                style={{ fontSize: "50pt", width: "50vw", padding: "20px", textAlign: "center"}}
                 >
+                    <FontAwesomeIcon icon={faAward} style={{ marginRight: "50px"}} /> 
                     Fortgeschritten
                 </div>
             </Link>

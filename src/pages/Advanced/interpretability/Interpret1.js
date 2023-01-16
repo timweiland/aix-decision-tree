@@ -10,7 +10,7 @@ export default function Interpret1() {
         <div
         className="column-container"
         >
-            <Stack className="space-y-8" direction="column" style={{ marginTop: "15vh", marginLeft: "16.5vw", marginRight: "20vw", marginBottom: "7vh" }}>
+            <Stack className="space-y-6" direction="column" style={{ marginTop: "13vh", marginLeft: "14.5vw", marginRight: "16.5vw", marginBottom: "7vh" }}>
             <div
             class="text-6xl mb-10 text-black font-semibold"
             >
