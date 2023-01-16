@@ -36,10 +36,6 @@ function Tutorial({
 
   const NoOfUserLines = userTree.structure.get_lines().length;
 
-  console.log("HistCount", histCounter);
-  console.log("Counter", Counter);
-  console.log("Flag", FlagHighlight);
-
   const DoAverageHighlight = (node) => {
     node.hasTestPoint = true;
   };
@@ -68,7 +64,8 @@ function Tutorial({
     node.hasTestPoint = false;
   };
 
-  const bubblebob = "chat-bubble chat-bubble-primary text-3xl bottom-0";
+  const bubblebob =
+    "chat-bubble chat-bubble-error text-3xl bottom-0 shadow-2xl";
   const textmargin = "m-2";
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////

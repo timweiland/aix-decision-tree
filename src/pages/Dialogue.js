@@ -37,8 +37,10 @@ function Dialogue() {
     }
   }, [inactivityTime]);
 
-  const bubblebob = "chat-bubble chat-bubble-primary text-3xl mx-2 my-2";
-  const bubblealice = "chat-bubble chat-bubble-secondary text-3xl mx-2 my-2";
+  const bubblebob =
+    "chat-bubble chat-bubble-error text-3xl mx-2 my-2 shadow-2xl ";
+  const bubblealice =
+    "chat-bubble chat-bubble-info text-3xl mx-2 my-2 shadow-2xl";
   const textmargin = "m-2";
 
   return (

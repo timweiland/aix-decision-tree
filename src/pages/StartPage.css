@@ -1,3 +1,13 @@
+.column-container {
+    display: flex;
+    height: 100vh;
+  }
+
+.middle-column {
+    width: 50%;
+}
+
+
 img {
     padding-top: 10%; 
     padding-left: 10%;
