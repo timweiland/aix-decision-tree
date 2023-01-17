@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-<<<<<<< HEAD
 import {
   faArrowRightLong,
   faArrowLeftLong,
@@ -50,7 +49,7 @@ function Explanation() {
 
   return (
     <Stack
-      spacing={33}
+      spacing={22}
       direction="column"
       style={{
         /*alignItems: "center", justifyItems: "center",*/ marginTop: "35vh",

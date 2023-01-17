@@ -33,7 +33,7 @@ export default function Interpret5() {
                 Wenn man den Entscheidungsbaum vom Beginn bis zu den Enden liest, kann man für jede Gruppe nachvollziehen, hinsichtlich welcher Merkmale die Datenpunkte in dieser Gruppe <i>ähnlich</i> sind.
             </div>
             <div>
-                <img style={{ height: "48vh", marginLeft: "-4.5vw", marginTop: "-10vh" }} src={fish_2} alt="fish_2" />    
+                <img style={{ height: "48vh", marginLeft: "2.5vw", marginTop: "-10vh" }} src={fish_2} alt="fish_2" />    
             </div>         
             
             {/*<div
