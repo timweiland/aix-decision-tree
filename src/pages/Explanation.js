@@ -11,11 +11,9 @@ import {
   faArrowRightLong,
   faArrowLeftLong,
   faXmark,
+  faLaptopCode,
+  faAward
 } from "@fortawesome/free-solid-svg-icons";
-=======
-import { faArrowRightLong, faArrowLeftLong, faXmark, faLaptopCode, faAward } from "@fortawesome/free-solid-svg-icons";
-
->>>>>>> explanation
 
 function Explanation() {
   const [inactivityTime, setInactivityTime] = useState(0);
