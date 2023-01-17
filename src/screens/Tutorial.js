@@ -155,7 +155,7 @@ function Tutorial({
                   <div className={textmargin}>
                     Wir machen erstmal einen Probedurchlauf. Du kannst
                     horizontale oder vertikale Striche zeichnen, um die Karte zu
-                    unterteilen. Probiere es gerne aus!
+                    unterteilen. Probiere es für mindestens zwei Striche aus!
                   </div>
                 </div>
               </div>
