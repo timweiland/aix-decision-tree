@@ -28,7 +28,7 @@ export default function Rents2() {
         </Stack>
 
         <div 
-        class="grid grid-cols-5"
+        class="grid grid-cols-4"
         style={{ fontSize: "50px",  marginLeft: "10.5vw", marginRight: "12.5vw", marginBottom: "7vh", marginTop: "25vh"}}
         >
           {Counter >= 2 && (
@@ -36,11 +36,11 @@ export default function Rents2() {
           <img style={{ height: "20vh"}} src={fish_2} alt="fish_2"/>    
       </div>  
         )}
-        {Counter >= 3 && (
+        {/*Counter >= 3 && (
           <div>
           <img style={{ height: "20vh"}} src={fish_2} alt="fish_2"/>    
       </div>
-        )}
+        )*/}
         {Counter >= 4 && (
           <div>
           <img style={{ height: "20vh"}} src={fish_2} alt="fish_2"/>    
