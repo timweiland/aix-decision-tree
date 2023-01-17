@@ -19,6 +19,11 @@ export default function Rents3() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
+                Der Algorithmus wird so lange wiederholt, bis alle möglichen Unterteilungen von <i>links nach rechts</i> und von <i>oben nach unten</i> getestet wurden.
+            </div>
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
                Wenn die KI <i>alle möglichen</i> Unterteilungen von links nach rechts und von oben nach unten getestet hat, wählt sie die <i>beste</i> Unterteilung.
             </div>
             <div
