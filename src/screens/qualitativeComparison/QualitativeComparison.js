@@ -27,8 +27,9 @@ export default function QualitativeComparison({ mietdaten, userTree, setUserTree
             {
                 (isDone) &&
                 <Popup closeCallback={onComplete} icon="check">
-                    <p>Welcher Entscheidungsbaum hat dich bisher mehr überzeugt?</p>
-                    <p>Jetzt schauen wir uns an, wie sehr die Schätzungen beider Entscheidungsbäume im Durchschnitt von den echten Mieten abweichen.</p>
+                    <p className="text-center">Welcher Entscheidungsbaum hat dich bisher mehr überzeugt?</p>
+                    <br/>
+                    <p className="text-center">Jetzt schauen wir uns an, wie sehr die Schätzungen beider Entscheidungsbäume im Durchschnitt von den echten Mieten abweichen.</p>
                 </Popup>
             }
         </>

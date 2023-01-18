@@ -132,7 +132,8 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             setConfetti(false);
             setBobExcited(false);
             setBobMessage("Das ganze machen wir jetzt im Schnelldurchlauf noch für zwei weitere Wohnungen.")
-            setAliceMessage("Mal sehen, wer die Mieten besser schätzt!")
+            setAliceMessage(undefined);
+            //setAliceMessage("Mal sehen, wer die Mieten besser schätzt!")
             userTree.structure.removeTestPoints();
             setUserTree(userTree.structure);
             aiTree.structure.removeTestPoints();
@@ -143,7 +144,7 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
 
     return (
         <ColumnContainer>
-            { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={false} />}
+            {confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={false} />}
             <MapColumn>
                 <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} testPoint={testPoint} hide={hideUserScreens.includes(screenState)} />
                 {
@@ -158,8 +159,8 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
                 </div>
                 <PredictionComparison showUserRentEstimate={showUserRentEstimate} userRentEstimate={userRentEstimate} testPoint={testPoint}
                     showTrueRent={showTrueRent} showAIRentEstimate={showAIRentEstimate} aiRentEstimate={aiRentEstimate}
-                    highlightAll={screenState === "revealTrueRent"} highlightUser={screenState==="followPath" && curPathIdx === userPath.length - 1} 
-                    highlightAI={screenState==="followAlicePath" && curPathIdx === aiTreePath.length - 1}/>
+                    highlightAll={screenState === "revealTrueRent"} highlightUser={screenState === "followPath" && curPathIdx === userPath.length - 1}
+                    highlightAI={screenState === "followAlicePath" && curPathIdx === aiTreePath.length - 1} />
                 <div className="mt-2">
                     <Tree structure={aiTree.structure} colors={aiTree.structure.get_colors()} arrow="right" hide={hideAIScreens.includes(screenState)} />
                 </div>
@@ -167,9 +168,8 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
 
             <MapColumn>
                 <Map coordinates={mietdaten} tree={aiTree.structure} enableInteraction={false} testPoint={testPoint} hide={hideAIScreens.includes(screenState)} />
-                {
-                    aliceMessage &&
-                    <Alice message={aliceMessage} excited={false} />
+                {!hideAIScreens.includes(screenState) &&
+                    < Alice message={aliceMessage} excited={false} />
                 }
             </MapColumn>
         </ColumnContainer>

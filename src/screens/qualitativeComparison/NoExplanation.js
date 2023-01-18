@@ -41,7 +41,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
 
   useEffect(() => {
     if (screenState === "intro") {
-      setBobMessage("Jetzt wollen wir den Mietpreis für diese (gelb markierte) Wohnung wissen.")
+      setBobMessage("Jetzt wollen wir den Mietpreis für diese Wohnung (gelber Punkt) wissen.")
       setContinueHandler({ handler: () => setScreenState("followUserPath") });
     }
     else if (screenState === "followUserPath") {
