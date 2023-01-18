@@ -68,6 +68,12 @@ function Tutorial({
     "chat-bubble chat-bubble-error text-3xl bottom-0 shadow-2xl";
   const textmargin = "m-2";
 
+  const addText = () => {
+    document.getElementById("addtext").innerHTML =
+      "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
+  };
+  const myTimeout = setTimeout(addText, 1500);
+
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <ColumnContainer>
@@ -143,9 +149,8 @@ function Tutorial({
               </div>
               <div className="chat chat-end">
                 <div className={bubblebob}>
-                  <div className={textmargin}>
-                    Hier ist eine Karte von Tübingen – jeder Punkt steht für ein
-                    WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.
+                  <div id="addtext" className={textmargin}>
+                    ...
                   </div>
                 </div>
               </div>
