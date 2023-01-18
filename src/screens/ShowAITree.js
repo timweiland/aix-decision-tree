@@ -103,7 +103,7 @@ export function ShowAITree({
       {isDone && (
         <Popup closeCallback={onComplete} icon="check">
           <p style={{ textAlign: "center" }}>
-            Zuerst hast du deinen Entscheidungsbaum erstellt, und danach die KI.
+            Zuerst hast du und danach die KI einen Entscheidungsbaum erstellt.
           </p>
           <br />
           <p style={{ textAlign: "center" }}>
