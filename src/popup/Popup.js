@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import Lottie from 'lottie-react';
 
 import checkAnimation from '../assets/check_anim.json';
