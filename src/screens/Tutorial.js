@@ -138,6 +138,11 @@ function Tutorial({
             <div className="speechbubble">
               <div className="chat chat-end">
                 <div className={bubblebob}>
+                  <div className="m-2 mx-16"> Willkommen zur Anleitung.</div>
+                </div>
+              </div>
+              <div className="chat chat-end">
+                <div className={bubblebob}>
                   <div className={textmargin}>
                     Hier ist eine Karte von Tübingen – jeder Punkt steht für ein
                     WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.
