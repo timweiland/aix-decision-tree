@@ -96,17 +96,24 @@ export default function InitialScreen({
 
             {
                 (isDone) && 
+                <div>
                 <div
-                  className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
+                  className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-14 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                   style={{ fontSize: "50pt" }}
                   onClick={() => {
                     onComplete();
                     
                   }}>
-                    Weiter zur Lösung der KI <FontAwesomeIcon icon={faArrowRightLong} />
+                     <FontAwesomeIcon icon={faArrowRightLong} />
                     
+                     
+                </div>
+                <div
+                className="absolute  bottom-5 right-10 text-black text-2xl"
+                >Zur Lösung der KI</div>
                 </div>
             }
+            
         </ColumnContainer>
 
     );
