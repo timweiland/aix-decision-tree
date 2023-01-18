@@ -9,11 +9,11 @@ import { faXmark, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import {
   TreeStructure,
   convertPythonTree,
-  clipPythonTree,
 } from "./tree/TreeStructure";
 import aiPythonTree from "./python/aiPythonTree.json";
 import mietdatenJSON from "./python/mietdaten.json";
 
+import CancelPopup from "./popup/CancelPopup";
 import "./taskbar/taskbar.css";
 import Tutorial from "./screens/Tutorial";
 import InitialScreen from "./screens/InitialScreen";
@@ -66,6 +66,8 @@ function App() {
 
   const [continueHandler, setContinueHandler] = useState(undefined);
   const [inactivityTime, setInactivityTime] = useState(0);
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
+  const [showTutorialPopup, setShowTutorialPopup] = useState(false);
 
   const setUserTree = (tree) => {
     setUserTreeState({ structure: tree, toggle: !userTree.toggle });
@@ -121,6 +123,7 @@ function App() {
   const openTutorial = () => {
     cleanUp();
     setScreenState("tutorial");
+    setShowTutorialPopup(false);
   };
 
   const restartWithoutTutorial = () => {
@@ -180,7 +183,7 @@ function App() {
           highlightNode={highlightNode}
           unhighlightAll={unhighlightAll}
           onComplete={() => setScreenState("showAITree")}
-          openTutorial={openTutorial}
+          openTutorial={() => setShowTutorialPopup(true)}
         />
       )}
       {screenState === "showAITree" && (
@@ -222,6 +225,16 @@ function App() {
           exitApp={exitApp}
         />
       )}
+      {showCancelPopup &&
+        <CancelPopup title="Spiel beenden" closeCallback={exitApp} cancelCallback={() => setShowCancelPopup(false)}>
+          Möchtest du das Spiel wirklich beenden? Dein Fortschritt geht dann verloren.
+        </CancelPopup>
+      }
+      {showTutorialPopup &&
+        <CancelPopup title="Zur Anleitung" closeCallback={openTutorial} cancelCallback={() => setShowTutorialPopup(false)}>
+          Möchtest du zurück zur Anleitung? Dein Fortschritt geht dann verloren.
+        </CancelPopup>
+      }
       {continueHandler !== undefined && (
         <div
           className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
@@ -234,17 +247,13 @@ function App() {
           <FontAwesomeIcon icon={faArrowRightLong} />
         </div>
       )}
-      {(continueHandler !== undefined ||
-        screenState === "quantitativeComparison") && (
-        <div
-          className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-          style={{ fontSize: "60px" }}
-        >
-          <Link to="/" style={{ textDecoration: "none" }} onClick={cleanUp}>
-            <FontAwesomeIcon icon={faXmark} />
-          </Link>
-        </div>
-      )}
+
+      <div
+        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
+        style={{ fontSize: "60px" }} onClick={() => setShowCancelPopup(true)}
+      >
+        <FontAwesomeIcon icon={faXmark} />
+      </div>
     </div>
   );
 }
