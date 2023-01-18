@@ -99,9 +99,9 @@ function Tutorial({
           <div
             className="absolute bg-white opacity-90 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3 px-2 py-2"
             style={{
-              fontSize: "40px",
+              fontSize: "50px",
               top: `${83}%`,
-              left: "88%",
+              left: "89%",
             }}
           >
             <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
@@ -113,14 +113,12 @@ function Tutorial({
       <TreeColumn>
         <div>
           <div
-            className="absolute text-black text-opacity-30 text-shadow top-8 left-8"
+            className="absolute text-black font-extralight top-8 left-8"
             style={{
               fontSize: "40px",
-              textShadow:
-                "0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08)",
             }}
           >
-            TUTORIAL
+            ANLEITUNG
           </div>
           <div className="imgbobsmall">
             <img id="bob" src={bob_mirrored} alt="bob_mirrored" />
@@ -154,8 +152,8 @@ function Tutorial({
                 <div className={bubblebob}>
                   <div className={textmargin}>
                     Wir machen erstmal einen Probedurchlauf. Du kannst
-                    horizontale oder vertikale Striche zeichnen, um die Karte zu
-                    unterteilen. Probiere es für mindestens zwei Striche aus!
+                    horizontale oder vertikale Linien zeichnen, um die Karte zu
+                    unterteilen. Probiere es für mindestens zwei Linien aus!
                   </div>
                 </div>
               </div>
@@ -166,7 +164,7 @@ function Tutorial({
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div className={textmargin}>
-                    Hier kannst du einen Strich rückgängig machen...
+                    Hier kannst du eine Linien rückgängig machen...
                   </div>
                 </div>
               </div>
@@ -211,9 +209,9 @@ function Tutorial({
                   <div className={bubblebob}>
                     <div className={textmargin}>
                       Gleich geht die eigentliche Aufgabe los: Versuche die
-                      Striche so zu ziehen, dass Bereiche mit ähnlichen
-                      Mietpreisen voneinander abgegrenzt werden. Du kannst
-                      insgesamt 5 Striche ziehen.
+                      Linien so zu ziehen, dass Bereiche mit ähnlichen
+                      Mietpreisen voneinander abgegrenzt werden. Du musst
+                      insgesamt 5 Linien ziehen.
                     </div>
                   </div>
                 </div>
