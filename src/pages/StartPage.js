@@ -28,7 +28,9 @@ function StartPage() {
           </div>
         </div>
         <div>
-          <div>Klicke auf den Button um Bob zu helfen.</div>
+          <div className="absolute bottom-10 right-52 text-3xl font-extralight">
+            Klicke auf den Button um Bob zu helfen.
+          </div>
           <Link to="/dialogue">
             <div
               className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
