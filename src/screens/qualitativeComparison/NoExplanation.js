@@ -101,7 +101,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
       }
       else {
         setBobMessage("Erstaunlich!");
-        setAliceMessage("Hier treffen beide Bäume die gleiche Vorhersage!");
+        setAliceMessage("Hier treffen beide Bäume die gleiche Schätzung!");
       }
       userTree.structure.removeTestPoints();
       setUserTree(userTree.structure);

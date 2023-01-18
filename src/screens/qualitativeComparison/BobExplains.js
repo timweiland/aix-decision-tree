@@ -57,7 +57,7 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             userTree.structure.find_idx(curNode.idx).hasTestPoint = true;
             setUserTree(userTree.structure);
             if (curPathIdx === userPath.length - 1) {
-                setBobMessage(`Fertig! Die Vorhersage liegt bei ${displayedRent(curNode.avgRent)}€.`)
+                setBobMessage(`Fertig! Die Schätzung liegt bei ${displayedRent(curNode.avgRent)}€.`)
                 setUserRentEstimate(curNode.avgRent);
                 setShowUserRentEstimate(true);
                 setContinueHandler({
@@ -87,7 +87,7 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             aiTree.structure.find_idx(curNodeAi.idx).hasTestPoint = true;
             setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
             if (curPathIdx === aiTreePath.length - 1) {
-                setAliceMessage(`Tada! Die Vorhersage liegt bei ${displayedRent(curNodeAi.avgRent)}€. Jetzt wollen wir mal sehen, was der echte Mietpreis ist...`);
+                setAliceMessage(`Tada! Die Schätzung liegt bei ${displayedRent(curNodeAi.avgRent)}€. Jetzt wollen wir mal sehen, was der echte Mietpreis ist...`);
                 setAiRentEstimate(curNodeAi.avgRent);
                 setShowAIRentEstimate(true);
                 setContinueHandler({ handler: () => setScreenState("revealTrueRent") });
