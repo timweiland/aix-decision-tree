@@ -18,17 +18,17 @@ export class TreeStructure {
         "#ff00ff", // fuchsia
         "#ffdab9", // peachpuff
         "#ff8c00", // darkorange
-        "#7f0000", // maroon 2
+        "#F87171", // red
       ].reverse()
     }
     else {
       this.colorPalette = [
         "#228b22", // forestgreen
-        "#000080", // navy
+        "#a78bfa", // violet
         "#D27D2D", // cinnamon
         "#ff69b4", // hotpink
         "#1e90ff", // dodgerblue
-        "#2f4f4f", // darkslategray
+        "#34D399", // emerald
       ].reverse()
     }
     this.color = undefined;

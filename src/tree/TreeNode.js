@@ -38,7 +38,7 @@ export default function TreeNode({
     >
       <div
         style={{ position: "relative" }}
-        className={classNames("text-white", "mx-auto", "z-10", {
+        className={classNames("text-black", "mx-auto", "z-10", "opacity-60", {
           "text-2xl": isSmall,
           "text-3xl": !isSmall,
         })}
