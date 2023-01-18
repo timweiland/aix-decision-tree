@@ -80,7 +80,8 @@ function Tutorial({
           highlightNode={highlightNode}
           unhighlightAll={unhighlightAll}
           enableInteraction={
-            Counter === 1 || (Counter === 2 && NoOfUserLines != 4)
+            (Counter === 1 && NoOfUserLines != 4) ||
+            (Counter === 2 && NoOfUserLines != 4)
           }
         />
         {Counter === 0 && (
@@ -107,7 +108,7 @@ function Tutorial({
             <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
           </div>
         )}
-        <Taskbar undo={undo} openTutorial={() => {}} />
+        <Taskbar undo={NoOfUserLines > 1 && undo} openTutorial={() => {}} />
       </MapColumn>
 
       <TreeColumn>
