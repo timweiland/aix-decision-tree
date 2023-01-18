@@ -100,7 +100,7 @@ function Tutorial({
             className="absolute bg-white opacity-90 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3 px-2 py-2"
             style={{
               fontSize: "50px",
-              top: `${83}%`,
+              top: `${85}%`,
               left: "89%",
             }}
           >
