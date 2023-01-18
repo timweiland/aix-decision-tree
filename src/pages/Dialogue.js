@@ -131,7 +131,7 @@ function Dialogue() {
           </div>
         ) : (
           <div>
-            <div className="absolute bottom-10 right-48 text-3xl font-extralight">
+            <div className="absolute bottom-10 right-44 text-3xl font-extralight">
               Klicke auf den Button um Bob zu helfen.
             </div>
             <Link to="/App">
