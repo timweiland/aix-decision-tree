@@ -47,7 +47,7 @@ export function ShowAITree({
       setTree(aiTreeClipped2);
     } else if (screenState === "showAITree3") {
       setAliceMessage(
-        "Meine KI ist fertig! Bob, jetzt wollen wir mal sehen, welcher Entscheidungsbaum die besseren Schätzungen liefert #teamKI"
+        "Meine KI ist fertig! Bob, jetzt wollen wir mal sehen, welcher Entscheidungsbaum die besseren Schätzungen liefert."
       );
       setContinueHandler({
         handler: () => {
