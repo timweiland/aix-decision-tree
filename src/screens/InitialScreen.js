@@ -10,9 +10,7 @@ import Tree from "../tree/Tree";
 import Popup from "../popup/Popup";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRightLong
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 export default function InitialScreen({
   cleanUp,
@@ -31,43 +29,41 @@ export default function InitialScreen({
 
   const NoOfUserLines = userTree.structure.get_lines().length;
 
-
-    useEffect(() => {
-        if (NoOfUserLines === 5) {
-            setShowPopUp(true);
-            setIsDone(true);
-            
-        }
-    }, [NoOfUserLines])
+  useEffect(() => {
+    if (NoOfUserLines === 5) {
+      setShowPopUp(true);
+      setIsDone(true);
+    }
+  }, [NoOfUserLines]);
 
   return (
     <ColumnContainer>
       <MapColumn>
-      {(!isDone) &&
-        <Taskbar
-          cleanUp={cleanUp}
-          complete={() => setIsDone(true)}
-          undo={undo}
-          openTutorial={openTutorial}
-        />
-      }
-        {(!isDone) &&
-        <Map
-          coordinates={mietdaten}
-          tree={userTree.structure}
-          splitTree={splitTree}
-          highlightNode={highlightNode}
-          unhighlightAll={unhighlightAll}
-          enableInteraction={true}
-        />
-        }
-        {(isDone) &&
-        <Map
-          coordinates={mietdaten}
-          tree={userTree.structure}
-          enableInteraction={false}
-        />
-        }
+        {!isDone && (
+          <Taskbar
+            cleanUp={cleanUp}
+            complete={() => setIsDone(true)}
+            undo={undo}
+            openTutorial={openTutorial}
+          />
+        )}
+        {!isDone && (
+          <Map
+            coordinates={mietdaten}
+            tree={userTree.structure}
+            splitTree={splitTree}
+            highlightNode={highlightNode}
+            unhighlightAll={unhighlightAll}
+            enableInteraction={true}
+          />
+        )}
+        {isDone && (
+          <Map
+            coordinates={mietdaten}
+            tree={userTree.structure}
+            enableInteraction={false}
+          />
+        )}
       </MapColumn>
 
       <TreeColumn>
@@ -79,42 +75,40 @@ export default function InitialScreen({
         </div>
       </TreeColumn>
 
+      {isDone && showPopUp && (
+        <Popup
+          closeCallback={() => {
+            setShowPopUp(false);
+          }}
+          icon="check"
+        >
+          <p style={{ textAlign: "center" }}>
+            Super! <br />
+            Du hast deinen Entscheidungsbaum fertig gestellt.
+          </p>
+          <br />
+          <p style={{ textAlign: "center" }}>
+            Jetzt schauen wir uns an, wie die KI es macht.
+          </p>
+        </Popup>
+      )}
 
-            {
-                (isDone) && (showPopUp) &&
-                <Popup closeCallback={() => {setShowPopUp(false)}} icon="check">
-                    <p style={{ textAlign: "center" }}>
-                        Super! <br />
-                        Du hast deinen Entscheidungsbaum fertig gestellt.
-                    </p>
-                    <br />
-                    <p style={{ textAlign: "center" }}>
-                       Jetzt schauen wir uns an, wie die KI es macht.
-                    </p>
-                </Popup>
-            }
-
-            {
-                (isDone) && 
-                <div>
-                <div
-                  className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-14 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
-                  style={{ fontSize: "50pt" }}
-                  onClick={() => {
-                    onComplete();
-                    
-                  }}>
-                     <FontAwesomeIcon icon={faArrowRightLong} />
-                    
-                     
-                </div>
-                <div
-                className="absolute  bottom-5 right-10 text-black text-2xl"
-                >Zur Lösung der KI</div>
-                </div>
-            }
-            
-        </ColumnContainer>
-
-    );
+      {isDone && (
+        <div>
+          <div
+            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            style={{ fontSize: "60px" }}
+            onClick={() => {
+              onComplete();
+            }}
+          >
+            <FontAwesomeIcon icon={faArrowRightLong} />
+          </div>
+          <div className="absolute bottom-12 right-48 text-2xl font-extralight">
+            Zur Lösung der KI
+          </div>
+        </div>
+      )}
+    </ColumnContainer>
+  );
 }
