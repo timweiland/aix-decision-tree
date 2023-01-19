@@ -13,7 +13,8 @@ import {
   faLightbulb, 
   faArrowUpRightDots, 
   faUniversalAccess,
-  faHouseMedical
+  faHouseMedical,
+  faHandPointer
 } from "@fortawesome/free-solid-svg-icons";
 
 /*
@@ -122,8 +123,8 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
         }}
         onClick={restartWithoutTutorial}
       >
-        <FontAwesomeIcon icon={faSync} style={{ marginRight: "50px" }} />
-        Wiederholen
+        <FontAwesomeIcon icon={faHandPointer} style={{ marginRight: "50px" }} />
+        Nochmal zeichnen
       </div>  
       
       <Link to="/">

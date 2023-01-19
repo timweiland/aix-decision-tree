@@ -15,12 +15,18 @@ function Complex() {
             <div 
             class="text-6xl mb-10 text-black font-semibold"
             >
-                Wie schätzt die KI die Mieten in Tübingen?
+                Entscheidunsbäume bei großen Datenmengen
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Die Datenpunkte auf der Karte Tübingens haben zwei Merkmale: Längen- und Breitengrad, die die Position auf der Karte bestimmen. Oft haben Daten deutlich mehr Merkmale. Fische können mit den Merkmalen Länge, Gewicht, Anzahl der Flossen und Länge der Schwanzflosse u.v.m. beschrieben werden.
+               Die Datenpunkte auf der Karte Tübingens haben zwei Merkmale: Längen- und Breitengrad. Zusammen bestimmen sie die Position auf der Karte.
+            </div>
+            
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+                Oft haben Daten deutlich mehr Merkmale. Fische können mit den Merkmalen Länge, Gewicht, Anzahl der Flossen und Länge der Schwanzflosse u.v.m. beschrieben werden.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"

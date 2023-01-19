@@ -8,6 +8,8 @@ import {
 import * as React from "react";
 import { Stack } from "@mui/material";
 
+import fish_2 from "../assets/fish_2.jpg";
+
 function Interpret() {
   return (
     <div className="column-container">
@@ -20,8 +22,16 @@ function Interpret() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Um die Ergebnisse der KI nachzuvollziehen, braucht man den Entscheidungsbaum: Jede Verzweigung enthält das Merkmal und den Wert, anhand dessen in zwei Gruppen unterteilt wurde. Wenn man den Baum von oben nach unten liest, erfährt man für alle Gruppen anhand welcher Merkmale sie ähnlich sind. [Fehlt: In jedem Schritt werden alle Merkmale probiert.]
+               Um die Ergebnisse der KI nachzuvollziehen, braucht man den Entscheidungsbaum: 
+            </div>            
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+               Jede Verzweigung enthält das Merkmal und den Wert, anhand dessen in zwei Gruppen unterteilt wurde. Wenn man den Baum von oben nach unten liest, erfährt man für alle Gruppen anhand welcher Merkmale sie ähnlich sind. [Fehlt: An jeder Verzweigung könnte jedes Merkmal stehen.]
             </div>
+            <div>
+                <img style={{ height: "52vh", marginLeft: "1.3vw", marginTop: "-7vh" }} src={fish_2} alt="fish_2" />    
+            </div>           
             </Stack>
             {/*<Link to="/final">
                 <div

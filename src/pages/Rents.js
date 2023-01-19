@@ -25,12 +25,12 @@ function Rents() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Für jede Linie berechnet sie die durchschnittliche Miete auf beiden Seiten der Linie. Schließlich wählt sie die Linie, wo der Unterschied zwischen echten Mietpreisen und durchschnittlicher Miete am kleinsten ist.
+               Für jede Linie berechnet sie die durchschnittliche Miete auf beiden Seiten der Linie. Schließlich wählt sie die Linie, wo der Unterschied zwischen echten Mietpreisen und durchschnittlicher Miete am kleinsten ist. [Checken die Leute das? Erwähnen, dass Ähnlichkeit der Mietpreise guter Indikator?]
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Diese Berechnung wiederholt sie genauso für alle weiteren Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten in den Bereichen als ihre Schätzung.
+               Diese Berechnung wiederholt sie genauso für alle weiteren Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten pro Bereich als Schätzung.
             </div>
             </Stack>
             {/*<Link to="/final">
