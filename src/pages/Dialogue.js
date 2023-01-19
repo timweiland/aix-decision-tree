@@ -63,7 +63,7 @@ function Dialogue() {
             <div className={bubblebob}>
               <div className={textmargin}>
                 Wenn ich den Durchschnitt berechne, weiß ich ungefähr, wie hoch
-                die Miete ist...
+                die Miete für mein Zimmer ist...
               </div>
             </div>
           </div>
@@ -84,7 +84,7 @@ function Dialogue() {
               <div className={textmargin}>
                 Ich habe eine bessere Idee: Ich kann die Stadt in teure und
                 billige Viertel einteilen, und dann jeweils den
-                Durchschnittspreis berechnen!
+                Durchschnittspreis als Schätzung verwenden!
               </div>
             </div>
           </div>
@@ -130,15 +130,20 @@ function Dialogue() {
             <FontAwesomeIcon icon={faArrowRightLong} />
           </div>
         ) : (
-          <Link to="/App">
-            <div
-              className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
-              style={{ fontSize: "60px" }}
-            >
-              {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
-              <FontAwesomeIcon icon={faArrowRightLong} />
+          <div>
+            <div className="absolute bottom-12 right-44 text-2xl font-extralight">
+              Klicke auf den Button um Bob zu helfen.
             </div>
-          </Link>
+            <Link to="/App">
+              <div
+                className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+                style={{ fontSize: "60px" }}
+              >
+                {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
+                <FontAwesomeIcon icon={faArrowRightLong} />
+              </div>
+            </Link>
+          </div>
         )}
       </div>
     </div>
