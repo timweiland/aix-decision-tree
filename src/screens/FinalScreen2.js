@@ -48,7 +48,7 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
       }}
     >
      <div>
-      <Link to="/explanation">
+      <Link to="/rents">
         <div
           className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
           style={{
@@ -64,7 +64,7 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
       </Link>
       </div>
       <div>
-      <Link to="/explanation">
+      <Link to="/complex">
         <div
           className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
           style={{
@@ -80,7 +80,7 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
       </Link>
       </div>
       <div>
-      <Link to="/explanation">
+      <Link to="/interpret">
         <div
           className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
           style={{
@@ -96,7 +96,7 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
       </Link>
       </div>
       <div>
-      <Link to="/explanation">
+      <Link to="/appl">
         <div
           className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
           style={{

@@ -25,6 +25,10 @@ import Interpret5 from "./pages/Advanced/interpretability/Interpret5";
 import Appl1 from "./pages/Advanced/Applications/Appl1";
 import Appl2 from "./pages/Advanced/Applications/Appl2";
 import FinalScreen from "./screens/FinalScreen2";
+import Rents from "./pages/Rents";
+import Complex from "./pages/ComplexData";
+import Interpret from "./pages/Interpret";
+import Appl from "./pages/Appl";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -53,7 +57,11 @@ root.render(
         {/*<Route path="/interpret6" element={<Interpret6 />} />*/}
         <Route path="/final" element={<FinalScreen />} />
         <Route path="/appl1" element={<Appl1 />} />
-        <Route path="/appl2" element={<Appl2 />} />
+        <Route path="/appl2" element={<Appl2 />} />        
+        <Route path="/rents" element={<Rents />} />
+        <Route path="/complex" element={<Complex />} />
+        <Route path="/interpret" element={<Interpret />} />
+        <Route path="/appl" element={<Appl />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -8,7 +8,7 @@ import {
 import * as React from "react";
 import { Stack } from "@mui/material";
 
-function Rents1() {
+function Rents() {
   return (
     <div className="column-container">
             <Stack className="space-y-6" direction="column" style={{ marginTop: "13vh", marginLeft: "14.5vw", marginRight: "16.5vw", marginBottom: "7vh" }}>
@@ -20,24 +20,29 @@ function Rents1() {
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Um die Mieten in den verschiedenen Stadtteilen gut zu schätzen, muss die KI herausfinden, wo auf der Karte die Mieten möglichst <i>ähnlich</i> sind.
+               Die KI berechnet ihre Lösung. Für eine Teilung der Karte probiert sie systematisch alle möglichen Trennungslinien von links nach rechts und von oben nach unten aus.
             </div>
             <div
             class="text-3xl text-black font-normal leading-relaxed"
             >
-               Diese Bereiche muss sie von Bereichen mit anderen Mietpreisen <i>unterscheiden</i>. 
+               Für jede Linie berechnet sie die durchschnittliche Miete auf beiden Seiten der Linie. Schließlich wählt sie die Linie, wo der Unterschied zwischen echten Mietpreisen und durchschnittlicher Miete am kleinsten ist.
+            </div>
+            <div
+            class="text-3xl text-black font-normal leading-relaxed"
+            >
+               Diese Berechnung wiederholt sie genauso für alle weiteren Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten in den Bereichen als ihre Schätzung.
             </div>
             </Stack>
-            <Link to="/final">
+            {/*<Link to="/final">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-40 pt-2 pb-3 left-8 pl-7 pr-7 shadow-2xl shadow-green-700 opacity-80 text-white"
                 style={{ fontSize: "40pt" }}
                 >
                     Menü
                 </div>
-            </Link>
+  </Link>*/}
             <div>
-                <Link to="/explanation">
+                <Link to="/final">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 left-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
                     style={{ fontSize: "50pt" }}
@@ -46,7 +51,7 @@ function Rents1() {
                     </div>
                 </Link>
             </div>
-            <div>
+            {/*<div>
                 <Link to="/rents2">
                     <div
                     className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
@@ -55,7 +60,7 @@ function Rents1() {
                         <FontAwesomeIcon icon={faArrowRightLong} />
                     </div>
                 </Link>
-            </div>            
+</div>*/}            
             <Link to="/">
             <div 
                 className="absolute hover:cursor-pointer bg-red-700 rounded-3xl /*top-10 right-10 pl-8 pr-8*/ top-8 right-8 pr-20 pl-20 pt-2 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10" 
@@ -67,4 +72,4 @@ function Rents1() {
     );
 }
 
-export default Rents1;
+export default Rents;
