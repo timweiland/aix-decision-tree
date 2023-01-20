@@ -13,12 +13,14 @@ import Alice from '../../mascots/Alice';
 import Bob from '../../mascots/Bob';
 
 import confettiAnimation from '../../assets/confetti_anim.json';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faForward, faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 
 function displayedRent(rent) {
   return Number(rent).toFixed(1).replace(".", ",");
 }
 
-export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree, setAITree, testPoint, setContinueHandler, onComplete }) {
+export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree, setAITree, testPoint, onComplete }) {
 
   const x = testPoint[0];
   const y = testPoint[1];
@@ -33,19 +35,53 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
   const [aliceMessage, setAliceMessage] = useState(undefined);
   const [aliceExcited, setAliceExcited] = useState(false);
   const [confetti, setConfetti] = useState(false);
+  const [continueHandler, setContinueHandler] = useState(undefined);
+  const [skipHandler, setSkipHandler] = useState(undefined);
 
   const aiPath = aiTree.structure.get_path(x, y);
   const userPath = userTree.structure.get_path(x, y);
 
   const delay = 2000;
 
+  const computeEstimates = () => {
+    const userNode = userTree.structure.find(x, y);
+    userNode.hasTestPoint = true;
+    setUserRentEstimate(userNode.avgRent);
+    setUserTree(userTree.structure);
+    setShowUserRentEstimate(true);
+
+    const aiNode = aiTree.structure.find(x, y);
+    aiNode.hasTestPoint = true;
+    setAIRentEstimate(aiNode.avgRent);
+    setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
+    setShowAIRentEstimate(true);
+  }
+
+  const cleanTestpoints = () => {
+    userTree.structure.removeTestPoints();
+    setUserTree(userTree.structure);
+    aiTree.structure.removeTestPoints();
+    setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
+  }
+
   useEffect(() => {
     if (screenState === "intro") {
       setBobMessage("Jetzt wollen wir den Mietpreis für diese Wohnung (gelber Punkt) wissen.")
-      setContinueHandler({ handler: () => setScreenState("followUserPath") });
+      setContinueHandler({ handler: () => {
+        setScreenState("followUserPath") 
+        setSkipHandler(undefined);
+      }
+      });
+      setSkipHandler({
+        handler: () => {
+          computeEstimates();
+          setScreenState("final");
+        }
+      })
     }
     else if (screenState === "followUserPath") {
       setBobMessage(undefined);
+      setSkipHandler(undefined);
       userPath.forEach((node, node_idx) => {
         setTimeout(() => {
           userTree.structure.removeTestPoints();
@@ -66,6 +102,7 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
     else if (screenState === "followAlicePath") {
       setBobMessage(undefined);
       setAliceMessage(undefined);
+      setSkipHandler(undefined);
       aiPath.forEach((node, node_idx) => {
         setTimeout(() => {
           aiTree.structure.removeTestPoints();
@@ -77,7 +114,12 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
               setShowAIRentEstimate(true);
               setBobMessage("Und welche Schätzung ist jetzt genauer?");
               setAliceMessage(`Mein KI-Baum schätzt eine Miete von ${displayedRent(node.avgRent)}€.`);
-              setContinueHandler({ handler: () => setScreenState("final") });
+              setContinueHandler({
+                handler: () => {
+                  cleanTestpoints();
+                  setScreenState("final");
+                }
+              });
             }, 1000);
           }
         }, delay * node_idx);
@@ -103,17 +145,19 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
         setBobMessage("Erstaunlich!");
         setAliceMessage("Hier treffen beide Bäume die gleiche Schätzung!");
       }
-      userTree.structure.removeTestPoints();
-      setUserTree(userTree.structure);
-      aiTree.structure.removeTestPoints();
-      setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
-      setContinueHandler({ handler: onComplete });
+      setSkipHandler(undefined);
+      setContinueHandler({
+        handler: () => {
+          cleanTestpoints();
+          onComplete();
+        }
+      });
     }
   }, [screenState])
 
   return (
     <ColumnContainer>
-      { confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={false} />}
+      {confetti && <Lottie className="absolute h-screen w-screen z-40" animationData={confettiAnimation} loop={false} />}
       <MapColumn>
         <Map coordinates={mietdaten} tree={userTree.structure} enableInteraction={false} testPoint={testPoint} hide={screenState === "followAlicePath"} />
         {
@@ -142,6 +186,45 @@ export default function NoExplanation({ mietdaten, userTree, setUserTree, aiTree
           <Alice message={aliceMessage} excited={aliceExcited} />
         }
       </MapColumn>
+
+      <div className="flex absolute bottom-10 right-10 flex-col">
+        {skipHandler !== undefined &&
+          <div
+            className="hover:cursor-pointer bg-yellow-500 rounded-2xl pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white font-medium h-25 z-50 border-transparent mb-4 text-center"
+            style={{ fontSize: "60px" }}
+            onClick={() => {
+              skipHandler.handler();
+              setSkipHandler(undefined);
+            }}
+          >
+            Direkt zur Auflösung
+          </div>
+        }
+        {continueHandler !== undefined && screenState === "intro" && (
+          <div
+            className="hover:cursor-pointer bg-green-700 rounded-2xl pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white font-medium h-25 z-50 border-transparent text-center"
+            style={{ fontSize: "60px" }}
+            onClick={() => {
+              continueHandler.handler();
+              setContinueHandler(undefined);
+            }}
+          >
+            Schritt für Schritt
+          </div>
+        )}
+        {continueHandler !== undefined && screenState !== "intro" && (
+        <div
+          className="hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white h-25 z-50 border-transparent"
+          style={{ fontSize: "60px" }}
+          onClick={() => {
+            continueHandler.handler();
+            setContinueHandler(undefined);
+          }}
+        >
+          <FontAwesomeIcon icon={faArrowRightLong} />
+        </div>
+      )}
+      </div>
     </ColumnContainer>
   );
 }

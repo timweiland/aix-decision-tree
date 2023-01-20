@@ -138,7 +138,11 @@ export default function BobExplains({ mietdaten, userTree, setUserTree, aiTree, 
             setUserTree(userTree.structure);
             aiTree.structure.removeTestPoints();
             setAITree({ structure: aiTree.structure, toggle: !aiTree.toggle });
-            setContinueHandler({ handler: onComplete });
+            setContinueHandler({ handler: () => {
+                onComplete();
+                setContinueHandler(undefined);
+            }
+             });
         }
     }, [screenState, setContinueHandler, onComplete, curPathIdx]);
 

@@ -18,7 +18,7 @@ function StartPage() {
           <div className="chat-bubble chat-bubble-error text-6xl top-8 my-10 shadow-2xl text-center">
             <div className="m-7">
               Wir sind neu in Tübingen und wollen wissen, wie hoch die Miete für
-              ein WG-Zimmer ist!
+              einzelne WG-Zimmer ist!
             </div>
           </div>
         </div>

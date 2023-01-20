@@ -3,15 +3,36 @@ import { useEffect, useState } from "react";
 import bobImg from "../assets/bob.png";
 
 export default function Bob({ message, excited }) {
-  const [hasNewMessage, setHasNewMessage] = useState(false);
+  const [prevMessage, setPrevMessage] = useState(null);
+  const [animating, setAnimating] = useState(false);
+  const [renderedMessage, setRenderedMessage] = useState(undefined);
 
   useEffect(() => {
-    setHasNewMessage(true);
-    const timerID = setTimeout(() => setHasNewMessage(false), 5000);
-    return () => {
-      clearTimeout(timerID);
-    }
+      let timeout = undefined;
+      if(!prevMessage) {
+          setRenderedMessage(message);
+      }
+      if (prevMessage && prevMessage !== message) {
+          setAnimating(true);
+          timeout = setTimeout(() => {
+              setPrevMessage(message);
+              setAnimating(false);
+          }, 1000);
+      }
+
+      return () => {
+          setPrevMessage(message);
+          if (timeout) {
+              clearTimeout(timeout);
+          }
+      }
   }, [message]);
+
+  useEffect(() => {
+      if(animating) {
+          setRenderedMessage(message);
+      }
+  }, [animating, message])
 
   return (
     <div className="absolute bottom-10 left-10 flex flex-row z-30">
@@ -21,15 +42,12 @@ export default function Bob({ message, excited }) {
         className={classNames({ "animate-excite": excited }, "w-32 p-0")}
       />
       {message && (
-        <div className="chat chat-start">
-          <div className="chat-bubble chat-bubble-error text-2xl shadow-2xl">
-            {hasNewMessage &&
-              <span class="flex absolute h-6 w-6 top-0 right-0 -mt-1 -mr-1">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-6 w-6 bg-red-500"></span>
-              </span>
-            }
-            {message}
+        <div className="chat chat-start relative">
+          <div className={classNames("chat-bubble chat-bubble-error text-2xl shadow-2xl", {"fading-in": animating})}>
+          {renderedMessage ? renderedMessage: message}
+          </div>
+          <div className={classNames("chat-bubble chat-bubble-error text-2xl shadow-2xl absolute w-full", {"fading-out": animating && prevMessage, "hidden": !animating})}>
+            {prevMessage}
           </div>
         </div>
       )}

@@ -163,7 +163,7 @@ function Tutorial({
                 <div className={bubblebob}>
                   <div className={textmargin}>
                     Wir machen erstmal einen Probedurchlauf. Du kannst
-                    horizontale oder vertikale Linien zeichnen, um die Karte zu
+                    mit dem Finger horizontale oder vertikale Linien zeichnen, um die Karte zu
                     unterteilen. Probiere es für mindestens zwei Linien aus!
                   </div>
                 </div>

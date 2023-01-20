@@ -5,6 +5,7 @@ import ColumnContainer from "../columns/ColumnContainer";
 import MapColumn from "../columns/MapColumn";
 import TreeColumn from "../columns/TreeColumn";
 
+import BobMirrored from "../mascots/BobMirrored";
 import Map from "../map/Map";
 import Tree from "../tree/Tree";
 import Popup from "../popup/Popup";
@@ -25,11 +26,22 @@ export default function InitialScreen({
 }) {
   const [isDone, setIsDone] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
+  const [bobMessage, setBobMessage] = useState(undefined);
   console.log(userTree);
 
   const NoOfUserLines = userTree.structure.get_lines().length;
 
   useEffect(() => {
+    if (NoOfUserLines < 3) {
+      setBobMessage(undefined);
+    }
+    else if(NoOfUserLines === 4) {
+      setBobMessage(`Super, weiter so! Es fehlt nur noch eine Linie.`)
+    }
+    else {
+      setBobMessage(`Super, weiter so! Es fehlen noch ${5 - NoOfUserLines} Linien.`)
+    }
+
     if (NoOfUserLines === 5) {
       setShowPopUp(true);
       setIsDone(true);
@@ -73,6 +85,9 @@ export default function InitialScreen({
             colors={userTree.structure.get_colors()}
           />
         </div>
+        {bobMessage && !isDone &&
+          <BobMirrored message={bobMessage} />
+        }
       </TreeColumn>
 
       {isDone && showPopUp && (
@@ -88,7 +103,7 @@ export default function InitialScreen({
           </p>
           <br />
           <p style={{ textAlign: "center" }}>
-            Jetzt schauen wir uns an, wie die KI es macht.
+            Wenn du möchtest, kannst du ihn jetzt nochmal in Ruhe betrachten bevor es weiter geht.
           </p>
         </Popup>
       )}

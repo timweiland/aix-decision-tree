@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BobExplains from './BobExplains';
 
 import NoExplanation from './NoExplanation';
@@ -10,16 +10,24 @@ export default function QualitativeComparison({ mietdaten, userTree, setUserTree
 
     const testPoints = [mietdaten[30], mietdaten[59], mietdaten[86]];
 
+    useEffect(() => {
+        if(screenState === "noExplanation0") {
+            setContinueHandler(undefined);
+        }
+    }, [screenState]);
     return (
         <>
             {screenState === "bobExplains" &&
-                <BobExplains mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[0]} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("noExplanation0")} />
+                <BobExplains mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[0]} setContinueHandler={setContinueHandler} onComplete={() => {
+                    setScreenState("noExplanation0")
+                    setContinueHandler(undefined)
+                }} />
             }
             {screenState === "noExplanation0" &&
-                <NoExplanation mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[1]} setContinueHandler={setContinueHandler} onComplete={() => setScreenState("noExplanation1")} />
+                <NoExplanation mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[1]} onComplete={() => setScreenState("noExplanation1")} />
             }
             {screenState === "noExplanation1" &&
-                <NoExplanation mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[2]} setContinueHandler={setContinueHandler} onComplete={() => {
+                <NoExplanation mietdaten={mietdaten} userTree={userTree} setUserTree={setUserTree} aiTree={aiTree} setAITree={setAITree} testPoint={testPoints[2]} onComplete={() => {
                     setIsDone(true);
                     setContinueHandler(undefined);
                 }} />
