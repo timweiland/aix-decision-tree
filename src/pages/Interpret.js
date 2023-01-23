@@ -34,8 +34,7 @@ function Interpret() {
           Entscheidungsbäume sind erklärbar
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Wenn KIs eine Entscheidung treffen, möchte man oft eine
-          <i>Erklärung</i>, wie sie dazu gekommen ist. Bei vielen KI-Algorithmen
+          Wenn KIs eine Entscheidung treffen, möchte man oft eine <i>Erklärung</i>, wie sie dazu gekommen ist. Bei vielen KI-Algorithmen
           ist das nicht immer so einfach. Bei Entscheidungsbäumen geht das
           allerdings gut:
         </div>
@@ -43,8 +42,7 @@ function Interpret() {
           Jede Verzweigung enthält das <i>Merkmal</i> und den <i>Wert</i>,
           anhand dessen in zwei Gruppen unterteilt wurde. Wenn man den Baum von
           oben nach unten liest, erfährt man für alle Gruppen anhand welcher
-          Merkmale sie
-          <i>ähnlich</i> sind.
+          Merkmale sie <i>ähnlich</i> sind.
         </div>
         <div>
           <img

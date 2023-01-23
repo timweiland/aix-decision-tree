@@ -45,7 +45,7 @@ export default function Appl() {
             <p>&#9679; Gleichmäßigkeit der Größe der Zellen</p>
             <p>&#9679; Gleichmäßigkeit der Form der Zellen</p>
             <p>&#9679; Dichte des Gewebes</p>
-            <p>&#9679; ...</p>
+            <p>&#9679; U.v.m.</p>
           </div>
         </div>
       </Stack>
