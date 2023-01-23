@@ -7,17 +7,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { Stack } from "@mui/material";
-import CancelPopup from "../popup/CancelPopup";
-import { useState } from "react";
 
 import fish_2 from "../assets/fish_2.jpg";
 
-function Interpret() {
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
-  console.log(showCancelPopup);
-  const exitApp = () => {
-    window.location.replace("/");
-  };
+function Interpret({onComplete}) {
   return (
     <div className="column-container">
       <Stack
@@ -61,14 +54,13 @@ function Interpret() {
                 </div>
   </Link>*/}
       <div>
-        <Link to="/final">
           <div
+          onClick={onComplete}
             className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
           >
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </div>
-        </Link>
       </div>
       {/*<div>
                 <Link to="/rents2">
@@ -80,22 +72,6 @@ function Interpret() {
                     </div>
                 </Link>
 </div>*/}
-      <div
-        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-        style={{ fontSize: "60px" }}
-        onClick={() => setShowCancelPopup(true)}
-      >
-        <FontAwesomeIcon icon={faXmark} />
-      </div>
-      {showCancelPopup && (
-        <CancelPopup
-          title="Beenden"
-          closeCallback={exitApp}
-          cancelCallback={() => setShowCancelPopup(false)}
-        >
-          Möchtest du beenden und wieder zurück zum Start?
-        </CancelPopup>
-      )}
     </div>
   );
 }

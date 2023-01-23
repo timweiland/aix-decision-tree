@@ -41,23 +41,6 @@ root.render(
         <Route path="/byebye" element={<ByePage />} />
         <Route path="/explanation" element={<Explanation />} />
         <Route path="/choose" element={<Choose />} />
-        <Route path="/rents1" element={<Rents1 />} />
-        <Route path="/rents2" element={<Rents2 />} />
-        <Route path="/rents3" element={<Rents3 />} />
-        <Route path="/rents4" element={<Rents4 />} />
-        <Route path="/rents5" element={<Rents5 />} />
-        <Route path="/complex1" element={<Complex1 />} />
-        <Route path="/complex2" element={<Complex2 />} />
-        <Route path="/complex3" element={<Complex3 />} />
-        <Route path="/interpret1" element={<Interpret1 />} />
-        <Route path="/interpret2" element={<Interpret2 />} />
-        <Route path="/interpret3" element={<Interpret3 />} />
-        <Route path="/interpret4" element={<Interpret4 />} />
-        <Route path="/interpret5" element={<Interpret5 />} />
-        {/*<Route path="/interpret6" element={<Interpret6 />} />*/}
-        <Route path="/final" element={<FinalScreen />} />
-        <Route path="/appl1" element={<Appl1 />} />
-        <Route path="/appl2" element={<Appl2 />} />        
         <Route path="/rents" element={<Rents />} />
         <Route path="/complex" element={<Complex />} />
         <Route path="/interpret" element={<Interpret />} />

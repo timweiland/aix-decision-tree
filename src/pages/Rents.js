@@ -13,14 +13,8 @@ import algo2 from "../assets/algo_sketch2.png";
 import algo3 from "../assets/algo_sketch3.png";
 import algo4 from "../assets/algo_sketch4.png";
 import algo5 from "../assets/algo_sketch5.png";
-import CancelPopup from "../popup/CancelPopup";
 
-function Rents() {
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
-  console.log(showCancelPopup);
-  const exitApp = () => {
-    window.location.replace("/");
-  };
+function Rents({ onComplete }) {
   return (
     <div className="column-container">
       <div className="grid grid-rows-2">
@@ -68,23 +62,23 @@ function Rents() {
         >
           <div>
             <img style={{ height: "28vh" }} src={algo1} alt="algo1" />
-            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Erste Linie probieren</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Erste Linie probieren</div>
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo2} alt="algo2" />
-            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Durchschnitte berechnen</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Durchschnitte berechnen</div>
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo3} alt="algo3" />
-            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Systematisch durchprobieren</div>
           </div>
           <div>
-                <img style={{ height: "28vh"}} src={algo5} alt="algo5"/>                    
-                {/*<div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>*/}
-            </div>
+            <img style={{ height: "28vh" }} src={algo5} alt="algo5" />
+            {/*<div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>*/}
+          </div>
           <div>
             <img style={{ height: "28vh" }} src={algo4} alt="algo4" />
-            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Beste Linie wählen</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Beste Linie wählen</div>
           </div>
         </div>
         {/*<Link to="/final">
@@ -97,14 +91,13 @@ function Rents() {
   </Link>*/}
       </div>
       <div>
-        <Link to="/final">
-          <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
-            style={{ fontSize: "60px" }}
-          >
-            <FontAwesomeIcon icon={faArrowLeftLong} />
-          </div>
-        </Link>
+        <div
+          onClick={onComplete}
+          className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+          style={{ fontSize: "60px" }}
+        >
+          <FontAwesomeIcon icon={faArrowLeftLong} />
+        </div>
       </div>
       {/*<div>
                 <Link to="/rents2">
@@ -116,23 +109,6 @@ function Rents() {
                     </div>
                 </Link>
 </div>*/}
-
-      <div
-        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-        style={{ fontSize: "60px" }}
-        onClick={() => setShowCancelPopup(true)}
-      >
-        <FontAwesomeIcon icon={faXmark} />
-      </div>
-      {showCancelPopup && (
-        <CancelPopup
-          title="Beenden"
-          closeCallback={exitApp}
-          cancelCallback={() => setShowCancelPopup(false)}
-        >
-          Möchtest du beenden und wieder zurück zum Start?
-        </CancelPopup>
-      )}
     </div>
   );
 }

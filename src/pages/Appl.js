@@ -4,15 +4,8 @@ import { faArrowRightLong } from "@fortawesome/free-solid-svg-icons";
 import { faArrowLeftLong, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
-import CancelPopup from "../popup/CancelPopup";
-import { useState } from "react";
 
-export default function Appl() {
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
-  console.log(showCancelPopup);
-  const exitApp = () => {
-    window.location.replace("/");
-  };
+export default function Appl({ onComplete }) {
   return (
     <div className="column-container">
       <Stack
@@ -58,14 +51,13 @@ export default function Appl() {
                     Menü
                 </div>
     </Link>*/}
-      <Link to="/final">
         <div
+          onClick={onComplete}
           className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
           style={{ fontSize: "60px" }}
         >
           <FontAwesomeIcon icon={faArrowLeftLong} />
         </div>
-      </Link>
       {/*<Link to="/appl2">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"
@@ -74,22 +66,6 @@ export default function Appl() {
                     <FontAwesomeIcon icon={faArrowRightLong} />
                 </div>
 </Link>*/}
-      <div
-        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-        style={{ fontSize: "60px" }}
-        onClick={() => setShowCancelPopup(true)}
-      >
-        <FontAwesomeIcon icon={faXmark} />
-      </div>
-      {showCancelPopup && (
-        <CancelPopup
-          title="Beenden"
-          closeCallback={exitApp}
-          cancelCallback={() => setShowCancelPopup(false)}
-        >
-          Möchtest du beenden und wieder zurück zum Start?
-        </CancelPopup>
-      )}
     </div>
   );
 }

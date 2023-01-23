@@ -20,7 +20,7 @@ import InitialScreen from "./screens/InitialScreen";
 import { ShowAITree } from "./screens/ShowAITree";
 import QualitativeComparison from "./screens/qualitativeComparison/QualitativeComparison";
 import { QuantitativeComparison } from "./screens/quantitativeComparison/QuantitativeComparison";
-import FinalScreen from "./screens/FinalScreen2";
+import FinalScreenManager from "./screens/FinalScreenManager";
 
 const mietdaten = mietdatenJSON.data;
 
@@ -220,7 +220,7 @@ function App() {
         />
       )}
       {screenState === "finalScreen" && (
-        <FinalScreen
+        <FinalScreenManager
           restartWithoutTutorial={restartWithoutTutorial}
           exitApp={exitApp}
         />

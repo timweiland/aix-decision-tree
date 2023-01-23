@@ -40,21 +40,9 @@ function Choose() {
 export default Choose;
 */
 
-export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
-  const [showCancelPopup, setShowCancelPopup] = useState(false);
+export default function FinalScreen({ restartWithoutTutorial, switchToAppl, switchToInterpret, switchToComplex, switchToRents }) {
   return (
     <div>
-      {showCancelPopup && (
-        <div>
-          <CancelPopup
-            title="Beenden"
-            closeCallback={exitApp}
-            cancelCallback={() => setShowCancelPopup(false)}
-          >
-            Möchtest du beenden und wieder zurück zum Start?
-          </CancelPopup>
-        </div>
-      )}
 
       <Stack
         spacing={15}
@@ -66,80 +54,76 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
         }}
       >
         <div style={{ marginTop: "22vh" }}>
-          <Link to="/rents">
-            <div
-              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-              style={{
-                fontSize: "30pt",
-                width: "45vw",
-                padding: "20px",
-                textAlign: "center",
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faLaptopCode}
-                style={{ marginRight: "50px" }}
-              />
-              Wie schätzt die KI die Mieten?
-            </div>
-          </Link>
+          <div
+            onClick={switchToRents}
+            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+            style={{
+              fontSize: "30pt",
+              width: "45vw",
+              padding: "20px",
+              textAlign: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faLaptopCode}
+              style={{ marginRight: "50px" }}
+            />
+            Wie schätzt die KI die Mieten?
+          </div>
         </div>
         <div>
-          <Link to="/complex">
-            <div
-              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-              style={{
-                fontSize: "30pt",
-                width: "45vw",
-                padding: "20px",
-                textAlign: "center",
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faArrowUpRightDots}
-                style={{ marginRight: "50px" }}
-              />
-              Große Datenmengen
-            </div>
-          </Link>
+          <div
+            onClick={switchToComplex}
+            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+            style={{
+              fontSize: "30pt",
+              width: "45vw",
+              padding: "20px",
+              textAlign: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faArrowUpRightDots}
+              style={{ marginRight: "50px" }}
+            />
+            Große Datenmengen
+          </div>
         </div>
         <div>
-          <Link to="/interpret">
-            <div
-              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-              style={{
-                fontSize: "30pt",
-                width: "45vw",
-                padding: "20px",
-                textAlign: "center",
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faLightbulb}
-                style={{ marginRight: "50px" }}
-              />
-              Erklärbarkeit
-            </div>
-          </Link>
+          <div
+            onClick={switchToInterpret}
+            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+            style={{
+              fontSize: "30pt",
+              width: "45vw",
+              padding: "20px",
+              textAlign: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faLightbulb}
+              style={{ marginRight: "50px" }}
+            />
+            Erklärbarkeit
+          </div>
         </div>
         <div>
-          <Link to="/appl">
-            <div
-              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-              style={{
-                fontSize: "30pt",
-                width: "45vw",
-                padding: "20px",
-                textAlign: "center",
-              }}
-            >
-              <FontAwesomeIcon
-                icon={faHouseMedical}
-                style={{ marginRight: "50px" }}
-              />
-              Anwendung in der Medizin
-            </div>
-          </Link>
+          <div
+            onClick={switchToAppl}
+            className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+            style={{
+              fontSize: "30pt",
+              width: "45vw",
+              padding: "20px",
+              textAlign: "center",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faHouseMedical}
+              style={{ marginRight: "50px" }}
+            />
+            Anwendung in der Medizin
+          </div>
         </div>
         <div
           onClick={restartWithoutTutorial}
@@ -159,13 +143,6 @@ export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
           Nochmal zeichnen
         </div>
       </Stack>
-      <div
-        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-        style={{ fontSize: "60px" }}
-        onClick={() => setShowCancelPopup(true)}
-      >
-        <FontAwesomeIcon icon={faXmark} />
-      </div>
     </div>
   );
 }
