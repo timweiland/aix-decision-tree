@@ -32,8 +32,9 @@ function Complex() {
           Entscheidunsbäume bei großen Datenmengen
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Die Datenpunkte auf der Karte Tübingens haben zwei Merkmale: Längen-
-          und Breitengrad. Zusammen bestimmen sie die Position auf der Karte.
+          Die Datenpunkte auf der Karte Tübingens haben zwei <i>Merkmale</i>:
+          Längen- und Breitengrad. Zusammen bestimmen sie die Position auf der
+          Karte.
         </div>
 
         <div class="text-3xl text-black font-normal leading-relaxed">
@@ -44,7 +45,7 @@ function Complex() {
         <div class="text-3xl text-black font-normal leading-relaxed">
           Eine KI kann in sehr kurzer Zeit einen Entscheidungsbaum berechnen,
           der anhand dieser Merkmale verschiedene Fischarten voneinander
-          unterscheiden kann. Auch wenn der Datensatz 5000 Datenpunkte oder mehr
+          unterscheiden kann. Auch wenn der Datensatz tausende von Datenpunkten
           enthält. Wir Menschen würden deutlich länger brauchen und könnten
           schnell den Überblick verlieren.
         </div>
