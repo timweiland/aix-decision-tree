@@ -22,14 +22,14 @@ export default function Appl({ onComplete }) {
           Entscheidungsbäume in der Medizin
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Entscheidungsbäume werden gern in der Medizin eingesetzt, weil sie
+          Entscheidungsbäume werden häufig in der Medizin eingesetzt, weil sie
           erklärbar sind (siehe <i>Erklärbarkeit</i>). Zum Beispiel können sie
           Ärzt_innen bei der Diagnose von Brustkrebs <i>unterstützen</i>. Es ist
           wichtig, die Ergebnisse der KI zu verstehen, bevor sie für die weitere
           Behandlung in Betracht gezogen werden.
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Anhand folgender Merkmale können gutartige von bösartigen Tumore
+          Anhand folgender Merkmale können gutartige von bösartigen Tumoren
           unterschieden werden:
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">

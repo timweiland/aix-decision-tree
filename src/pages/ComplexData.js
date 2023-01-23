@@ -22,7 +22,7 @@ function Complex({ onComplete }) {
         }}
       >
         <div class="text-6xl mb-10 text-black font-semibold">
-          Entscheidunsbäume bei großen Datenmengen
+          Entscheidungsbäume bei großen Datenmengen
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
           Die Datenpunkte auf der Karte Tübingens haben zwei <i>Merkmale</i>:

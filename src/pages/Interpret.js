@@ -35,8 +35,8 @@ function Interpret({ onComplete }) {
         <div class="text-3xl text-black font-normal leading-relaxed">
           Jede Verzweigung enthält das <i>Merkmal</i> und den <i>Wert</i>,
           anhand dessen in zwei Gruppen unterteilt wurde. Wenn man den Baum von
-          oben nach unten liest, erfährt man für alle Gruppen anhand welcher
-          Merkmale sie <i>ähnlich</i> sind.
+          oben nach unten liest, erfährt man für alle Gruppen hinsichtlich
+          welcher Merkmale sie <i>ähnlich</i> sind.
         </div>
         <div>
           <img

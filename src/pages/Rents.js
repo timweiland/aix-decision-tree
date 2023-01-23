@@ -37,16 +37,17 @@ function Rents({ onComplete }) {
             links nach rechts und von oben nach unten aus.
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
-            Für jede Linie berechnet sie die durchschnittliche Miete auf beiden
-            Seiten. Schließlich wählt sie die Linie, wo der
+            Für jede Linie berechnet sie die durchschnittliche Miete in beiden
+            Bereichen. Schließlich wählt sie die Linie, wo der
             <i> Unterschied</i> zwischen echten Mieten und durchschnittlicher
             Miete am <i>kleinsten</i> ist. Das führt dazu, dass innerhalb eines
             Bereichs die Mieten <i>ähnlich</i> sind.
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
             Damit ist die erste Linie festgelegt. Für alle Teilungen in weitere
-            Unterbereiche verfährt sie genauso. Wenn sie fertig ist, verwendet
-            sie die durchschnittlichen Mieten pro Bereich als <i>Schätzung</i>.
+            Unterbereiche verfährt die KI genauso. Wenn sie fertig ist,
+            verwendet sie die durchschnittliche Miete pro Bereich als{" "}
+            <i>Schätzung</i>.
           </div>
         </Stack>
 
