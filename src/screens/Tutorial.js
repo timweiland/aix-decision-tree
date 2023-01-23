@@ -17,6 +17,8 @@ import Map from "../map/Map";
 import Tree from "../tree/Tree";
 
 import bob_mirrored from "../assets/bob_mirrored.png";
+//import Xarrow from "react-xarrows/lib/Xarrow/Xarrow";
+import Xarrow from "react-xarrows";
 
 function Tutorial({
   cleanUp,
@@ -68,11 +70,28 @@ function Tutorial({
     "chat-bubble chat-bubble-error text-3xl bottom-0 shadow-2xl";
   const textmargin = "m-2";
 
-  const addText = () => {
-    document.getElementById("addtext").innerHTML =
+  const addTextKarte = () => {
+    clearTimeout();
+    document.getElementById("karte").innerHTML =
       "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
   };
-  const myTimeout = setTimeout(addText, 1500);
+  const myTimeout01 = setTimeout(addTextKarte, 2000);
+
+  const addTextBereit = () => {
+    clearTimeout(myTimeout01);
+    document.getElementById("bereit").innerHTML = "Bereit? Los geht's!";
+  };
+  /* const myTimeout02 = setTimeout(addTextBereit, 2000); */
+  const myTimeout02 = () => {
+    clearTimeout(myTimeout01);
+    setTimeout(addTextBereit, 2000);
+  };
+
+  const addTextDurchschnittspreis = () => {
+    document.getElementById("durchschnittspreis").innerHTML =
+      "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
+  };
+  const myTimeout03 = setTimeout(addTextDurchschnittspreis, 3000);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -98,21 +117,7 @@ function Tutorial({
               top: `${85}%`,
               left: "30%",
             }}
-          >
-            {/* <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} /> */}
-          </div>
-        )}
-        {Counter === 2 && (
-          <div
-            className="absolute bg-white opacity-90 rounded-2xl shadow-2xl text-black text-opacity-60 pl-3 pr-3 px-2 py-2"
-            style={{
-              fontSize: "50px",
-              top: `${85}%`,
-              left: "89%",
-            }}
-          >
-            <FontAwesomeIcon className="fa-fade" icon={faArrowDownLong} />
-          </div>
+          ></div>
         )}
         <Taskbar undo={NoOfUserLines > 1 && undo} openTutorial={() => {}} />
       </MapColumn>
@@ -128,10 +133,10 @@ function Tutorial({
             ANLEITUNG
           </div>
           <div className="imgbobsmall">
-            <img id="bob" src={bob_mirrored} alt="bob_mirrored" />
+            <img src={bob_mirrored} alt="bob_mirrored" />
           </div>
 
-          {Counter != 6 && Counter >= 3 && (
+          {Counter >= 3 && (
             <div className="mt-4">
               <Tree
                 structure={userTree.structure}
@@ -149,7 +154,7 @@ function Tutorial({
               </div>
               <div className="chat chat-end">
                 <div className={bubblebob}>
-                  <div id="addtext" className={textmargin}>
+                  <div id="karte" className={textmargin}>
                     ...
                   </div>
                 </div>
@@ -162,23 +167,32 @@ function Tutorial({
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div className={textmargin}>
-                    Wir machen erstmal einen Probedurchlauf. Du kannst
-                    mit dem Finger horizontale oder vertikale Linien zeichnen, um die Karte zu
-                    unterteilen. Probiere es für mindestens zwei Linien aus!
+                    Wir machen erstmal einen Probedurchlauf. Du kannst mit dem
+                    Finger horizontale oder vertikale Linien zeichnen, um die
+                    Karte zu unterteilen. Probiere es für mindestens zwei Linien
+                    aus!
                   </div>
                 </div>
               </div>
             </div>
           )}
           {Counter === 2 && (
-            <div className="speechbubble">
-              <div className="chat chat-end">
-                <div className={bubblebob}>
-                  <div className={textmargin}>
-                    Hier kannst du eine Linien rückgängig machen...
+            <div>
+              <div className="speechbubble">
+                <div className="chat chat-end">
+                  <div id="bubble" className={bubblebob}>
+                    <div className={textmargin}>
+                      Hier kannst du eine Linie rückgängig machen...
+                    </div>
                   </div>
                 </div>
               </div>
+              <Xarrow
+                start="bubble"
+                end="rotateleft"
+                color="black"
+                animateDrawing={2}
+              />
             </div>
           )}
           {Counter === 3 && (
@@ -226,20 +240,27 @@ function Tutorial({
                     </div>
                   </div>
                 </div>
+                {RemoveAvgHighlight(userTree.structure.get_leaves()[0])}
+                {myTimeout02()}
+                <div className="chat chat-end">
+                  <div className={bubblebob}>
+                    <div id="bereit" className="m-2 text-5xl">
+                      ...
+                    </div>
+                  </div>
+                </div>
               </div>
-              {RemoveAvgHighlight(userTree.structure.get_leaves()[0])}
             </div>
           )}
-          {Counter === 6 && (
+          {/* {Counter === 6 && (
             <div className="speechbubble_low">
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div className="m-2 text-5xl">Bereit? Los geht's!</div>
                 </div>
               </div>
-              {/* {userTree.structure.reset()} */}
             </div>
-          )}
+          )} */}
         </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
         {/* move within tutorial normally */}
@@ -269,7 +290,7 @@ function Tutorial({
 
         {/* ++++++++++++++++ RIGHT ARROW ++++++++++++++++ */}
         {/* move forward within tutorial */}
-        {Counter <= 5 && Counter !== 1 && (
+        {Counter <= 4 && Counter !== 1 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
@@ -308,7 +329,7 @@ function Tutorial({
           //setHistCounter(Counter) &&
           setCounter(Counter + 1)}
 
-        {Counter > 5 && (
+        {Counter > 4 && (
           <div
             className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
