@@ -32,14 +32,16 @@ export default function InitialScreen({
   const NoOfUserLines = userTree.structure.get_lines().length;
 
   useEffect(() => {
-    if (NoOfUserLines < 3) {
+    if (NoOfUserLines < 3 && NoOfUserLines != 0) {
       setBobMessage(undefined);
-    }
-    else if(NoOfUserLines === 4) {
-      setBobMessage(`Super, weiter so! Es fehlt nur noch eine Linie.`)
-    }
-    else {
-      setBobMessage(`Super, weiter so! Es fehlen noch ${5 - NoOfUserLines} Linien.`)
+    } else if (NoOfUserLines === 0) {
+      setBobMessage(`Zeichne deine erste Linie.`);
+    } else if (NoOfUserLines === 4) {
+      setBobMessage(`Super, weiter so! Es fehlt nur noch eine Linie.`);
+    } else {
+      setBobMessage(
+        `Super, weiter so! Es fehlen noch ${5 - NoOfUserLines} Linien.`
+      );
     }
 
     if (NoOfUserLines === 5) {
@@ -85,9 +87,7 @@ export default function InitialScreen({
             colors={userTree.structure.get_colors()}
           />
         </div>
-        {bobMessage && !isDone &&
-          <BobMirrored message={bobMessage} />
-        }
+        {bobMessage && !isDone && <BobMirrored message={bobMessage} />}
       </TreeColumn>
 
       {isDone && showPopUp && (
@@ -103,7 +103,8 @@ export default function InitialScreen({
           </p>
           <br />
           <p style={{ textAlign: "center" }}>
-            Wenn du möchtest, kannst du ihn jetzt nochmal in Ruhe betrachten bevor es weiter geht.
+            Wenn du möchtest, kannst du ihn jetzt nochmal in Ruhe betrachten
+            bevor es weiter geht.
           </p>
         </Popup>
       )}
