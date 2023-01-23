@@ -248,7 +248,7 @@ function Tutorial({
         {/* move within tutorial normally */}
         {Counter !== 0 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
@@ -262,7 +262,7 @@ function Tutorial({
         {Counter === 0 && (
           <Link to="/Dialogue">
             <div
-              className="absolute hover:cursor-pointer bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+              className="absolute hover:bg-green-700 bg-green-700 bg-opacity-50 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
               style={{ fontSize: "60px" }}
             >
               <FontAwesomeIcon icon={faArrowLeftLong} />
@@ -274,7 +274,7 @@ function Tutorial({
         {/* move forward within tutorial */}
         {Counter <= 4 && Counter !== 1 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
@@ -287,7 +287,7 @@ function Tutorial({
         {/* show forward button if at least two lines and max three lines are drawn */}
         {Counter === 1 && NoOfUserLines >= 2 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               setHistCounter(Counter);
@@ -313,7 +313,7 @@ function Tutorial({
 
         {Counter > 4 && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               cleanUp();
