@@ -39,7 +39,7 @@ function Complex() {
 
         <div class="text-3xl text-black font-normal leading-relaxed">
           Oft haben Daten deutlich mehr Merkmale. Fische können mit den
-          Merkmalen Länge, Gewicht, Anzahl der Flossen und Länge der
+          Merkmalen Länge, Gewicht, Anzahl der Flossen, Länge der
           Schwanzflosse u.v.m. beschrieben werden.
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">

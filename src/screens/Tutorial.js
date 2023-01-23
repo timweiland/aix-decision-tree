@@ -183,7 +183,6 @@ function Tutorial({
                 start="bubble"
                 end="rotateleft"
                 color="black"
-                animateDrawing={2}
               />
             </div>
           )}

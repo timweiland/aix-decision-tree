@@ -108,8 +108,8 @@ export function ShowAITree({
           <br />
           <p style={{ textAlign: "center" }}>
             Jetzt wollen wir beide miteinander vergleichen. <br /> Dazu schauen
-            wir uns an, welcher Entscheidungsbaum den Preis für ein WG-Zimmer
-            besser schätzen kann.
+            wir die Schätzungen der Entscheidungsbäume für <i>drei </i> 
+            WG-Zimmer an.
           </p>
         </Popup>
       )}
