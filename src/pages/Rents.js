@@ -38,20 +38,21 @@ function Rents() {
             Wie schätzt die KI die Mieten in Tübingen?
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
-            Die KI berechnet ihre Lösung. Für eine Teilung der Karte probiert
-            sie systematisch alle möglichen Trennungslinien von links nach
-            rechts und von oben nach unten aus.
+            Die KI <i>berechnet</i> ihre Lösung. Für eine Teilung der Karte
+            probiert sie systematisch <i>alle möglichen</i> Trennungslinien von
+            links nach rechts und von oben nach unten aus.
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
             Für jede Linie berechnet sie die durchschnittliche Miete auf beiden
-            Seiten der Linie. Schließlich wählt sie die Linie, wo der
-            Unterschied zwischen echten Mietpreisen und durchschnittlicher Miete
-            am kleinsten ist. Das ist der Fall, wenn Bereiche mit ähnlichen Mietpreisen möglichst gut voneinander abgegrenzt werden.
+            Seiten. Schließlich wählt sie die Linie, wo der
+            <i>Unterschied</i> zwischen echten Mieten und durchschnittlicher
+            Miete am <i>kleinsten</i> ist. Das führt dazu, dass innerhalb eines
+            Bereichs die Mieten <i>ähnlich</i> sind.
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
-            Diese Berechnung wiederholt sie genauso für alle weiteren
-            Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten
-            pro Bereich als Schätzung.
+            Damit ist die erste Linie festgelegt. Für alle Teilungen in weitere
+            Unterbereiche verfährt sie genauso. Wenn sie fertig ist verwendet
+            sie die durchschnittlichen Mieten pro Bereich als <i>Schätzung</i>.
           </div>
         </Stack>
 
@@ -74,10 +75,10 @@ function Rents() {
           <div>
             <img style={{ height: "20vh" }} src={algo3} alt="algo3" />
           </div>
-                <div>
-                    <img style={{ height: "20vh"}} src={algo5} alt="algo5"/>                    
-                    {/*<div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>*/}
-                </div>                
+          <div>
+            <img style={{ height: "20vh" }} src={algo5} alt="algo5" />
+            {/*<div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>*/}
+          </div>
           <div>
             <img style={{ height: "20vh" }} src={algo4} alt="algo4" />
           </div>

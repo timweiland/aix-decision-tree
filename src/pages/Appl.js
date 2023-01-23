@@ -29,13 +29,15 @@ export default function Appl() {
           Entscheidungsbäume in der Medizin
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Entscheidungsbäume werden in der Medizin verwendet, denn hier ist
-          Nachvollziehbarkeit besonders wichtig.
+          Entscheidungsbäume werden gern in der Medizin eingesetzt, weil sie
+          erklärbar sind (siehe <i>Erklärbarkeit</i>). Zum Beispiel können sie
+          Ärzt_innen bei der Diagnose von Brustkrebs <i>unterstützen</i>. Es ist
+          wichtig, die Ergebnisse der KI zu verstehen, bevor sie für die weitere
+          Behandlung in Betracht gezogen werden.
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Sie können Ärzt_innen bei der Diagnose von Brustkrebs unterstützen.
-          Anhand folgender Merkmale können sie gutartige und bösartige Tumore
-          voneinander unterscheiden:
+          Anhand folgender Merkmale können gutartige von bösartigen Tumore
+          unterschieden werden:
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
           <div class="text-3xl text-black font-normal leading-relaxed">
@@ -43,6 +45,7 @@ export default function Appl() {
             <p>&#9679; Gleichmäßigkeit der Größe der Zellen</p>
             <p>&#9679; Gleichmäßigkeit der Form der Zellen</p>
             <p>&#9679; Dichte des Gewebes</p>
+            <p>&#9679; ...</p>
           </div>
         </div>
       </Stack>
