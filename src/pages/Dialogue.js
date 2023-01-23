@@ -120,7 +120,7 @@ function Dialogue() {
 
         {Counter < 5 ? (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               setCounter(Counter + 1);
@@ -136,10 +136,9 @@ function Dialogue() {
             </div>
             <Link to="/App">
               <div
-                className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+                className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
                 style={{ fontSize: "60px" }}
               >
-                {/* <button className="btn btn-lg text-4xl text-white btn-secondary">WEITER</button> */}
                 <FontAwesomeIcon icon={faArrowRightLong} />
               </div>
             </Link>

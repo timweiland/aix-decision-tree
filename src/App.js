@@ -237,7 +237,7 @@ function App() {
       }
       {continueHandler !== undefined && (
         <div
-          className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+          className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 right-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
           style={{ fontSize: "60px" }}
           onClick={() => {
             continueHandler.handler();
@@ -249,7 +249,7 @@ function App() {
       )}
 
       <div
-        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
+        className="absolute hover:bg-red-700 bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
         style={{ fontSize: "60px" }} onClick={() => setShowCancelPopup(true)}
       >
         <FontAwesomeIcon icon={faXmark} />
