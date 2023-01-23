@@ -8,14 +8,17 @@ import {
   faArrowLeftLong,
   faXmark,
   faSync,
-  faBook,  
+  faBook,
   faLaptopCode,
-  faLightbulb, 
-  faArrowUpRightDots, 
+  faLightbulb,
+  faArrowUpRightDots,
   faUniversalAccess,
   faHouseMedical,
-  faHandPointer
+  faHandPointer,
 } from "@fortawesome/free-solid-svg-icons";
+import CancelPopup from "../popup/CancelPopup";
+import { useState } from "react";
+import { reject } from "lodash";
 
 /*
 function Choose() {
@@ -38,103 +41,131 @@ export default Choose;
 */
 
 export default function FinalScreen({ restartWithoutTutorial, exitApp }) {
+  const [showCancelPopup, setShowCancelPopup] = useState(false);
   return (
-    <Stack
-      spacing={15}
-      direction="column"
-      style={{
-        marginTop: "22vh",
-        marginLeft: "25vw",
-        marginRight: "25vw",
-      }}
-    >
-     <div>
-      <Link to="/rents">
-        <div
-          className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-          style={{
-            fontSize: "30pt",
-            width: "45vw",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faLaptopCode} style={{ marginRight: "50px" }} />
-          Wie schätzt die KI die Mieten?
+    <div>
+      {showCancelPopup && (
+        <div>
+          <CancelPopup
+            title="Beenden"
+            closeCallback={exitApp}
+            cancelCallback={() => setShowCancelPopup(false)}
+          >
+            Möchtest du beenden und wieder zurück zum Start?
+          </CancelPopup>
         </div>
-      </Link>
-      </div>
-      <div>
-      <Link to="/complex">
-        <div
-          className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-          style={{
-            fontSize: "30pt",
-            width: "45vw",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faArrowUpRightDots} style={{ marginRight: "50px" }} />
-          Große Datenmengen
-        </div>
-      </Link>
-      </div>
-      <div>
-      <Link to="/interpret">
-        <div
-          className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-          style={{
-            fontSize: "30pt",
-            width: "45vw",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faLightbulb} style={{ marginRight: "50px" }} />
-          Erklärbarkeit
-        </div>
-      </Link>
-      </div>
-      <div>
-      <Link to="/appl">
-        <div
-          className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
-          style={{
-            fontSize: "30pt",
-            width: "45vw",
-            padding: "20px",
-            textAlign: "center",
-          }}
-        >
-          <FontAwesomeIcon icon={faHouseMedical} style={{ marginRight: "50px" }} />
-          Anwendung in der Medizin
-        </div>
-      </Link>        
-      </div> 
-      <div
-        class="absolute hover:cursor-pointer bg-orange-600 rounded-3xl shadow-2xl opacity-60 text-white align-middle"
+      )}
+
+      <Stack
+        spacing={15}
+        direction="column"
         style={{
-          fontSize: "30pt",
-          width: "45vw",
-          padding: "20px",
-          textAlign: "center",
-          marginTop: "48vh"
+          //marginTop: "22vh",
+          marginLeft: "25vw",
+          marginRight: "25vw",
         }}
-        onClick={restartWithoutTutorial}
       >
-        <FontAwesomeIcon icon={faHandPointer} style={{ marginRight: "50px" }} />
-        Nochmal zeichnen
-      </div>  
-      
-      <Link to="/">
-        <div
-          className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
-          style={{ fontSize: "60px" }}
-        >
-          <FontAwesomeIcon icon={faXmark} />
+        <div style={{ marginTop: "22vh" }}>
+          <Link to="/rents">
+            <div
+              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+              style={{
+                fontSize: "30pt",
+                width: "45vw",
+                padding: "20px",
+                textAlign: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faLaptopCode}
+                style={{ marginRight: "50px" }}
+              />
+              Wie schätzt die KI die Mieten?
+            </div>
+          </Link>
         </div>
-      </Link>
-    </Stack>
+        <div>
+          <Link to="/complex">
+            <div
+              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+              style={{
+                fontSize: "30pt",
+                width: "45vw",
+                padding: "20px",
+                textAlign: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faArrowUpRightDots}
+                style={{ marginRight: "50px" }}
+              />
+              Große Datenmengen
+            </div>
+          </Link>
+        </div>
+        <div>
+          <Link to="/interpret">
+            <div
+              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+              style={{
+                fontSize: "30pt",
+                width: "45vw",
+                padding: "20px",
+                textAlign: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faLightbulb}
+                style={{ marginRight: "50px" }}
+              />
+              Erklärbarkeit
+            </div>
+          </Link>
+        </div>
+        <div>
+          <Link to="/appl">
+            <div
+              className="absolute hover:cursor-pointer bg-blue-600 rounded-3xl shadow-2xl bg-blue-600 opacity-80 text-white align-middle"
+              style={{
+                fontSize: "30pt",
+                width: "45vw",
+                padding: "20px",
+                textAlign: "center",
+              }}
+            >
+              <FontAwesomeIcon
+                icon={faHouseMedical}
+                style={{ marginRight: "50px" }}
+              />
+              Anwendung in der Medizin
+            </div>
+          </Link>
+        </div>
+        <div
+          onClick={restartWithoutTutorial}
+          className="absolute hover:cursor-pointer bg-orange-600 rounded-3xl shadow-2xl opacity-60 text-white align-middle"
+          style={{
+            fontSize: "30pt",
+            width: "45vw",
+            padding: "20px",
+            textAlign: "center",
+            marginTop: "71vh",
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faHandPointer}
+            style={{ marginRight: "50px" }}
+          />
+          Nochmal zeichnen
+        </div>
+      </Stack>
+      <div
+        className="absolute hover:cursor-pointer bg-red-700 rounded-2xl top-10 right-10 pl-8 pr-8 shadow-2xl shadow-red-700 opacity-90 text-white btn btn-lg h-25 z-10 border-transparent"
+        style={{ fontSize: "60px" }}
+        onClick={() => setShowCancelPopup(true)}
+      >
+        <FontAwesomeIcon icon={faXmark} />
+      </div>
+    </div>
   );
 }
