@@ -7,10 +7,15 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import * as React from "react";
 import { Stack } from "@mui/material";
+import algo1 from "../assets/algo_sketch1.png";
+import algo2 from "../assets/algo_sketch2.png";
+import algo3 from "../assets/algo_sketch3.png";
+import algo4 from "../assets/algo_sketch4.png";
 
 function Rents() {
   return (
     <div className="column-container">
+        <div className="grid grid-rows-2">
             <Stack className="space-y-6" direction="column" style={{ marginTop: "13vh", marginLeft: "14.5vw", marginRight: "16.5vw", marginBottom: "7vh" }}>
             <div 
             class="text-6xl mb-10 text-black font-semibold"
@@ -33,6 +38,25 @@ function Rents() {
                Diese Berechnung wiederholt sie genauso für alle weiteren Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten pro Bereich als Schätzung.
             </div>
             </Stack>
+
+            <div
+            class="grid grid-cols-4"
+            style={{ fontSize: "50px",  marginLeft: "10.5vw", marginRight: "12.5vw", marginBottom: "7vh", marginTop: "25vh"}}
+            >
+                <div>
+                    <img style={{ height: "20vh"}} src={algo1} alt="algo1"/>
+                </div>
+                <div>
+                    <img style={{ height: "20vh"}} src={algo2} alt="algo2"/>
+                </div>
+                <div>
+                    <img style={{ height: "20vh"}} src={algo3} alt="algo3"/>
+                </div>
+                <div>
+                    <img style={{ height: "20vh"}} src={algo4} alt="algo4"/>
+                </div>
+
+            </div>
             {/*<Link to="/final">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-40 pt-2 pb-3 left-8 pl-7 pr-7 shadow-2xl shadow-green-700 opacity-80 text-white"
@@ -41,6 +65,8 @@ function Rents() {
                     Menü
                 </div>
   </Link>*/}
+
+        </div>
             <div>
                 <Link to="/final">
                     <div
