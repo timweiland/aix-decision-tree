@@ -51,13 +51,13 @@ export default function Appl({ onComplete }) {
                     Menü
                 </div>
     </Link>*/}
-        <div
-          onClick={onComplete}
-          className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
-          style={{ fontSize: "60px" }}
-        >
-          <FontAwesomeIcon icon={faArrowLeftLong} />
-        </div>
+      <div
+        onClick={onComplete}
+        className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+        style={{ fontSize: "60px" }}
+      >
+        <FontAwesomeIcon icon={faArrowLeftLong} />
+      </div>
       {/*<Link to="/appl2">
                 <div
                 className="absolute hover:cursor-pointer bg-green-700 rounded-3xl bottom-8 right-8 pl-16 pr-16 shadow-2xl shadow-green-700 opacity-80 text-white"

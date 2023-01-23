@@ -32,8 +32,8 @@ function Complex({ onComplete }) {
 
         <div class="text-3xl text-black font-normal leading-relaxed">
           Oft haben Daten deutlich mehr Merkmale. Fische können mit den
-          Merkmalen Länge, Gewicht, Anzahl der Flossen, Länge der
-          Schwanzflosse u.v.m. beschrieben werden.
+          Merkmalen Länge, Gewicht, Anzahl der Flossen, Länge der Schwanzflosse
+          u.v.m. beschrieben werden.
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
           Eine KI kann in sehr kurzer Zeit einen Entscheidungsbaum berechnen,
@@ -54,7 +54,7 @@ function Complex({ onComplete }) {
       <div>
         <div
           onClick={onComplete}
-          className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+          className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
           style={{ fontSize: "60px" }}
         >
           <FontAwesomeIcon icon={faArrowLeftLong} />

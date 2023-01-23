@@ -10,7 +10,7 @@ import { Stack } from "@mui/material";
 
 import fish_2 from "../assets/fish_2.jpg";
 
-function Interpret({onComplete}) {
+function Interpret({ onComplete }) {
   return (
     <div className="column-container">
       <Stack
@@ -27,7 +27,8 @@ function Interpret({onComplete}) {
           Entscheidungsbäume sind erklärbar
         </div>
         <div class="text-3xl text-black font-normal leading-relaxed">
-          Wenn eine KI eine Entscheidung trifft, möchte man oft eine <i>Erklärung</i>, wie sie dazu gekommen ist. Bei vielen KI-Algorithmen
+          Wenn eine KI eine Entscheidung trifft, möchte man oft eine{" "}
+          <i>Erklärung</i>, wie sie dazu gekommen ist. Bei vielen KI-Algorithmen
           ist das nicht immer so einfach. Bei Entscheidungsbäumen geht das
           allerdings gut:
         </div>
@@ -54,13 +55,13 @@ function Interpret({onComplete}) {
                 </div>
   </Link>*/}
       <div>
-          <div
+        <div
           onClick={onComplete}
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
-            style={{ fontSize: "60px" }}
-          >
-            <FontAwesomeIcon icon={faArrowLeftLong} />
-          </div>
+          className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+          style={{ fontSize: "60px" }}
+        >
+          <FontAwesomeIcon icon={faArrowLeftLong} />
+        </div>
       </div>
       {/*<div>
                 <Link to="/rents2">

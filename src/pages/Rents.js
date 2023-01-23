@@ -62,15 +62,21 @@ function Rents({ onComplete }) {
         >
           <div>
             <img style={{ height: "28vh" }} src={algo1} alt="algo1" />
-            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Erste Linie probieren</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>
+              Erste Linie probieren
+            </div>
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo2} alt="algo2" />
-            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Durchschnitte berechnen</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>
+              Durchschnitte berechnen
+            </div>
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo3} alt="algo3" />
-            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Systematisch durchprobieren</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>
+              Systematisch durchprobieren
+            </div>
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo5} alt="algo5" />
@@ -78,7 +84,9 @@ function Rents({ onComplete }) {
           </div>
           <div>
             <img style={{ height: "28vh" }} src={algo4} alt="algo4" />
-            <div class="text-base" style={{ marginLeft: "3.1vw" }}>Beste Linie wählen</div>
+            <div class="text-base" style={{ marginLeft: "3.1vw" }}>
+              Beste Linie wählen
+            </div>
           </div>
         </div>
         {/*<Link to="/final">
@@ -93,7 +101,7 @@ function Rents({ onComplete }) {
       <div>
         <div
           onClick={onComplete}
-          className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+          className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-10 left-10 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
           style={{ fontSize: "60px" }}
         >
           <FontAwesomeIcon icon={faArrowLeftLong} />

@@ -266,7 +266,7 @@ export default function NoExplanation({
         )}
         {continueHandler !== undefined && screenState !== "intro" && (
           <div
-            className="absolute hover:cursor-pointer bg-green-700 rounded-2xl bottom-0 right-0 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
+            className="absolute hover:bg-green-700 bg-green-700 rounded-2xl bottom-0 right-0 pl-8 pr-8 shadow-2xl shadow-green-700 opacity-90 text-white btn btn-lg h-25 z-50 border-transparent"
             style={{ fontSize: "60px" }}
             onClick={() => {
               continueHandler.handler();
