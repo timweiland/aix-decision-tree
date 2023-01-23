@@ -28,7 +28,7 @@ function Rents() {
           className="space-y-6"
           direction="column"
           style={{
-            marginTop: "13vh",
+            marginTop: "11.5vh",
             marginLeft: "14.5vw",
             marginRight: "16.5vw",
             marginBottom: "7vh",
@@ -49,37 +49,41 @@ function Rents() {
             am kleinsten ist. Das ist der Fall, wenn Bereiche mit ähnlichen Mietpreisen möglichst gut voneinander abgegrenzt werden.
           </div>
           <div class="text-3xl text-black font-normal leading-relaxed">
-            Diese Berechnung wiederholt sie genauso für alle weiteren
+            Diese Berechnung wiederholt sie genauso für alle weiteren 
             Unterteilungen. Am Ende verwendet sie die durchschnittlichen Mieten
             pro Bereich als Schätzung.
           </div>
         </Stack>
 
         <div
-          class="grid grid-cols-4"
+          class="grid grid-cols-5"
           style={{
             fontSize: "50px",
-            marginLeft: "10.5vw",
+            marginLeft: "11.5vw",
             marginRight: "12.5vw",
             marginBottom: "7vh",
-            marginTop: "25vh",
+            marginTop: "14vh",
           }}
         >
           <div>
-            <img style={{ height: "20vh" }} src={algo1} alt="algo1" />
+            <img style={{ height: "28vh" }} src={algo1} alt="algo1" />
+            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Erste Linie probieren</div>
           </div>
           <div>
-            <img style={{ height: "20vh" }} src={algo2} alt="algo2" />
+            <img style={{ height: "28vh" }} src={algo2} alt="algo2" />
+            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Durchschnitte berechnen</div>
           </div>
           <div>
-            <img style={{ height: "20vh" }} src={algo3} alt="algo3" />
+            <img style={{ height: "28vh" }} src={algo3} alt="algo3" />
+            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>
           </div>
                 <div>
-                    <img style={{ height: "20vh"}} src={algo5} alt="algo5"/>                    
+                    <img style={{ height: "28vh"}} src={algo5} alt="algo5"/>                    
                     {/*<div class="text-base" style={{ marginLeft: "3.1vw"}}>Systematisch durchprobieren</div>*/}
                 </div>                
           <div>
-            <img style={{ height: "20vh" }} src={algo4} alt="algo4" />
+            <img style={{ height: "28vh" }} src={algo4} alt="algo4" />
+            <div class="text-base" style={{ marginLeft: "3.1vw"}}>Beste Linie wählen</div>
           </div>
         </div>
         {/*<Link to="/final">
