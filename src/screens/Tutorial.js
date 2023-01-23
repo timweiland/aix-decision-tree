@@ -72,26 +72,17 @@ function Tutorial({
 
   const addTextKarte = () => {
     clearTimeout();
-    document.getElementById("karte").innerHTML =
-      "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
+    setTimeout(() => {
+      document.getElementById("karte").innerHTML =
+        "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
+    }, 1800);
   };
-  const myTimeout01 = setTimeout(addTextKarte, 2000);
 
   const addTextBereit = () => {
-    clearTimeout(myTimeout01);
-    document.getElementById("bereit").innerHTML = "Bereit? Los geht's!";
+    setTimeout(() => {
+      document.getElementById("bereit").innerHTML = "Bereit? Los geht's!";
+    }, 2000);
   };
-  /* const myTimeout02 = setTimeout(addTextBereit, 2000); */
-  const myTimeout02 = () => {
-    clearTimeout(myTimeout01);
-    setTimeout(addTextBereit, 2000);
-  };
-
-  const addTextDurchschnittspreis = () => {
-    document.getElementById("durchschnittspreis").innerHTML =
-      "Hier ist eine Karte von Tübingen – jeder Punkt steht für ein WG-Zimmer. Je größer der Punkt desto höher der Mietpreis.";
-  };
-  const myTimeout03 = setTimeout(addTextDurchschnittspreis, 3000);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -152,6 +143,7 @@ function Tutorial({
                   <div className="m-2 mx-16"> Willkommen zur Anleitung.</div>
                 </div>
               </div>
+              {addTextKarte()}
               <div className="chat chat-end">
                 <div className={bubblebob}>
                   <div id="karte" className={textmargin}>
@@ -241,7 +233,7 @@ function Tutorial({
                   </div>
                 </div>
                 {RemoveAvgHighlight(userTree.structure.get_leaves()[0])}
-                {myTimeout02()}
+                {addTextBereit()}
                 <div className="chat chat-end">
                   <div className={bubblebob}>
                     <div id="bereit" className="m-2 text-5xl">
@@ -252,15 +244,6 @@ function Tutorial({
               </div>
             </div>
           )}
-          {/* {Counter === 6 && (
-            <div className="speechbubble_low">
-              <div className="chat chat-end">
-                <div className={bubblebob}>
-                  <div className="m-2 text-5xl">Bereit? Los geht's!</div>
-                </div>
-              </div>
-            </div>
-          )} */}
         </div>
         {/* ++++++++++++++++ LEFT ARROW ++++++++++++++++ */}
         {/* move within tutorial normally */}
